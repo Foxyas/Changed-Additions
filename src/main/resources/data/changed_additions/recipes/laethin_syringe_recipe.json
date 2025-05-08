@@ -1,0 +1,19 @@
+{
+  "type": "changed_additions:neofuser_recipe",
+  "ingredients": [
+    {
+      "item": "changed_additions:ammonium_chloride"
+    },
+    {
+      "item": "changed_additions:anti_latexbase"
+    },
+    {
+      "tag": "changed_additions:have_dna"
+    }
+  ],
+  "output": {
+    "item": "changed_additions:laethin_syringe",
+    "ProgressSpeed": 0.5,
+    "count": 1
+  }
+}

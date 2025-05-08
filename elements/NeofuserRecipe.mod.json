@@ -1,0 +1,43 @@
+{
+  "_fv": 47,
+  "_type": "jeirecipetype",
+  "definition": {
+    "textureSelector": "jei_neofuser_screen.png",
+    "width": 116,
+    "height": 54,
+    "icon": {
+      "value": "CUSTOM:Neofuser"
+    },
+    "craftingtable": {
+      "value": "CUSTOM:Neofuser"
+    },
+    "enableCraftingtable": true,
+    "title": "Neofuser Recipe",
+    "slotList": [
+      {
+        "type": "INPUT",
+        "x": 1,
+        "y": 1,
+        "slotid": 0
+      },
+      {
+        "type": "INPUT",
+        "x": 1,
+        "y": 36,
+        "slotid": 1
+      },
+      {
+        "type": "INPUT",
+        "x": 37,
+        "y": 18,
+        "slotid": 2
+      },
+      {
+        "type": "OUTPUT",
+        "x": 96,
+        "y": 18,
+        "slotid": 0
+      }
+    ]
+  }
+}

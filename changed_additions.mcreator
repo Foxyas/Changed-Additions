@@ -1,0 +1,177 @@
+{
+  "mod_elements": [
+    {
+      "name": "Neofuser",
+      "type": "block",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "neofuser",
+      "metadata": {
+        "files": [
+          "src/main/java/net/foxyas/changed_additions/block/NeofuserBlock.java",
+          "src/main/resources/assets/changed_additions/models/block/neofuser.json",
+          "src/main/java/net/foxyas/changed_additions/block/entity/NeofuserBlockEntity.java",
+          "src/main/resources/assets/changed_additions/models/item/neofuser.json",
+          "src/main/resources/assets/changed_additions/blockstates/neofuser.json"
+        ]
+      }
+    },
+    {
+      "name": "NeofuserRecipe",
+      "type": "jeirecipetype",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "neofuser_recipe",
+      "metadata": {
+        "files": [
+          "src/main/java/net/foxyas/changed_additions/jei_recipes/NeofuserRecipeRecipeCategory.java",
+          "src/main/java/net/foxyas/changed_additions/jei_recipes/NeofuserRecipeRecipe.java"
+        ]
+      }
+    },
+    {
+      "name": "NeofuserGui",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "neofuser_gui",
+      "metadata": {
+        "files": [
+          "src/main/java/net/foxyas/changed_additions/world/inventory/NeofuserGuiMenu.java",
+          "src/main/java/net/foxyas/changed_additions/client/gui/NeofuserGuiScreen.java"
+        ]
+      }
+    },
+    {
+      "name": "ChangedAdditionsTab",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "changed_additions_tab",
+      "metadata": {
+        "files": []
+      }
+    },
+    {
+      "name": "AntiLatexbase",
+      "type": "item",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "anti_latexbase",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/changed_additions/models/item/anti_latexbase.json",
+          "src/main/java/net/foxyas/changed_additions/item/AntiLatexbaseItem.java"
+        ]
+      }
+    },
+    {
+      "name": "Havedna",
+      "type": "tag",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "havedna",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/changed_additions/tags/items/have_dna.json"
+        ]
+      }
+    },
+    {
+      "name": "Ammoniumchloride",
+      "type": "item",
+      "sortid": 3,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ammonium_chloride",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/changed_additions/models/item/ammonium_chloride.json",
+          "src/main/java/net/foxyas/changed_additions/item/AmmoniumchlorideItem.java"
+        ]
+      }
+    },
+    {
+      "name": "LaethinSyringe",
+      "type": "item",
+      "sortid": 4,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "laethin_syringe",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/changed_additions/models/item/laethin_syringe.json",
+          "src/main/java/net/foxyas/changed_additions/item/LaethinSyringeItem.java"
+        ]
+      }
+    },
+    {
+      "name": "LaethinSyringeRecipe",
+      "type": "jeirecipe",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "laethin_syringe_recipe",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/changed_additions/recipes/laethin_syringe_recipe.json"
+        ]
+      }
+    },
+    {
+      "name": "Biomass",
+      "type": "item",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "biomass",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/changed_additions/models/item/biomass.json",
+          "src/main/java/net/foxyas/changed_additions/item/BiomassItem.java"
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "language_map": {
+    "en_us": {
+      "item.changed_additions.ammonium_chloride": "Ammonium Chloride",
+      "itemGroup.tabchanged_additions_tab": "Changed Additions Tab",
+      "item.changed_additions.laethin_syringe": "Laethin Syringe",
+      "block.changed_additions.neofuser": "Neofuser",
+      "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
+      "item.changed_additions.anti_latexbase": "Anti-Latex Base",
+      "item.changed_additions.biomass": "Biomass"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "changed_additions",
+    "modName": "Changed Additions",
+    "version": "1.0.0",
+    "author": "Microcamp, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Academic Free License v3.0",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "requiredMods": [
+      "changed"
+    ],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [
+      "jei"
+    ],
+    "currentGenerator": "forge-1.18.2",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.foxyas.changed_additions",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202300336712
+}

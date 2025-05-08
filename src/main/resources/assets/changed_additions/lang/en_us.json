@@ -1,0 +1,9 @@
+{
+  "item.changed_additions.ammonium_chloride": "Ammonium Chloride",
+  "itemGroup.tabchanged_additions_tab": "Changed Additions Tab",
+  "item.changed_additions.laethin_syringe": "Laethin Syringe",
+  "block.changed_additions.neofuser": "Neofuser",
+  "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
+  "item.changed_additions.anti_latexbase": "Anti-Latex Base",
+  "item.changed_additions.biomass": "Biomass"
+}

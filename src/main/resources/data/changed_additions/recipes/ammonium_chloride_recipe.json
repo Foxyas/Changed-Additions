@@ -1,0 +1,7 @@
+{
+  "type": "changed:purifier",
+  "ingredient": {
+    "item": "changed_additions:biomass"
+  },
+  "result": "changed_additions:ammonium_chloride"
+}
