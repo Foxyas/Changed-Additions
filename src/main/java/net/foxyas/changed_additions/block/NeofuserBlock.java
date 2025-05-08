@@ -1,8 +1,11 @@
 
 package net.foxyas.changed_additions.block;
 
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.network.NetworkHooks;
 
 import net.minecraft.world.phys.BlockHitResult;
@@ -56,6 +59,15 @@ public class NeofuserBlock extends Block implements EntityBlock {
 		if (!dropsOriginal.isEmpty())
 			return dropsOriginal;
 		return Collections.singletonList(new ItemStack(this, 1));
+	}
+
+	@Override
+	public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
+		ItemStack selectedItem = player.getInventory().getSelected();
+		if (selectedItem.getItem() instanceof TieredItem tieredItem && tieredItem.isCorrectToolForDrops(selectedItem,state)) {
+			return TierSortingRegistry.isCorrectTierForDrops(Tiers.STONE, state) || tieredItem.getTier().getLevel() >= 1;
+		}
+		return false;
 	}
 
 	@Override

@@ -1,14 +1,16 @@
 modLoader="javafml"
 loaderVersion="[40,)"
-license="Academic Free License v3.0"
+license="MIT License"
+issueTrackerURL="https://github.com/Foxyas/Changed-Additions/issues
 
 [[mods]]
 modId="changed_additions"
-version="1.0.0"
+version="0.0.1"
 displayName="Changed Additions"
-credits="Created using mod maker MCreator - https://mcreator.net/about"
-displayURL="https://mcreator.net"
-authors="Microcamp, MCreator"
+credits="LTXProgrammer for Changed mod"
+logoFile="logo.png"
+displayURL="https://github.com/Foxyas/Changed-Additions/tree/main"
+authors="Foxyas"
 
 [[dependencies.changed_additions]]
     modId="minecraft"
@@ -21,8 +23,8 @@ authors="Microcamp, MCreator"
 [[dependencies.changed_additions]]
     modId="changed"
     mandatory=true
-    versionRange="[0,)"
-    ordering="NONE"
+    versionRange="[0.14c,)"
+    ordering="AFTER"
     side="BOTH"
 
 [[dependencies.changed_additions]]
