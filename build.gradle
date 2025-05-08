@@ -1,0 +1,110 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'eclipse'
+
+version = '1.0'
+group = 'net.foxyas.changed_additions'
+archivesBaseName = 'changed_additions'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.18.2'
+
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                changed_additions {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                changed_additions {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {
+    // Mod Location
+    flatDir {
+        dirs 'libs'
+    }
+
+    maven {
+        url "https://cursemaven.com"
+    }
+
+    maven {
+        name = "Changed"
+        url = "https://raw.githubusercontent.com/LtxProgrammer/Changed-Minecraft-Mod/master/mcmodsrepo/"
+    }
+
+    /*maven {
+        name = "Changed_Local_file"
+        url uri("${rootProject.projectDir}/libs")
+    }*/
+
+
+    /* maven {
+          // location of the maven that hosts JEI files
+          name = "Progwml6 maven"
+          url = "https://dvs1.progwml6.com/files/maven/"
+      }
+      maven {
+          // location of a maven mirror for JEI files, as a fallback
+          name = "ModMaven"
+          url = "https://modmaven.dev"
+      }*/
+}
+
+mixin {
+    add sourceSets.main, "changed_additions.refmap.json"
+    config "changed_additions.mixins.json"
+    env {
+        remapRefMap = true
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.18.2-40.2.21'
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.18.2-f40.2.0:v0.14c") //Changed
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+apply from: 'mcreator.gradle'
+
