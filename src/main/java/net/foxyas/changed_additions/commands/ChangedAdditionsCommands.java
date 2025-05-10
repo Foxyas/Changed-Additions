@@ -51,7 +51,7 @@ public class ChangedAdditionsCommands {
                         .executes(arguments -> {
                                     ServerLevel world = arguments.getSource().getLevel();
                                     double amount = DoubleArgumentType.getDouble(arguments, "MaxSize");
-                                    return SizeManipulator.MaxSizeChange(amount);
+                                    return SizeManipulator.MaxSizeChange(arguments, amount);
                                 }
                         )
                 )
@@ -101,11 +101,13 @@ public class ChangedAdditionsCommands {
         }
 
 
-        public static int MaxSizeChange(double amount) {
+        public static int MaxSizeChange(CommandContext<CommandSourceStack> arguments, double amount) {
             try {
                 Changed.config.server.bpiSizeTolerance.set(amount); // Change Size
+                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success", amount), false);
                 return 1;
             } catch (Exception exception) {
+                arguments.getSource().sendFailure(new TextComponent(exception.getMessage()));
                 return 0;
             }
         }

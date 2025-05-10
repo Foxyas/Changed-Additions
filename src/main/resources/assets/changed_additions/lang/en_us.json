@@ -6,7 +6,8 @@
   "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
   "item.changed_additions.anti_latexbase": "Anti-Latex Base",
   "item.changed_additions.biomass": "Biomass",
-  "changed_additions.commands.setBpiSize.success": "Size successfully changed to {1%}",
+  "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
   "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
-  "changed_additions.commands.getMaxSizeTolerance": "Maximum size tolerance is {1%}"
+  "changed_additions.commands.getMaxSizeTolerance": "Maximum size tolerance is %s",
+  "changed_additions.commands.setMaxBPISize.success": "maximum size tolerance has been changed to %s"
 }
