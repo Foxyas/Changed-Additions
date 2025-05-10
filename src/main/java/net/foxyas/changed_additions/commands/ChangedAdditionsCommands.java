@@ -31,8 +31,8 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 public class ChangedAdditionsCommands {
     @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
-        LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
-        literalBuilder.then(Commands.literal("setBPISize")
+        final LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
+        final LiteralArgumentBuilder<CommandSourceStack> setBPISizeCommand = literalBuilder.then(Commands.literal("setBPISize")
                 .then(Commands.argument("size", FloatArgumentType.floatArg())
                         .executes(arguments -> {
                                     ServerLevel world = arguments.getSource().getLevel();
@@ -46,8 +46,7 @@ public class ChangedAdditionsCommands {
                         )
                 )
         ).requires(source -> !source.getServer().isDedicatedServer() && source.getEntity() instanceof Player);
-
-        literalBuilder.then(Commands.literal("setMaxBPISize")
+        final LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize")
                 .then(Commands.argument("MaxSize", DoubleArgumentType.doubleArg())
                         .executes(arguments -> {
                                     ServerLevel world = arguments.getSource().getLevel();
@@ -60,6 +59,8 @@ public class ChangedAdditionsCommands {
 
 
         event.getDispatcher().register(literalBuilder);
+        event.getDispatcher().register(setBPISizeCommand);
+        event.getDispatcher().register(setMaxBPISize);
     }
 
     private static class SizeManipulator {
