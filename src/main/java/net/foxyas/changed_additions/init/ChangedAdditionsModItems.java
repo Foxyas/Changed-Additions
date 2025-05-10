@@ -15,11 +15,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ChangedAdditionsModItems {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, ChangedAdditionsMod.MODID);
-    public static final RegistryObject<Item> ANTI_LATEXBASE = REGISTRY.register("anti_latexbase", () -> new AntiLatexbaseItem());
+    public static final RegistryObject<Item> ANTI_LATEX_BASE = REGISTRY.register("anti_latex_base", AntiLatexbaseItem::new);
     public static final RegistryObject<Item> NEOFUSER = block(ChangedAdditionsModBlocks.NEOFUSER, ChangedAdditionsModTabs.TAB_CHANGED_ADDITIONS_TAB);
-    public static final RegistryObject<Item> AMMONIUM_CHLORIDE = REGISTRY.register("ammonium_chloride", () -> new AmmoniumchlorideItem());
-    public static final RegistryObject<Item> LAETHIN_SYRINGE = REGISTRY.register("laethin_syringe", () -> new LaethinSyringeItem());
-    public static final RegistryObject<Item> BIOMASS = REGISTRY.register("biomass", () -> new BiomassItem());
+    public static final RegistryObject<Item> AMMONIUM_CHLORIDE = REGISTRY.register("ammonium_chloride", AmmoniumchlorideItem::new);
+    public static final RegistryObject<Item> LAETHIN_SYRINGE = REGISTRY.register("laethin_syringe", LaethinSyringeItem::new);
+    public static final RegistryObject<Item> BIOMASS = REGISTRY.register("biomass", BiomassItem::new);
 
     private static RegistryObject<Item> block(RegistryObject<Block> block, CreativeModeTab tab) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));

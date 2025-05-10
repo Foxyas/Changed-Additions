@@ -59,10 +59,10 @@
       "sortid": 1,
       "compiles": true,
       "locked_code": false,
-      "registry_name": "anti_latexbase",
+      "registry_name": "anti_latex_base",
       "metadata": {
         "files": [
-          "src/main/resources/assets/changed_additions/models/item/anti_latexbase.json",
+          "src/main/resources/assets/changed_additions/models/item/anti_latex_base.json",
           "src/main/java/net/foxyas/changed_additions/item/AntiLatexbaseItem.java"
         ]
       }
@@ -143,7 +143,7 @@
       "item.changed_additions.laethin_syringe": "Laethin Syringe",
       "block.changed_additions.neofuser": "Neofuser",
       "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
-      "item.changed_additions.anti_latexbase": "Anti-Latex Base",
+      "item.changed_additions.anti_latex_base": "Anti-Latex Base",
       "item.changed_additions.biomass": "Biomass"
     }
   },

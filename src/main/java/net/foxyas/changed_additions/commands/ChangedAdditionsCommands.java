@@ -7,8 +7,10 @@ import com.mojang.brigadier.context.CommandContext;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -63,13 +65,13 @@ public class ChangedAdditionsCommands {
     }
 
     private static class SizeManipulator {
-        private static final float SIZE_TOLERANCE = BasicPlayerInfo.getSizeTolerance();
 
-        public static float getSize(float size, boolean OverrideSize) {
+        public static float getSize(Player player, float size, boolean OverrideSize) {
+            float SIZE_TOLERANCE = BasicPlayerInfo.getSizeTolerance();
             if (size < 1.0f - SIZE_TOLERANCE) {
-                ChangedAdditionsMod.LOGGER.atWarn().log("Size value is too low: " + size + ", The Size Value is going to be auto set to limit"); // Too Low Warn
+                player.displayClientMessage(new TextComponent("Size value is too low: " + size + ", The Size Value is going to be auto set to limit").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too Low Warn
             } else if (size > 1.0f + SIZE_TOLERANCE) {
-                ChangedAdditionsMod.LOGGER.atWarn().log("Size value is too high: " + size + ", The Size Value is going to be auto set to max"); // Too High Warn
+                player.displayClientMessage(new TextComponent("Size value is too high: " + size + ", The Size Value is going to be auto set to max").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too High Warn
             }
             return OverrideSize ? Mth.clamp(size, 1.0f - SIZE_TOLERANCE, 1.0f + SIZE_TOLERANCE) : size;
 
@@ -84,10 +86,10 @@ public class ChangedAdditionsCommands {
 
         public static int SizeChange(CommandContext<CommandSourceStack> arguments, Entity entity, float amount) {
             if (entity instanceof Player player) {
-                float newSize = getSize(amount, true);
+                float newSize = getSize(player, amount, true);
                 Changed.config.client.basicPlayerInfo.setSize(newSize); // Change Size
                 ChangedAdditionsMod.LOGGER.info("Size changed to: " + newSize + " for player: " + player.getName().getString()); // Command Classic Log
-                player.displayClientMessage(new TextComponent("Size changed to: " + newSize), false); // Chat log for the player
+                //player.displayClientMessage(new TextComponent("Size changed to: " + newSize), false); // Chat log for the player
                 arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.success", amount), false);
                 return 1;
             } else {

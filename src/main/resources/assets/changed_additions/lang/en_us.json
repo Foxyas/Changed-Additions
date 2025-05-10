@@ -4,7 +4,7 @@
   "item.changed_additions.laethin_syringe": "Laethin Syringe",
   "block.changed_additions.neofuser": "Neofuser",
   "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
-  "item.changed_additions.anti_latexbase": "Anti-Latex Base",
+  "item.changed_additions.anti_latex_base": "Anti-Latex Base",
   "item.changed_additions.biomass": "Biomass",
   "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
   "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
