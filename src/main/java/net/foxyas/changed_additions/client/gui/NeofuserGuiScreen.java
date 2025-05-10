@@ -61,19 +61,16 @@ public class NeofuserGuiScreen extends AbstractContainerScreen<NeofuserGuiMenu> 
 		RenderSystem.setShaderTexture(0, texture);
 		blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		RenderSystem.setShaderTexture(0, new ResourceLocation("changed_additions:textures/screens/true_neofuser_gui.png"));
-		blit(ms, this.leftPos + 0, this.topPos + 0, 0, 0, 200, 187, 200, 187);
-
 		double math = 0;
 		float progress = getValue(this.world,new BlockPos(x,y,z)) / 3.57f;
 
 		int progressint = (int) progress;
 
         RenderSystem.setShaderTexture(0, new ResourceLocation("changed_additions:textures/screens/empty_bar.png"));
-        blit(ms, this.leftPos + 84, this.topPos + 57, 0, 0, 32, 12, 32, 12);
+        blit(ms, this.leftPos + 84, this.topPos + 59, 0, 0, 32, 12, 32, 12);
 		
         RenderSystem.setShaderTexture(0, new ResourceLocation("changed_additions:textures/screens/bar_full.png"));
-        blit(ms, this.leftPos + 84+2, this.topPos + 57+2, 0, 0, progressint, 8, progressint, 8);
+        blit(ms, this.leftPos + 84+2, this.topPos + 59+2, 0, 0, progressint, 8, progressint, 8);
 		
 
         RenderSystem.disableBlend();
