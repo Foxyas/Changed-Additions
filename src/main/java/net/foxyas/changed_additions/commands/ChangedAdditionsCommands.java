@@ -57,6 +57,12 @@ public class ChangedAdditionsCommands {
                 )
         ).requires(source -> !source.getLevel().isClientSide);
         event.getDispatcher().register(setMaxBPISize);
+
+        LiteralArgumentBuilder<CommandSourceStack> getMaxBPISize = literalBuilder.then(Commands.literal("getMaxSizeTolerance")
+                .executes(SizeManipulator::SendMaxSizeTolerance
+                )
+        ).requires(source -> !source.getLevel().isClientSide);
+        event.getDispatcher().register(getMaxBPISize);
     }
 
     private static class SizeManipulator {
@@ -100,6 +106,17 @@ public class ChangedAdditionsCommands {
                 Changed.config.server.bpiSizeTolerance.set(amount); // Change Size
                 return 1;
             } catch (Exception exception) {
+                return 0;
+            }
+        }
+
+        public static int SendMaxSizeTolerance(CommandContext<CommandSourceStack> arguments) {
+            try {
+                double value = Changed.config.server.bpiSizeTolerance.get();
+                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.getMaxSizeTolerance", value), false);
+                return 1;
+            } catch (Exception e) {
+                arguments.getSource().sendFailure(new TranslatableComponent(e.getMessage()));
                 return 0;
             }
         }

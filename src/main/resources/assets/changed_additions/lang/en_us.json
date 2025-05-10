@@ -7,5 +7,6 @@
   "item.changed_additions.anti_latexbase": "Anti-Latex Base",
   "item.changed_additions.biomass": "Biomass",
   "changed_additions.commands.setBpiSize.success": "Size successfully changed to {1%}",
-  "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size"
+  "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
+  "changed_additions.commands.getMaxSizeTolerance": "Maximum size tolerance is {1%}"
 }
