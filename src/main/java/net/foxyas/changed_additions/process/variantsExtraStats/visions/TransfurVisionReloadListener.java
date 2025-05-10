@@ -37,6 +37,9 @@ public class TransfurVisionReloadListener extends SimpleJsonResourceReloadListen
             }
         }
 
+        if (!entries.isEmpty()) {
+            ChangedAdditionsMod.LOGGER.info("Loaded transfur visions successfully. Note: Ensure your vision post-effect shaders are valid – malformed shaders may cause rendering issues or crashes.");
+        }
         ChangedAdditionsMod.LOGGER.info("Loaded {} transfur visions", entries.size());
     }
 

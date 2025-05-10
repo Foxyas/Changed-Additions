@@ -2,16 +2,15 @@ package net.foxyas.changed_additions.commands;
 
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import org.checkerframework.checker.units.qual.s;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,19 +19,17 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.Direction;
-import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.Commands;
 
 import com.mojang.brigadier.arguments.DoubleArgumentType;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 
 @Mod.EventBusSubscriber
 public class ChangedAdditionsCommands {
     @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
         final LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
-        final LiteralArgumentBuilder<CommandSourceStack> setBPISizeCommand = literalBuilder.then(Commands.literal("setBPISize")
+        event.getDispatcher().register(literalBuilder);
+        LiteralArgumentBuilder<CommandSourceStack> setBPISizeCommand = literalBuilder.then(Commands.literal("setBPISize")
                 .then(Commands.argument("size", FloatArgumentType.floatArg())
                         .executes(arguments -> {
                                     ServerLevel world = arguments.getSource().getLevel();
@@ -41,12 +38,15 @@ public class ChangedAdditionsCommands {
                                         entity = FakePlayerFactory.getMinecraft(world);
                                     }
                                     float amount = FloatArgumentType.getFloat(arguments, "size");
-                                    return SizeManipulator.SizeChange(entity, amount);
+
+                                    return SizeManipulator.SizeChange(arguments, entity, amount);
                                 }
                         )
                 )
-        ).requires(source -> !source.getServer().isDedicatedServer() && source.getEntity() instanceof Player);
-        final LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize")
+        ).requires(source -> source.getEntity() instanceof Player player && player.getLevel().isClientSide());
+        event.getDispatcher().register(setBPISizeCommand);
+
+        LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize")
                 .then(Commands.argument("MaxSize", DoubleArgumentType.doubleArg())
                         .executes(arguments -> {
                                     ServerLevel world = arguments.getSource().getLevel();
@@ -55,11 +55,7 @@ public class ChangedAdditionsCommands {
                                 }
                         )
                 )
-        ).requires(source -> source.getServer().isDedicatedServer());
-
-
-        event.getDispatcher().register(literalBuilder);
-        event.getDispatcher().register(setBPISizeCommand);
+        ).requires(source -> !source.getLevel().isClientSide);
         event.getDispatcher().register(setMaxBPISize);
     }
 
@@ -83,15 +79,17 @@ public class ChangedAdditionsCommands {
              */
         }
 
-        public static int SizeChange(Entity entity, float amount) {
+        public static int SizeChange(CommandContext<CommandSourceStack> arguments, Entity entity, float amount) {
             if (entity instanceof Player player) {
                 float newSize = getSize(amount, true);
                 Changed.config.client.basicPlayerInfo.setSize(newSize); // Change Size
                 ChangedAdditionsMod.LOGGER.info("Size changed to: " + newSize + " for player: " + player.getName().getString()); // Command Classic Log
                 player.displayClientMessage(new TextComponent("Size changed to: " + newSize), false); // Chat log for the player
+                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.success", amount), false);
                 return 1;
             } else {
                 ChangedAdditionsMod.LOGGER.atError().log("Entity is not a player, cannot change size."); // Command Classic Error
+                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.fail"), false);
                 return 0;
             }
         }
