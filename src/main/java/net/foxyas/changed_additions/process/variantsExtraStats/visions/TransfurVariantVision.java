@@ -21,20 +21,20 @@ public class TransfurVariantVision {
         return new ResourceLocation(input.getNamespace(), path);
     }
 
+    public static TransfurVariantVision fromJson(ResourceLocation id, JsonObject json) {
+        String effectStr = GsonHelper.getAsString(json, "visionEffect");
+        String formStr = GsonHelper.getAsString(json, "form");
+        return new TransfurVariantVision(
+                new ResourceLocation(effectStr),
+                new ResourceLocation(formStr)
+        );
+    }
+
     public ResourceLocation getVisionEffect() {
         return visionEffect;
     }
 
     public ResourceLocation getForm() {
         return form;
-    }
-
-    public static TransfurVariantVision fromJson(ResourceLocation id, JsonObject json) {
-        String effectStr = GsonHelper.getAsString(json, "visionEffect");
-        String formStr = GsonHelper.getAsString(json, "form");
-        return new TransfurVariantVision(
-            new ResourceLocation(effectStr),
-            new ResourceLocation(formStr)
-        );
     }
 }

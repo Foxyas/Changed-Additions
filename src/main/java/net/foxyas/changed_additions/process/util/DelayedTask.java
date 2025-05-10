@@ -37,6 +37,37 @@ public class DelayedTask {
         MinecraftForge.EVENT_BUS.register(this); // Automatic registration of the instance with ForgeEventBus
     }
 
+    // Métodos estáticos para acessar as tarefas
+    public static DelayedTask getTask(int id) {
+        return activeTasks.get(id);
+    }
+
+    public static void cancelTask(int id) {
+        DelayedTask task = activeTasks.get(id);
+        if (task != null) {
+            task.cancel();
+        }
+    }
+
+    public static void pauseTask(int id) {
+        DelayedTask task = activeTasks.get(id);
+        if (task != null) {
+            task.pause();
+        }
+    }
+
+    public static void resumeTask(int id) {
+        DelayedTask task = activeTasks.get(id);
+        if (task != null) {
+            task.resume();
+        }
+    }
+
+    public static boolean isTaskPaused(int id) {
+        DelayedTask task = activeTasks.get(id);
+        return task != null && task.isPaused();
+    }
+
     // Event to update this instance only
     @SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) {
@@ -105,37 +136,6 @@ public class DelayedTask {
 
     public int getId() {
         return id;
-    }
-
-    // Métodos estáticos para acessar as tarefas
-    public static DelayedTask getTask(int id) {
-        return activeTasks.get(id);
-    }
-
-    public static void cancelTask(int id) {
-        DelayedTask task = activeTasks.get(id);
-        if (task != null) {
-            task.cancel();
-        }
-    }
-
-    public static void pauseTask(int id) {
-        DelayedTask task = activeTasks.get(id);
-        if (task != null) {
-            task.pause();
-        }
-    }
-
-    public static void resumeTask(int id) {
-        DelayedTask task = activeTasks.get(id);
-        if (task != null) {
-            task.resume();
-        }
-    }
-
-    public static boolean isTaskPaused(int id) {
-        DelayedTask task = activeTasks.get(id);
-        return task != null && task.isPaused();
     }
 
 }

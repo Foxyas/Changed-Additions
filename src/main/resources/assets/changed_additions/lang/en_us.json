@@ -9,5 +9,6 @@
   "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
   "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
   "changed_additions.commands.getMaxSizeTolerance": "Maximum size tolerance is %s",
-  "changed_additions.commands.setMaxBPISize.success": "maximum size tolerance has been changed to %s"
+  "changed_additions.commands.setMaxBPISize.success": "maximum size tolerance has been changed to %s",
+  "subtitles.untransfur": "Untransfurmization"
 }

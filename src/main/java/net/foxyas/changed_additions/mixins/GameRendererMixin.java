@@ -29,16 +29,13 @@ public abstract class GameRendererMixin {
     private Minecraft minecraft;
     @Unique
     private TransfurVariantVision changed_Additions$transfurVariantVision;
-
-    @Shadow
-    public abstract void render(float p_109094_, long p_109095_, boolean p_109096_);
-
     @Unique
     private PostChain changed_Additions$colorblindChain;
-
     @Unique
     private int changed_Additions$prevWidth = -1, changed_Additions$prevHeight = -1;
 
+    @Shadow
+    public abstract void render(float p_109094_, long p_109095_, boolean p_109096_);
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;doEntityOutline()V", shift = At.Shift.AFTER))
     private void verdant$addColorblindFilter(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci) {
@@ -66,7 +63,7 @@ public abstract class GameRendererMixin {
     private boolean changed_Additions$ShouldWork(Player player) {
         TransfurVariantInstance<?> variantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (variantInstance != null) {
-            this.changed_Additions$transfurVariantVision = TransfurVariantVisions.getTransfurVariantVision(player.getLevel(),variantInstance.getFormId());
+            this.changed_Additions$transfurVariantVision = TransfurVariantVisions.getTransfurVariantVision(player.getLevel(), variantInstance.getFormId());
             return TransfurVariantVisions.getTransfurVariantVision(player.getLevel(), variantInstance.getFormId()) != null;
         }
 

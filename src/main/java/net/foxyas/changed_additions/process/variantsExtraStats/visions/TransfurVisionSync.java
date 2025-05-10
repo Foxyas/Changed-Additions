@@ -16,7 +16,7 @@ import static net.foxyas.changed_additions.network.packets.utils.PacketsUtils.se
 public class TransfurVisionSync {
     public static void syncTo(ServerPlayer player) {
         List<TransfurVariantVision> all = new ArrayList<>(TransfurVisionRegistry.getAll());
-        sendToPlayer(ChangedAdditionsMod.PACKET_HANDLER,new SyncTransfurVisionsPacket(all), player);
+        sendToPlayer(ChangedAdditionsMod.PACKET_HANDLER, new SyncTransfurVisionsPacket(all), player);
     }
 
     @SubscribeEvent

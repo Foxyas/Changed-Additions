@@ -16,7 +16,7 @@ public class FormsStats {
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         Player player = event.getPlayer();
         TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
-        if (transfurVariantInstance == null){
+        if (transfurVariantInstance == null) {
             return;
         }
 

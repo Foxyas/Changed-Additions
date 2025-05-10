@@ -1,0 +1,11 @@
+{
+  "player.untransfur": {
+    "subtitle": "subtitles.untransfur",
+    "sounds": [
+      {
+        "name": "changed_additions:healing",
+        "stream": false
+      }
+    ]
+  }
+}

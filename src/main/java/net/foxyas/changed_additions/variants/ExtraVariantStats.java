@@ -6,7 +6,7 @@ public interface ExtraVariantStats {
     float BlockBreakSpeed();
 
     // Multiplier Based on % amount [Vanilla Attribute Style]
-    default float getBlockBreakSpeedMultiplier(){
+    default float getBlockBreakSpeedMultiplier() {
         return this.BlockBreakSpeed() + 1;
     }
 }

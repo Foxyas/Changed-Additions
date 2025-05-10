@@ -7,9 +7,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 
 @Mod.EventBusSubscriber(modid = ChangedAdditionsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-	public class ChangedAddonPacketsRegistry {
-		@SubscribeEvent
-		public static void registerPackets(FMLConstructModEvent event) {
-			ChangedAdditionsMod.addNetworkMessage(SyncTransfurVisionsPacket.class, SyncTransfurVisionsPacket::encode, SyncTransfurVisionsPacket::decode, SyncTransfurVisionsPacket::handle);
-		}
-	}
+public class ChangedAddonPacketsRegistry {
+    @SubscribeEvent
+    public static void registerPackets(FMLConstructModEvent event) {
+        ChangedAdditionsMod.addNetworkMessage(SyncTransfurVisionsPacket.class, SyncTransfurVisionsPacket::encode, SyncTransfurVisionsPacket::decode, SyncTransfurVisionsPacket::handle);
+    }
+}

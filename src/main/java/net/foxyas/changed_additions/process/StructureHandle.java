@@ -19,9 +19,9 @@ public class StructureHandle {
     /**
      * Verifica se uma estrutura pode gerar dentro de um determinado raio de chunks.
      *
-     * @param level     o ServerLevel
-     * @param pos       a posição a ser verificada
-     * @param structure ResourceKey da estrutura
+     * @param level      o ServerLevel
+     * @param pos        a posição a ser verificada
+     * @param structure  ResourceKey da estrutura
      * @param chunkRange o raio de chunks a ser verificado
      * @return true se a estrutura pode gerar na área, false caso contrário.
      */
