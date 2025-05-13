@@ -67,7 +67,7 @@ public class ChangedAdditionsTransfurVariants {
 
 
     public static final RegistryObject<TransfurVariant<FengQIFoxEntity>> FENG_QI_FOX = register("form_feng_qi_fox", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_FOX)
-            .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.LEAP).addAbility(ChangedAdditionsAbilities.CARRY).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
+            .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).scares(List.of(Rabbit.class)).nightVision());
 
 
     private static <T extends ChangedEntity> RegistryObject<TransfurVariant<T>> register(String name, TransfurVariant.Builder<T> builder) {

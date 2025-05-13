@@ -9,7 +9,9 @@
     "RandomVariantFunctionMixin",
     "goals.ChangedEntityGoalsMixin",
     "goals.PhantomSweepAttackGoalMixin",
-    "mods.ChangedMixin"
+    "mods.ChangedMixin",
+    "render.WingFallFlyAnimationMixin",
+    "render.WingFlyAnimationMixin"
   ],
   "injectors": {
     "defaultRequire": 1
