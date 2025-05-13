@@ -103,6 +103,12 @@ public class ChangedAdditionsCommands {
             try {
                 Changed.config.server.bpiSizeTolerance.set(amount); // Change Size
                 arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success", amount), false);
+                if (amount < 0) {
+                    arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success_but_to_low", amount), false);
+                }
+                if (amount > 100) {
+                    arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success_but_to_high", amount), false);
+                }
                 return 1;
             } catch (Exception exception) {
                 arguments.getSource().sendFailure(new TextComponent(exception.getMessage()));
