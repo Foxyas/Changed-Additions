@@ -6,6 +6,6 @@ import net.minecraft.world.item.Rarity;
 
 public class AntiLatexbaseItem extends Item {
     public AntiLatexbaseItem() {
-        super(new Item.Properties().tab(ChangedAdditionsModTabs.TAB_CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
+        super(new Item.Properties().tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
     }
 }

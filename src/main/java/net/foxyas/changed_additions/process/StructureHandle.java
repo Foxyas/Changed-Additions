@@ -35,7 +35,7 @@ public class StructureHandle {
      *
      * @param level       o ServerLevel
      * @param pos         a posição a ser verificada
-     * @param structureId o ID da estrutura desejada (ex.: "changed_addon:dazed_meteor")
+     * @param structureId o ID da estrutura desejada (ex.: "changed_additions:dazed_meteor")
      * @param chunkRange  o raio de chunks a ser verificado
      * @return true se a estrutura pode gerar na área, false caso contrário.
      */

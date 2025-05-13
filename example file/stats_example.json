@@ -1,0 +1,7 @@
+{
+  "form": "changed:form_gas_wolf",
+  "miningSpeedMultiplier": 6,
+  "regenSpeedMultiplier": 5,
+  "flySpeedMultiplier": 4,
+  "fallDmgMultiplier": 2
+}

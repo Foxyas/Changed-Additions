@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class BiomassItem extends Item {
     public BiomassItem() {
-        super(new Item.Properties().tab(ChangedAdditionsModTabs.TAB_CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON).food(
+        super(new Item.Properties().tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON).food(
                 new FoodProperties.Builder().alwaysEat().nutrition(-6).saturationMod(1).effect(() -> new MobEffectInstance(MobEffects.HUNGER), 0.5f).build())
         );
     }

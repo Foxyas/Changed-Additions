@@ -6,6 +6,8 @@
   "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
   "item.changed_additions.anti_latex_base": "Anti-Latex Base",
   "item.changed_additions.biomass": "Biomass",
+  "item.changed_additions.dyeable_shorts": "Dyeable Shorts",
+  "item.changed_additions.laser_pointer": "Laser Pointer",
   "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
   "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
   "changed_additions.commands.getMaxSizeTolerance": "Maximum size tolerance is %s",

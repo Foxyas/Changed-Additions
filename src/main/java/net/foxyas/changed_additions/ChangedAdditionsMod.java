@@ -1,5 +1,6 @@
 package net.foxyas.changed_additions;
 
+import net.foxyas.changed_additions.client.renderer.item.LaserItemDynamicRender;
 import net.foxyas.changed_additions.init.ChangedAdditionsModBlockEntities;
 import net.foxyas.changed_additions.init.ChangedAdditionsModBlocks;
 import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
@@ -8,6 +9,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
@@ -18,6 +20,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+import static net.foxyas.changed_additions.init.ChangedAdditionsModItems.LASER_POINTER;
 
 @Mod("changed_additions")
 public class ChangedAdditionsMod {
@@ -35,6 +39,12 @@ public class ChangedAdditionsMod {
 
         ChangedAdditionsModBlockEntities.REGISTRY.register(bus);
 
+        bus.addListener(this::clientLoad); // <-- REGISTRA o método corretamente
+    }
+
+    public void clientLoad(FMLClientSetupEvent event) {
+        // Dynamic Color
+        LaserItemDynamicRender.DynamicLaserColor(LASER_POINTER);
     }
 
     public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {

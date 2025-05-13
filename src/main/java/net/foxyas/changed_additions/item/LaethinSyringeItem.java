@@ -26,7 +26,7 @@ import static net.foxyas.changed_additions.process.ProcessUntransfur.UntransfurP
 
 public class LaethinSyringeItem extends Item implements SpecializedAnimations {
     public LaethinSyringeItem() {
-        super(new Item.Properties().tab(ChangedAdditionsModTabs.TAB_CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
+        super(new Item.Properties().tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
     }
 
     @Override

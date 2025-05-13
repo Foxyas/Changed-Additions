@@ -10,7 +10,6 @@ import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -54,7 +53,7 @@ public class ChangedAdditionsCommands {
                                 }
                         )
                 )
-        ).requires(source -> !source.getLevel().isClientSide);
+        ).requires(source -> !source.getLevel().isClientSide && source.hasPermission(2));
         event.getDispatcher().register(setMaxBPISize);
 
         LiteralArgumentBuilder<CommandSourceStack> getMaxBPISize = literalBuilder.then(Commands.literal("getMaxSizeTolerance")

@@ -6,10 +6,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ChangedAdditionsModTabs {
-    public static CreativeModeTab TAB_CHANGED_ADDITIONS_TAB;
+    public static CreativeModeTab CHANGED_ADDITIONS_TAB;
 
     public static void load() {
-        TAB_CHANGED_ADDITIONS_TAB = new CreativeModeTab("tabchanged_additions_tab") {
+        CHANGED_ADDITIONS_TAB = new CreativeModeTab("tabchanged_additions_tab") {
             @Override
             public ItemStack makeIcon() {
                 return new ItemStack(ChangedAdditionsModBlocks.NEOFUSER.get());

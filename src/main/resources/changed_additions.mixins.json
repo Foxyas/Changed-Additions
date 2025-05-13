@@ -5,12 +5,14 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "changed_additions.refmap.json",
   "mixins": [
+    "goals.ChangedEntityGoalsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
     "GameRendererMixin",
-    "PostChainMixin"
+    "PostChainMixin",
+    "render.AdvancedHumanoidRendererMixin"
   ]
 }
