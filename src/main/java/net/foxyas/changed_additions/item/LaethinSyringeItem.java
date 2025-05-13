@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.item;
 
 import net.foxyas.changed_additions.init.ChangedAdditionsModTabs;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
+import net.ltxprogrammer.changed.init.ChangedItems;
 import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.item.SpecializedAnimations;
@@ -62,6 +63,10 @@ public class LaethinSyringeItem extends Item implements SpecializedAnimations {
         assert player != null;
         if (!player.isCreative()) {
             stack.shrink(1);
+            ItemStack syringe = new ItemStack(ChangedItems.SYRINGE.get(), 1);
+            if (!player.addItem(syringe)) {
+                player.drop(syringe,false);
+            }
         }
         return super.finishUsingItem(stack, level, entity);
     }
