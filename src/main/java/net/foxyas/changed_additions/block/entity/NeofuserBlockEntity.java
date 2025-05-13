@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.block.entity;
 
 import io.netty.buffer.Unpooled;
-import net.foxyas.changed_additions.init.ChangedAdditionsModBlockEntities;
+import net.foxyas.changed_additions.init.ChangedAdditionsBlockEntities;
 import net.foxyas.changed_additions.recipes.RecipesHandle;
 import net.foxyas.changed_additions.world.inventory.NeofuserGuiMenu;
 import net.minecraft.core.BlockPos;
@@ -38,7 +38,7 @@ public class NeofuserBlockEntity extends RandomizableContainerBlockEntity implem
     private int tickCooldown = 0; // usado para o delay entre os avanços de progresso
 
     public NeofuserBlockEntity(BlockPos position, BlockState state) {
-        super(ChangedAdditionsModBlockEntities.NEOFUSER.get(), position, state);
+        super(ChangedAdditionsBlockEntities.NEOFUSER.get(), position, state);
     }
 
     @Override

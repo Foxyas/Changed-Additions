@@ -7,7 +7,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.foxyas.changed_additions.init.ChangedAdditionsModBlocks;
+import net.foxyas.changed_additions.init.ChangedAdditionsBlocks;
 import net.foxyas.changed_additions.init.ChangedAdditionsModJeiPlugin;
 import net.foxyas.changed_additions.recipes.NeofuserRecipe;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
 
     public NeofuserRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 116, 54);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ChangedAdditionsModBlocks.NEOFUSER.get().asItem()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ChangedAdditionsBlocks.NEOFUSER.get().asItem()));
     }
 
     @Override
@@ -50,11 +50,13 @@ public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
     }
 
     @Deprecated
+    @SuppressWarnings("removal")
     @Override
     public Class<? extends NeofuserRecipe> getRecipeClass() {
         return NeofuserRecipe.class;
     }
 
+    @SuppressWarnings("removal")
     @Override
     public ResourceLocation getUid() {
         return UID;

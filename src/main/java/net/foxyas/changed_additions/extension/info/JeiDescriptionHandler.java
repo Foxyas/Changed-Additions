@@ -16,8 +16,8 @@ import java.util.Map;
 public class JeiDescriptionHandler {
     public static void registerDescriptions(IRecipeRegistration registration) {
         // Item Information
-        registration.addIngredientInfo(new ItemStack(ChangedAdditionsModItems.DYEABLE_SHORTS.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_addon.jei_descriptions.dyeable_shorts"));
-        registration.addIngredientInfo(new ItemStack(ChangedAdditionsModItems.LASER_POINTER.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_addon.jei_descriptions.laser_pointer"));
+        registration.addIngredientInfo(new ItemStack(ChangedAdditionsModItems.DYEABLE_SHORTS.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_additions.jei_descriptions.dyeable_shorts"));
+        registration.addIngredientInfo(new ItemStack(ChangedAdditionsModItems.LASER_POINTER.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_additions.jei_descriptions.laser_pointer"));
     }
 
     private static void addSharedDescriptions(IRecipeRegistration registration, List<Item> items, String translationKey) {

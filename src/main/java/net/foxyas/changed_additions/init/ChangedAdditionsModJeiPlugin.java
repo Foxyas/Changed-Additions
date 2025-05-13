@@ -41,6 +41,6 @@ public class ChangedAdditionsModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ChangedAdditionsModBlocks.NEOFUSER.get().asItem()), NeofuserRecipe_Type);
+        registration.addRecipeCatalyst(new ItemStack(ChangedAdditionsBlocks.NEOFUSER.get().asItem()), NeofuserRecipe_Type);
     }
 }

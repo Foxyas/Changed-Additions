@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ChangedAdditionsModMenus {
+public class ChangedAdditionsMenus {
     private static final List<MenuType<?>> REGISTRY = new ArrayList<>();
     public static final MenuType<NeofuserGuiMenu> NEOFUSER_GUI = register("neofuser_gui", (id, inv, extraData) -> new NeofuserGuiMenu(id, inv, extraData));
 

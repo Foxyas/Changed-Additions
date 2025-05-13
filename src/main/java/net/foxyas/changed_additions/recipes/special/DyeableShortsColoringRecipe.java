@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.recipes.special;
 
 import com.google.gson.JsonObject;
-import net.foxyas.changed_additions.init.ChangedAdditionsModRecipeTypes;
+import net.foxyas.changed_additions.init.ChangedAdditionsRecipeTypes;
 import net.foxyas.changed_additions.item.armor.DyeableShorts;
 import net.ltxprogrammer.changed.item.BenignPants;
 import net.minecraft.network.FriendlyByteBuf;
@@ -101,7 +101,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ChangedAdditionsModRecipeTypes.SHORTS_COLORING.get();
+        return ChangedAdditionsRecipeTypes.SHORTS_COLORING.get();
     }
 
     public static class Serializer implements RecipeSerializer<DyeableShortsColoringRecipe> {

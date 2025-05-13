@@ -17,7 +17,7 @@ public class ChangedAdditionsModItems {
     public static final RegistryObject<Item> ANTI_LATEX_BASE = REGISTRY.register("anti_latex_base", AntiLatexbaseItem::new);
     public static final RegistryObject<Item> AMMONIUM_CHLORIDE = REGISTRY.register("ammonium_chloride", AmmoniumchlorideItem::new);
     public static final RegistryObject<Item> LAETHIN_SYRINGE = REGISTRY.register("laethin_syringe", LaethinSyringeItem::new);
-    public static final RegistryObject<Item> NEOFUSER = block(ChangedAdditionsModBlocks.NEOFUSER, ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB);
+    public static final RegistryObject<Item> NEOFUSER = block(ChangedAdditionsBlocks.NEOFUSER, ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB);
     public static final RegistryObject<Item> DYEABLE_SHORTS = REGISTRY.register("dyeable_shorts", DyeableShorts::new);
     public static final RegistryObject<Item> LASER_POINTER = REGISTRY.register("laser_pointer", LaserPointer::new);
 

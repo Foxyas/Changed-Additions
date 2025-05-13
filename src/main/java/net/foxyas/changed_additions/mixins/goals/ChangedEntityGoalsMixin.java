@@ -29,8 +29,8 @@ public class ChangedEntityGoalsMixin {
         if (thisFixed.getSelfVariant() != null
                 && (thisFixed.getSelfVariant().is(TransfurVariantTags.CAT_LIKE)
                 || thisFixed.getSelfVariant().is(TransfurVariantTags.LEOPARD_LIKE)
-                || thisFixed.getSelfVariant().is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(), new ResourceLocation("changed_addon", "leopard_like")))
-                || thisFixed.getSelfVariant().is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(), new ResourceLocation("changed_addon", "cat_like"))))
+                || thisFixed.getSelfVariant().is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(), new ResourceLocation("changed_additions", "leopard_like")))
+                || thisFixed.getSelfVariant().is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(), new ResourceLocation("changed_additions", "cat_like"))))
         ) {
             thisFixed.goalSelector.addGoal(5, new FollowAndLookAtLaser(thisFixed, 0.4));
         }

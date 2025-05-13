@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.world.inventory;
 
 import net.foxyas.changed_additions.block.entity.NeofuserBlockEntity;
-import net.foxyas.changed_additions.init.ChangedAdditionsModMenus;
+import net.foxyas.changed_additions.init.ChangedAdditionsMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -39,7 +39,7 @@ public class NeofuserGuiMenu extends AbstractContainerMenu implements Supplier<M
     private BlockEntity boundBlockEntity = null;
 
     public NeofuserGuiMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        super(ChangedAdditionsModMenus.NEOFUSER_GUI, id);
+        super(ChangedAdditionsMenus.NEOFUSER_GUI, id);
         this.entity = inv.player;
         this.world = inv.player.level;
         this.internal = new ItemStackHandler(4);

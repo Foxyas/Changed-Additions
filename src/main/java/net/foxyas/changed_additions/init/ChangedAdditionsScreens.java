@@ -8,11 +8,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ChangedAdditionsModScreens {
+public class ChangedAdditionsScreens {
     @SubscribeEvent
     public static void clientLoad(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.register(ChangedAdditionsModMenus.NEOFUSER_GUI, NeofuserGuiScreen::new);
+            MenuScreens.register(ChangedAdditionsMenus.NEOFUSER_GUI, NeofuserGuiScreen::new);
         });
     }
 }

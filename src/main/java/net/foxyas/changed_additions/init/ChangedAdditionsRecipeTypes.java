@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ChangedAdditionsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ChangedAdditionsModRecipeTypes {
+public class ChangedAdditionsRecipeTypes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, "changed_additions");
 
     public static final RegistryObject<RecipeSerializer<?>> LAZER_POINTER_COLORING =

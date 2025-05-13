@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ChangedAdditionsModBlocks {
+public class ChangedAdditionsBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, ChangedAdditionsMod.MODID);
     public static final RegistryObject<Block> NEOFUSER = REGISTRY.register("neofuser", () -> new NeofuserBlock());
 }

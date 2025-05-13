@@ -8,12 +8,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ChangedAdditionsModBlockEntities {
+public class ChangedAdditionsBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ChangedAdditionsMod.MODID);
 
     private static RegistryObject<BlockEntityType<?>> register(String registryname, RegistryObject<Block> block, BlockEntityType.BlockEntitySupplier<?> supplier) {
         return REGISTRY.register(registryname, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));
-    }    public static final RegistryObject<BlockEntityType<?>> NEOFUSER = register("neofuser", ChangedAdditionsModBlocks.NEOFUSER, NeofuserBlockEntity::new);
+    }    public static final RegistryObject<BlockEntityType<?>> NEOFUSER = register("neofuser", ChangedAdditionsBlocks.NEOFUSER, NeofuserBlockEntity::new);
 
 
 }

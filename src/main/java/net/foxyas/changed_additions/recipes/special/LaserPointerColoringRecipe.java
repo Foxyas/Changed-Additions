@@ -2,7 +2,7 @@ package net.foxyas.changed_additions.recipes.special;
 
 import com.google.gson.JsonObject;
 import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
-import net.foxyas.changed_additions.init.ChangedAdditionsModRecipeTypes;
+import net.foxyas.changed_additions.init.ChangedAdditionsRecipeTypes;
 import net.foxyas.changed_additions.item.LaserPointer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -89,7 +89,7 @@ public class LaserPointerColoringRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ChangedAdditionsModRecipeTypes.LAZER_POINTER_COLORING.get();
+        return ChangedAdditionsRecipeTypes.LAZER_POINTER_COLORING.get();
     }
 
     public static class Serializer implements RecipeSerializer<LaserPointerColoringRecipe> {

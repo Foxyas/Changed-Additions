@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.process.variantsExtraStats;
 
 import net.foxyas.changed_additions.configuration.ChangedAdditionsServerConfigs;
-import net.foxyas.changed_additions.init.ChangedAdditionsModGameRules;
+import net.foxyas.changed_additions.init.ChangedAdditionsGameRules;
 import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
@@ -57,7 +57,7 @@ public class CreatureDietsHandleProcedure {
             return;
         }
 
-        boolean isForWork = world.getGameRules().getBoolean(ChangedAdditionsModGameRules.CHANGED_ADDITIONS_CREATURE_DIETS);
+        boolean isForWork = world.getGameRules().getBoolean(ChangedAdditionsGameRules.CHANGED_ADDITIONS_CREATURE_DIETS);
         boolean Debuffs;
         Debuffs = ChangedAdditionsServerConfigs.DEBUFFS.get();
 

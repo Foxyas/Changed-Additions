@@ -1,10 +1,8 @@
 package net.foxyas.changed_additions;
 
 import net.foxyas.changed_additions.client.renderer.item.LaserItemDynamicRender;
-import net.foxyas.changed_additions.init.ChangedAdditionsModBlockEntities;
-import net.foxyas.changed_additions.init.ChangedAdditionsModBlocks;
-import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
-import net.foxyas.changed_additions.init.ChangedAdditionsModTabs;
+import net.foxyas.changed_additions.init.*;
+import net.foxyas.changed_additions.variants.ChangedAdditionsTransfurVariants;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -34,10 +32,13 @@ public class ChangedAdditionsMod {
     public ChangedAdditionsMod() {
         ChangedAdditionsModTabs.load();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        ChangedAdditionsModBlocks.REGISTRY.register(bus);
+        ChangedAdditionsBlocks.REGISTRY.register(bus);
         ChangedAdditionsModItems.REGISTRY.register(bus);
+        ChangedAdditionsEntities.REGISTRY.register(bus);
+        ChangedAdditionsTransfurVariants.REGISTRY.register(bus);
+        ChangedAdditionsAbilities.REGISTRY.register(bus);
 
-        ChangedAdditionsModBlockEntities.REGISTRY.register(bus);
+        ChangedAdditionsBlockEntities.REGISTRY.register(bus);
 
         bus.addListener(this::clientLoad); // <-- REGISTRA o método corretamente
     }

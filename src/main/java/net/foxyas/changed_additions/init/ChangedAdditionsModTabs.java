@@ -12,7 +12,7 @@ public class ChangedAdditionsModTabs {
         CHANGED_ADDITIONS_TAB = new CreativeModeTab("tabchanged_additions_tab") {
             @Override
             public ItemStack makeIcon() {
-                return new ItemStack(ChangedAdditionsModBlocks.NEOFUSER.get());
+                return new ItemStack(ChangedAdditionsBlocks.NEOFUSER.get());
             }
 
             @OnlyIn(Dist.CLIENT)
