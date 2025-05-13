@@ -14,5 +14,7 @@
   "changed_additions.commands.setMaxBPISize.success": "maximum size tolerance has been changed to %s",
   "subtitles.untransfur": "Untransfurmization",
   "changed_addon.jei_descriptions.dyeable_shorts": "Made from dyeing regular pants\n§oCan be dyed§r",
-  "changed_addon.jei_descriptions.laser_pointer": "§oCan be dyed§r"
+  "changed_addon.jei_descriptions.laser_pointer": "§oCan be dyed§r",
+  "changed_additions.commands.setMaxBPISize.success_but_to_low": "%s is a value less than 0 and due that may cause issues",
+  "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s is a value high than 100 and due that may cause lag and crash issues"
 }
