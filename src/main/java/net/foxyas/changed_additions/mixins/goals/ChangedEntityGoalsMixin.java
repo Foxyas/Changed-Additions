@@ -1,11 +1,15 @@
 package net.foxyas.changed_additions.mixins.goals;
 
+import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.goals.FollowAndLookAtLaser;
 import net.foxyas.changed_additions.entities.goals.SleepingNearOwnerGoal;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.beast.AbstractDarkLatexWolf;
 import net.ltxprogrammer.changed.entity.beast.DarkLatexWolfPup;
+import net.ltxprogrammer.changed.init.ChangedRegistry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,7 +28,10 @@ public class ChangedEntityGoalsMixin {
         }
         if (thisFixed.getSelfVariant() != null
                 && (thisFixed.getSelfVariant().is(TransfurVariantTags.CAT_LIKE)
-                || thisFixed.getSelfVariant().is(TransfurVariantTags.LEOPARD_LIKE))) {
+                || thisFixed.getSelfVariant().is(TransfurVariantTags.LEOPARD_LIKE)
+                || thisFixed.getSelfVariant().is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(), new ResourceLocation("changed_addon", "leopard_like")))
+                || thisFixed.getSelfVariant().is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(), new ResourceLocation("changed_addon", "cat_like"))))
+        ) {
             thisFixed.goalSelector.addGoal(5, new FollowAndLookAtLaser(thisFixed, 0.4));
         }
     }
