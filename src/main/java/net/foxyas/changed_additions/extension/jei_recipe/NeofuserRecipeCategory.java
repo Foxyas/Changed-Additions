@@ -1,4 +1,4 @@
-package net.foxyas.changed_additions.jei_recipes;
+package net.foxyas.changed_additions.extension.jei_recipe;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -9,6 +9,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.foxyas.changed_additions.init.ChangedAdditionsModBlocks;
 import net.foxyas.changed_additions.init.ChangedAdditionsModJeiPlugin;
+import net.foxyas.changed_additions.recipes.NeofuserRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;

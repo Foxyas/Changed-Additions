@@ -1,7 +1,9 @@
 {
   "homepage": "https://www.patreon.com/c/Changedaddonplus",
   "1.18.2": {
-    "0.0.1": "Added a basic and vanilla-style untransfur system to the mod. Introduced a custom Transfur Vision post-shader system, dynamically loaded via datapacks."
+    "0.0.1": "Added a basic and vanilla-style untransfur system to the mod. Introduced a custom Transfur Vision post-shader system, dynamically loaded via datapacks.",
+    "0.0.2": "",
+    "0.0.3": "+ Added Creature Diets\n+ Added New datapack handle to add extra stats for any transfur\n  * MiningSpeedMultiplier,RegenSpeedMultiplier,FlySpeedMultiplier,FallDmgMultiplier\n+ Added Client Configs To turn off plantoids visibility from models\n+ Added Dyeable pants and Laser Pointers\n  * With Jei Info\n"
   },
   "promos": {
     "1.18.2-latest": "0.0.1",

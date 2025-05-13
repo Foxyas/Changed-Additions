@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.init;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.jei_recipes.NeofuserRecipe;
+import net.foxyas.changed_additions.recipes.NeofuserRecipe;
 import net.foxyas.changed_additions.recipes.special.DyeableShortsColoringRecipe;
 import net.foxyas.changed_additions.recipes.special.LaserPointerColoringRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;

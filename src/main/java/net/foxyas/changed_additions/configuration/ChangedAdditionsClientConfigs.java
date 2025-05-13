@@ -9,7 +9,7 @@ public class ChangedAdditionsClientConfigs {
     public static final ForgeConfigSpec.ConfigValue<Boolean> PLANTOIDS_VARIABLE;
 
     static {
-        BUILDER.push("Animations/Movement");
+        BUILDER.push("Animations / Movement");
         SMOOTH_LASER_MOVIMENT = BUILDER.comment("Make the Laser Moviment be smooth, it may cause the particule to be slower").define("Laser Smooth Moviment", false);
         BUILDER.pop();
         BUILDER.push("ModelsHandle");

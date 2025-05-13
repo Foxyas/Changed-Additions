@@ -188,13 +188,12 @@ public class LaserPointer extends Item implements SpecializedAnimations {
             Direction face = Direction.UP; // fallback para quando mirar no ar
 
             if (entityHitResult != null) {
-            } else if (result instanceof BlockHitResult blockResult && level.getBlockState(blockResult.getBlockPos()).isAir()) {
+            } else if (result.getType() == HitResult.Type.MISS) {
                 // Mira no ar: define uma posição "alvo" no ar baseada na direção do olhar
-                // spawnLaserParticle(level, player, stack, blockResult.getLocation());
+                spawnLaserParticle(level, player, stack, player.position());
             } else if (result instanceof BlockHitResult blockResult &&
                     // Se for translúcido, refazer raycast ignorando blocos
                     level.getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
-
                 Set<Block> blockSet = Objects.requireNonNull(ForgeRegistries.BLOCKS.tags())
                         .getTag(ChangedTags.Blocks.LASER_TRANSLUCENT).stream().collect(Collectors.toSet());
                 BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(level, player, 64, blockSet);

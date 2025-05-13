@@ -1,6 +1,5 @@
 package net.foxyas.changed_additions.recipes;
 
-import net.foxyas.changed_additions.jei_recipes.NeofuserRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;

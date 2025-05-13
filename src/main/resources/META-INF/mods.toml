@@ -5,12 +5,13 @@ issueTrackerURL="https://github.com/Foxyas/Changed-Additions/issues"
 
 [[mods]]
 modId="changed_additions"
-version="0.0.2"
+version="0.0.3"
 displayName="Changed Additions"
 credits="LTXProgrammer for Changed mod"
 logoFile="logo.png"
 displayURL="https://github.com/Foxyas/Changed-Additions/tree/main"
 authors="Foxyas"
+description="Adds extra content to the Changed Mod by LtxProgrammer but keeping a Vanilla style\nPatreon: https://www.patreon.com/Changedaddonplus"
 
 [[dependencies.changed_additions]]
     modId="minecraft"

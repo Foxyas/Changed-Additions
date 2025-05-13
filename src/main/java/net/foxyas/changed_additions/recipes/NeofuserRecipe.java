@@ -1,4 +1,4 @@
-package net.foxyas.changed_additions.jei_recipes;
+package net.foxyas.changed_additions.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

@@ -5,8 +5,9 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.foxyas.changed_additions.jei_recipes.NeofuserRecipe;
-import net.foxyas.changed_additions.jei_recipes.NeofuserRecipeCategory;
+import net.foxyas.changed_additions.extension.info.JeiDescriptionHandler;
+import net.foxyas.changed_additions.recipes.NeofuserRecipe;
+import net.foxyas.changed_additions.extension.jei_recipe.NeofuserRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +35,8 @@ public class ChangedAdditionsModJeiPlugin implements IModPlugin {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<NeofuserRecipe> neofuserRecipes = recipeManager.getAllRecipesFor(NeofuserRecipe.Type.INSTANCE);
         registration.addRecipes(NeofuserRecipe_Type, neofuserRecipes);
+
+        JeiDescriptionHandler.registerDescriptions(registration);
     }
 
     @Override
