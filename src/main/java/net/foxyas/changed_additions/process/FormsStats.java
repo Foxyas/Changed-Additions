@@ -55,12 +55,13 @@ public class FormsStats {
             int regenInterval = (int) (20 / multiplier);
             if (regenInterval <= 0 || player.tickCount % regenInterval == 0) {
                 player.heal(1.0F);
+                player.causeFoodExhaustion(0.125f * multiplier);
             }
         }
     }
 
     private static boolean shouldRegenerate(Player player) {
-        return !player.isCreative() && player.getFoodData().getFoodLevel() > 10;
+        return !player.isCreative() && player.getFoodData().getFoodLevel() > 10 && player.getHealth() < player.getMaxHealth();
     }
 
     @SubscribeEvent

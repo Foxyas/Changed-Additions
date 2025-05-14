@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "changed:latex_hypno_cat",
+    "changed:latex_medusa_cat",
+    "changed:latex_ming_cat",
+    "changed:latex_snow_leopard_male",
+    "changed:latex_snow_leopard_female",
+    "changed:latex_stiger",
+    "changed:latex_tiger_shark",
+    "changed:latex_watermelon_cat",
+    "changed:latex_white_tiger"
+  ]
+}

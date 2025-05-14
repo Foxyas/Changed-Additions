@@ -43,6 +43,10 @@ public class ChangedAdditionsMod {
         bus.addListener(this::clientLoad); // <-- REGISTRA o método corretamente
     }
 
+    public static ResourceLocation modResource(String path) {
+        return new ResourceLocation(MODID, path);
+    }
+
     public void clientLoad(FMLClientSetupEvent event) {
         // Dynamic Color
         LaserItemDynamicRender.DynamicLaserColor(LASER_POINTER);

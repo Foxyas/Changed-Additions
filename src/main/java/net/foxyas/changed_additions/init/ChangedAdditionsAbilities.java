@@ -38,6 +38,8 @@ public class ChangedAdditionsAbilities /*extends ChangedAbilities*/ {
 
     public static void addUniversalAbilities(TransfurVariant.UniversalAbilitiesEvent event) {
         event.addAbility(event.isOfTag(ChangedTags.EntityTypes.LATEX).and(event.isNotOfTag(ChangedTags.EntityTypes.PARTIAL_LATEX)), SOFTEN_ABILITY);
+        event.addAbility(event.isOfTag(ChangedAdditionsTags.EntityTypes.HAVE_CLAWS).and(event.isNotOfTag(ChangedAdditionsTags.EntityTypes.NO_CLAWS)), CLAWS_ABILITY);
+        event.addAbility(event.isOfTag(ChangedAdditionsTags.EntityTypes.FELINES_LIKE), LEAP);
         event.addAbility(entityType -> getCanGlideEntites().contains(entityType), WING_FLAP_ABILITY);
     }
 

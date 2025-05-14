@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.init;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.FengQIFoxEntity;
+import net.ltxprogrammer.changed.init.ChangedMobCategories;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,7 +19,7 @@ import net.minecraft.world.entity.Entity;
 public class ChangedAdditionsEntities {
 	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITIES, ChangedAdditionsMod.MODID);
 	public static final RegistryObject<EntityType<FengQIFoxEntity>> FENG_QI_FOX = register("feng_qi_fox",
-			EntityType.Builder.<FengQIFoxEntity>of(FengQIFoxEntity::new, MobCategory.MONSTER)
+			EntityType.Builder.<FengQIFoxEntity>of(FengQIFoxEntity::new, ChangedMobCategories.CHANGED)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(FengQIFoxEntity::new)
