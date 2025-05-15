@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
-import static net.foxyas.changed_additions.init.ChangedAdditionsModItems.DYEABLE_SHORTS;
+import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DYEABLE_SHORTS;
 
 public class DyeableShortsColoringRecipe extends CustomRecipe {
     public DyeableShortsColoringRecipe(ResourceLocation id) {

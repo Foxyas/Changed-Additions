@@ -19,7 +19,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static net.foxyas.changed_additions.init.ChangedAdditionsModItems.LASER_POINTER;
+import static net.foxyas.changed_additions.init.ChangedAdditionsItems.LASER_POINTER;
 
 @Mod("changed_additions")
 public class ChangedAdditionsMod {
@@ -30,17 +30,19 @@ public class ChangedAdditionsMod {
     private static int messageID = 0;
 
     public ChangedAdditionsMod() {
-        ChangedAdditionsModTabs.load();
+        ChangedAdditionsTabs.load();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        ChangedAdditionsEnchantments.REGISTRY.register(bus);
+        ChangedAdditionsMobEffects.REGISTRY.register(bus);
         ChangedAdditionsBlocks.REGISTRY.register(bus);
-        ChangedAdditionsModItems.REGISTRY.register(bus);
+        ChangedAdditionsItems.REGISTRY.register(bus);
         ChangedAdditionsEntities.REGISTRY.register(bus);
         ChangedAdditionsTransfurVariants.REGISTRY.register(bus);
         ChangedAdditionsAbilities.REGISTRY.register(bus);
 
         ChangedAdditionsBlockEntities.REGISTRY.register(bus);
 
-        bus.addListener(this::clientLoad); // <-- REGISTRA o método corretamente
+        bus.addListener(this::clientLoad); // Client Stuff goes Here
     }
 
     public static ResourceLocation modResource(String path) {

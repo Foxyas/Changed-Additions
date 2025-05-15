@@ -1,29 +1,53 @@
 {
   "item.changed_additions.ammonium_chloride": "Ammonium Chloride",
-  "itemGroup.tabchanged_additions_tab": "Changed Additions Tab",
-  "item.changed_additions.laethin_syringe": "Laethin Syringe",
-  "block.changed_additions.neofuser": "Neofuser",
-  "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
   "item.changed_additions.anti_latex_base": "Anti-Latex Base",
   "item.changed_additions.biomass": "Biomass",
   "item.changed_additions.dyeable_shorts": "Dyeable Shorts",
+  "item.changed_additions.laethin_syringe": "Laethin Syringe",
   "item.changed_additions.laser_pointer": "Laser Pointer",
-  "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
-  "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
+  "item.changed_additions.latex_snow_fox_female_spawn_egg": "Female Latex Snow Fox Spawn Egg",
+  "item.changed_additions.latex_snow_fox_male_spawn_egg": "Male Latex Snow Fox Spawn Egg",
+  "item.changed_additions.feng_qi_fox_spawn_egg": "Feng QI Fox",
+
+  "block.changed_additions.neofuser": "Neofuser",
+
+  "entity.changed_additions.latex_snow_fox_male": "Male Latex Snow Fox",
+  "entity.changed_additions.latex_snow_fox_female": "Female Latex Snow Fox",
+  "entity.changed_additions.feng_qi_fox": "Feng QI Fox",
+
+  "enchantment.changed_additions.latex_solvent": "Latex Solvent",
+  "enchantment.changed_additions.solvent.desc": "Deal more Damage to Latex Entities",
+
+  "effect.changed_additions.latex_solvent": "Latex Solvent",
+  "effect.changed_additions.latex_solvent.description": "Inflicts damage on latex entities, with damage increasing as the effect strengthens.",
+
+  "itemGroup.changed_additions_tab": "Changed Additions Tab",
+
+  "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
+
   "changed_additions.commands.getMaxSizeTolerance": "Maximum size tolerance is %s",
+  "changed_additions.commands.setBpiSize.fail": "An error occurred while trying to change the player's Size",
+  "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
   "changed_additions.commands.setMaxBPISize.success": "maximum size tolerance has been changed to %s",
-  "subtitles.untransfur": "Untransfurmization",
-  "changed_addon.jei_descriptions.dyeable_shorts": "Made from dyeing regular pants\n§oCan be dyed§r",
-  "changed_addon.jei_descriptions.laser_pointer": "§oCan be dyed§r",
-  "changed_additions.commands.setMaxBPISize.success_but_to_low": "%s is a value less than 0 and due that may cause issues",
   "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s is a value high than 100 and due that may cause lag and crash issues",
+  "changed_additions.commands.setMaxBPISize.success_but_to_low": "%s is a value less than 0 and due that may cause issues",
+
   "changed_additions.ability.carry": "Carry Ability",
   "changed_additions.ability.claws": "Claws Ability",
   "changed_additions.ability.claws.desc": "Activate your feline claws and unleash a sweeping attacks with your §mhands§r Paws.",
   "changed_additions.ability.custom_interaction": "Form Interactions",
   "changed_additions.ability.leap": "Leap",
-  "changed_additions.ability.soften.description": "Allow the player to pass through blocks with holes",
   "changed_additions.ability.soften": "Soften",
+  "changed_additions.ability.soften.description": "Allow the player to pass through blocks with holes",
   "changed_additions.ability.wing_flap": "Wing Flap",
-  "changed_additions.warn.cant_carry": "You try to lift %1$s, but it\u0027s far too heavy."
+
+  "changed_additions.warn.cant_carry": "You try to lift %1$s, but it\u0027s far too heavy.",
+
+  "death.attack.latex_solvent": "%1$s was dissolved",
+  "death.attack.latex_solvent.player": "%1$s was dissolved by %2$s",
+
+  "changed_addon.jei_descriptions.dyeable_shorts": "Made from dyeing regular pants\n§oCan be dyed§r",
+  "changed_addon.jei_descriptions.laser_pointer": "§oCan be dyed§r",
+
+  "subtitles.untransfur": "Untransfurmization"
 }

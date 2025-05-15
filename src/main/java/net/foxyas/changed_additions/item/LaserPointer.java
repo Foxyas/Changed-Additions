@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.item;
 
 import net.foxyas.changed_additions.entities.goals.FollowAndLookAtLaser;
-import net.foxyas.changed_additions.init.ChangedAdditionsModTabs;
+import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.item.SpecializedAnimations;
 import net.ltxprogrammer.changed.util.Color3;
@@ -35,7 +35,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static net.foxyas.changed_additions.effects.particles.ChangedAdditionsParticles.laserPoint;
+import static net.foxyas.changed_additions.init.ChangedAdditionsParticles.laserPoint;
 import static net.foxyas.changed_additions.process.util.FoxyasUtils.manualRaycastIgnoringBlocks;
 import static net.foxyas.changed_additions.process.util.PlayerUtil.ParticlesUtil;
 import static net.foxyas.changed_additions.process.util.PlayerUtil.getEntityHitLookingAt;
@@ -83,7 +83,7 @@ public class LaserPointer extends Item implements SpecializedAnimations {
     }
 
     public LaserPointer() {
-        super(new Properties().stacksTo(1).tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB));
+        super(new Properties().stacksTo(1).tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
     }
 
     @Override

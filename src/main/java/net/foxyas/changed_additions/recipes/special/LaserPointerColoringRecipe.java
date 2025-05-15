@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.recipes.special;
 
 import com.google.gson.JsonObject;
-import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
+import net.foxyas.changed_additions.init.ChangedAdditionsItems;
 import net.foxyas.changed_additions.init.ChangedAdditionsRecipeTypes;
 import net.foxyas.changed_additions.item.LaserPointer;
 import net.minecraft.network.FriendlyByteBuf;
@@ -28,7 +28,7 @@ public class LaserPointerColoringRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
                 Item item = stack.getItem();
-                if (item == ChangedAdditionsModItems.LASER_POINTER.get()) {
+                if (item == ChangedAdditionsItems.LASER_POINTER.get()) {
                     if (hasPointer) return false;
                     hasPointer = true;
                 } else if (item instanceof DyeItem) {
@@ -55,7 +55,7 @@ public class LaserPointerColoringRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
                 Item item = stack.getItem();
-                if (item == ChangedAdditionsModItems.LASER_POINTER.get()) {
+                if (item == ChangedAdditionsItems.LASER_POINTER.get()) {
                     pointer = stack;
                 } else if (item instanceof DyeItem dyeItem) {
                     int color = dyeItem.getDyeColor().getTextColor(); // 0xRRGGBB

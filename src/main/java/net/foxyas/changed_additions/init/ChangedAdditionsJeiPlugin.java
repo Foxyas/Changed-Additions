@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @JeiPlugin
-public class ChangedAdditionsModJeiPlugin implements IModPlugin {
+public class ChangedAdditionsJeiPlugin implements IModPlugin {
     public static mezz.jei.api.recipe.RecipeType<NeofuserRecipe> NeofuserRecipe_Type = new mezz.jei.api.recipe.RecipeType<>(NeofuserRecipeCategory.UID, NeofuserRecipe.class);
 
     @Override

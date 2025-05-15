@@ -8,7 +8,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.foxyas.changed_additions.init.ChangedAdditionsBlocks;
-import net.foxyas.changed_additions.init.ChangedAdditionsModJeiPlugin;
+import net.foxyas.changed_additions.init.ChangedAdditionsJeiPlugin;
 import net.foxyas.changed_additions.recipes.NeofuserRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -31,7 +31,7 @@ public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
 
     @Override
     public mezz.jei.api.recipe.RecipeType<NeofuserRecipe> getRecipeType() {
-        return ChangedAdditionsModJeiPlugin.NeofuserRecipe_Type;
+        return ChangedAdditionsJeiPlugin.NeofuserRecipe_Type;
     }
 
     @Override

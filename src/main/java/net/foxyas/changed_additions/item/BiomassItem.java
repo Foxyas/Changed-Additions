@@ -1,6 +1,6 @@
 package net.foxyas.changed_additions.item;
 
-import net.foxyas.changed_additions.init.ChangedAdditionsModTabs;
+import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class BiomassItem extends Item {
     public BiomassItem() {
-        super(new Item.Properties().tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON).food(
+        super(new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON).food(
                 new FoodProperties.Builder().alwaysEat().nutrition(-6).saturationMod(1).effect(() -> new MobEffectInstance(MobEffects.HUNGER), 0.5f).build())
         );
     }

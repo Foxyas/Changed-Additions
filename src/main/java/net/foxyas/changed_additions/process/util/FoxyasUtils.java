@@ -2,8 +2,12 @@ package net.foxyas.changed_additions.process.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,9 +15,20 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class FoxyasUtils {
+
+    public static List<Holder<EntityType<?>>> getEntitiesInTag(TagKey<EntityType<?>> tagKey, Level level) {
+        return level.registryAccess()
+                .registry(Registry.ENTITY_TYPE_REGISTRY)
+                .flatMap(reg -> reg.getTag(tagKey))
+                .map(tag -> tag.stream().toList())
+                .orElse(List.of());
+    }
+
 
     public static BlockHitResult manualRaycastIgnoringBlocks(Level level, Entity entity, double maxDistance, Set<Block> ignoredBlocks) {
         Vec3 start = entity.getEyePosition(1.0F);

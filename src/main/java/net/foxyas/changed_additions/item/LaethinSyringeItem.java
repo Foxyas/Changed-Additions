@@ -1,6 +1,6 @@
 package net.foxyas.changed_additions.item;
 
-import net.foxyas.changed_additions.init.ChangedAdditionsModTabs;
+import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.init.ChangedItems;
 import net.ltxprogrammer.changed.init.ChangedParticles;
@@ -27,7 +27,7 @@ import static net.foxyas.changed_additions.process.ProcessUntransfur.UntransfurP
 
 public class LaethinSyringeItem extends Item implements SpecializedAnimations {
     public LaethinSyringeItem() {
-        super(new Item.Properties().tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
+        super(new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
     }
 
     @Override

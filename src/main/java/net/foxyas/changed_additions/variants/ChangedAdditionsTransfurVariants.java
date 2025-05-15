@@ -1,7 +1,9 @@
 package net.foxyas.changed_additions.variants;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.entities.FengQIFoxEntity;
+import net.foxyas.changed_additions.entities.FengQIFox;
+import net.foxyas.changed_additions.entities.LatexSnowFoxFemale;
+import net.foxyas.changed_additions.entities.LatexSnowFoxMale;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
@@ -66,7 +68,15 @@ public class ChangedAdditionsTransfurVariants {
     }
 
 
-    public static final RegistryObject<TransfurVariant<FengQIFoxEntity>> FENG_QI_FOX = register("form_feng_qi_fox", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_FOX)
+    public static final RegistryObject<TransfurVariant<LatexSnowFoxMale>> ADDON_LATEX_SNOW_FOX_MALE = register("form_latex_snow_fox/male",
+            () -> TransfurVariant.Builder.of(/*WHITE_LATEX_WOLF_MALE.get(),*/ChangedAdditionsEntities.LATEX_SNOW_FOX_MALE)
+                    .nightVision().scares(Rabbit.class));
+
+    public static final RegistryObject<TransfurVariant<LatexSnowFoxFemale>> ADDON_LATEX_SNOW_FOX_FEMALE = register("form_latex_snow_fox/female",
+            () -> TransfurVariant.Builder.of(/*WHITE_LATEX_WOLF_FEMALE.get(),*/ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE)
+                    .nightVision().scares(Rabbit.class));
+
+    public static final RegistryObject<TransfurVariant<FengQIFox>> FENG_QI_FOX = register("form_feng_qi_fox", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_FOX)
             .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).scares(List.of(Rabbit.class)).nightVision());
 
 

@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.item.armor;
 
-import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
-import net.foxyas.changed_additions.init.ChangedAdditionsModTabs;
+import net.foxyas.changed_additions.init.ChangedAdditionsItems;
+import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.item.ExtendedItemProperties;
 import net.ltxprogrammer.changed.item.Shorts;
@@ -59,7 +59,7 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
 
 	
     public DyeableShorts() {
-        super(MATERIAL, EquipmentSlot.LEGS, (new Properties()).tab(ChangedAdditionsModTabs.CHANGED_ADDITIONS_TAB));
+        super(MATERIAL, EquipmentSlot.LEGS, (new Properties()).tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
     }
 
     public boolean isDamageable(ItemStack stack) {
@@ -110,7 +110,7 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
         public static void onItemColorsInit(ColorHandlerEvent.Item event) {
             event.getItemColors().register(
                     (stack, layer) -> ((DyeableLeatherItem)stack.getItem()).getColor(stack),
-                    ChangedAdditionsModItems.DYEABLE_SHORTS.get());
+                    ChangedAdditionsItems.DYEABLE_SHORTS.get());
         }
     }
 

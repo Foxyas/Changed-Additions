@@ -2,7 +2,7 @@ package net.foxyas.changed_additions.process.variantsExtraStats;
 
 import net.foxyas.changed_additions.configuration.ChangedAdditionsServerConfigs;
 import net.foxyas.changed_additions.init.ChangedAdditionsGameRules;
-import net.foxyas.changed_additions.init.ChangedAdditionsModItems;
+import net.foxyas.changed_additions.init.ChangedAdditionsItems;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.beast.AbstractLatexWolf;
@@ -225,7 +225,7 @@ public class CreatureDietsHandleProcedure {
 
         public static boolean isNotFoodItem(ItemStack item) {
             List<Item> NonFoodItemslist = List.of(
-                    ChangedAdditionsModItems.LAETHIN_SYRINGE.get());
+                    ChangedAdditionsItems.LAETHIN_SYRINGE.get());
             if (item.is(Items.ENCHANTED_GOLDEN_APPLE)) {
                 return true;
             } else if (item.is(Items.POTION)) {

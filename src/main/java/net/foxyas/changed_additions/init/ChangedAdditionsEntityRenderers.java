@@ -12,5 +12,7 @@ public class ChangedAdditionsEntityRenderers {
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ChangedAdditionsEntities.FENG_QI_FOX.get(), FengQIFoxRenderer::new);
+        event.registerEntityRenderer(ChangedAdditionsEntities.LATEX_SNOW_FOX_MALE.get(), LatexSnowFoxMaleRenderer::new);
+        event.registerEntityRenderer(ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE.get(), LatexSnowFoxFemaleRenderer::new);
     }
 }
