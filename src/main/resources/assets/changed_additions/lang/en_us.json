@@ -8,6 +8,8 @@
   "item.changed_additions.latex_snow_fox_female_spawn_egg": "Female Latex Snow Fox Spawn Egg",
   "item.changed_additions.latex_snow_fox_male_spawn_egg": "Male Latex Snow Fox Spawn Egg",
   "item.changed_additions.feng_qi_fox_spawn_egg": "Feng QI Fox",
+  "item.changed_additions.dark_latex_coat": "Dark Latex Coat",
+  "item.changed_additions.dark_latex_coat_cap": "Dark Latex Head Cap",
 
   "block.changed_additions.neofuser": "Neofuser",
 
@@ -46,8 +48,16 @@
   "death.attack.latex_solvent": "%1$s was dissolved",
   "death.attack.latex_solvent.player": "%1$s was dissolved by %2$s",
 
-  "changed_addon.jei_descriptions.dyeable_shorts": "Made from dyeing regular pants\n§oCan be dyed§r",
-  "changed_addon.jei_descriptions.laser_pointer": "§oCan be dyed§r",
+  "changed_additions.jei_descriptions.dyeable_shorts": "Made from dyeing regular pants\n§oCan be dyed§r",
+  "changed_additions.jei_descriptions.laser_pointer": "§oCan be dyed§r",
 
-  "subtitles.untransfur": "Untransfurmization"
+  "subtitles.untransfur": "Untransfurmization",
+  "subtitles.armor.equip": "Soft Armor Equip",
+
+  "key.changed_additions.pat_message": "You pat %s",
+  "key.changed_additions.pat_received": "%s pat you",
+  "key.changed_additions.turn_off_transfur": "Turn Off Transfur",
+  "key.categories.changed_additions": "Changed Additions Keybinds",
+  "key.changed_additions.pat_key": "Pat",
+  "changed_additions.info.is_patable": "Press %1$s to pat %2$s"
 }

@@ -2,10 +2,13 @@ package net.foxyas.changed_additions.mixins;
 
 import net.foxyas.changed_additions.abilities.ClawsAbility;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
+import net.foxyas.changed_additions.process.quickTimeEvents.QTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.QuickTimeEvent;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,6 +22,7 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -64,5 +68,28 @@ public class PlayerMixin {
             }
         }));
 
+    }
+
+    @Unique
+    private static final String QTE_TAG = "QTE";
+
+    @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
+    private void onSave(CompoundTag tag, CallbackInfo ci) {
+        Player player = (Player) (Object) this;
+        QuickTimeEvent qte = QTEManager.getActiveQTE(player);
+        if (qte != null && !qte.isFinished()) {
+            tag.put(QTE_TAG, qte.saveToTag());
+        }
+    }
+
+    @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
+    private void onLoad(CompoundTag tag, CallbackInfo ci) {
+        Player player = (Player) (Object) this;
+        if (tag.contains(QTE_TAG)) {
+            QuickTimeEvent qte = QuickTimeEvent.loadFromTag(player, tag.getCompound(QTE_TAG));
+            if (!qte.isFinished()) {
+                QTEManager.addQTE(player, qte);
+            }
+        }
     }
 }

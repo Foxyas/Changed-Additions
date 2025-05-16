@@ -13,6 +13,7 @@ import java.util.Map;
 public class ChangedAdditionsSounds {
     public static Map<ResourceLocation, SoundEvent> REGISTRY = new HashMap<>();
     public static final SoundEvent UNTRANSFUR = register("changed_additions:player.untransfur");
+    public static final SoundEvent ARMOR_EQUIP = register("changed_additions:armor.equip");
     private static IForgeRegistry<SoundEvent> MINECRAFT_REGISTRY;
 
     public static SoundEvent register(String name) {

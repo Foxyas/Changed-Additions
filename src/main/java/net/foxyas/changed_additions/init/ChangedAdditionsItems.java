@@ -2,8 +2,10 @@ package net.foxyas.changed_additions.init;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.item.*;
+import net.foxyas.changed_additions.item.armor.DarkLatexCoatItem;
 import net.foxyas.changed_additions.item.armor.DyeableShorts;
 import net.ltxprogrammer.changed.util.Color3;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -28,6 +30,12 @@ public class ChangedAdditionsItems {
     public static final RegistryObject<Item> LATEX_SNOW_FOX_FEMALE_SPAWN_EGG = REGISTRY.register("latex_snow_fox_female_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE, 0xFFFFFFF, 0xfD6DDF7, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
 
     public static final RegistryObject<Item> FENG_QI_FOX_SPAWN_EGG = REGISTRY.register("feng_qi_fox_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.FENG_QI_FOX, Color3.getColor("#93c6fd").toInt(), Color3.getColor("#FAC576").toInt(), new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+
+    public static final RegistryObject<Item> DARK_LATEX_COAT = REGISTRY.register("dark_latex_coat",
+            () -> new DarkLatexCoatItem(EquipmentSlot.CHEST, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+
+    public static final RegistryObject<Item> DARK_LATEX_HEAD_CAP = REGISTRY.register("dark_latex_coat_cap",
+            () -> new DarkLatexCoatItem.HeadPart(EquipmentSlot.HEAD, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
 
     private static RegistryObject<Item> block(RegistryObject<Block> block, CreativeModeTab tab) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));

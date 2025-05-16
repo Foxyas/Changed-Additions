@@ -11,8 +11,8 @@ public class ChangedAdditionsTags {
 
         public static final TagKey<EntityType<?>> HAVE_CLAWS = create("have_claws");
         public static final TagKey<EntityType<?>> NO_CLAWS = create("no_claws");
-
         public static final TagKey<EntityType<?>> FELINES_LIKE = create("feline_like");
+        public static final TagKey<EntityType<?>> PATABLE_ENTITIES = create("patable_entities");
 
         public EntityTypes() {
         }

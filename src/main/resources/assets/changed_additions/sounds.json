@@ -1,4 +1,21 @@
 {
+  "armor.equip": {
+    "subtitle": "subtitles.armor.equip",
+    "sounds": [
+      {
+        "name": "changed:equip1",
+        "stream": false
+      },
+      {
+        "name": "changed:equip2",
+        "stream": false
+      },
+      {
+        "name": "changed:equip3",
+        "stream": false
+      }
+    ]
+  },
   "player.untransfur": {
     "subtitle": "subtitles.untransfur",
     "sounds": [

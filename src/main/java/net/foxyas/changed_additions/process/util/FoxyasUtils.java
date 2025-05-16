@@ -42,6 +42,31 @@ public class FoxyasUtils {
     }
 
 
+    public static double StringToDouble(String s) {
+        try {
+            return Double.parseDouble(s.trim());
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public static float StringToFloat(String s) {
+        try {
+            return Float.parseFloat(s.trim());
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public static int StringToInt(String s) {
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+
 
     public static BlockHitResult manualRaycastIgnoringBlocks(Level level, Entity entity, double maxDistance, Set<Block> ignoredBlocks) {
         Vec3 start = entity.getEyePosition(1.0F);
