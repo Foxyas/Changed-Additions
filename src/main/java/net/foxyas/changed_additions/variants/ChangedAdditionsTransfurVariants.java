@@ -8,6 +8,7 @@ import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.PatronOC;
+import net.ltxprogrammer.changed.entity.variant.GenderedPair;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
 import net.ltxprogrammer.changed.init.ChangedRegistry;
 import net.ltxprogrammer.changed.init.ChangedTags;
@@ -68,17 +69,20 @@ public class ChangedAdditionsTransfurVariants {
     }
 
 
-    public static final RegistryObject<TransfurVariant<LatexSnowFoxMale>> ADDON_LATEX_SNOW_FOX_MALE = register("form_latex_snow_fox/male",
+    public static final RegistryObject<TransfurVariant<LatexSnowFoxMale>> LATEX_SNOW_FOX_MALE = register("form_latex_snow_fox/male",
             () -> TransfurVariant.Builder.of(/*WHITE_LATEX_WOLF_MALE.get(),*/ChangedAdditionsEntities.LATEX_SNOW_FOX_MALE)
                     .nightVision().scares(Rabbit.class));
 
-    public static final RegistryObject<TransfurVariant<LatexSnowFoxFemale>> ADDON_LATEX_SNOW_FOX_FEMALE = register("form_latex_snow_fox/female",
+    public static final RegistryObject<TransfurVariant<LatexSnowFoxFemale>> LATEX_SNOW_FOX_FEMALE = register("form_latex_snow_fox/female",
             () -> TransfurVariant.Builder.of(/*WHITE_LATEX_WOLF_FEMALE.get(),*/ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE)
                     .nightVision().scares(Rabbit.class));
 
     public static final RegistryObject<TransfurVariant<FengQIFox>> FENG_QI_FOX = register("form_feng_qi_fox", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_FOX)
             .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).scares(List.of(Rabbit.class)).nightVision());
 
+    public static class Gendered {
+        public static final GenderedPair<LatexSnowFoxMale, LatexSnowFoxFemale> LATEX_SNOW_FOXES = new GenderedPair<>(LATEX_SNOW_FOX_MALE, LATEX_SNOW_FOX_FEMALE);
+    }
 
     private static <T extends ChangedEntity> RegistryObject<TransfurVariant<T>> register(String name, TransfurVariant.Builder<T> builder) {
         Objects.requireNonNull(builder);

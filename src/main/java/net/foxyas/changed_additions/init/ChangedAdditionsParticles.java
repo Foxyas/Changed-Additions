@@ -40,8 +40,8 @@ public class ChangedAdditionsParticles {
         return new LaserPointParticle.Option(entity, color.getRGB(), color.getAlpha());
     }
 
-    public static SolventDripsOption solventDrips() {
-        return new SolventDripsOption(SOLVENT_PARTICLE);
+    public static SolventDripsOption solventDrips(int lifeTime, float size) {
+        return new SolventDripsOption(SOLVENT_PARTICLE, lifeTime, size);
     }
 
     private static <T extends ParticleOptions> ParticleType<T> register(ResourceLocation name, ParticleType<T> type) {

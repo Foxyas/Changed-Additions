@@ -1,5 +1,7 @@
 package net.foxyas.changed_additions.init;
 
+import net.foxyas.changed_additions.ChangedAdditionsMod;
+import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
@@ -7,6 +9,7 @@ import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
@@ -19,7 +22,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 public class ChangedAdditionsDamageSources {
-    public static final DamageSource SOLVENT = new DamageSource("latex_solvent");
+    public static final DamageSource SOLVENT = new DamageSource("latex_solvent") {
+        @Override
+        public float getFoodExhaustion() {
+            return super.getFoodExhaustion() + 0.5f;
+        }
+    };
 
     public static EntityDamageSource mobAttack(LivingEntity mob) {
         return new EntityDamageSource("latex_solvent", mob);
@@ -33,24 +41,37 @@ public class ChangedAdditionsDamageSources {
             var entity = event.getEntity();
             var source = event.getSource();
 
-            if (!isSolventDamage(source)) return;
+            if (!isSolventDamage(source)) {
+                return;
+            }
 
-            if (!isLatexTarget(entity)) return;
+            if (!isLatexTarget(entity)) {
+                return;
+            }
 
-            // Efeito sonoro
-            entity.playSound(SoundEvents.FIRE_EXTINGUISH, 2.5f, 0);
+
+            if (entity instanceof Player player) {
+                // Efeito sonoro
+                player.getLevel().playSound(null, player, SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 2.5f, 0f);
+            } else {
+                // Efeito sonoro
+                entity.playSound(SoundEvents.FIRE_EXTINGUISH, 2.5f, 0);
+            }
+
+            // Dynamic Power
+            int amount = (int) event.getAmount() / 4;
 
             // Partícula solvente base
             PlayerUtil.ParticlesUtil.sendParticles(
                     entity.level,
-                    ChangedAdditionsParticles.solventDrips(),
-                    entity.getEyePosition(),
+                    ChangedAdditionsParticles.solventDrips(10, FoxyasUtils.clamp(entity.getLevel().getRandom().nextFloat(0.45f), 0.15f, 0.45f)),
+                    entity.position(),
                     0.25f, 0.25f, 0.25f,
-                    8, 0.25f
+                    8 + FoxyasUtils.clamp(amount, 0, 22), 0.25f
             );
 
             // Partículas de latex coloridas
-            sendLatexParticlesIfApplicable(entity);
+            sendLatexParticlesIfApplicable(entity, amount);
         }
 
         private static boolean isSolventDamage(DamageSource source) {
@@ -67,9 +88,10 @@ public class ChangedAdditionsDamageSources {
                     && ProcessTransfur.isPlayerLatex(player);
         }
 
-        private static void sendLatexParticlesIfApplicable(Entity entity) {
+        private static void sendLatexParticlesIfApplicable(Entity entity, int amount) {
             var level = entity.level;
-            var position = entity.getEyePosition();
+            var position = entity.position();
+            float speed = 0.05f;
 
             if (entity instanceof ChangedEntity changed) {
                 var colors = changed.getSelfVariant().getColors();
@@ -80,7 +102,7 @@ public class ChangedAdditionsDamageSources {
                         ChangedParticles.drippingLatex(color),
                         position,
                         0.25f, 0.25f, 0.25f,
-                        8, 0.25f
+                        8 + FoxyasUtils.clamp(amount, 0, 22), speed
                 );
             } else if (entity instanceof Player player) {
                 var variant = ProcessTransfur.getPlayerTransfurVariant(player);
@@ -93,7 +115,40 @@ public class ChangedAdditionsDamageSources {
                             ChangedParticles.drippingLatex(color),
                             position,
                             0.25f, 0.25f, 0.25f,
-                            8, 0.25f
+                            8 + FoxyasUtils.clamp(amount, 0, 22), speed
+                    );
+                }
+            }
+        }
+
+        private static void sendLatexParticlesIfApplicable(Entity entity) {
+            var level = entity.level;
+            var position = entity.getEyePosition();
+            float speed = 0.05f;
+
+            if (entity instanceof ChangedEntity changed) {
+                var colors = changed.getSelfVariant().getColors();
+                var color = changed.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
+
+                PlayerUtil.ParticlesUtil.sendParticles(
+                        level,
+                        ChangedParticles.drippingLatex(color),
+                        position,
+                        0.25f, 0.25f, 0.25f,
+                        8, speed
+                );
+            } else if (entity instanceof Player player) {
+                var variant = ProcessTransfur.getPlayerTransfurVariant(player);
+                if (variant != null) {
+                    var colors = variant.getParent().getColors();
+                    var color = player.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
+
+                    PlayerUtil.ParticlesUtil.sendParticles(
+                            level,
+                            ChangedParticles.drippingLatex(color),
+                            position,
+                            0.25f, 0.25f, 0.25f,
+                            8, speed
                     );
                 }
             }
