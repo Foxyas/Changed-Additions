@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "item": "changed_additions:dark_latex_coat_cap"
+    },
+    "title": {
+      "translate": "advancements.stealth_pats.title"
+    },
+    "description": {
+      "translate": "advancements.stealth_pats.descr"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stealth_pats": {
+      "trigger": "changed_additions:pat_entity_trigger",
+      "conditions": {
+        "head": {
+          "items": [
+            "changed_additions:dark_latex_coat_cap"
+          ]
+        },
+        "chest": {
+          "items": [
+            "changed_additions:dark_latex_coat"
+          ]
+        }
+      }
+    }
+  },
+  "rewards": {
+    "experience": 160
+  },
+  "parent": "minecraft:changed/root"
+}

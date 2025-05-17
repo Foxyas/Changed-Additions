@@ -1,13 +1,18 @@
 package net.foxyas.changed_additions.process.util;
 
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -103,6 +108,22 @@ public class FoxyasUtils {
                 face.getStepY() * offset,
                 face.getStepZ() * offset
         );
+    }
+
+    public static void grandPlayerAdvancement(Player player, String AdvancementId) {
+        if (player instanceof ServerPlayer _player) {
+            Advancement _adv = _player.server.getAdvancements().getAdvancement(new ResourceLocation(AdvancementId));
+            assert _adv != null;
+            if (_player.getAdvancements().getOrStartProgress(_adv).isDone()) {
+                return;
+            }
+            AdvancementProgress _ap = _player.getAdvancements().getOrStartProgress(_adv);
+            if (!_ap.isDone()) {
+                for (String string : _ap.getRemainingCriteria()) {
+                    _player.getAdvancements().award(_adv, string);
+                }
+            }
+        }
     }
 
 

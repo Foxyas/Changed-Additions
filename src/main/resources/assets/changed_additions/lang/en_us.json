@@ -59,5 +59,15 @@
   "key.changed_additions.turn_off_transfur": "Turn Off Transfur",
   "key.categories.changed_additions": "Changed Additions Keybinds",
   "key.changed_additions.pat_key": "Pat",
-  "changed_additions.info.is_patable": "Press %1$s to pat %2$s"
+
+  "changed_additions.info.is_patable": "Press %1$s to pat %2$s",
+
+  "advancements.pat_advancement.title": "That does something?!",
+  "advancements.pat_advancement.descr": "Your pat was so good that it helped someone get better",
+  "advancements.stealth_pats.title": "Hidden §cAffection§r",
+  "advancements.stealth_pats.descr": "Pet a Goo Creature while wearing a cloak to conceal and confuse them.",
+  "advancements.pants_dyer.title": "With a touch of dye",
+  "advancements.pants_dyer.descr": "You gave those shorts a splash of color. Style and laser safe? That’s a win-win.",
+  "advancements.organic_transfur_advancement.title": "Organic And Fluffy!!",
+  "advancements.organic_transfur_advancement.descr": "Transfur yourself into a organic form"
 }
