@@ -1,13 +1,20 @@
 package net.foxyas.changed_additions.process.quickTimeEvents;
 
+import net.foxyas.changed_additions.process.ProcessUntransfur;
+import net.foxyas.changed_additions.process.util.PlayerUtil;
+import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
+import net.ltxprogrammer.changed.init.ChangedDamageSources;
+import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ConscienceQuickTimeEvent {
 
@@ -18,12 +25,19 @@ public class ConscienceQuickTimeEvent {
     private int ticksRemaining;
     private boolean finished = false;
     private float progress = 0.0f;
-
     private boolean isHolding = false;
     private InputKey lastKeyPressed = null;
 
     public ConscienceQuickTimeEvent(Player player, ConscienceQuickTimeEventType type, int durationTicks) {
         this.player = player;
+        this.type = type;
+        this.sequence = new ArrayList<>(type.getSequence());
+        this.ticksRemaining = durationTicks;
+    }
+
+    public ConscienceQuickTimeEvent(Player player, Random random, int durationTicks) {
+        this.player = player;
+        ConscienceQuickTimeEventType type = ConscienceQuickTimeEventType.getRandom(random);
         this.type = type;
         this.sequence = new ArrayList<>(type.getSequence());
         this.ticksRemaining = durationTicks;
@@ -50,6 +64,13 @@ public class ConscienceQuickTimeEvent {
 
     public void tick() {
         if (finished) return;
+        if (ProcessTransfur.getPlayerTransfurVariant(this.player) != null) {
+            TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(this.player);
+            if (transfurVariantInstance.getTransfurProgression(0) > 0.9f){
+                this.ticksRemaining -= 5;
+            }
+
+        }
 
         ticksRemaining--;
         this.progress -= 0.01f;
@@ -86,11 +107,19 @@ public class ConscienceQuickTimeEvent {
     }
 
     private void handleFail() {
-        this.player.displayClientMessage(new TextComponent("Fail") , true);
+        this.player.displayClientMessage(new TranslatableComponent("changed_additions.fight_conscience.fail") , true);
+        if (ProcessTransfur.getPlayerTransfurVariant(this.player) != null) {
+            TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(this.player);
+            if (transfurVariantInstance.getTransfurProgression(0) >= 1f) {
+                this.player.hurt(ChangedDamageSources.entityAbsorb(transfurVariantInstance.getChangedEntity()),10000);
+                PlayerUtil.UnTransfurPlayer(player);
+            }
+
+        }
     }
 
     private void handleSuccess() {
-        this.player.displayClientMessage(new TextComponent("Success") , true);
+        this.player.displayClientMessage(new TranslatableComponent("changed_additions.fight_conscience.success") , true);
     }
 
     public boolean isFinished() {

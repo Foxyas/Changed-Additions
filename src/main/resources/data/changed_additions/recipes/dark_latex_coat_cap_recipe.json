@@ -9,14 +9,14 @@
       "item": "changed:dark_latex_goo"
     },
     "$": {
-      "item": "changed_addon:anti_latex_base"
+      "item": "changed_additions:anti_latex_base"
     },
     "@": {
       "item": "changed:dark_latex_mask"
     }
   },
   "result": {
-    "item": "changed_addon:dark_latex_coat_cap",
+    "item": "changed_additions:dark_latex_coat_cap",
     "count": 1
   }
 }

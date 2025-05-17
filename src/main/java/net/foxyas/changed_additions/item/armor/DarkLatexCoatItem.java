@@ -119,7 +119,7 @@ public class DarkLatexCoatItem extends ArmorItem {
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return "changed_additions:textures/models/armors/dark_latex_coat.png";
+        return "changed_additions:textures/models/armor/dark_latex_coat.png";
     }
 
     public static class HeadPart extends DarkLatexCoatItem {
@@ -156,7 +156,7 @@ public class DarkLatexCoatItem extends ArmorItem {
         @Nullable
         @Override
         public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-            return "changed_additions:textures/models/armors/dark_latex_coat.png";
+            return "changed_additions:textures/models/armor/dark_latex_coat.png";
         }
     }
 }

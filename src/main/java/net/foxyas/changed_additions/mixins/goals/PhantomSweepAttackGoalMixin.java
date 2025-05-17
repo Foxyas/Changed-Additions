@@ -18,30 +18,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(targets = "net.minecraft.world.entity.monster.Phantom.PhantomSweepAttackGoal")
+@Mixin(value = Phantom.PhantomSweepAttackGoal.class)
 public abstract class PhantomSweepAttackGoalMixin extends Goal {
     @Shadow
     private boolean isScaredOfCat;
 
     @Shadow
-    @Final
-    Phantom this$0;
-
-    @Shadow
     private int catSearchTick;
+
+    @Shadow @Final private Phantom this$0;
 
     @Inject(method = "canContinueToUse", at = @At("HEAD"), cancellable = true)
     private void canContinueToUseInject(CallbackInfoReturnable<Boolean> cir) {
-        LivingEntity livingentity = this$0.getTarget();
+        Phantom phantomOwner = this$0;
+
+        LivingEntity livingentity = phantomOwner.getTarget();
         if (livingentity != null && livingentity.isAlive()) {
             if (this.canUse()) {
-                if (this$0.tickCount > this.catSearchTick) {
-                    this.catSearchTick = this$0.tickCount + 20;
+                if (phantomOwner.tickCount > this.catSearchTick) {
+                    this.catSearchTick = phantomOwner.tickCount + 20;
 
 
-                    List<LivingEntity> list = this$0.level.getEntitiesOfClass(
+                    List<LivingEntity> list = phantomOwner.level.getEntitiesOfClass(
                             LivingEntity.class,
-                            this$0.getBoundingBox().inflate(16.0D),
+                            phantomOwner.getBoundingBox().inflate(16.0D),
                             (e) -> {
                                 if (e instanceof Player player) {
                                     return ProcessTransfur.getPlayerTransfurVariantSafe(player).map(transfurVariantInstance ->
@@ -59,7 +59,7 @@ public abstract class PhantomSweepAttackGoalMixin extends Goal {
                     for (LivingEntity entity : list) {
                         if (entity instanceof Player player) {
                             // Toca o som de hiss
-                            this$0.level.playSound(
+                            phantomOwner.level.playSound(
                                     null, // null = som global (todos ouvem)
                                     player.blockPosition(),
                                     SoundEvents.CAT_HISS,

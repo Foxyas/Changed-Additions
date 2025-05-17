@@ -62,6 +62,15 @@
 
   "changed_additions.info.is_patable": "Press %1$s to pat %2$s",
 
+  "changed_additions.fight_conscience.success": "You §2Maintained!!! §rYour Conscience, Well done!",
+  "changed_additions.fight_conscience.fail": "You §4Lost!!! §rYour Conscience, Good Luck next time!",
+
+  "gamerule.changed_additions:fight_to_keep_consciousness": "Fight to Keep Consciousness QTE",
+  "gamerule.changed_additions:fight_to_keep_consciousness.description": "Allow the fight to keep consciousness quick time event to happen",
+  "gamerule.changed_additions:CreatureDiets": "Creatures Diets?",
+  "gamerule.changed_additions:CreatureDiets.description": "Allow Transfurs Get More Food points and saturation when eat a Good food for them",
+
+
   "advancements.pat_advancement.title": "That does something?!",
   "advancements.pat_advancement.descr": "Your pat was so good that it helped someone get better",
   "advancements.stealth_pats.title": "Hidden §cAffection§r",

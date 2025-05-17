@@ -22,5 +22,5 @@
   "rewards": {
     "experience": 10000
   },
-  "parent": "minecraft:changed/root"
+  "parent": "changed_additions:stealth_pats"
 }

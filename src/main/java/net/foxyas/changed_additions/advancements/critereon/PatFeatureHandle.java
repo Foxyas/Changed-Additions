@@ -124,11 +124,11 @@ public class PatFeatureHandle {
             }
             if (player instanceof Player p && !p.level.isClientSide()) {
                 p.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
-				if (target instanceof CustomPatReaction pat) {
-					pat.WhenPattedReaction(p);
+                if (target instanceof CustomPatReaction pat) {
+                    pat.WhenPattedReaction(p);
                     pat.WhenPattedReaction();
                     //p.displayClientMessage(new TextComponent("pat_message:" + target.getDisplayName().getString()), false);
-				}
+                }
             }
         }
     }
@@ -145,7 +145,7 @@ public class PatFeatureHandle {
             if (world instanceof ServerLevel serverLevel) {
                 p.swing(getSwingHand(player), true);
                 serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 4, 0.3, 0.3, 0.3, 1);
-                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getEyeY(), target.getZ(), 1, 0.3, 0.3, 0.3, 1);
+                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65, target.getZ(), 1, 0, 0, 0, 1);
                 // Dispara o trigger personalizado
                 SpawnEmote(p, target);
                 if (p instanceof ServerPlayer sp) {
@@ -167,8 +167,8 @@ public class PatFeatureHandle {
     }
 
     private static void handlePlayerEntity(Player player, Player target, LevelAccessor world) {
-        boolean isPlayerTransfur =  ProcessTransfur.isPlayerTransfurred(player);
-        boolean isTargetTransfur =  ProcessTransfur.isPlayerTransfurred(target);
+        boolean isPlayerTransfur = ProcessTransfur.isPlayerTransfurred(player);
+        boolean isTargetTransfur = ProcessTransfur.isPlayerTransfurred(target);
 
         if (isHandEmpty(player, InteractionHand.MAIN_HAND) || isHandEmpty(player, InteractionHand.OFF_HAND)) {
             if (!isPlayerTransfur && !isTargetTransfur) {
@@ -183,8 +183,8 @@ public class PatFeatureHandle {
 
             if (isTargetTransfur && world instanceof ServerLevel serverLevel) {
                 serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 4, 0.3, 0.3, 0.3, 1);
-                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getEyeY(), target.getZ(), 1, 0.3, 0.3, 0.3, 1);
-                if (serverLevel.random.nextFloat(100) <= 2.5f) {
+                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65, target.getZ(), 1, 0, 0, 0, 1);
+                if (serverLevel.random.nextFloat(100) <= 25.5f) {
                     target.heal(6f);
                     GivePatAdvancement(player);
                 }
@@ -245,9 +245,9 @@ public class PatFeatureHandle {
         }
     }
 
-    public static void SpawnEmote(Player player, Entity target){
-        if (target instanceof ChangedEntity changedEntity){
-            if (changedEntity.getTarget() == player){
+    public static void SpawnEmote(Player player, Entity target) {
+        if (target instanceof ChangedEntity changedEntity) {
+            if (changedEntity.getTarget() == player) {
                 return;
             }
             if (shouldBeConfused(player, target)) {
