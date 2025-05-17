@@ -7,6 +7,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,9 +37,16 @@ public class ChangedAdditionsKeyMappings {
         public void setDown(boolean isDown) {
             if (Minecraft.getInstance().player != null) {
                 super.setDown(isDown);
-                ChangedAdditionsMod.PACKET_HANDLER.sendToServer(new PatKeyMessage(PAT_KEY.getKey().getValue(), 0));
-                PatKeyMessage.pressAction(Minecraft.getInstance().player, PAT_KEY.getKey().getValue(), 0);
+                if (isDown) {
+                    ChangedAdditionsMod.PACKET_HANDLER.sendToServer(new PatKeyMessage(0, 0));
+                    PatKeyMessage.pressAction(Minecraft.getInstance().player, 0, 0);
+                }
             }
+        }
+
+        @Override
+        public boolean consumeClick() {
+            return super.consumeClick() && Minecraft.getInstance().player != null;
         }
     };
 	/*public static final KeyMapping OPEN_STRUGGLE_MENU = new KeyMapping("key.changed_additions.open_struggle_menu", GLFW.GLFW_KEY_B, "key.categories.changed_additions") {
@@ -70,6 +78,13 @@ public class ChangedAdditionsKeyMappings {
                 TURN_OFF_TRANSFUR.consumeClick();
                 PAT_KEY.consumeClick();
                 //OPEN_STRUGGLE_MENU.consumeClick();
+            }
+        }
+
+        @SubscribeEvent
+        public static void onKeyInput(InputEvent.KeyInputEvent event) {
+            if (Minecraft.getInstance().screen == null && event.getKey() == PAT_KEY.getKey().getValue()) {
+                //PAT_KEY.consumeClick();
             }
         }
     }

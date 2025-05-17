@@ -1,7 +1,5 @@
 package net.foxyas.changed_additions.process.quickTimeEvents;
 
-import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Arrays;

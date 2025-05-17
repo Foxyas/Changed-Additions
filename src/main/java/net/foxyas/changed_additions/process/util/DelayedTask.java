@@ -15,7 +15,6 @@ public class DelayedTask {
 
     private static final Map<Integer, DelayedTask> activeTasks = new HashMap<>();
     private static int nextId = 0;
-
     private final int id;
     private final int delayTicks;
     private final LivingEntity entity;

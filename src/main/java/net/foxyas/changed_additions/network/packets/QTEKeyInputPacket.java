@@ -1,8 +1,7 @@
 package net.foxyas.changed_additions.network.packets;
 
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
-import net.foxyas.changed_additions.process.quickTimeEvents.QTEManager;
-import net.foxyas.changed_additions.process.quickTimeEvents.QuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQTEManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
@@ -42,8 +41,8 @@ public class QTEKeyInputPacket {
             ServerPlayer player = context.getSender();
             if (player == null) return;
             InputKey.fromKeyCode(keyValue).ifPresent(inputKey -> {
-                if (QTEManager.getActiveQTE(player) != null) {
-                    QTEManager.TriggerKeyUpdate(inputKey, Action);
+                if (ConscienceQTEManager.getActiveQTE(player) != null) {
+                    ConscienceQTEManager.TriggerKeyUpdate(inputKey, Action);
                 }
             });
         });

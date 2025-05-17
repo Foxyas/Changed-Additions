@@ -145,7 +145,7 @@ public class PatFeatureHandle {
             if (world instanceof ServerLevel serverLevel) {
                 p.swing(getSwingHand(player), true);
                 serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 4, 0.3, 0.3, 0.3, 1);
-                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getY() + 1, target.getZ(), 1, 0.3, 0.3, 0.3, 1);
+                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getEyeY(), target.getZ(), 1, 0.3, 0.3, 0.3, 1);
                 // Dispara o trigger personalizado
                 SpawnEmote(p, target);
                 if (p instanceof ServerPlayer sp) {
@@ -183,7 +183,7 @@ public class PatFeatureHandle {
 
             if (isTargetTransfur && world instanceof ServerLevel serverLevel) {
                 serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 4, 0.3, 0.3, 0.3, 1);
-                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getY() + 1, target.getZ(), 1, 0.3, 0.3, 0.3, 1);
+                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getEyeY(), target.getZ(), 1, 0.3, 0.3, 0.3, 1);
                 if (serverLevel.random.nextFloat(100) <= 2.5f) {
                     target.heal(6f);
                     GivePatAdvancement(player);

@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class QTEDEBUG {
+public class ConscienceQTEDEBUG {
 
     @SubscribeEvent
     public static void DEBUG(ServerChatEvent event) {
@@ -27,10 +27,10 @@ public class QTEDEBUG {
 
             String typeStr = parts[1];
 
-            QuickTimeEventType type = switch (typeStr) {
-                case "arrows" -> QuickTimeEventType.ARROWS;
-                case "wasd" -> QuickTimeEventType.WASD;
-                case "space" -> QuickTimeEventType.SPACE;
+            ConscienceQuickTimeEventType type = switch (typeStr) {
+                case "arrows" -> ConscienceQuickTimeEventType.ARROWS;
+                case "wasd" -> ConscienceQuickTimeEventType.WASD;
+                case "space" -> ConscienceQuickTimeEventType.SPACE;
                 default -> null;
             };
 
@@ -39,7 +39,7 @@ public class QTEDEBUG {
                 return;
             }
 
-            QTEManager.addQTE(player, new QuickTimeEvent(player, type, FoxyasUtils.StringToInt(parts[2]))); // 100 ticks = 5 segundos
+            ConscienceQTEManager.addQTE(player, new ConscienceQuickTimeEvent(player, type, FoxyasUtils.StringToInt(parts[2]))); // 100 ticks = 5 segundos
 
             player.displayClientMessage(new TextComponent("Quick Time Event iniciado: " + type.name()).withStyle(ChatFormatting.GREEN), false);
         }

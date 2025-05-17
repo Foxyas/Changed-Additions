@@ -1,17 +1,18 @@
 package net.foxyas.changed_additions.process.quickTimeEvents;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickTimeEvent {
+public class ConscienceQuickTimeEvent {
 
     private final Player player;
-    private final QuickTimeEventType type;
+    private final ConscienceQuickTimeEventType type;
     private final List<InputKey> sequence;
     private int currentIndex = 0;
     private int ticksRemaining;
@@ -21,17 +22,16 @@ public class QuickTimeEvent {
     private boolean isHolding = false;
     private InputKey lastKeyPressed = null;
 
-    public QuickTimeEvent(Player player, QuickTimeEventType type, int durationTicks) {
+    public ConscienceQuickTimeEvent(Player player, ConscienceQuickTimeEventType type, int durationTicks) {
         this.player = player;
         this.type = type;
         this.sequence = new ArrayList<>(type.getSequence());
         this.ticksRemaining = durationTicks;
     }
 
-
-    public static QuickTimeEvent loadFromTag(Player player, CompoundTag tag) {
-        QuickTimeEventType type = QuickTimeEventType.valueOf(tag.getString("QTEType"));
-        QuickTimeEvent qte = new QuickTimeEvent(player, type, tag.getInt("TicksRemaining"));
+    public static ConscienceQuickTimeEvent loadFromTag(Player player, CompoundTag tag) {
+        ConscienceQuickTimeEventType type = ConscienceQuickTimeEventType.valueOf(tag.getString("QTEType"));
+        ConscienceQuickTimeEvent qte = new ConscienceQuickTimeEvent(player, type, tag.getInt("TicksRemaining"));
         qte.currentIndex = tag.getInt("CurrentIndex");
         qte.progress = tag.getFloat("Progress");
         qte.finished = tag.getBoolean("Finished");
@@ -52,6 +52,7 @@ public class QuickTimeEvent {
         if (finished) return;
 
         ticksRemaining--;
+        this.progress -= 0.01f;
         if (ticksRemaining <= 0) {
             finish();
         }
@@ -72,8 +73,24 @@ public class QuickTimeEvent {
     }
 
     private void finish() {
+        handleFinal();
         finished = true;
-        // Você pode enviar evento ou chamar callbacks aqui
+    }
+
+    public void handleFinal() {
+        if (progress >= 0.95f) {
+            handleSuccess();
+        } else {
+            handleFail();
+        }
+    }
+
+    private void handleFail() {
+        this.player.displayClientMessage(new TextComponent("Fail") , true);
+    }
+
+    private void handleSuccess() {
+        this.player.displayClientMessage(new TextComponent("Success") , true);
     }
 
     public boolean isFinished() {
@@ -100,7 +117,7 @@ public class QuickTimeEvent {
         return sequence.get(currentIndex);
     }
 
-    public QuickTimeEventType getType() {
+    public ConscienceQuickTimeEventType getType() {
         return type;
     }
 
@@ -111,10 +128,5 @@ public class QuickTimeEvent {
     public List<InputKey> getSequence() {
         return sequence;
     }
-
-    public boolean isHolding() {
-        return isHolding;
-    }
-
 
 }

@@ -13,43 +13,43 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class PatKeyMessage {
-	int type, pressedms;
+    int type, pressedms;
 
-	public PatKeyMessage(int type, int pressedms) {
-		this.type = type;
-		this.pressedms = pressedms;
-	}
+    public PatKeyMessage(int type, int pressedms) {
+        this.type = type;
+        this.pressedms = pressedms;
+    }
 
-	public PatKeyMessage(FriendlyByteBuf buffer) {
-		this.type = buffer.readInt();
-		this.pressedms = buffer.readInt();
-	}
+    public PatKeyMessage(FriendlyByteBuf buffer) {
+        this.type = buffer.readInt();
+        this.pressedms = buffer.readInt();
+    }
 
-	public static void buffer(PatKeyMessage message, FriendlyByteBuf buffer) {
-		buffer.writeInt(message.type);
-		buffer.writeInt(message.pressedms);
-	}
+    public static void buffer(PatKeyMessage message, FriendlyByteBuf buffer) {
+        buffer.writeInt(message.type);
+        buffer.writeInt(message.pressedms);
+    }
 
-	public static void handler(PatKeyMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-		NetworkEvent.Context context = contextSupplier.get();
-		context.enqueueWork(() -> {
-			pressAction(context.getSender(), message.type, message.pressedms);
-		});
-		context.setPacketHandled(true);
-	}
+    public static void handler(PatKeyMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
+        NetworkEvent.Context context = contextSupplier.get();
+        context.enqueueWork(() -> {
+            pressAction(context.getSender(), message.type, message.pressedms);
+        });
+        context.setPacketHandled(true);
+    }
 
-	public static void pressAction(@Nullable Player entity, int type, int pressedms) {
+    public static void pressAction(@Nullable Player entity, int type, int pressedms) {
         assert entity != null;
         Level world = entity.level;
-		// security measure to prevent arbitrary chunk generation
-		if (!world.hasChunkAt(entity.blockPosition()))
-			return;
-		if (type == ChangedAdditionsKeyMappings.PAT_KEY.getKey().getValue()) {
-			run(entity, world);
-		}
-	}
+        // security measure to prevent arbitrary chunk generation
+        if (!world.hasChunkAt(entity.blockPosition()))
+            return;
+        if (type == 0) {
+            run(entity, world);
+        }
+    }
 
-	private static void run(Player player, Level world){
-		PatFeatureHandle.execute(world,player);
-	}
+    private static void run(Player player, Level world) {
+        PatFeatureHandle.execute(world, player);
+    }
 }
