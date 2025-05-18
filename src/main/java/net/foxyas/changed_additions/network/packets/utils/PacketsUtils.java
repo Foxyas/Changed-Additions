@@ -8,4 +8,8 @@ public class PacketsUtils {
     public static void sendToPlayer(SimpleChannel simpleChannel, Object message, ServerPlayer player) {
         simpleChannel.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
+
+    public static void sendToPlayer(SimpleChannel simpleChannel, Object message) {
+        simpleChannel.send(PacketDistributor.PLAYER.noArg(), message);
+    }
 }

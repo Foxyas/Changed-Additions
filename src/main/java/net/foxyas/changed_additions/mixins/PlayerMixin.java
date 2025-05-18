@@ -72,24 +72,12 @@ public class PlayerMixin {
 
     @Unique
     private static final String QTE_TAG = "QTE";
-
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
     private void onSave(CompoundTag tag, CallbackInfo ci) {
         Player player = (Player) (Object) this;
         ConscienceQuickTimeEvent qte = ConscienceQTEManager.getActiveQTE(player);
         if (qte != null && !qte.isFinished()) {
             tag.put(QTE_TAG, qte.saveToTag());
-        }
-    }
-
-    @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-    private void onLoad(CompoundTag tag, CallbackInfo ci) {
-        Player player = (Player) (Object) this;
-        if (tag.contains(QTE_TAG)) {
-            ConscienceQuickTimeEvent qte = ConscienceQuickTimeEvent.loadFromTag(player, tag.getCompound(QTE_TAG));
-            if (!qte.isFinished()) {
-                ConscienceQTEManager.addQTE(player, qte);
-            }
         }
     }
 }

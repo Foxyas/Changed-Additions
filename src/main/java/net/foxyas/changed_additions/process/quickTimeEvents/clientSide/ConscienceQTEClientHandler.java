@@ -21,7 +21,7 @@ public class ConscienceQTEClientHandler {
         Player player = mc.player;
         if (player == null) return;
 
-        ConscienceQuickTimeEvent qte = ConscienceQTEManager.getActiveQTE(player);
+        ConscienceQuickTimeEvent qte = ConscienceQTEManager.getAutoActiveQTE(player);
         if (qte == null || qte.isFinished()) return;
 
         PoseStack stack = event.getMatrixStack();

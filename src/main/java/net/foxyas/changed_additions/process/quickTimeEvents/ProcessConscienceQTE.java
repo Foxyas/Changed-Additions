@@ -11,13 +11,13 @@ import net.minecraftforge.fml.common.Mod;
 public class ProcessConscienceQTE {
 
     @SubscribeEvent
-    public static void StartQTEWhenTransfured(ProcessTransfur.KeepConsciousEvent event){
+    public static void StartQTEWhenTransfured(ProcessTransfur.KeepConsciousEvent event) {
         Player player = event.player;
         Level world = player.getLevel();
         boolean keepConscious = event.keepConscious;
         if (!keepConscious && !world.isClientSide() && world.getGameRules().getBoolean(ChangedAdditionsGameRules.CHANGED_ADDITIONS_FIGHT_TO_KEEP_CONSCIENCE)) {
             event.shouldKeepConscious = true;
-            ConscienceQTEManager.addQTE(player,new ConscienceQuickTimeEvent(player,player.getRandom(),player.getRandom().nextInt(100,120)));
+            ConscienceQTEManager.addQTE(player, new ConscienceQuickTimeEvent(player, player.getRandom(), player.getRandom().nextInt(100, 120)));
         }
     }
 }

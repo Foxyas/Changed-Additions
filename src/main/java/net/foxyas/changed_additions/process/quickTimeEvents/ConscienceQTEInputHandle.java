@@ -17,16 +17,19 @@ public class ConscienceQTEInputHandle {
         if (event.getAction() == GLFW.GLFW_PRESS || event.getAction() == GLFW.GLFW_REPEAT) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player != null && mc.screen == null) {
-                if (ConscienceQTEManager.getActiveQTE(Minecraft.getInstance().player) != null && InputKey.fromKeyCode(event.getKey()).isPresent()) {
+                if (ConscienceQTEManager.Client.getActiveQTE(Minecraft.getInstance().player) != null && InputKey.fromKeyCode(event.getKey()).isPresent()) {
                     ChangedAdditionsMod.PACKET_HANDLER.sendToServer(new QTEKeyInputPacket(event.getKey(), event.getAction()));
                     // Cancela movimentação
-                    mc.options.keyUp.setDown(false);
-                    mc.options.keyDown.setDown(false);
-                    mc.options.keyLeft.setDown(false);
-                    mc.options.keyRight.setDown(false);
-                    mc.options.keyJump.setDown(false);
-                    mc.options.keySprint.setDown(false);
-                    mc.options.keyShift.setDown(false);
+                    ConscienceQTEManager.Client.WhenSync();
+                    if (ConscienceQTEManager.Client.getActiveQTE(Minecraft.getInstance().player) != null) {
+                        mc.options.keyUp.setDown(false);
+                        mc.options.keyDown.setDown(false);
+                        mc.options.keyLeft.setDown(false);
+                        mc.options.keyRight.setDown(false);
+                        mc.options.keyJump.setDown(false);
+                        mc.options.keySprint.setDown(false);
+                        mc.options.keyShift.setDown(false);
+                    }
                 }
             }
         }

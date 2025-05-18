@@ -23,14 +23,17 @@ public class TurnOffTransfurMessage {
 		this.pressedms = pressedms;
 	}
 
-	public TurnOffTransfurMessage(FriendlyByteBuf buffer) {
-		this.type = buffer.readInt();
-		this.pressedms = buffer.readInt();
-	}
-
 	public static void buffer(TurnOffTransfurMessage message, FriendlyByteBuf buffer) {
 		buffer.writeInt(message.type);
 		buffer.writeInt(message.pressedms);
+	}
+
+	public static TurnOffTransfurMessage decode(FriendlyByteBuf buffer) {
+		int type, pressdms;
+		type = buffer.readInt();
+		pressdms = buffer.readInt();
+
+		return new TurnOffTransfurMessage(type,pressdms);
 	}
 
 	public static void handler(TurnOffTransfurMessage message, Supplier<NetworkEvent.Context> contextSupplier) {

@@ -1,37 +1,48 @@
 package net.foxyas.changed_additions.init;
 
-import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
-import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
 import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 public class ChangedAdditionsDamageSources {
-    public static final DamageSource SOLVENT = new DamageSource("latex_solvent") {
+    public static final DamageSource LATEX_SOLVENT = new DamageSource("latex_solvent") {
         @Override
         public float getFoodExhaustion() {
             return super.getFoodExhaustion() + 0.5f;
         }
     };
 
-    public static EntityDamageSource mobAttack(LivingEntity mob) {
+    public static EntityDamageSource LatexSolventMobAttack(LivingEntity mob) {
         return new EntityDamageSource("latex_solvent", mob);
     }
+
+
+    public static final DamageSource CONSCIENCE_LOST = new DamageSource("conscience_lost") {
+        @Override
+        public float getFoodExhaustion() {
+            return 0;
+        }
+    }.bypassArmor();
+
+    public static EntityDamageSource ConscienceLostMobAttack(LivingEntity mob) {
+        return new EntityDamageSource("conscience_lost", mob);
+    }
+
+
 
     @Mod.EventBusSubscriber
     public static class DamageHandle {
@@ -75,10 +86,10 @@ public class ChangedAdditionsDamageSources {
         }
 
         private static boolean isSolventDamage(DamageSource source) {
-            if (source == SOLVENT) return true;
+            if (source == LATEX_SOLVENT) return true;
 
             return source instanceof EntityDamageSource eds
-                    && eds.getMsgId().startsWith(SOLVENT.getMsgId());
+                    && eds.getMsgId().startsWith(LATEX_SOLVENT.getMsgId());
         }
 
         private static boolean isLatexTarget(Entity entity) {

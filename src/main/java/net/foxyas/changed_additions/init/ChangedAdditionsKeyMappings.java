@@ -7,7 +7,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ClientRegistry;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -43,11 +42,6 @@ public class ChangedAdditionsKeyMappings {
                 }
             }
         }
-
-        @Override
-        public boolean consumeClick() {
-            return super.consumeClick() && Minecraft.getInstance().player != null;
-        }
     };
 	/*public static final KeyMapping OPEN_STRUGGLE_MENU = new KeyMapping("key.changed_additions.open_struggle_menu", GLFW.GLFW_KEY_B, "key.categories.changed_additions") {
 		private boolean isDownOld = false;
@@ -81,11 +75,11 @@ public class ChangedAdditionsKeyMappings {
             }
         }
 
-        @SubscribeEvent
+        /*@SubscribeEvent
         public static void onKeyInput(InputEvent.KeyInputEvent event) {
             if (Minecraft.getInstance().screen == null && event.getKey() == PAT_KEY.getKey().getValue()) {
                 //PAT_KEY.consumeClick();
             }
-        }
+        }*/
     }
 }

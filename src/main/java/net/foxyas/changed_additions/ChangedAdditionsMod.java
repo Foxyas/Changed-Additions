@@ -2,12 +2,21 @@ package net.foxyas.changed_additions;
 
 import net.foxyas.changed_additions.client.renderer.item.LaserItemDynamicRender;
 import net.foxyas.changed_additions.init.*;
+import net.foxyas.changed_additions.network.PatKeyMessage;
+import net.foxyas.changed_additions.network.TurnOffTransfurMessage;
+import net.foxyas.changed_additions.network.packets.QTEKeyInputPacket;
+import net.foxyas.changed_additions.network.packets.QTESyncPacket;
+import net.foxyas.changed_additions.network.packets.SyncTransfurVisionsPacket;
 import net.foxyas.changed_additions.variants.ChangedAdditionsTransfurVariants;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
@@ -43,6 +52,10 @@ public class ChangedAdditionsMod {
         ChangedAdditionsBlockEntities.REGISTRY.register(bus);
 
         bus.addListener(this::clientLoad); // Client Stuff goes Here
+    }
+
+    public static <T extends Event> boolean postModEvent(T event) {
+        return MinecraftForge.EVENT_BUS.post(event);
     }
 
     public static ResourceLocation modResource(String path) {

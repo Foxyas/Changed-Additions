@@ -18,10 +18,6 @@ public class QTEKeyInputPacket {
         this.Action = Action;
     }
 
-    public void toBytes(FriendlyByteBuf buf) {
-        buf.writeInt(keyValue);
-    }
-
     public static void encode(QTEKeyInputPacket msg, FriendlyByteBuf buf) {
         buf.writeInt(msg.keyValue);
         buf.writeInt(msg.Action);

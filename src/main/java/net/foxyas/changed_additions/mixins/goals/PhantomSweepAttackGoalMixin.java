@@ -26,7 +26,8 @@ public abstract class PhantomSweepAttackGoalMixin extends Goal {
     @Shadow
     private int catSearchTick;
 
-    @Shadow @Final private Phantom this$0;
+    @Shadow @Final
+    Phantom this$0;
 
     @Inject(method = "canContinueToUse", at = @At("HEAD"), cancellable = true)
     private void canContinueToUseInject(CallbackInfoReturnable<Boolean> cir) {

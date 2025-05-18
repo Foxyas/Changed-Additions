@@ -1,8 +1,10 @@
 package net.foxyas.changed_additions.advancements.critereon;
 
+import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.extras.CustomPatReaction;
 import net.foxyas.changed_additions.init.ChangedAdditionsCriteriaTriggers;
 import net.foxyas.changed_additions.init.ChangedAdditionsTags;
+import net.foxyas.changed_additions.process.ProcessPatFeature;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.ability.GrabEntityAbility;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
@@ -32,6 +34,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.eventbus.api.Event;
 
 import java.util.Objects;
 
@@ -128,6 +131,7 @@ public class PatFeatureHandle {
                     pat.WhenPattedReaction(p);
                     pat.WhenPattedReaction();
                     //p.displayClientMessage(new TextComponent("pat_message:" + target.getDisplayName().getString()), false);
+                } else {
                 }
             }
         }
@@ -142,12 +146,18 @@ public class PatFeatureHandle {
             Player p = (Player) player;
             p.swing(getSwingHand(player), true);
 
+
+            Player player_ = (Player) player;
+            if (target instanceof LivingEntity targetLiving) {
+                ProcessPatFeature.GlobalPatReaction globalPatReactionEvent = new ProcessPatFeature.GlobalPatReaction(world, player_, targetLiving);
+                ChangedAdditionsMod.postModEvent(globalPatReactionEvent);
+            }
+
+
             if (world instanceof ServerLevel serverLevel) {
                 p.swing(getSwingHand(player), true);
-                serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 4, 0.3, 0.3, 0.3, 1);
-                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65, target.getZ(), 1, 0, 0, 0, 1);
                 // Dispara o trigger personalizado
-                SpawnEmote(p, target);
+                //SpawnEmote(p, target);
                 if (p instanceof ServerPlayer sp) {
                     GiveStealthPatAdvancement(sp, target);
                 }
@@ -156,6 +166,7 @@ public class PatFeatureHandle {
                     e.WhenPattedReaction(p);
                     e.WhenPattedReaction();
                     //p.displayClientMessage(new TextComponent("pat_message:" + target.getDisplayName().getString()), false);
+                } else {
                 }
 
                 // Exibe mensagens
@@ -181,9 +192,9 @@ public class PatFeatureHandle {
             }
 
 
+            ProcessPatFeature.GlobalPatReaction globalPatReactionEvent = new ProcessPatFeature.GlobalPatReaction(world, player, target);
             if (isTargetTransfur && world instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 4, 0.3, 0.3, 0.3, 1);
-                serverLevel.sendParticles(ChangedParticles.emote(target, Emote.HEART), target.getX(), target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65, target.getZ(), 1, 0, 0, 0, 1);
+                ChangedAdditionsMod.postModEvent(globalPatReactionEvent);
                 if (serverLevel.random.nextFloat(100) <= 25.5f) {
                     target.heal(6f);
                     GivePatAdvancement(player);
@@ -204,7 +215,7 @@ public class PatFeatureHandle {
                 ((Player) player).swing(getSwingHand(player), true);
             }
             if (world instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 7, 0.3, 0.3, 0.3, 1);
+                //serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 7, 0.3, 0.3, 0.3, 1);
             }
             if (player instanceof Player p && !p.level.isClientSide()) {
                 p.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
@@ -245,33 +256,6 @@ public class PatFeatureHandle {
         }
     }
 
-    public static void SpawnEmote(Player player, Entity target) {
-        if (target instanceof ChangedEntity changedEntity) {
-            if (changedEntity.getTarget() == player) {
-                return;
-            }
-            if (shouldBeConfused(player, target)) {
-                PlayerUtil.ParticlesUtil.sendParticles(player.getLevel(),
-                        ChangedParticles.emote(changedEntity, Emote.CONFUSED),
-                        target.getX(),
-                        target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65,
-                        target.getZ(),
-                        0.0f,
-                        0.0f,
-                        0.0f, 1, 0f
-                );
-            }
-        }
-    }
-
-    private static boolean shouldBeConfused(Player player, Entity entity) {
-        if (entity instanceof AbstractDarkLatexWolf) {
-            // Verificando se o jogador usa a armadura correta
-            return player.getItemBySlot(EquipmentSlot.HEAD).is(DARK_LATEX_HEAD_CAP.get())
-                    && player.getItemBySlot(EquipmentSlot.CHEST).is(DARK_LATEX_COAT.get());
-        }
-        return false;
-    }
 
     public static void GiveStealthPatAdvancement(Entity entity, Entity target) {
         if (entity instanceof ServerPlayer _player) {

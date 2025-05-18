@@ -47,6 +47,9 @@
 
   "death.attack.latex_solvent": "%1$s was dissolved",
   "death.attack.latex_solvent.player": "%1$s was dissolved by %2$s",
+  "death.attack.conscience_lost": "%1$s lost their consciousness",
+  "death.attack.conscience_lost.player": "%1$s lost their consciousness by %2$s",
+
 
   "changed_additions.jei_descriptions.dyeable_shorts": "Made from dyeing regular pants\n§oCan be dyed§r",
   "changed_additions.jei_descriptions.laser_pointer": "§oCan be dyed§r",
