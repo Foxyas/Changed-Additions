@@ -3,6 +3,9 @@ package net.foxyas.changed_additions.process.quickTimeEvents.clientSide;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.foxyas.changed_additions.process.quickTimeEvents.*;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEventType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +40,7 @@ public class ConscienceQTEClientHandler {
                 //String type = qteType != null ? qteType.name() : "";
 
                 assert qteType != null;
-                int ImageSizeX,ImageSizeY,KeySizeX,KeySizeY;
+                int ImageSizeX, ImageSizeY, KeySizeX, KeySizeY;
                 ImageSizeX = qteType.getImageDimensions().getFirst();
                 ImageSizeY = qteType.getImageDimensions().getSecond();
                 KeySizeX = qteType.getKeyTypeSize().getFirst();
@@ -52,10 +55,20 @@ public class ConscienceQTEClientHandler {
                 int u = key.u;
                 int v = key.v;
 
+                // Verifica se é a próxima tecla esperada
+                boolean isNextExpectedKey = key == qte.getCurrentExpectedKey();
+
+                // Se for a esperada, colore de vermelho (1, 0, 0, 1)
+                if (isNextExpectedKey && key != InputKey.SPACE) {
+                    RenderSystem.setShaderColor(1f, 0f, 0f, 1f); // Vermelho
+                } else {
+                    RenderSystem.setShaderColor(1f, 1f, 1f, 1f); // Branco padrão
+                }
+
                 if (isPressed) {
                     GuiComponent.blit(stack, x, y, u, v + 16, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
                 } else {
-                    GuiComponent.blit(stack, x, y, u, v , KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
+                    GuiComponent.blit(stack, x, y, u, v, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
                 }
 
             }

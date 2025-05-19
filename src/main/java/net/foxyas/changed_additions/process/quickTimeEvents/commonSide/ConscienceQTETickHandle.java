@@ -1,4 +1,4 @@
-package net.foxyas.changed_additions.process.quickTimeEvents;
+package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;

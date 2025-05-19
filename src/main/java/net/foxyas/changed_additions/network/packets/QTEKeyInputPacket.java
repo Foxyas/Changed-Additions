@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.network.packets;
 
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
-import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;

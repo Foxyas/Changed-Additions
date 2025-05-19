@@ -1,4 +1,4 @@
-package net.foxyas.changed_additions.process.quickTimeEvents;
+package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.minecraft.ChatFormatting;
@@ -28,8 +28,10 @@ public class ConscienceQTEDEBUG {
             String typeStr = parts[1];
 
             ConscienceQuickTimeEventType type = switch (typeStr) {
-                case "arrows" -> ConscienceQuickTimeEventType.ARROWS;
+                case "arrows_right" -> ConscienceQuickTimeEventType.ARROWS_RIGHT;
+                case "arrows_left" -> ConscienceQuickTimeEventType.ARROWS_LEFT;
                 case "wasd" -> ConscienceQuickTimeEventType.WASD;
+                case "wdsa" -> ConscienceQuickTimeEventType.WDSA;
                 case "space" -> ConscienceQuickTimeEventType.SPACE;
                 default -> null;
             };

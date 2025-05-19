@@ -1,8 +1,9 @@
-package net.foxyas.changed_additions.process.quickTimeEvents;
+package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.network.packets.QTESyncPacket;
 import net.foxyas.changed_additions.network.packets.utils.PacketsUtils;
+import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.server.level.ServerPlayer;

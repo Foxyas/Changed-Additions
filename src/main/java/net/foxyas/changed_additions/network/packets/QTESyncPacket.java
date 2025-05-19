@@ -1,13 +1,10 @@
 package net.foxyas.changed_additions.network.packets;
 
-import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQTEManager;
-import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQuickTimeEvent;
-import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQuickTimeEventType;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEventType;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.ArrayList;

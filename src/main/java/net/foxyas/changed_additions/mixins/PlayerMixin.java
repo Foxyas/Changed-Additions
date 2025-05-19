@@ -2,8 +2,8 @@ package net.foxyas.changed_additions.mixins;
 
 import net.foxyas.changed_additions.abilities.ClawsAbility;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
-import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQTEManager;
-import net.foxyas.changed_additions.process.quickTimeEvents.ConscienceQuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.process.ProcessTransfur;

@@ -137,7 +137,7 @@ public class CreatureDietsHandleProcedure {
     }
 
     private static boolean isCatDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity.getType().getRegistryName().toString().contains("cat") ||
+        return entity.getType().getRegistryName().toString().contains("cat") || entity.getType().getRegistryName().toString().contains("tiger") ||
                 variant.is(TransfurVariantTags.CAT_LIKE) ||
                 variant.is(TransfurVariantTags.LEOPARD_LIKE) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
@@ -164,7 +164,7 @@ public class CreatureDietsHandleProcedure {
     }
 
     private static boolean isAquaticDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity instanceof AquaticEntity ||
+        return entity instanceof AquaticEntity || entity.getType().getRegistryName().toString().contains("shark") ||
                 variant.is(TransfurVariantTags.SHARK_LIKE) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
                         new ResourceLocation("changed_additions:aquatic_like"))) ||

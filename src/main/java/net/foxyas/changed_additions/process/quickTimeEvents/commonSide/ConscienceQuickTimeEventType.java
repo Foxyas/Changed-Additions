@@ -1,7 +1,8 @@
-package net.foxyas.changed_additions.process.quickTimeEvents;
+package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import com.mojang.datafixers.util.Pair;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
+import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,7 +12,9 @@ import java.util.Random;
 public enum ConscienceQuickTimeEventType {
     SPACE(List.of(InputKey.SPACE), new Pair<>(64, 32), new Pair<>(64, 16)),
     WASD(List.of(InputKey.W, InputKey.A, InputKey.S, InputKey.D), new Pair<>(64, 32), new Pair<>(16, 16)),
-    ARROWS(List.of(InputKey.UP, InputKey.RIGHT, InputKey.DOWN, InputKey.LEFT), new Pair<>(64, 32), new Pair<>(16, 16));
+    WDSA(List.of(InputKey.W, InputKey.A, InputKey.S, InputKey.D), new Pair<>(64, 32), new Pair<>(16, 16)),
+    ARROWS_RIGHT(List.of(InputKey.UP, InputKey.RIGHT, InputKey.DOWN, InputKey.LEFT), new Pair<>(64, 32), new Pair<>(16, 16)),
+    ARROWS_LEFT(List.of(InputKey.UP, InputKey.LEFT, InputKey.DOWN, InputKey.RIGHT), new Pair<>(64, 32), new Pair<>(16, 16));
 
     private final List<InputKey> sequence;
     private final Pair<Integer, Integer> ImageDimensions;

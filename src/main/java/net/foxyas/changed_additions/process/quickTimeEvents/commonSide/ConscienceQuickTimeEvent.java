@@ -1,12 +1,12 @@
-package net.foxyas.changed_additions.process.quickTimeEvents;
+package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.init.ChangedAdditionsDamageSources;
 import net.foxyas.changed_additions.network.packets.QTESyncPacket;
 import net.foxyas.changed_additions.network.packets.utils.PacketsUtils;
+import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
-import net.ltxprogrammer.changed.init.ChangedDamageSources;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;

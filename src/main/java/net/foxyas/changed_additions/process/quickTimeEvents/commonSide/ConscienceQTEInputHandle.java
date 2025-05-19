@@ -1,7 +1,8 @@
-package net.foxyas.changed_additions.process.quickTimeEvents;
+package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.network.packets.QTEKeyInputPacket;
+import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;

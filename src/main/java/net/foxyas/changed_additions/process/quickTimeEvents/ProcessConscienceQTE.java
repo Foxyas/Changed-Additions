@@ -1,6 +1,8 @@
 package net.foxyas.changed_additions.process.quickTimeEvents;
 
 import net.foxyas.changed_additions.init.ChangedAdditionsGameRules;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
