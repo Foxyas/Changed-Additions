@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 public enum ConscienceQuickTimeEventType {
-    SPACE(List.of(InputKey.SPACE), new Pair<>(64, 32), new Pair<>(64, 16)),
+    SPACE(List.of(InputKey.SPACE), new Pair<>(64, 64), new Pair<>(64, 32)),
     WASD(List.of(InputKey.W, InputKey.A, InputKey.S, InputKey.D), new Pair<>(64, 32), new Pair<>(16, 16)),
     WDSA(List.of(InputKey.W, InputKey.A, InputKey.S, InputKey.D), new Pair<>(64, 32), new Pair<>(16, 16)),
     ARROWS_RIGHT(List.of(InputKey.UP, InputKey.RIGHT, InputKey.DOWN, InputKey.LEFT), new Pair<>(64, 32), new Pair<>(16, 16)),

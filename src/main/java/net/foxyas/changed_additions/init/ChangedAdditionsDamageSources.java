@@ -43,7 +43,6 @@ public class ChangedAdditionsDamageSources {
     }
 
 
-
     @Mod.EventBusSubscriber
     public static class DamageHandle {
 
@@ -76,7 +75,7 @@ public class ChangedAdditionsDamageSources {
             PlayerUtil.ParticlesUtil.sendParticles(
                     entity.level,
                     ChangedAdditionsParticles.solventDrips(10, FoxyasUtils.clamp(entity.getLevel().getRandom().nextFloat(0.45f), 0.15f, 0.45f)),
-                    entity.position(),
+                    entity.position().add(0, entity.getBbHeight() / 2f, 0),
                     0.25f, 0.25f, 0.25f,
                     8 + FoxyasUtils.clamp(amount, 0, 22), 0.25f
             );

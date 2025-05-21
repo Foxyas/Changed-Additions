@@ -66,7 +66,7 @@ public class ConscienceQTEClientHandler {
                 }
 
                 if (isPressed) {
-                    GuiComponent.blit(stack, x, y, u, v + 16, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
+                    GuiComponent.blit(stack, x, y, u, v + KeySizeY, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
                 } else {
                     GuiComponent.blit(stack, x, y, u, v, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
                 }

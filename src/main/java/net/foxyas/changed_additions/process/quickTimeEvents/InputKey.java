@@ -14,7 +14,7 @@ public enum InputKey {
     DOWN(GLFW.GLFW_KEY_DOWN, 16, 16, -8, 72 - 20),
     LEFT(GLFW.GLFW_KEY_LEFT, 32, 16, -20-8, 72),
     RIGHT(GLFW.GLFW_KEY_RIGHT, 48, 16, 20-8, 72),
-    SPACE(GLFW.GLFW_KEY_SPACE, 0, 32, -32, 72);
+    SPACE(GLFW.GLFW_KEY_SPACE, 0, 0, -32, 72);
 
     public final int keyCode;
     public final int u;

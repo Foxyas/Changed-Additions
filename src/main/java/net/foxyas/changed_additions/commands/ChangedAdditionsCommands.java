@@ -6,16 +6,22 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.ltxprogrammer.changed.Changed;
+import net.ltxprogrammer.changed.block.AbstractLatexBlock;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
+import net.ltxprogrammer.changed.entity.LatexType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -61,6 +67,87 @@ public class ChangedAdditionsCommands {
                 )
         ).requires(source -> !source.getLevel().isClientSide);
         event.getDispatcher().register(getMaxBPISize);
+
+        LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.then(Commands.literal("BlocksHandle")
+                .then(Commands.literal("setBlocksInfectionType")
+                        .then(Commands.argument("minPos", BlockPosArgument.blockPos())
+                                .then(Commands.argument("maxPos", BlockPosArgument.blockPos())
+                                        .then(Commands.literal("white_latex")
+                                                .executes(ctx -> {
+                                                    ServerLevel world = ctx.getSource().getLevel();
+                                                    BlockPos minPos = BlockPosArgument.getLoadedBlockPos(ctx, "minPos");
+                                                    BlockPos maxPos = BlockPosArgument.getLoadedBlockPos(ctx, "maxPos");
+
+                                                    long value = BlockPos.betweenClosedStream(minPos, maxPos).count();
+                                                    int SAFE_LIMIT = 32768;
+
+                                                    if (value > SAFE_LIMIT) {
+                                                        ctx.getSource().sendFailure(new TextComponent("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
+                                                        return 0;
+                                                    }
+
+                                                    BlockHandle.run(world, minPos, maxPos, LatexType.WHITE_LATEX);
+                                                    ctx.getSource().sendSuccess(new TextComponent("Set Infection of " + value + " blocks to white_latex"), true);
+                                                    return 1;
+                                                })
+                                        ).then(Commands.literal("dark_latex")
+                                                .executes(ctx -> {
+                                                    ServerLevel world = ctx.getSource().getLevel();
+                                                    BlockPos minPos = BlockPosArgument.getLoadedBlockPos(ctx, "minPos");
+                                                    BlockPos maxPos = BlockPosArgument.getLoadedBlockPos(ctx, "maxPos");
+
+                                                    long value = BlockPos.betweenClosedStream(minPos, maxPos).count();
+                                                    int SAFE_LIMIT = 32768;
+
+                                                    if (value > SAFE_LIMIT) {
+                                                        ctx.getSource().sendFailure(new TextComponent("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
+                                                        return 0;
+                                                    }
+
+                                                    BlockHandle.run(world, minPos, maxPos, LatexType.DARK_LATEX);
+                                                    ctx.getSource().sendSuccess(new TextComponent("Set Infection of " + value + " blocks to dark_latex"), true);
+                                                    return 1;
+
+                                                })
+                                        ).then(Commands.literal("neutral")
+                                                .executes(ctx -> {
+                                                    ServerLevel world = ctx.getSource().getLevel();
+                                                    BlockPos minPos = BlockPosArgument.getLoadedBlockPos(ctx, "minPos");
+                                                    BlockPos maxPos = BlockPosArgument.getLoadedBlockPos(ctx, "maxPos");
+
+                                                    long value = BlockPos.betweenClosedStream(minPos, maxPos).count();
+                                                    int SAFE_LIMIT = 32768;
+
+                                                    if (value > SAFE_LIMIT) {
+                                                        ctx.getSource().sendFailure(new TextComponent("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
+                                                        return 0;
+                                                    }
+
+                                                    BlockHandle.run(world, minPos, maxPos, LatexType.NEUTRAL);
+                                                    ctx.getSource().sendSuccess(new TextComponent("Set Infection of " + value + " blocks to neutral"), true);
+                                                    return 1;
+
+                                                })
+                                        )
+                                )
+                        )
+                )
+        ).requires(source -> !source.getLevel().isClientSide && source.hasPermission(2));
+
+
+        event.getDispatcher().register(BlocksHandle);
+    }
+
+    public static class BlockHandle {
+        public static void run(LevelAccessor world, BlockPos minPos, BlockPos maxPos, LatexType enumValue) {
+            for (BlockPos pos : BlockPos.betweenClosed(minPos, maxPos)) {
+                BlockState state = world.getBlockState(pos);
+                if (state.hasProperty(AbstractLatexBlock.COVERED)) {
+                    BlockState newState = state.setValue(AbstractLatexBlock.COVERED, enumValue);
+                    world.setBlock(pos, newState, 3);
+                }
+            }
+        }
     }
 
     private static class SizeManipulator {
