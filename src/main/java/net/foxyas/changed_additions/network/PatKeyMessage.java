@@ -1,9 +1,7 @@
 package net.foxyas.changed_additions.network;
 
-import net.foxyas.changed_additions.advancements.critereon.PatFeatureHandle;
 import net.foxyas.changed_additions.process.ProcessPatFeature;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;

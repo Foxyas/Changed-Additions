@@ -9,7 +9,7 @@ public class ChangedAdditionsTabs {
     public static CreativeModeTab CHANGED_ADDITIONS_TAB;
 
     public static void load() {
-        CHANGED_ADDITIONS_TAB = new CreativeModeTab("changed_additions_tab") {
+        CHANGED_ADDITIONS_TAB = new CreativeModeTab("changed_additions") {
             @Override
             public ItemStack makeIcon() {
                 return new ItemStack(ChangedAdditionsBlocks.NEOFUSER.get());

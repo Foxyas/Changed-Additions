@@ -2,7 +2,8 @@ package net.foxyas.changed_additions.process.quickTimeEvents.clientSide;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.foxyas.changed_additions.process.quickTimeEvents.*;
+import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
+import net.foxyas.changed_additions.process.quickTimeEvents.InputKeyTracker;
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEventType;

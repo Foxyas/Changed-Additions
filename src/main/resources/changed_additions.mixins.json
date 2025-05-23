@@ -7,8 +7,11 @@
   "mixins": [
     "PlayerMixin",
     "RandomVariantFunctionMixin",
-    "goals.ChangedEntityGoalsMixin",
-    "goals.PhantomSweepAttackGoalMixin",
+    "blocks.BlockMixin",
+    "blocks.CrossCollisionBlockMixin",
+    "entities.ChangedEntityMixin",
+    "goals.AvoidEntityGoalMixin",
+    "goals.PhantomAIMixin",
     "mods.ChangedMixin",
     "render.WingFallFlyAnimationMixin",
     "render.WingFlyAnimationMixin"

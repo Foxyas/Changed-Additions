@@ -1,11 +1,12 @@
 package net.foxyas.changed_additions.init;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.foxyas.changed_additions.client.renderer.FengQIFoxRenderer;
+import net.foxyas.changed_additions.client.renderer.LatexSnowFoxFemaleRenderer;
+import net.foxyas.changed_additions.client.renderer.LatexSnowFoxMaleRenderer;
 import net.minecraftforge.api.distmarker.Dist;
-
-import net.foxyas.changed_additions.client.renderer.*;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ChangedAdditionsEntityRenderers {

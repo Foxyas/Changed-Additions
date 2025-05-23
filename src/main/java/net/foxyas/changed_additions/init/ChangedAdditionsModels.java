@@ -1,6 +1,8 @@
 package net.foxyas.changed_additions.init;
 
-import net.foxyas.changed_additions.client.models.*;
+import net.foxyas.changed_additions.client.models.FengQIFoxModel;
+import net.foxyas.changed_additions.client.models.LatexSnowFoxFemaleModel;
+import net.foxyas.changed_additions.client.models.LatexSnowFoxMaleModel;
 import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;

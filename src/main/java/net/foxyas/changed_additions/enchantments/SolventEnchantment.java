@@ -1,7 +1,5 @@
 package net.foxyas.changed_additions.enchantments;
 
-import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.init.ChangedAdditionsDamageSources;
 import net.foxyas.changed_additions.init.ChangedAdditionsMobEffects;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.init.ChangedTags;

@@ -5,25 +5,19 @@ import net.foxyas.changed_additions.entities.extras.CustomPatReaction;
 import net.foxyas.changed_additions.init.ChangedAdditionsCriteriaTriggers;
 import net.foxyas.changed_additions.init.ChangedAdditionsTags;
 import net.foxyas.changed_additions.process.ProcessPatFeature;
-import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.ability.GrabEntityAbility;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
-import net.ltxprogrammer.changed.entity.Emote;
-import net.ltxprogrammer.changed.entity.beast.AbstractDarkLatexWolf;
 import net.ltxprogrammer.changed.init.ChangedAbilities;
-import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -34,12 +28,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.eventbus.api.Event;
 
 import java.util.Objects;
-
-import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DARK_LATEX_COAT;
-import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DARK_LATEX_HEAD_CAP;
 
 public class PatFeatureHandle {
 

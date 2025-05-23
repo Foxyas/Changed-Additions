@@ -1,6 +1,5 @@
-package net.foxyas.changed_additions.mixins.goals;
+package net.foxyas.changed_additions.mixins.entities;
 
-import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.goals.FollowAndLookAtLaser;
 import net.foxyas.changed_additions.entities.goals.SleepingNearOwnerGoal;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
@@ -16,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChangedEntity.class)
-public class ChangedEntityGoalsMixin {
+public class ChangedEntityMixin {
 
     @Inject(method = "registerGoals", at = @At("HEAD"))
     private void addExtraGoal(CallbackInfo ci) {

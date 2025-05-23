@@ -5,13 +5,16 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
+import net.foxyas.changed_additions.entities.AbstractTamableLatexEntity;
 import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.block.AbstractLatexBlock;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
 import net.ltxprogrammer.changed.entity.LatexType;
+import net.ltxprogrammer.changed.entity.beast.AbstractDarkLatexEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
@@ -22,10 +25,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Collection;
 
 @Mod.EventBusSubscriber
 public class ChangedAdditionsCommands {
@@ -33,24 +38,7 @@ public class ChangedAdditionsCommands {
     public static void registerCommand(RegisterCommandsEvent event) {
         final LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
         event.getDispatcher().register(literalBuilder);
-        LiteralArgumentBuilder<CommandSourceStack> setBPISizeCommand = literalBuilder.then(Commands.literal("setBPISize")
-                .then(Commands.argument("size", FloatArgumentType.floatArg())
-                        .executes(arguments -> {
-                                    ServerLevel world = arguments.getSource().getLevel();
-                                    Entity entity = arguments.getSource().getEntity();
-                                    if (entity == null) {
-                                        entity = FakePlayerFactory.getMinecraft(world);
-                                    }
-                                    float amount = FloatArgumentType.getFloat(arguments, "size");
-
-                                    return SizeManipulator.SizeChange(arguments, entity, amount);
-                                }
-                        )
-                )
-        ).requires(source -> source.getEntity() instanceof Player player && player.getLevel().isClientSide());
-        event.getDispatcher().register(setBPISizeCommand);
-
-        LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize")
+        LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.argument("MaxSize", DoubleArgumentType.doubleArg())
                         .executes(arguments -> {
                                     ServerLevel world = arguments.getSource().getLevel();
@@ -59,16 +47,16 @@ public class ChangedAdditionsCommands {
                                 }
                         )
                 )
-        ).requires(source -> !source.getLevel().isClientSide && source.hasPermission(2));
+        );
         event.getDispatcher().register(setMaxBPISize);
 
-        LiteralArgumentBuilder<CommandSourceStack> getMaxBPISize = literalBuilder.then(Commands.literal("getMaxSizeTolerance")
+        LiteralArgumentBuilder<CommandSourceStack> getMaxBPISize = literalBuilder.then(Commands.literal("getMaxSizeTolerance").requires(source -> !source.getLevel().isClientSide)
                 .executes(SizeManipulator::SendMaxSizeTolerance
                 )
-        ).requires(source -> !source.getLevel().isClientSide);
+        );
         event.getDispatcher().register(getMaxBPISize);
 
-        LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.then(Commands.literal("BlocksHandle")
+        LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("BlocksHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.literal("setBlocksInfectionType")
                         .then(Commands.argument("minPos", BlockPosArgument.blockPos())
                                 .then(Commands.argument("maxPos", BlockPosArgument.blockPos())
@@ -132,10 +120,45 @@ public class ChangedAdditionsCommands {
                                 )
                         )
                 )
-        ).requires(source -> !source.getLevel().isClientSide && source.hasPermission(2));
+        );
 
 
         event.getDispatcher().register(BlocksHandle);
+
+        LiteralArgumentBuilder<CommandSourceStack> tameEntity = literalBuilder.then(Commands.literal("tameChangedEntity").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
+                .then(Commands.argument("tameTarget", EntityArgument.entities())
+                        .then(Commands.argument("tamer", EntityArgument.player())
+                                .then(Commands.literal("overwrite_owner")
+                                        .executes((ctx) -> {
+                                            TameHandle.run(EntityArgument.getEntities(ctx, "tameTarget"), EntityArgument.getPlayer(ctx, "tamer"), true);
+                                            return 1; // overwrite the owner
+                                        }))
+                                .executes((ctx) -> {
+                                    TameHandle.run(EntityArgument.getEntities(ctx, "tameTarget"), EntityArgument.getPlayer(ctx, "tamer"), false);
+                                    return 1; // no overwrite
+                                })
+                        )
+                )
+        );
+        event.getDispatcher().register(tameEntity);
+    }
+
+    @SubscribeEvent
+    public static void registerClientCommand(RegisterClientCommandsEvent event) {
+        final LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
+        event.getDispatcher().register(literalBuilder);
+        LiteralArgumentBuilder<CommandSourceStack> setBPISizeCommand = literalBuilder.then(Commands.literal("setBPISize")
+                .then(Commands.argument("size", FloatArgumentType.floatArg())
+                        .executes(arguments -> {
+                                    Entity entity = arguments.getSource().getEntity();
+                                    float amount = FloatArgumentType.getFloat(arguments, "size");
+
+                                    return SizeManipulator.SizeChange(arguments, entity, amount);
+                                }
+                        )
+                )
+        );
+        event.getDispatcher().register(setBPISizeCommand);
     }
 
     public static class BlockHandle {
@@ -150,7 +173,27 @@ public class ChangedAdditionsCommands {
         }
     }
 
-    private static class SizeManipulator {
+    public static class TameHandle {
+        public static void run(Collection<?> tameTargets, Player tamer, boolean overwriteOwner) {
+            tameTargets.forEach((tameTarget) -> {
+                if (tameTarget instanceof AbstractTamableLatexEntity tamableLatexEntity) {
+                    if (tamableLatexEntity.getOwner() != null && overwriteOwner) {
+                        tamableLatexEntity.tame(tamer);
+                    } else if (tamableLatexEntity.getOwner() == null) {
+                        tamableLatexEntity.tame(tamer);
+                    }
+                } else if (tameTarget instanceof AbstractDarkLatexEntity tamableDarkLatexEntity) {
+                    if (tamableDarkLatexEntity.getOwner() != null && overwriteOwner) {
+                        tamableDarkLatexEntity.setOwnerUUID(tamer.getUUID());
+                    } else if (tamableDarkLatexEntity.getOwner() == null) {
+                        tamableDarkLatexEntity.setOwnerUUID(tamer.getUUID());
+                    }
+                }
+            });
+        }
+    }
+
+    public static class SizeManipulator {
 
         public static float getSize(Player player, float size, boolean OverrideSize) {
             float SIZE_TOLERANCE = BasicPlayerInfo.getSizeTolerance();
@@ -179,7 +222,7 @@ public class ChangedAdditionsCommands {
                 arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.success", amount), false);
                 return 1;
             } else {
-                ChangedAdditionsMod.LOGGER.atError().log("Entity is not a player, cannot change size."); // Command Classic Error
+                ChangedAdditionsMod.LOGGER.atError().log("cannot change size."); // Command Classic Error
                 arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.fail"), false);
                 return 0;
             }

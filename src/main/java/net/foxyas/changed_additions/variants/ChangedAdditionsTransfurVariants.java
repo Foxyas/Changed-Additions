@@ -6,6 +6,7 @@ import net.foxyas.changed_additions.entities.LatexSnowFoxFemale;
 import net.foxyas.changed_additions.entities.LatexSnowFoxMale;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
+import net.foxyas.changed_additions.init.ChangedAdditionsTags;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.PatronOC;
 import net.ltxprogrammer.changed.entity.variant.GenderedPair;
@@ -93,16 +94,29 @@ public class ChangedAdditionsTransfurVariants {
             }
             return null;
         });
+        builder.addAbility(entityType -> {
+            if (entityType.is(ChangedAdditionsTags.EntityTypes.DRAGONS_ENTITIES)) {
+                return ChangedAdditionsAbilities.WING_FLAP_ABILITY.get();
+            }
+            return null;
+        });
+
         return REGISTRY.register(name, builder::build);
     }
 
     private static <T extends ChangedEntity> RegistryObject<TransfurVariant<T>> register(String name, Supplier<TransfurVariant.Builder<T>> builder) {
         return REGISTRY.register(name, () -> builder.get().addAbility(entityType -> {
-            if (entityType.is(ChangedTags.EntityTypes.LATEX)
-                    && !entityType.is(ChangedTags.EntityTypes.PARTIAL_LATEX)) {
-                return ChangedAdditionsAbilities.SOFTEN_ABILITY.get();
-            }
-            return null;
-        }).build());
+                    if (entityType.is(ChangedTags.EntityTypes.LATEX)
+                            && !entityType.is(ChangedTags.EntityTypes.PARTIAL_LATEX)) {
+                        return ChangedAdditionsAbilities.SOFTEN_ABILITY.get();
+                    }
+                    return null;
+                }).addAbility(entityType -> {
+                    if (entityType.is(ChangedAdditionsTags.EntityTypes.DRAGONS_ENTITIES)) {
+                        return ChangedAdditionsAbilities.SOFTEN_ABILITY.get();
+                    }
+                    return null;
+                })
+                .build());
     }
 }

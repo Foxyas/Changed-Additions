@@ -3,7 +3,6 @@ package net.foxyas.changed_additions.item.armor;
 import com.google.common.collect.Multimap;
 import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
 import net.ltxprogrammer.changed.init.ChangedItems;
-import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;

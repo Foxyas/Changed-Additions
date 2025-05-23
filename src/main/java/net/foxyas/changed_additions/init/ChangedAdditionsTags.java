@@ -7,8 +7,20 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.Block;
 
 public class ChangedAdditionsTags {
+
+    public static class Blocks {
+
+        public static final TagKey<Block> PASSABLE_BLOCKS = create("passable_blocks");
+        public static final TagKey<Block> LAB_DOORS = create("lab_doors");
+        public static final TagKey<Block> LAB_BIG_DOORS = create("lab_big_doors");
+
+        private static TagKey<Block> create(String name) {
+            return TagKey.create(Registry.BLOCK_REGISTRY, ChangedAdditionsMod.modResource(name));
+        }
+    }
 
     public static class EntityTypes {
 
@@ -16,6 +28,10 @@ public class ChangedAdditionsTags {
         public static final TagKey<EntityType<?>> NO_CLAWS = create("no_claws");
         public static final TagKey<EntityType<?>> FELINES_LIKE = create("feline_like");
         public static final TagKey<EntityType<?>> PATABLE_ENTITIES = create("patable_entities");
+        public static final TagKey<EntityType<?>> DRAGONS_ENTITIES = create("dragons_entities");
+
+        // Make this make the tags didn't need to load the entry successfully to fully load
+        // { "id": "resource id ", "required": <boolean value> }
 
         public EntityTypes() {
         }
