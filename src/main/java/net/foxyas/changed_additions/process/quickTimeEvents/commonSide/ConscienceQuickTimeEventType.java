@@ -45,6 +45,17 @@ public enum ConscienceQuickTimeEventType {
         return sequence;
     }
 
+    public String getQteType() {
+        String type = this.name().split("_", 2)[0];
+        return type.toLowerCase();
+    }
+
+    private String capitalize(String str) {
+        if (str.isEmpty()) return str;
+        return Character.toUpperCase(str.charAt(0)) + str.substring(1);
+    }
+
+
     public Pair<Integer, Integer> getImageDimensions() {
         return ImageDimensions;
     }
@@ -54,7 +65,7 @@ public enum ConscienceQuickTimeEventType {
     }
 
     public ResourceLocation getKeyTexture() {
-        return ChangedAdditionsMod.modResource("textures/overlays/qte/" + name().toLowerCase() + ".png");
+        return ChangedAdditionsMod.modResource("textures/overlays/qte/" + getQteType().toLowerCase() + ".png");
     }
 
 }
