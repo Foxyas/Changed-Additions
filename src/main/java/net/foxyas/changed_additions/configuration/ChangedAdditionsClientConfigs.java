@@ -12,6 +12,7 @@ public class ChangedAdditionsClientConfigs {
     public static final ForgeConfigSpec.ConfigValue<Integer> PAT_OVERLAY_Y;
     public static final ForgeConfigSpec.ConfigValue<Boolean> PAW_STYLE_PAT_OVERLAY;
     public static final ForgeConfigSpec.ConfigValue<Boolean> WING_FLAP_INFO;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> USE_BLOW1_SOUND_INSTEAD_OF_CLICK;
 
 
     static {
@@ -27,6 +28,9 @@ public class ChangedAdditionsClientConfigs {
         PAT_OVERLAY_X = BUILDER.comment("Set the X pos of the pat overlay.").define("Pat Overlay X pos",  25);
         PAT_OVERLAY_Y = BUILDER.comment("Set the Y pos of the pat overlay.").define("Pat Overlay Y pos",  72);
         PAW_STYLE_PAT_OVERLAY = BUILDER.comment("Make the pat overlay use a paw icon instead of text").define("Paw Style Pat Overlay", true);
+        BUILDER.pop();
+        BUILDER.push("QuickTimeEvents");
+        USE_BLOW1_SOUND_INSTEAD_OF_CLICK = BUILDER.comment("Use the Blow1 sound instead of the Default minecraft click one").define("Use blow1 sound instead of click", false);
         BUILDER.pop();
 
 

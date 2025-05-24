@@ -2,8 +2,8 @@ package net.foxyas.changed_additions.mixins;
 
 import net.foxyas.changed_additions.abilities.ClawsAbility;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
-import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
-import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEvent;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
@@ -68,16 +68,5 @@ public class PlayerMixin {
             }
         }));
 
-    }
-
-    @Unique
-    private static final String QTE_TAG = "QTE";
-    @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
-    private void onSave(CompoundTag tag, CallbackInfo ci) {
-        Player player = (Player) (Object) this;
-        ConscienceQuickTimeEvent qte = ConscienceQTEManager.getActiveQTE(player);
-        if (qte != null && !qte.isFinished()) {
-            tag.put(QTE_TAG, qte.saveToTag());
-        }
     }
 }

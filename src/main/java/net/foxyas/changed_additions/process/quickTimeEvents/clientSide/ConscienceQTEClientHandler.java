@@ -4,9 +4,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKeyTracker;
-import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQTEManager;
-import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEvent;
-import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.ConscienceQuickTimeEventType;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEventSequenceType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +25,7 @@ public class ConscienceQTEClientHandler {
         Player player = mc.player;
         if (player == null) return;
 
-        ConscienceQuickTimeEvent qte = ConscienceQTEManager.getAutoActiveQTE(player);
+        QuickTimeEvent qte = QTEManager.getAutoActiveQTE(player);
         if (qte == null || qte.isFinished()) return;
 
         PoseStack stack = event.getMatrixStack();
@@ -37,7 +37,7 @@ public class ConscienceQTEClientHandler {
         for (InputKey key : keys) {
             { // Verifica se deve usar a imagem de "pressionada"
                 boolean isPressed = InputKeyTracker.isHeld(key);
-                ConscienceQuickTimeEventType qteType = ConscienceQuickTimeEventType.getFromSequence(qte.getSequence());
+                QuickTimeEventSequenceType qteType = QuickTimeEventSequenceType.getFromSequence(qte.getSequence());
                 //String type = qteType != null ? qteType.name() : "";
 
                 assert qteType != null;
@@ -64,6 +64,11 @@ public class ConscienceQTEClientHandler {
                     RenderSystem.setShaderColor(1f, 0f, 0f, 1f); // Vermelho
                 } else {
                     RenderSystem.setShaderColor(1f, 1f, 1f, 1f); // Branco padrão
+                }
+
+                // Se for a esperada, colore de vermelho (1, 0, 0, 1)
+                if (isNextExpectedKey && key != InputKey.SPACE && isPressed) {
+                    RenderSystem.setShaderColor(0f, 1f, 0f, 1f); // Verde
                 }
 
                 if (isPressed) {

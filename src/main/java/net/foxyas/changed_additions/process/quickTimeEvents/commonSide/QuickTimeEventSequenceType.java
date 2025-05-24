@@ -9,10 +9,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public enum ConscienceQuickTimeEventType {
+public enum QuickTimeEventSequenceType {
     SPACE(List.of(InputKey.SPACE), new Pair<>(64, 64), new Pair<>(64, 32)),
     WASD(List.of(InputKey.W, InputKey.A, InputKey.S, InputKey.D), new Pair<>(64, 32), new Pair<>(16, 16)),
-    WDSA(List.of(InputKey.W, InputKey.A, InputKey.S, InputKey.D), new Pair<>(64, 32), new Pair<>(16, 16)),
+    WDSA(List.of(InputKey.W, InputKey.D, InputKey.S, InputKey.A), new Pair<>(64, 32), new Pair<>(16, 16)),
     ARROWS_RIGHT(List.of(InputKey.UP, InputKey.RIGHT, InputKey.DOWN, InputKey.LEFT), new Pair<>(64, 32), new Pair<>(16, 16)),
     ARROWS_LEFT(List.of(InputKey.UP, InputKey.LEFT, InputKey.DOWN, InputKey.RIGHT), new Pair<>(64, 32), new Pair<>(16, 16));
 
@@ -20,15 +20,15 @@ public enum ConscienceQuickTimeEventType {
     private final Pair<Integer, Integer> ImageDimensions;
     private final Pair<Integer, Integer> KeyTypeSize;
 
-    ConscienceQuickTimeEventType(List<InputKey> sequence, Pair<Integer, Integer> ImageMaxSheetSize, Pair<Integer, Integer> KeySize) {
+    QuickTimeEventSequenceType(List<InputKey> sequence, Pair<Integer, Integer> ImageMaxSheetSize, Pair<Integer, Integer> KeySize) {
         this.sequence = sequence;
         this.ImageDimensions = ImageMaxSheetSize;
         this.KeyTypeSize = KeySize;
     }
 
     @Nullable
-    public static ConscienceQuickTimeEventType getFromSequence(List<InputKey> sequence) {
-        for (ConscienceQuickTimeEventType type : values()) {
+    public static QuickTimeEventSequenceType getFromSequence(List<InputKey> sequence) {
+        for (QuickTimeEventSequenceType type : values()) {
             if (type.getSequence().equals(sequence)) {
                 return type;
             }
@@ -36,8 +36,8 @@ public enum ConscienceQuickTimeEventType {
         return null;
     }
 
-    public static ConscienceQuickTimeEventType getRandom(Random random) {
-        ConscienceQuickTimeEventType[] values = values();
+    public static QuickTimeEventSequenceType getRandom(Random random) {
+        QuickTimeEventSequenceType[] values = values();
         return values[random.nextInt(values.length)];
     }
 

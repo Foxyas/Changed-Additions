@@ -65,8 +65,12 @@
 
   "changed_additions.info.is_patable": "Press %1$s to pat %2$s",
 
-  "changed_additions.fight_conscience.success": "You §2Maintained!!! §rYour Conscience, Well done!",
-  "changed_additions.fight_conscience.fail": "You §4Lost!!! §rYour Conscience, Good Luck next time!",
+  "changed_additions.fight_conscience.success": "You §2Maintained§r your conscience! Well done!",
+  "changed_additions.struggle.success": "You §2Freed§r yourself! Well done!",
+  "changed_additions.generic.success": "You §2Won§r! Well done!",
+  "changed_additions.fight_conscience.fail": "You §4Lost§r your conscience. Good luck next time!",
+  "changed_additions.struggle.fail": "You §4Lost§r — your struggle wasn't enough. Good luck next time!",
+  "changed_additions.generic.fail": "You §4Lost§r. Good luck next time!",
 
   "gamerule.changed_additions:fight_to_keep_consciousness": "Fight to Keep Consciousness QTE",
   "gamerule.changed_additions:fight_to_keep_consciousness.description": "Allow the fight to keep consciousness quick time event to happen",

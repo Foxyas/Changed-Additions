@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class ConscienceQTEDEBUG {
+public class QTEDEBUG {
 
     @SubscribeEvent
     public static void DEBUG(ServerChatEvent event) {
@@ -27,21 +27,35 @@ public class ConscienceQTEDEBUG {
 
             String typeStr = parts[1];
 
-            ConscienceQuickTimeEventType type = switch (typeStr) {
-                case "arrows_right" -> ConscienceQuickTimeEventType.ARROWS_RIGHT;
-                case "arrows_left" -> ConscienceQuickTimeEventType.ARROWS_LEFT;
-                case "wasd" -> ConscienceQuickTimeEventType.WASD;
-                case "wdsa" -> ConscienceQuickTimeEventType.WDSA;
-                case "space" -> ConscienceQuickTimeEventType.SPACE;
+            QuickTimeEventSequenceType type = switch (typeStr) {
+                case "arrows_right" -> QuickTimeEventSequenceType.ARROWS_RIGHT;
+                case "arrows_left" -> QuickTimeEventSequenceType.ARROWS_LEFT;
+                case "wasd" -> QuickTimeEventSequenceType.WASD;
+                case "wdsa" -> QuickTimeEventSequenceType.WDSA;
+                case "space" -> QuickTimeEventSequenceType.SPACE;
                 default -> null;
             };
 
             if (type == null) {
-                player.displayClientMessage(new TextComponent("Tipo inválido! Use arrows, wasd ou space.").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(new TextComponent("Tipo inválido! Use arrows_[left or right], wasd, wdsa ou space.").withStyle(ChatFormatting.RED), false);
                 return;
             }
 
-            ConscienceQTEManager.addQTE(player, new ConscienceQuickTimeEvent(player, type, FoxyasUtils.StringToInt(parts[2]))); // 100 ticks = 5 segundos
+            String typeStr2 = parts[2];
+
+            QuickTimeEventType type2 = switch (typeStr2) {
+                case "ftkc" -> QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE;
+                case "s" -> QuickTimeEventType.STRUGGLE;
+                case "g" -> QuickTimeEventType.GENERIC;
+                default -> null;
+            };
+
+            if (type2 == null) {
+                player.displayClientMessage(new TextComponent("Tipo inválido! Use ftkc, s ou g.").withStyle(ChatFormatting.RED), false);
+                return;
+            }
+
+            QTEManager.addQTE(player, new QuickTimeEvent(player, type, type2, FoxyasUtils.StringToInt(parts[3]))); // 100 ticks = 5 segundos
 
             player.displayClientMessage(new TextComponent("Quick Time Event iniciado: " + type.name()).withStyle(ChatFormatting.GREEN), false);
         }
