@@ -32,7 +32,12 @@
   "changed_additions.commands.setBpiSize.success": "Size successfully changed to %s",
   "changed_additions.commands.setMaxBPISize.success": "maximum size tolerance has been changed to %s",
   "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s is a value high than 100 and due that may cause lag and crash issues",
-  "changed_additions.commands.setMaxBPISize.success_but_to_low": "%s is a value less than 0 and due that may cause issues",
+  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Assigned a Quick Time Event (%s / %s) to '%s' for %s ticks.",
+  "changed_additions.commands.setQuickTimeEventForPlayer.fail": "Invalid Quick Time Event parameters.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.have": "Player '%s' currently has an active Quick Time Event.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.details": "Type: %s, Sequence: %s, Ticks remaining: %s , Progress: %s",
+  "changed_additions.commands.getQuickTimeEventForPlayer.none": "Player '%s' does not have any active Quick Time Event.",
+
 
   "changed_additions.ability.carry": "Carry Ability",
   "changed_additions.ability.claws": "Claws Ability",

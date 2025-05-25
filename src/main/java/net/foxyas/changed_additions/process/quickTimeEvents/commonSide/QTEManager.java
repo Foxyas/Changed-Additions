@@ -12,6 +12,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class QTEManager {
 
@@ -62,16 +64,19 @@ public class QTEManager {
     }
 
     public static void tickAll() {
-        if (activeQTEs.isEmpty()) {
-            return;
-        }
-        for (QuickTimeEvent qte : activeQTEs.values()) {
+        if (activeQTEs.isEmpty()) return;
+
+        Iterator<Map.Entry<Player, QuickTimeEvent>> iterator = activeQTEs.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Player, QuickTimeEvent> entry = iterator.next();
+            QuickTimeEvent qte = entry.getValue();
             qte.tick();
             if (qte.isFinished()) {
-                removeQTE(qte.getPlayer(), qte); // remove qte finalizado da lista
+                iterator.remove();
             }
         }
     }
+
 
     @OnlyIn(Dist.CLIENT)
     public static class Client {

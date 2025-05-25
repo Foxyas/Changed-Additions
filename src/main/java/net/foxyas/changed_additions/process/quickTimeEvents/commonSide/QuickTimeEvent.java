@@ -122,7 +122,7 @@ public class QuickTimeEvent {
         isHolding = (action == GLFW.GLFW_REPEAT);
         lastKeyPressed = key;
 
-        if (key == getCurrentExpectedKey()) {
+        if (key == getCurrentExpectedKey() && !isHolding) {
             progress = Math.min(2.0f, progress + 0.1f);
             currentIndex = (currentIndex + 1) % sequence.size();
         } else {

@@ -2,10 +2,16 @@ package net.foxyas.changed_additions.commands;
 
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.AbstractTamableLatexEntity;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QTEManager;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEvent;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEventSequenceType;
+import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEventType;
 import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.block.AbstractLatexBlock;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
@@ -14,6 +20,7 @@ import net.ltxprogrammer.changed.entity.beast.AbstractDarkLatexEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
@@ -29,7 +36,9 @@ import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.server.command.EnumArgument;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 @Mod.EventBusSubscriber
@@ -141,6 +150,102 @@ public class ChangedAdditionsCommands {
                 )
         );
         event.getDispatcher().register(tameEntity);
+
+        LiteralArgumentBuilder<CommandSourceStack> QuickTimeEventsHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("QuickTimeEventsHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
+                .then(Commands.literal("getQuickTimeEventForPlayer")
+                        .then(Commands.argument("targetPlayer", EntityArgument.player())
+                                .executes(ctx -> {
+                                    Player player = EntityArgument.getPlayer(ctx, "targetPlayer");
+                                    QuickTimeEvent quickTimeEvent = QTEManager.getActiveQTE(player);
+                                    if (quickTimeEvent != null) {
+                                        ctx.getSource().sendSuccess(
+                                                new TranslatableComponent(
+                                                        "changed_additions.commands.getQuickTimeEventForPlayer.have",
+                                                        player.getName().getString()
+                                                ),
+                                                false
+                                        );
+                                        ctx.getSource().sendSuccess(
+                                                new TranslatableComponent(
+                                                        "changed_additions.commands.getQuickTimeEventForPlayer.details",
+                                                        quickTimeEvent.getType().name(),
+                                                        quickTimeEvent.getSequenceType().name(),
+                                                        quickTimeEvent.getTicksRemaining(),
+                                                        quickTimeEvent.getProgress() * 100 + "%"
+                                                ),
+                                                false
+                                        );
+                                    } else {
+                                        ctx.getSource().sendSuccess(
+                                                new TranslatableComponent(
+                                                        "changed_additions.commands.getQuickTimeEventForPlayer.none",
+                                                        player.getName().getString()
+                                                ),
+                                                false
+                                        );
+                                    }
+
+                                    return 1;
+                                })
+                        )
+                )
+
+
+                .then(Commands.literal("setQuickTimeEventForPlayer")
+                        .then(Commands.argument("targetPlayer", EntityArgument.player())
+                                .then(Commands.argument("SequenceType", StringArgumentType.word())
+                                        .suggests((ctx, builder) -> {
+                                            return SharedSuggestionProvider.suggest(
+                                                    Arrays.stream(QuickTimeEventSequenceType.values()).map(Enum::name),
+                                                    builder
+                                            );
+                                        })
+                                        .then(Commands.argument("Type", StringArgumentType.word())
+                                                .suggests((ctx, builder) -> {
+                                                    return SharedSuggestionProvider.suggest(
+                                                            Arrays.stream(QuickTimeEventType.values()).map(Enum::name),
+                                                            builder
+                                                    );
+                                                })
+                                                .then(Commands.argument("Ticks", IntegerArgumentType.integer(0))
+                                                        .executes(ctx -> {
+                                                            ServerLevel world = ctx.getSource().getLevel();
+                                                            Player player = EntityArgument.getPlayer(ctx, "targetPlayer");
+
+                                                            // Converte os nomes para enums (com validação)
+                                                            String sequenceStr = StringArgumentType.getString(ctx, "SequenceType");
+                                                            String typeStr = StringArgumentType.getString(ctx, "Type");
+
+                                                            QuickTimeEventSequenceType sequenceType;
+                                                            QuickTimeEventType type;
+                                                            try {
+                                                                sequenceType = QuickTimeEventSequenceType.valueOf(sequenceStr.toUpperCase());
+                                                                type = QuickTimeEventType.valueOf(typeStr.toUpperCase());
+                                                            } catch (IllegalArgumentException ex) {
+                                                                ctx.getSource().sendFailure(new TranslatableComponent("changed_additions.commands.setQuickTimeEventForPlayer.fail"));
+                                                                return 0;
+                                                            }
+
+                                                            int ticks = IntegerArgumentType.getInteger(ctx, "Ticks");
+                                                            QuickTimeEvent quickTimeEvent = new QuickTimeEvent(player, sequenceType, type, ticks);
+                                                            QTEManager.addQTE(player, quickTimeEvent);
+                                                            ctx.getSource().sendSuccess(
+                                                                    new TranslatableComponent(
+                                                                            "changed_additions.commands.setQuickTimeEventForPlayer.success",
+                                                                            type.name(), sequenceType.name(), player.getName().getString(), ticks
+                                                                    ),
+                                                                    false
+                                                            );
+                                                            return 1;
+                                                        })
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+        event.getDispatcher().register(QuickTimeEventsHandle);
+
     }
 
     @SubscribeEvent
