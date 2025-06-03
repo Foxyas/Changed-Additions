@@ -10,6 +10,7 @@
     "ServerPlayerMixin",
     "blocks.BlockMixin",
     "blocks.CrossCollisionBlockMixin",
+    "blocks.DroppedSyringeMixin",
     "entities.ChangedEntityMixin",
     "goals.AvoidEntityGoalMixin",
     "goals.PhantomAIMixin",
@@ -23,6 +24,7 @@
   "client": [
     "GameRendererMixin",
     "PostChainMixin",
-    "render.AdvancedHumanoidRendererMixin"
+    "render.AdvancedHumanoidRendererMixin",
+    "render.MixinAdvancedHumanoidRenderer"
   ]
 }

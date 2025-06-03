@@ -159,7 +159,8 @@ public class CreatureDietsHandleProcedure {
     }
 
     private static boolean isFoxDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity.getType().getRegistryName().toString().contains("fox") || variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
+        return entity.getType().getRegistryName().toString().contains("fox") || variant.is(TransfurVariantTags.FOX_LIKE)
+                || variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
                         new ResourceLocation("changed_additions:fox_diet")));
     }
 

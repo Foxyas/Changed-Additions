@@ -22,6 +22,11 @@ public class ChangedAdditionsItems {
     public static final RegistryObject<Item> AMMONIUM_CHLORIDE = REGISTRY.register("ammonium_chloride", AmmoniumchlorideItem::new);
     public static final RegistryObject<Item> LAETHIN_SYRINGE = REGISTRY.register("laethin_syringe", LaethinSyringeItem::new);
     public static final RegistryObject<Item> NEOFUSER = block(ChangedAdditionsBlocks.NEOFUSER, ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB);
+
+    public static final RegistryObject<Item> TEST = REGISTRY.register("test", TESTITEM::new);
+
+    public static final RegistryObject<Item> GOLDEN_ORANGE = REGISTRY.register("golden_orange", GoldenOrange::new);
+
     public static final RegistryObject<Item> DYEABLE_SHORTS = REGISTRY.register("dyeable_shorts", DyeableShorts::new);
     public static final RegistryObject<Item> LASER_POINTER = REGISTRY.register("laser_pointer", LaserPointer::new);
 
