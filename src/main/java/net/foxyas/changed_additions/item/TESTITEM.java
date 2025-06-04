@@ -3,30 +3,40 @@ package net.foxyas.changed_additions.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
+import net.foxyas.changed_additions.client.models.accessories.DefaultClothesColors;
 import net.foxyas.changed_additions.client.models.accessories.IAccessoryItem;
+import net.foxyas.changed_additions.client.models.accessories.models.AccessoriesMaleWolf;
+import net.foxyas.changed_additions.init.ChangedAdditionsItems;
 import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
+import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.Gender;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.Model;
+import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
+import net.ltxprogrammer.changed.process.ProcessTransfur;
+import net.ltxprogrammer.changed.util.Color3;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.function.Consumer;
 
-public class TESTITEM extends ArmorItem implements IAccessoryItem {
+public class TESTITEM extends ArmorItem implements IAccessoryItem, DyeableLeatherItem {
     public TESTITEM() {
         super(new ArmorMaterial() {
             @Override
@@ -79,21 +89,59 @@ public class TESTITEM extends ArmorItem implements IAccessoryItem {
 
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-        return true;
+        if (entity instanceof Player player) {
+            TransfurVariantInstance<?> variant = ProcessTransfur.getPlayerTransfurVariant(player);
+            if (variant != null) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
-    public ResourceLocation getAccessoryTexture(ChangedEntity entity, EquipmentSlot slot, Gender gender) {
-        if (gender == Gender.MALE) {
-            if (slot == EquipmentSlot.HEAD) {
-                return ChangedAdditionsMod.modResource("textures/entities/head_test.png");
-            } else if (slot == EquipmentSlot.CHEST) {
-                return ChangedAdditionsMod.modResource("textures/entities/torso_arms.png");
+    public ResourceLocation getAccessoryTexture(ChangedEntity entity, EquipmentSlot slot, Gender gender, EntityRendererProvider.Context context) {
+        if (getAccessoryModel(entity,slot,gender,context) instanceof AccessoriesMaleWolf<?>) {
+            if (gender == Gender.MALE) {
+                if (slot == EquipmentSlot.HEAD) {
+                    return ChangedAdditionsMod.modResource("textures/entities/head_test.png");
+                } else if (slot == EquipmentSlot.CHEST) {
+                    return ChangedAdditionsMod.modResource("textures/entities/torso_arms.png");
+                }
             }
         }
 
 
         return null;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientInitializer {
+        @SubscribeEvent
+        public static void onItemColorsInit(ColorHandlerEvent.Item event) {
+            event.getItemColors().register(
+                    (stack, layer) -> ((DyeableLeatherItem) stack.getItem()).getColor(stack),
+                    ChangedAdditionsItems.TEST.get());
+        }
+    }
+
+    @Override
+    public @NotNull ItemStack getDefaultInstance() {
+        ItemStack stack = super.getDefaultInstance();
+        this.setColor(stack, Color3.WHITE.toInt());
+        return stack;
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(tab)) {
+            for (DefaultClothesColors color : DefaultClothesColors.values()) {
+                ItemStack stack = new ItemStack(this);
+                this.setColor(stack, color.getColorToInt());
+                items.add(stack);
+            }
+        }
     }
 
     @Override
@@ -102,7 +150,7 @@ public class TESTITEM extends ArmorItem implements IAccessoryItem {
     }
 
     @Override
-    public Color getColor(ChangedEntity entity, EquipmentSlot slot) {
+    public Color getRenderColor(ChangedEntity entity, EquipmentSlot slot) {
         if (entity.isShiftKeyDown()) {
             return new Color(255, 255, 255);
         }
@@ -114,7 +162,12 @@ public class TESTITEM extends ArmorItem implements IAccessoryItem {
         }
 
 
-
         return new Color(255, 0, 0);
+    }
+
+    @Override
+    @Nullable
+    public <E extends ChangedEntity> AdvancedHumanoidModel<E> getAccessoryModel(E entity, EquipmentSlot slot, Gender gender, EntityRendererProvider.Context context) {
+        return IAccessoryItem.super.getAccessoryModel(entity, slot, gender, context);
     }
 }

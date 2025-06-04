@@ -26,7 +26,7 @@ import java.awt.*;
 
 public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedItemProperties {
 
-	public static enum DefaultColors {
+	public enum DefaultColors {
         RED(new Color(255, 0, 0)),
         GREEN(new Color(0, 255, 0)),
         BLUE(new Color(0, 0, 255)),
@@ -56,7 +56,6 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
             return color.getRGB();
         }
     }
-
 	
     public DyeableShorts() {
         super(MATERIAL, EquipmentSlot.LEGS, (new Properties()).tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
@@ -77,11 +76,9 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
         return stack;
     }
 
-
     public SoundEvent getBreakSound(ItemStack itemStack) {
         return ChangedSounds.SLASH10;
     }
-
 
     @Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
