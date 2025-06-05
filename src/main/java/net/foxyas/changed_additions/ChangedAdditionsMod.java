@@ -55,6 +55,10 @@ public class ChangedAdditionsMod {
         return new ResourceLocation(MODID, path);
     }
 
+    public static String modResourceString(String path) {
+        return modResource(path).toString();
+    }
+
     public void clientLoad(FMLClientSetupEvent event) {
         // Dynamic Color
         LaserItemDynamicRender.DynamicLaserColor(LASER_POINTER);

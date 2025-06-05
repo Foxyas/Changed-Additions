@@ -1,6 +1,6 @@
 package net.foxyas.changed_additions.init;
 
-import net.foxyas.changed_additions.client.models.FengQIFoxModel;
+import net.foxyas.changed_additions.client.models.FengQIWolfModel;
 import net.foxyas.changed_additions.client.models.LatexSnowFoxFemaleModel;
 import net.foxyas.changed_additions.client.models.LatexSnowFoxMaleModel;
 import net.foxyas.changed_additions.client.models.accessories.models.*;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ChangedAdditionsModels {
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(FengQIFoxModel.LAYER_LOCATION, FengQIFoxModel::createBodyLayer);
+        event.registerLayerDefinition(FengQIWolfModel.LAYER_LOCATION, FengQIWolfModel::createBodyLayer);
         event.registerLayerDefinition(LatexSnowFoxMaleModel.LAYER_LOCATION, LatexSnowFoxMaleModel::createBodyLayer);
         event.registerLayerDefinition(LatexSnowFoxFemaleModel.LAYER_LOCATION, LatexSnowFoxFemaleModel::createBodyLayer);
 

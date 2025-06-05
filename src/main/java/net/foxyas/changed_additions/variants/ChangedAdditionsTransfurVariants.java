@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.variants;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.entities.FengQIFox;
+import net.foxyas.changed_additions.entities.FengQIWolf;
 import net.foxyas.changed_additions.entities.LatexSnowFoxFemale;
 import net.foxyas.changed_additions.entities.LatexSnowFoxMale;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
@@ -34,7 +34,7 @@ public class ChangedAdditionsTransfurVariants {
     public static final DeferredRegister<TransfurVariant<?>> REGISTRY = ChangedRegistry.TRANSFUR_VARIANT.createDeferred(ChangedAdditionsMod.MODID);
 
     public static List<TransfurVariant<?>> getRemovedVariantsList() {
-        return List.of(FENG_QI_FOX.get());
+        return List.of(FENG_QI_WOLF.get());
     }
 
 
@@ -43,7 +43,7 @@ public class ChangedAdditionsTransfurVariants {
     }
 
     protected static List<TransfurVariant<?>> getOcVariantList() {
-        return List.of(FENG_QI_FOX.get());
+        return List.of(FENG_QI_WOLF.get());
     }
 
     public static boolean isVariantOC(TransfurVariant<?> transfurVariant, @Nullable Level level) {
@@ -78,7 +78,7 @@ public class ChangedAdditionsTransfurVariants {
             () -> TransfurVariant.Builder.of(/*WHITE_LATEX_WOLF_FEMALE.get(),*/ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE)
                     .nightVision().scares(Rabbit.class));
 
-    public static final RegistryObject<TransfurVariant<FengQIFox>> FENG_QI_FOX = register("form_feng_qi_fox", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_FOX)
+    public static final RegistryObject<TransfurVariant<FengQIWolf>> FENG_QI_WOLF = register("form_feng_qi_wolf", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_WOLF)
             .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).scares(List.of(Rabbit.class)).nightVision());
 
     public static class Gendered {

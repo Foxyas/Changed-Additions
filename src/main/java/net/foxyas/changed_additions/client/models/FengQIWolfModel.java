@@ -3,7 +3,7 @@ package net.foxyas.changed_additions.client.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.entities.FengQIFox;
+import net.foxyas.changed_additions.entities.FengQIWolf;
 import net.ltxprogrammer.changed.client.renderer.animate.AnimatorPresets;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class FengQIFoxModel extends AdvancedHumanoidModel<FengQIFox> implements AdvancedHumanoidModelInterface<FengQIFox, FengQIFoxModel> {
+public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> implements AdvancedHumanoidModelInterface<FengQIWolf, FengQIWolfModel> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ChangedAdditionsMod.modResource("foxta_fox"), "main");
     private final ModelPart RightLeg;
     private final ModelPart LeftLeg;
@@ -26,9 +26,9 @@ public class FengQIFoxModel extends AdvancedHumanoidModel<FengQIFox> implements 
     private final ModelPart Head;
     private final ModelPart Torso;
     private final ModelPart Tail;
-    private final HumanoidAnimator<FengQIFox, FengQIFoxModel> animator;
+    private final HumanoidAnimator<FengQIWolf, FengQIWolfModel> animator;
 
-    public FengQIFoxModel(ModelPart root) {
+    public FengQIWolfModel(ModelPart root) {
         super(root);
         this.RightLeg = root.getChild("RightLeg");
         this.LeftLeg = root.getChild("LeftLeg");
@@ -182,7 +182,7 @@ public class FengQIFoxModel extends AdvancedHumanoidModel<FengQIFox> implements 
 		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
-    public void prepareMobModel(FengQIFox p_102861_, float p_102862_, float p_102863_, float p_102864_) {
+    public void prepareMobModel(FengQIWolf p_102861_, float p_102862_, float p_102863_, float p_102864_) {
         this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
@@ -190,7 +190,7 @@ public class FengQIFoxModel extends AdvancedHumanoidModel<FengQIFox> implements 
         this.animator.setupHand();
     }
 
-    public void setupAnim(@NotNull FengQIFox entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@NotNull FengQIWolf entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     }
@@ -220,7 +220,7 @@ public class FengQIFoxModel extends AdvancedHumanoidModel<FengQIFox> implements 
         this.LeftArm.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
-    public HumanoidAnimator<FengQIFox, FengQIFoxModel> getAnimator() {
+    public HumanoidAnimator<FengQIWolf, FengQIWolfModel> getAnimator() {
         return this.animator;
     }
 }
