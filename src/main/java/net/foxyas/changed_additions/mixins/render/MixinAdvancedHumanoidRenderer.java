@@ -29,16 +29,16 @@ import java.util.function.BiFunction;
 @Mixin(value = AdvancedHumanoidRenderer.class, remap = false)
 public abstract class MixinAdvancedHumanoidRenderer<T extends ChangedEntity, M extends AdvancedHumanoidModel<T>, A extends LatexHumanoidArmorModel<T, ?>> extends MobRenderer<T, M> {
 
-    @Unique
+    /*@Unique
     private EntityRendererProvider.Context changed_Additions$MixinContext;
     @Unique
-    private ChangedEntity changed_Additions$MixinEntity;
+    private ChangedEntity changed_Additions$MixinEntity;*/
 
     public MixinAdvancedHumanoidRenderer(EntityRendererProvider.Context p_174304_, M p_174305_, float p_174306_) {
         super(p_174304_, p_174305_, p_174306_);
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lnet/ltxprogrammer/changed/client/renderer/model/AdvancedHumanoidModel;Ljava/util/function/BiFunction;Lnet/minecraft/client/model/geom/ModelLayerLocation;Lnet/minecraft/client/model/geom/ModelLayerLocation;F)V", at = @At("TAIL"))
+    /*@Inject(method = "<init>(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lnet/ltxprogrammer/changed/client/renderer/model/AdvancedHumanoidModel;Ljava/util/function/BiFunction;Lnet/minecraft/client/model/geom/ModelLayerLocation;Lnet/minecraft/client/model/geom/ModelLayerLocation;F)V", at = @At("TAIL"))
     private void injectLayer(EntityRendererProvider.Context context, AdvancedHumanoidModel main, BiFunction ctorA, ModelLayerLocation armorInner, ModelLayerLocation armorOuter, float shadowSize, CallbackInfo ci) {
         AdvancedHumanoidRenderer thisFixed = ((AdvancedHumanoidRenderer) (Object) this);
         thisFixed.addLayer(new AccessoryRenderLayer<T, M>(thisFixed, context));
@@ -61,5 +61,5 @@ public abstract class MixinAdvancedHumanoidRenderer<T extends ChangedEntity, M e
         //    AdvancedHumanoidRenderer thisFixed = ((AdvancedHumanoidRenderer) (Object) this);
         //    thisFixed.addLayer(new AccessoryRenderLayer<T, M>(thisFixed, new AccessoriesMaleWolf<>(context.bakeLayer(AccessoriesMaleWolf.LAYER_LOCATION))));
         //}
-    }
+    }*/
 }

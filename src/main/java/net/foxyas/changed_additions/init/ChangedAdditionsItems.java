@@ -4,7 +4,6 @@ import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.item.*;
 import net.foxyas.changed_additions.item.armor.DarkLatexCoatItem;
 import net.foxyas.changed_additions.item.armor.DyeableShorts;
-import net.foxyas.changed_additions.item.armor.TESTITEM;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
@@ -23,8 +22,6 @@ public class ChangedAdditionsItems {
     public static final RegistryObject<Item> AMMONIUM_CHLORIDE = REGISTRY.register("ammonium_chloride", AmmoniumchlorideItem::new);
     public static final RegistryObject<Item> LAETHIN_SYRINGE = REGISTRY.register("laethin_syringe", LaethinSyringeItem::new);
     public static final RegistryObject<Item> NEOFUSER = block(ChangedAdditionsBlocks.NEOFUSER, ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB);
-
-    public static final RegistryObject<Item> TEST = REGISTRY.register("test", TESTITEM::new);
 
     public static final RegistryObject<Item> GOLDEN_ORANGE = REGISTRY.register("golden_orange", GoldenOrange::new);
 
