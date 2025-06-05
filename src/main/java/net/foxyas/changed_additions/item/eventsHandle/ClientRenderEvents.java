@@ -14,9 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = ChangedAdditionsMod.MODID, value = Dist.CLIENT)
 public class ClientRenderEvents {
-
-    EquipmentSlot.HEAD
-
+    /*
     @SubscribeEvent
     public static void onRenderLivingPre(RenderLivingEvent.Pre<?, ?> event) {
         LivingEntity entity = event.getEntity();
@@ -36,5 +34,5 @@ public class ClientRenderEvents {
         // Aqui você pode restaurar o item se tiver salvo ele antes
         // Isso é mais necessário se o renderizador tentar usar o ItemStack após esse ponto (raro)
         // Geralmente, apenas remover no Pre já resolve.
-    }
+    }*/
 }
