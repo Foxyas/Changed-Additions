@@ -1,4 +1,4 @@
-package net.foxyas.changed_additions.item;
+package net.foxyas.changed_additions.item.armor;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -115,6 +115,14 @@ public class TESTITEM extends ArmorItem implements IAccessoryItem, DyeableLeathe
         return null;
     }
 
+    @Override
+    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        if ("overlay".equals(type)) {
+            return "changed_additions:textures/models/armor/nothing_layer_1_overlay.png"; // totalmente invisível
+        }
+        return "changed_additions:textures/models/armor/nothing_layer_1.png";
+    }
+
     @OnlyIn(Dist.CLIENT)
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientInitializer {
@@ -142,11 +150,6 @@ public class TESTITEM extends ArmorItem implements IAccessoryItem, DyeableLeathe
                 items.add(stack);
             }
         }
-    }
-
-    @Override
-    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return super.getArmorTexture(stack, entity, slot, type);
     }
 
     @Override
