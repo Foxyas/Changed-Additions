@@ -7,7 +7,7 @@
   "item.changed_additions.laser_pointer": "Laser Pointer",
   "item.changed_additions.latex_snow_fox_female_spawn_egg": "Female Latex Snow Fox Spawn Egg",
   "item.changed_additions.latex_snow_fox_male_spawn_egg": "Male Latex Snow Fox Spawn Egg",
-  "item.changed_additions.feng_qi_fox_spawn_egg": "Feng QI Fox",
+  "item.changed_additions.feng_qi_wolf_spawn_egg": "Feng QI Fox",
   "item.changed_additions.dark_latex_coat": "Dark Latex Coat",
   "item.changed_additions.dark_latex_coat_cap": "Dark Latex Head Cap",
   "item.changed_additions.golden_orange": "Golden Orange",
@@ -16,7 +16,7 @@
 
   "entity.changed_additions.latex_snow_fox_male": "Male Latex Snow Fox",
   "entity.changed_additions.latex_snow_fox_female": "Female Latex Snow Fox",
-  "entity.changed_additions.feng_qi_fox": "Feng QI Fox",
+  "entity.changed_additions.feng_qi_wolf": "Feng QI Fox",
 
   "enchantment.changed_additions.latex_solvent": "Latex Solvent",
   "enchantment.changed_additions.solvent.desc": "Deal more Damage to Latex Entities",
