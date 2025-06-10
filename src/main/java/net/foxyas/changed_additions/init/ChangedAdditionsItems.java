@@ -4,6 +4,7 @@ import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.item.*;
 import net.foxyas.changed_additions.item.armor.DarkLatexCoatItem;
 import net.foxyas.changed_additions.item.armor.DyeableShorts;
+import net.foxyas.changed_additions.item.armor.TShirtClothing;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
@@ -26,6 +27,7 @@ public class ChangedAdditionsItems {
     public static final RegistryObject<Item> GOLDEN_ORANGE = REGISTRY.register("golden_orange", GoldenOrange::new);
 
     public static final RegistryObject<Item> DYEABLE_SHORTS = REGISTRY.register("dyeable_shorts", DyeableShorts::new);
+    public static final RegistryObject<Item> DYEABLE_SHIRT = REGISTRY.register("dyeable_shirt", TShirtClothing::new);
     public static final RegistryObject<Item> LASER_POINTER = REGISTRY.register("laser_pointer", LaserPointer::new);
 
     public static final RegistryObject<Item> LATEX_SNOW_FOX_SPAWN_EGG = REGISTRY.register("latex_snow_fox_male_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_SNOW_FOX_MALE, 0xFFFFFFF, 0xfD6DDF7, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));

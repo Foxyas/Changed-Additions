@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.foxyas.changed_additions.client.models.accessories.models.AccessoriesMaleWolf;
 import net.foxyas.changed_additions.client.models.accessories.render_layer.AccessoryRenderLayer;
+import net.foxyas.changed_additions.client.models.accessories.render_layer.ClothesLayer;
 import net.foxyas.changed_additions.variants.ChangedAdditionsTransfurVariants;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
 import net.ltxprogrammer.changed.client.renderer.AdvancedHumanoidRenderer;
@@ -52,14 +53,14 @@ public abstract class MixinAdvancedHumanoidRenderer<T extends ChangedEntity, M e
         //changed_Additions$MixinEntity = entity;
     }
 
-    @SuppressWarnings("unchecked")
+    */@SuppressWarnings("unchecked")
     @Inject(method = "addLayers", at = @At("TAIL"))
     private void injectLayer(EntityRendererProvider.Context context, M main, CallbackInfo ci) {
-        //AdvancedHumanoidRenderer thisFixed = ((AdvancedHumanoidRenderer) (Object) this);
-        //thisFixed.addLayer(new AccessoryRenderLayer<T, M>(thisFixed, context));
+        AdvancedHumanoidRenderer thisFixed = ((AdvancedHumanoidRenderer) (Object) this);
+        thisFixed.addLayer(new ClothesLayer<>(thisFixed));
         //if (changed_Additions$MixinEntity.getSelfVariant() != null && changed_Additions$MixinEntity.getSelfVariant().is(TransfurVariantTags.WOLF_LIKE)) {
         //    AdvancedHumanoidRenderer thisFixed = ((AdvancedHumanoidRenderer) (Object) this);
         //    thisFixed.addLayer(new AccessoryRenderLayer<T, M>(thisFixed, new AccessoriesMaleWolf<>(context.bakeLayer(AccessoriesMaleWolf.LAYER_LOCATION))));
         //}
-    }*/
+    }
 }

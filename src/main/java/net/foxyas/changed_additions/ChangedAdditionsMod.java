@@ -1,7 +1,9 @@
 package net.foxyas.changed_additions;
 
 import net.foxyas.changed_additions.client.renderer.item.LaserItemDynamicRender;
+import net.foxyas.changed_additions.client.renderer.item.StyleItemPredicate;
 import net.foxyas.changed_additions.init.*;
+import net.foxyas.changed_additions.item.armor.TShirtClothing;
 import net.foxyas.changed_additions.variants.ChangedAdditionsTransfurVariants;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +23,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DYEABLE_SHIRT;
 import static net.foxyas.changed_additions.init.ChangedAdditionsItems.LASER_POINTER;
 
 @Mod("changed_additions")
@@ -62,6 +65,7 @@ public class ChangedAdditionsMod {
     public void clientLoad(FMLClientSetupEvent event) {
         // Dynamic Color
         LaserItemDynamicRender.DynamicLaserColor(LASER_POINTER);
+        StyleItemPredicate.DynamicStyleRender(DYEABLE_SHIRT, "style_check");
     }
 
     public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {

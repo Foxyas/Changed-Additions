@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "changed_additions:items/shirt_type1"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "changed_additions:style_check": 1.0
+      },
+      "model": "changed_additions:item/dyeable_shirt_type2"
+    }
+  ]
+}

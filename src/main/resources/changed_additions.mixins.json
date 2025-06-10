@@ -25,6 +25,7 @@
     "GameRendererMixin",
     "PostChainMixin",
     "render.AdvancedHumanoidRendererMixin",
+    "render.LatexHumanoidArmorLayerMixin",
     "render.MixinAdvancedHumanoidRenderer"
   ]
 }
