@@ -1,5 +1,7 @@
 package net.foxyas.changed_additions.item.armor;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.foxyas.changed_additions.init.ChangedAdditionsItems;
 import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.ltxprogrammer.changed.init.ChangedSounds;
@@ -11,6 +13,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -63,6 +67,11 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
 
     public boolean isDamageable(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot slot) {
+        return ImmutableMultimap.of();
     }
 
     public SoundEvent getEquipSound() {

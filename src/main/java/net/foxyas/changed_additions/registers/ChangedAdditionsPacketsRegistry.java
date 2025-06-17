@@ -6,6 +6,7 @@ import net.foxyas.changed_additions.network.TurnOffTransfurMessage;
 import net.foxyas.changed_additions.network.packets.QTEKeyInputPacket;
 import net.foxyas.changed_additions.network.packets.QTESyncPacket;
 import net.foxyas.changed_additions.network.packets.SyncTransfurVisionsPacket;
+import net.foxyas.changed_additions.network.packets.SyncTransfursStatsPacket;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
@@ -17,6 +18,7 @@ public class ChangedAdditionsPacketsRegistry {
 
         //Packets
         ChangedAdditionsMod.addNetworkMessage(SyncTransfurVisionsPacket.class, SyncTransfurVisionsPacket::encode, SyncTransfurVisionsPacket::decode, SyncTransfurVisionsPacket::handle);
+        ChangedAdditionsMod.addNetworkMessage(SyncTransfursStatsPacket.class, SyncTransfursStatsPacket::encode, SyncTransfursStatsPacket::decode, SyncTransfursStatsPacket::handle);
         ChangedAdditionsMod.addNetworkMessage(QTEKeyInputPacket.class, QTEKeyInputPacket::encode, QTEKeyInputPacket::decode, QTEKeyInputPacket::handle);
         ChangedAdditionsMod.addNetworkMessage(QTESyncPacket.class, QTESyncPacket::encode, QTESyncPacket::decode, QTESyncPacket::handle);
 

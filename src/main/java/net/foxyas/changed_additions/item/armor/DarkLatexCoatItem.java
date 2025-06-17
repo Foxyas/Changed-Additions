@@ -1,5 +1,6 @@
 package net.foxyas.changed_additions.item.armor;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
 import net.ltxprogrammer.changed.init.ChangedItems;
@@ -75,8 +76,8 @@ public class DarkLatexCoatItem extends ArmorItem {
     }
 
     @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot p_40390_) {
-        return super.getDefaultAttributeModifiers(p_40390_);
+    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot slot) {
+        return ImmutableMultimap.of();
     }
 
     @Override

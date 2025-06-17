@@ -1,6 +1,7 @@
 package net.foxyas.changed_additions.process.variantsExtraStats;
 
 import com.google.gson.JsonObject;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 
@@ -27,6 +28,22 @@ public class TransfurExtraStats {
         this.RegenSpeedMultiplier = regenSpeedMultiplier;
         this.FlySpeedMultiplier = flySpeedMultiplier;
         this.FallDmgMultiplier = fallDmgMultiplier;
+    }
+
+    public void WriteToBuffer(FriendlyByteBuf buf) {
+        buf.writeResourceLocation(this.form);
+        buf.writeFloat(this.MiningSpeedMultiplier);
+        buf.writeFloat(this.RegenSpeedMultiplier);
+        buf.writeFloat(this.FlySpeedMultiplier);
+        buf.writeFloat(this.FallDmgMultiplier);
+    }
+
+    public TransfurExtraStats(FriendlyByteBuf buf) {
+        this.form = buf.readResourceLocation();
+        this.MiningSpeedMultiplier = buf.readFloat();
+        this.RegenSpeedMultiplier = buf.readFloat();
+        this.FlySpeedMultiplier = buf.readFloat();
+        this.FallDmgMultiplier = buf.readFloat();
     }
 
     private static ResourceLocation fixJsonExtension(ResourceLocation input) {

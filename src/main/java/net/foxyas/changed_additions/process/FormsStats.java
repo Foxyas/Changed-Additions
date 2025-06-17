@@ -24,14 +24,26 @@ public class FormsStats {
         if (transfurVariantInstance == null) {
             return;
         }
-        TransfurExtraStats transfurExtraStats = TransfurExtraStatsRegistry.get(transfurVariantInstance.getFormId());
-
-        // Verifica se o jogador está segurando um item específico, ou se tem alguma condição
-        if (transfurVariantInstance.getChangedEntity() instanceof ExtraVariantStats extraVariantStats) {
-            event.setNewSpeed(event.getNewSpeed() * extraVariantStats.getBlockBreakSpeedMultiplier()); // More Fast Break
-        } else if (TransfurExtraStatsRegistry.hasExtraStats(transfurVariantInstance.getFormId()) && transfurExtraStats != null) {
-            event.setNewSpeed(event.getNewSpeed() * transfurExtraStats.getMiningSpeedMultiplier());
+        TransfurExtraStats transfurExtraStats;
+        if (player.getLevel().isClientSide()) {
+            transfurExtraStats = TransfurExtraStatsRegistry.CLIENT.get(transfurVariantInstance.getFormId());
+            // Verifica se o jogador está segurando um item específico, ou se tem alguma condição
+            if (transfurVariantInstance.getChangedEntity() instanceof ExtraVariantStats extraVariantStats) {
+                event.setNewSpeed(event.getNewSpeed() * extraVariantStats.getBlockBreakSpeedMultiplier()); // More Fast Break
+            } else if (TransfurExtraStatsRegistry.hasExtraStats(transfurVariantInstance.getFormId()) && transfurExtraStats != null) {
+                event.setNewSpeed(event.getNewSpeed() * transfurExtraStats.getMiningSpeedMultiplier());
+            }
+        } else {
+            transfurExtraStats = TransfurExtraStatsRegistry.get(transfurVariantInstance.getFormId());
+            // Verifica se o jogador está segurando um item específico, ou se tem alguma condição
+            if (transfurVariantInstance.getChangedEntity() instanceof ExtraVariantStats extraVariantStats) {
+                event.setNewSpeed(event.getNewSpeed() * extraVariantStats.getBlockBreakSpeedMultiplier()); // More Fast Break
+            } else if (TransfurExtraStatsRegistry.hasExtraStats(transfurVariantInstance.getFormId()) && transfurExtraStats != null) {
+                event.setNewSpeed(event.getNewSpeed() * transfurExtraStats.getMiningSpeedMultiplier());
+            }
         }
+
+
     }
 
     @SubscribeEvent
@@ -61,7 +73,7 @@ public class FormsStats {
     }
 
     private static boolean shouldRegenerate(Player player) {
-        return !player.isCreative() && player.getFoodData().getFoodLevel() > 10 && player.getHealth() < player.getMaxHealth();
+        return !player.isCreative() && player.getFoodData().getFoodLevel() >= 18 && player.getHealth() < player.getMaxHealth();
     }
 
     @SubscribeEvent
@@ -90,6 +102,7 @@ public class FormsStats {
     @SubscribeEvent
     public static void onFall(LivingFallEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
+        if (player.getLevel().isClientSide()) return;
         TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (transfurVariantInstance == null) {
             return;
