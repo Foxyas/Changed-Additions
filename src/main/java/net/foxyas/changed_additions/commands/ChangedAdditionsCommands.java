@@ -46,7 +46,10 @@ public class ChangedAdditionsCommands {
     @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
         final LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
-        event.getDispatcher().register(literalBuilder);
+        var ChangedAdditionsCommandNode = event.getDispatcher().register(literalBuilder);
+        event.getDispatcher().register(Commands.literal("ca").redirect(ChangedAdditionsCommandNode));
+
+
         LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.argument("MaxSize", DoubleArgumentType.doubleArg())
                         .executes(arguments -> {
@@ -57,13 +60,15 @@ public class ChangedAdditionsCommands {
                         )
                 )
         );
-        event.getDispatcher().register(setMaxBPISize);
+        var setMaxBPICommandNode = event.getDispatcher().register(setMaxBPISize);
+        event.getDispatcher().register(Commands.literal("ca-MaxBPI").requires(source -> source.hasPermission(2)).redirect(setMaxBPICommandNode));
+
 
         LiteralArgumentBuilder<CommandSourceStack> getMaxBPISize = literalBuilder.then(Commands.literal("getMaxSizeTolerance").requires(source -> !source.getLevel().isClientSide)
                 .executes(SizeManipulator::SendMaxSizeTolerance
                 )
         );
-        event.getDispatcher().register(getMaxBPISize);
+        var getMaxSizeToleranceCommandNode = event.getDispatcher().register(getMaxBPISize);
 
         LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("BlocksHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.literal("setBlocksInfectionType")
@@ -130,9 +135,8 @@ public class ChangedAdditionsCommands {
                         )
                 )
         );
-
-
-        event.getDispatcher().register(BlocksHandle);
+        var BlockInfectionHandleCommandNode = event.getDispatcher().register(BlocksHandle);
+        event.getDispatcher().register(Commands.literal("ca-setBlocksInfection").requires(source -> source.hasPermission(2)).redirect(BlockInfectionHandleCommandNode));
 
         LiteralArgumentBuilder<CommandSourceStack> tameEntity = literalBuilder.then(Commands.literal("tameChangedEntity").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.argument("tameTarget", EntityArgument.entities())
@@ -149,7 +153,7 @@ public class ChangedAdditionsCommands {
                         )
                 )
         );
-        event.getDispatcher().register(tameEntity);
+        var tameEntityCommandNode = event.getDispatcher().register(tameEntity);
 
         LiteralArgumentBuilder<CommandSourceStack> QuickTimeEventsHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("QuickTimeEventsHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.literal("getQuickTimeEventForPlayer")
@@ -244,8 +248,8 @@ public class ChangedAdditionsCommands {
                         )
                 )
         );
-        event.getDispatcher().register(QuickTimeEventsHandle);
-
+        var QuickTimeEventsHandleCommandNode = event.getDispatcher().register(QuickTimeEventsHandle);
+        event.getDispatcher().register(Commands.literal("ca-QTE").requires(source -> source.hasPermission(2)).redirect(QuickTimeEventsHandleCommandNode));
     }
 
     @SubscribeEvent

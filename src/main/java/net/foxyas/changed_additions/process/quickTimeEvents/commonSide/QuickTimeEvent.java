@@ -30,6 +30,7 @@ public class QuickTimeEvent {
     // --- Campos principais ---
     private Player player;
     private int currentIndex = 0;
+    private final int MaxTicks;
     private int ticksRemaining;
     private boolean finished = false;
     private float progress = 0.0f;
@@ -43,6 +44,7 @@ public class QuickTimeEvent {
         this.Type = type;
         this.sequence = new ArrayList<>(SequenceType.getSequence());
         this.ticksRemaining = durationTicks;
+        this.MaxTicks = durationTicks;
     }
 
     public QuickTimeEvent(@Nullable Player player, Random random, QuickTimeEventType type, int durationTicks) {
@@ -194,13 +196,17 @@ public class QuickTimeEvent {
         return currentIndex;
     }
 
+    public int getTicksRemaining() {
+        return ticksRemaining;
+    }
+
+    public int getMaxTicks() {
+        return MaxTicks;
+    }
+
     // --- Setters ---
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;
-    }
-
-    public int getTicksRemaining() {
-        return ticksRemaining;
     }
 
     public void setTicksRemaining(int ticksRemaining) {
