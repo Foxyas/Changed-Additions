@@ -131,8 +131,8 @@ public class QuickTimeEvent {
     }
 
     private void finish() {
-        handleFinal();
         finished = true;
+        handleFinal();
     }
 
     public void handleFinal() {
