@@ -5,6 +5,7 @@ import net.foxyas.changed_additions.client.renderer.item.StyleItemPredicate;
 import net.foxyas.changed_additions.init.*;
 import net.foxyas.changed_additions.item.armor.TShirtClothing;
 import net.foxyas.changed_additions.variants.ChangedAdditionsTransfurVariants;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,6 +57,10 @@ public class ChangedAdditionsMod {
 
     public static ResourceLocation modResource(String path) {
         return new ResourceLocation(MODID, path);
+    }
+
+    public static ModelLayerLocation modModelLayerLocation(String path, String type) {
+        return new ModelLayerLocation(modResource(path), type);
     }
 
     public static String modResourceString(String path) {

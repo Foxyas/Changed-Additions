@@ -13,6 +13,7 @@ public class JeiDescriptionHandler {
     public static void registerDescriptions(IRecipeRegistration registration) {
         // Item Information
         registration.addIngredientInfo(new ItemStack(ChangedAdditionsItems.DYEABLE_SHORTS.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_additions.jei_descriptions.dyeable_shorts"));
+        registration.addIngredientInfo(new ItemStack(ChangedAdditionsItems.DYEABLE_SHIRT.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_additions.jei_descriptions.dyeable_shirt"));
         registration.addIngredientInfo(new ItemStack(ChangedAdditionsItems.LASER_POINTER.get()), VanillaTypes.ITEM_STACK, new TranslatableComponent("changed_additions.jei_descriptions.laser_pointer"));
     }
 

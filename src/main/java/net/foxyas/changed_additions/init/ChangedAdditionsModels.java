@@ -5,6 +5,7 @@ import net.foxyas.changed_additions.client.models.LatexSnowFoxFemaleModel;
 import net.foxyas.changed_additions.client.models.LatexSnowFoxMaleModel;
 import net.foxyas.changed_additions.client.models.accessories.models.*;
 import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
+import net.foxyas.changed_additions.client.models.armors.SkinLayerModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,5 +29,6 @@ public class ChangedAdditionsModels {
 
         //Armors Models
         event.registerLayerDefinition(DarkLatexCoatModel.LAYER_LOCATION, DarkLatexCoatModel::createBodyLayer);
+        event.registerLayerDefinition(SkinLayerModel.LAYER_LOCATION, SkinLayerModel::createBodyLayer);
     }
 }

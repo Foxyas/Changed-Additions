@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "P",
+    "L"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:white_dye"
+    },
+    "P": {
+      "item": "minecraft:leather_chestplate"
+    },
+    "L": {
+      "item": "changed:latex_base"
+    }
+  },
+  "result": {
+    "item": "changed_additions:dyeable_shirt"
+  }
+}
