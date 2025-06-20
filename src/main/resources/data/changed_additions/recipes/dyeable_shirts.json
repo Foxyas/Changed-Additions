@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "B",
-    "P",
-    "L"
+    " B ",
+    "LPL",
+    " W "
   ],
   "key": {
     "B": {
@@ -13,7 +13,10 @@
       "item": "minecraft:leather_chestplate"
     },
     "L": {
-      "item": "changed:latex_base"
+      "tag": "forge:string"
+    },
+    "W": {
+      "tag": "minecraft:wool"
     }
   },
   "result": {

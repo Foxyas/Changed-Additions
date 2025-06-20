@@ -21,6 +21,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.ModelUtils;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
@@ -83,11 +84,9 @@ public class TShirtClothing extends SimpleClothingItem {
         TYPE2("type2");
 
         private final String id;
-        private int value = 0;
 
         ShirtType(String id) {
             this.id = id;
-            this.value++;
         }
 
         public String getId() {
@@ -147,6 +146,11 @@ public class TShirtClothing extends SimpleClothingItem {
         }
     }
 
+    @Override
+    public int getColor(ItemStack p_41122_) {
+        CompoundTag compoundtag = p_41122_.getTagElement("display");
+        return compoundtag != null && compoundtag.contains("color", 99) ? compoundtag.getInt("color") : Color3.WHITE.toInt();
+    }
 
     @Override
     public boolean isDamageable(ItemStack stack) {
@@ -169,7 +173,8 @@ public class TShirtClothing extends SimpleClothingItem {
         }
 
         if (entity instanceof Player player) {
-            if (ProcessTransfur.getPlayerTransfurVariant(player) == null || ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
+            if (ProcessTransfur.getPlayerTransfurVariant(player) == null
+                    || ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
                 ShirtType shirtType = getShirtType(stack);
 
                 if (shirtType == ShirtType.TYPE2) {
@@ -184,6 +189,27 @@ public class TShirtClothing extends SimpleClothingItem {
                     return "changed_additions:textures/models/armor/player_t_shirt_layer_1_overlay.png";
                 }
                 return "changed_additions:textures/models/armor/player_t_shirt_layer_1.png";
+            }
+        } else if (entity instanceof ChangedEntity changedEntity) {
+            Player player = changedEntity.getUnderlyingPlayer();
+            if (player != null) {
+                if (ProcessTransfur.getPlayerTransfurVariant(player) == null
+                        || ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
+                    ShirtType shirtType = getShirtType(stack);
+
+                    if (shirtType == ShirtType.TYPE2) {
+                        if ("overlay".equals(type)) {
+                            return "changed_additions:textures/models/armor/player_t_shirt_type_2_layer_1_overlay.png";
+                        }
+                        return "changed_additions:textures/models/armor/player_t_shirt_type_2_layer_1.png";
+                    }
+
+                    // Default TYPE1
+                    if ("overlay".equals(type)) {
+                        return "changed_additions:textures/models/armor/player_t_shirt_layer_1_overlay.png";
+                    }
+                    return "changed_additions:textures/models/armor/player_t_shirt_layer_1.png";
+                }
             }
         }
 
@@ -209,10 +235,23 @@ public class TShirtClothing extends SimpleClothingItem {
             @OnlyIn(Dist.CLIENT)
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+                if (!(living instanceof Player) && !(living instanceof ChangedEntity)) {
+                    return defaultModel;
+                }
+
                 if (living instanceof Player player) {
-                    if (ProcessTransfur.getPlayerTransfurVariant(player) != null) {
+                    if (ProcessTransfur.getPlayerTransfurVariant(player) != null
+                            && !ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
                         return null;
-                    } else if (ProcessTransfur.getPlayerTransfurVariant(player) != null && !ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
+                    }
+                } else if (living instanceof ChangedEntity changedEntity) {
+                    Player player = changedEntity.getUnderlyingPlayer();
+                    if (player != null) {
+                        if (ProcessTransfur.getPlayerTransfurVariant(player) != null
+                                && !ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
+                            return null;
+                        }
+                    } else {
                         return null;
                     }
                 }
@@ -232,6 +271,7 @@ public class TShirtClothing extends SimpleClothingItem {
                 model.crouching = living.isShiftKeyDown();
                 model.riding = defaultModel.riding;
                 model.young = living.isBaby();
+                defaultModel.copyPropertiesTo(model);
 
                 return model;
             }
