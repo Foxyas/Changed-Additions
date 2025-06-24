@@ -70,6 +70,16 @@ public class PlayerUtil {
         });
     }
 
+    public static void UnTransfurPlayerAndKill(Entity entity) {
+        Player player = (Player) entity;
+        ProcessTransfur.ifPlayerTransfurred(player, (variant) -> {
+            variant.getParent().replaceEntity(player);
+            variant.unhookAll(player);
+            ProcessTransfur.removePlayerTransfurVariant(player);
+            ProcessTransfur.setPlayerTransfurProgress(player, 0.0f);
+        });
+    }
+
     @Nullable
     public static Entity getEntityPlayerLookingAt(Player player, double range) {
         Level world = player.level;
