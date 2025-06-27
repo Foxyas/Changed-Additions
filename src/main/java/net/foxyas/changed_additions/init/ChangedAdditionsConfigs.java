@@ -13,6 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 @Mod.EventBusSubscriber(modid = ChangedAdditionsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ChangedAdditionsConfigs {
 	@SubscribeEvent
+	@SuppressWarnings("removal")
 	public static void register(FMLConstructModEvent event) {
 		event.enqueueWork(() -> {
 			ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ChangedAdditionsServerConfigs.SPEC, "changed_additions-server.toml");

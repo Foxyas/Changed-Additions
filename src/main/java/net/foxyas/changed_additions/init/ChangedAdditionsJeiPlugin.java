@@ -22,7 +22,7 @@ public class ChangedAdditionsJeiPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation("changed_additions:jei_plugin");
+        return ResourceLocation.parse("changed_additions:jei_plugin");
     }
 
     @Override

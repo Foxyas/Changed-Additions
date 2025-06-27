@@ -10,17 +10,19 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Random;
+
 @Mod.EventBusSubscriber
 public class ProcessConscienceQTE {
 
     @SubscribeEvent
     public static void StartQTEWhenTransfured(ProcessTransfur.KeepConsciousEvent event) {
         Player player = event.player;
-        Level world = player.getLevel();
+        Level world = player.level();
         boolean keepConscious = event.keepConscious;
         if (!keepConscious && !world.isClientSide() && world.getGameRules().getBoolean(ChangedAdditionsGameRules.CHANGED_ADDITIONS_FIGHT_TO_KEEP_CONSCIENCE)) {
             event.shouldKeepConscious = true;
-            QTEManager.addQTE(player, new QuickTimeEvent(player, player.getRandom(), QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE, player.getRandom().nextInt(100, 120)));
+            QTEManager.addQTE(player, new QuickTimeEvent(player, (Random) player.getRandom(), QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE, player.getRandom().nextInt(100, 120)));
         }
     }
 }

@@ -51,7 +51,7 @@ public class TransfurExtraStats {
         if (!path.endsWith(".json")) {
             path += ".json";
         }
-        return new ResourceLocation(input.getNamespace(), path);
+        return ResourceLocation.fromNamespaceAndPath(input.getNamespace(), path);
     }
 
     public static TransfurExtraStats fromJson(ResourceLocation id, JsonObject json) {
@@ -61,7 +61,7 @@ public class TransfurExtraStats {
         float fallDmgMultiplier = GsonHelper.getAsFloat(json, "fallDmgMultiplier", 1f);
         String formStr = GsonHelper.getAsString(json, "form");
         return new TransfurExtraStats(
-                new ResourceLocation(formStr),
+                ResourceLocation.parse(formStr),
                 miningSpeedMultiplier,
                 regenSpeedMultiplier,
                 flySpeedMultiplier,

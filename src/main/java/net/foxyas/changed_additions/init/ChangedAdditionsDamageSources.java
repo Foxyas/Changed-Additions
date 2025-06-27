@@ -1,45 +1,46 @@
 package net.foxyas.changed_additions.init;
 
+import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Random;
+
 public class ChangedAdditionsDamageSources {
-    public static final DamageSource LATEX_SOLVENT = new DamageSource("latex_solvent") {
-        @Override
-        public float getFoodExhaustion() {
-            return super.getFoodExhaustion() + 0.5f;
+    public record DamageHolder(ResourceKey<DamageType> key) {
+        public DamageSource source(RegistryAccess access) {
+            final Holder<DamageType> type = access.lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(key);
+            return new DamageSource(type);
         }
-    };
 
-    public static EntityDamageSource LatexSolventMobAttack(LivingEntity mob) {
-        return new EntityDamageSource("latex_solvent", mob);
+        public DamageSource source(RegistryAccess access, Entity sourceEntity) {
+            final Holder<DamageType> type = access.lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(key);
+            return new DamageSource(type, sourceEntity);
+        }
     }
 
-
-    public static final DamageSource CONSCIENCE_LOST = new DamageSource("conscience_lost") {
-        @Override
-        public float getFoodExhaustion() {
-            return 0;
-        }
-    }.bypassArmor();
-
-    public static EntityDamageSource ConscienceLostMobAttack(LivingEntity mob) {
-        return new EntityDamageSource("conscience_lost", mob);
+    private static DamageHolder holder(String name) {
+        return new DamageHolder(ResourceKey.create(Registries.DAMAGE_TYPE, ChangedAdditionsMod.modResource(name)));
     }
+
+    public static final DamageHolder LATEX_SOLVENT = holder("latex_solvent");
+    public static final DamageHolder CONSCIENCE_LOST = holder("conscience_lost");
 
 
     @Mod.EventBusSubscriber
@@ -61,7 +62,7 @@ public class ChangedAdditionsDamageSources {
 
             if (entity instanceof Player player) {
                 // Efeito sonoro
-                player.getLevel().playSound(null, player, SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 2.5f, 0f);
+                player.level().playSound(null, player, SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 2.5f, 0f);
             } else {
                 // Efeito sonoro
                 entity.playSound(SoundEvents.FIRE_EXTINGUISH, 2.5f, 0);
@@ -72,8 +73,8 @@ public class ChangedAdditionsDamageSources {
 
             // Partícula solvente base
             PlayerUtil.ParticlesUtil.sendParticles(
-                    entity.level,
-                    ChangedAdditionsParticles.solventDrips(10, FoxyasUtils.clamp(entity.getLevel().getRandom().nextFloat(0.45f), 0.15f, 0.45f)),
+                    entity.level(),
+                    ChangedAdditionsParticles.solventDrips(10, FoxyasUtils.clamp(new Random().nextFloat(0.45f), 0.15f, 0.45f)),
                     entity.position().add(0, entity.getBbHeight() / 2f, 0),
                     0.25f, 0.25f, 0.25f,
                     8 + FoxyasUtils.clamp(amount, 0, 22), 0.25f
@@ -84,10 +85,7 @@ public class ChangedAdditionsDamageSources {
         }
 
         private static boolean isSolventDamage(DamageSource source) {
-            if (source == LATEX_SOLVENT) return true;
-
-            return source instanceof EntityDamageSource eds
-                    && eds.getMsgId().startsWith(LATEX_SOLVENT.getMsgId());
+            return source.is(LATEX_SOLVENT.key());
         }
 
         private static boolean isLatexTarget(Entity entity) {
@@ -98,7 +96,7 @@ public class ChangedAdditionsDamageSources {
         }
 
         private static void sendLatexParticlesIfApplicable(Entity entity, int amount) {
-            var level = entity.level;
+            var level = entity.level();
             var position = entity.position();
             float speed = 0.05f;
 
@@ -131,7 +129,7 @@ public class ChangedAdditionsDamageSources {
         }
 
         private static void sendLatexParticlesIfApplicable(Entity entity) {
-            var level = entity.level;
+            var level = entity.level();
             var position = entity.getEyePosition();
             float speed = 0.05f;
 

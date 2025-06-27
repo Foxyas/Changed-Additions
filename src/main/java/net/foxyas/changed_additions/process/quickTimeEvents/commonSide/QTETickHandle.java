@@ -15,7 +15,7 @@ public class QTETickHandle {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level.isClientSide) return;
+        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
 
         QuickTimeEvent qte = QTEManager.getActiveQTE(event.player);
         if (qte != null) {
@@ -30,7 +30,7 @@ public class QTETickHandle {
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         /*Player player = event.getPlayer();
-        if (!player.getLevel().isClientSide()) {
+        if (!player.level().isClientSide()) {
             CompoundTag tag = player.saveWithoutId(new CompoundTag());
             if (tag.contains("QTE")) {
                 QuickTimeEvent qte = QuickTimeEvent.loadFromTag(player, tag.getCompound("QTE"));
@@ -39,14 +39,14 @@ public class QTETickHandle {
                 }
             }
         }*/
-        if (!event.getEntity().getLevel().isClientSide && event.getEntity() instanceof ServerPlayer serverPlayer) {
+        if (!event.getEntity().level().isClientSide && event.getEntity() instanceof ServerPlayer serverPlayer) {
             QTEPendingManager.trySend(serverPlayer);
         }
     }
 
     @SubscribeEvent
     public static void onTransfurAttempt(ProcessTransfur.TransfurAttackEvent event){
-        if (!event.target.getLevel().isClientSide() && event.target instanceof Player player) {
+        if (!event.target.level().isClientSide() && event.target instanceof Player player) {
             if (QTEManager.getActiveQTE(player) != null && QTEManager.getActiveQTE(player).getType() == QuickTimeEventType.STRUGGLE) {
                 player.invulnerableTime = 2;
                 player.hurtDuration = 2;
@@ -58,7 +58,7 @@ public class QTETickHandle {
 
     @SubscribeEvent
     public static void onHitAttempt(LivingAttackEvent event){
-        if (!event.getEntityLiving().getLevel().isClientSide() && event.getEntityLiving() instanceof Player player) {
+        if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof Player player) {
             if (QTEManager.getActiveQTE(player) != null && QTEManager.getActiveQTE(player).getType() == QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE && !QTEManager.getActiveQTE(player).isFinished()) {
                 event.setCanceled(true);
             }
@@ -68,7 +68,7 @@ public class QTETickHandle {
     /*@SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedOutEvent event) {
         Player player = event.getPlayer();
-        if (!player.getLevel().isClientSide()) {
+        if (!player.level().isClientSide()) {
             QuickTimeEvent qte = QTEManager.getActiveQTE(player);
             if (!qte.isFinished()) {
                 QTEManager.removeQTE(player, qte);

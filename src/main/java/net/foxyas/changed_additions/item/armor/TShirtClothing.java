@@ -1,50 +1,23 @@
 package net.foxyas.changed_additions.item.armor;
 
-import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
-import net.foxyas.changed_additions.client.models.armors.SkinLayerModel;
-import net.foxyas.changed_additions.client.renderer.LatexSnowFoxMaleRenderer;
-import net.foxyas.changed_additions.entities.LatexSnowFoxMale;
 import net.foxyas.changed_additions.init.ChangedAdditionsItems;
-import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
-import net.foxyas.changed_additions.process.util.DelayedTask;
-import net.foxyas.changed_additions.process.util.FoxyasUtils;
-import net.foxyas.changed_additions.process.util.GlobalEntityUtil;
-import net.foxyas.changed_additions.process.util.PlayerUtil;
-import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.init.ChangedSounds;
-import net.ltxprogrammer.changed.init.ChangedTransfurVariants;
-import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.ltxprogrammer.changed.util.Color3;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.ModelUtils;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Consumer;
 
 public class TShirtClothing extends SimpleClothingItem {
 
@@ -102,7 +75,7 @@ public class TShirtClothing extends SimpleClothingItem {
     }
 
     public TShirtClothing() {
-        super(EquipmentSlot.CHEST, new Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
+        super(Type.CHESTPLATE, new Properties());
     }
 
     @Override
@@ -111,7 +84,7 @@ public class TShirtClothing extends SimpleClothingItem {
     }
 
     public SoundEvent getEquipSound() {
-        return ChangedSounds.EQUIP3;
+        return ChangedSounds.EQUIP3.get();
     }
 
     @Override
@@ -121,28 +94,16 @@ public class TShirtClothing extends SimpleClothingItem {
         return stack;
     }
 
-    @Override
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(tab)) {
-            for (ShirtType type : ShirtType.values()) {
-                for (DefaultColors color : DefaultColors.values()) {
-                    ItemStack stack = new ItemStack(this);
-                    this.setColor(stack, color.getColorToInt());
-                    TShirtClothing.setShirtType(stack, type);
-                    items.add(stack);
-                }
-            }
-        }
-    }
 
     @OnlyIn(Dist.CLIENT)
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientInitializer {
         @SubscribeEvent
-        public static void onItemColorsInit(ColorHandlerEvent.Item event) {
-            event.getItemColors().register(
+        public static void onItemColorsInit(RegisterColorHandlersEvent.Item event) {
+            event.register(
                     (stack, layer) -> ((DyeableLeatherItem) stack.getItem()).getColor(stack),
-                    ChangedAdditionsItems.DYEABLE_SHIRT.get());
+                    ChangedAdditionsItems.DYEABLE_SHIRT.get()
+            );
         }
     }
 
@@ -168,51 +129,6 @@ public class TShirtClothing extends SimpleClothingItem {
 
     @Override
     public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        if (entity instanceof ChangedEntity changedEntity && this.getClothTexture(changedEntity, slot, stack) != null) {
-            return "changed_additions:textures/models/armor/nothing_layer_1.png";
-        }
-
-        if (entity instanceof Player player) {
-            if (ProcessTransfur.getPlayerTransfurVariant(player) == null
-                    || ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
-                ShirtType shirtType = getShirtType(stack);
-
-                if (shirtType == ShirtType.TYPE2) {
-                    if ("overlay".equals(type)) {
-                        return "changed_additions:textures/models/armor/player_t_shirt_type_2_layer_1_overlay.png";
-                    }
-                    return "changed_additions:textures/models/armor/player_t_shirt_type_2_layer_1.png";
-                }
-
-                // Default TYPE1
-                if ("overlay".equals(type)) {
-                    return "changed_additions:textures/models/armor/player_t_shirt_layer_1_overlay.png";
-                }
-                return "changed_additions:textures/models/armor/player_t_shirt_layer_1.png";
-            }
-        } else if (entity instanceof ChangedEntity changedEntity) {
-            Player player = changedEntity.getUnderlyingPlayer();
-            if (player != null) {
-                if (ProcessTransfur.getPlayerTransfurVariant(player) == null
-                        || ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
-                    ShirtType shirtType = getShirtType(stack);
-
-                    if (shirtType == ShirtType.TYPE2) {
-                        if ("overlay".equals(type)) {
-                            return "changed_additions:textures/models/armor/player_t_shirt_type_2_layer_1_overlay.png";
-                        }
-                        return "changed_additions:textures/models/armor/player_t_shirt_type_2_layer_1.png";
-                    }
-
-                    // Default TYPE1
-                    if ("overlay".equals(type)) {
-                        return "changed_additions:textures/models/armor/player_t_shirt_layer_1_overlay.png";
-                    }
-                    return "changed_additions:textures/models/armor/player_t_shirt_layer_1.png";
-                }
-            }
-        }
-
         ShirtType shirtType = getShirtType(stack);
 
         if (shirtType == ShirtType.TYPE2) {
@@ -227,64 +143,5 @@ public class TShirtClothing extends SimpleClothingItem {
             return "changed_additions:textures/models/armor/t_shirt_layer_1_overlay.png";
         }
         return "changed_additions:textures/models/armor/t_shirt_layer_1.png";
-    }
-
-    @Override
-    public void initializeClient(@NotNull Consumer<IItemRenderProperties> consumer) {
-        consumer.accept(new IItemRenderProperties() {
-            @OnlyIn(Dist.CLIENT)
-            @Override
-            public HumanoidModel<?> getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
-                if (!(living instanceof Player) && !(living instanceof ChangedEntity)) {
-                    return defaultModel;
-                }
-
-                if (living instanceof Player player) {
-                    if (ProcessTransfur.getPlayerTransfurVariant(player) != null
-                            && !ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
-                        return null;
-                    }
-                } else if (living instanceof ChangedEntity changedEntity) {
-                    Player player = changedEntity.getUnderlyingPlayer();
-                    if (player != null) {
-                        if (ProcessTransfur.getPlayerTransfurVariant(player) != null
-                                && !ProcessTransfur.getPlayerTransfurVariant(player).getParent().is(ChangedTransfurVariants.LATEX_HUMAN)) {
-                            return null;
-                        }
-                    } else {
-                        return null;
-                    }
-                }
-
-                SkinLayerModel<LivingEntity> model = new SkinLayerModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(SkinLayerModel.LAYER_LOCATION));
-                /*SkinLayerModel<LivingEntity> LayerArmor = new SkinLayerModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(SkinLayerModel.LAYER_LOCATION));
-                // Criar o modelo de armadura com base na classe DarkLatexCoat
-                HumanoidModel<?> model = new HumanoidModel<>(new ModelPart(Collections.emptyList(),
-                        Map.of("head", LayerArmor.head,  // Para a parte da cabeça
-                                "hat", LayerArmor.hat,
-                                "body", LayerArmor.body,
-                                "left_arm", LayerArmor.leftArm,
-                                "right_arm", LayerArmor.rightArm,
-                                "right_leg", LayerArmor.rightLeg,
-                                "left_leg", LayerArmor.leftLeg)));*/
-
-                model.crouching = living.isShiftKeyDown();
-                model.riding = defaultModel.riding;
-                model.young = living.isBaby();
-                defaultModel.copyPropertiesTo(model);
-
-                return model;
-            }
-        });
-    }
-
-    @Override
-    public @Nullable Color3 getClothColor(ChangedEntity entity, EquipmentSlot slot, ItemStack itemBySlot) {
-        return super.getClothColor(entity, slot, itemBySlot);
-    }
-
-    @Override
-    public @Nullable ResourceLocation getClothTexture(ChangedEntity entity, EquipmentSlot slot, ItemStack itemBySlot) {
-        return super.getClothTexture(entity, slot, itemBySlot);
     }
 }

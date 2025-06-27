@@ -19,15 +19,15 @@ public class FormsStats {
 
     @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (transfurVariantInstance == null) {
             return;
         }
         TransfurExtraStats transfurExtraStats;
-        if (player.getLevel().isClientSide()) {
+        if (player.level().isClientSide()) {
             transfurExtraStats = TransfurExtraStatsRegistry.CLIENT.get(transfurVariantInstance.getFormId());
-            // Verifica se o jogador está segurando um item específico, ou se tem alguma condição
+            // Verifica se o jogador está a segurar um “item” específico, ou se tem alguma condição
             if (transfurVariantInstance.getChangedEntity() instanceof ExtraVariantStats extraVariantStats) {
                 event.setNewSpeed(event.getNewSpeed() * extraVariantStats.getBlockBreakSpeedMultiplier()); // More Fast Break
             } else if (TransfurExtraStatsRegistry.hasExtraStats(transfurVariantInstance.getFormId()) && transfurExtraStats != null) {
@@ -35,7 +35,7 @@ public class FormsStats {
             }
         } else {
             transfurExtraStats = TransfurExtraStatsRegistry.get(transfurVariantInstance.getFormId());
-            // Verifica se o jogador está segurando um item específico, ou se tem alguma condição
+            // Verifica se o jogador está a segurar um “item” específico, ou se tem alguma condição
             if (transfurVariantInstance.getChangedEntity() instanceof ExtraVariantStats extraVariantStats) {
                 event.setNewSpeed(event.getNewSpeed() * extraVariantStats.getBlockBreakSpeedMultiplier()); // More Fast Break
             } else if (TransfurExtraStatsRegistry.hasExtraStats(transfurVariantInstance.getFormId()) && transfurExtraStats != null) {
@@ -47,9 +47,9 @@ public class FormsStats {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(LivingEvent.LivingUpdateEvent event) {
+    public static void onPlayerTick(LivingEvent.LivingTickEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.getLevel().isClientSide()) return;
+        if (player.level().isClientSide()) return;
         TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (transfurVariantInstance == null) {
             return;
@@ -79,7 +79,7 @@ public class FormsStats {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
-        if (player.getLevel().isClientSide()) return;
+        if (player.level().isClientSide()) return;
         if (player.isSpectator()) return;
         TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (transfurVariantInstance == null) {
@@ -102,7 +102,7 @@ public class FormsStats {
     @SubscribeEvent
     public static void onFall(LivingFallEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (player.getLevel().isClientSide()) return;
+        if (player.level().isClientSide()) return;
         TransfurVariantInstance<?> transfurVariantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (transfurVariantInstance == null) {
             return;

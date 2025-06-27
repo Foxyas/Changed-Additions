@@ -5,7 +5,7 @@ import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
 import net.ltxprogrammer.changed.ability.SimpleAbility;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -32,20 +32,19 @@ public class ClawsAbility extends SimpleAbility {
 		}
 	}
 
-	@Override
 	public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-		return new ResourceLocation("changed_additions:textures/abilities/claw.png");
+		return ResourceLocation.parse("changed_additions:textures/abilities/claw.png");
 	}
 
 	@Override
 	public Component getAbilityName(IAbstractChangedEntity entity) {
-		return new TranslatableComponent("changed_additions.ability.claws");
+		return Component.translatable("changed_additions.ability.claws");
 	}
 
 	@Override
 	public Collection<Component> getAbilityDescription(IAbstractChangedEntity entity) {
 		Collection<Component> list = new ArrayList<>();
-		list.add(new TranslatableComponent("changed_additions.ability.claws.desc"));
+		list.add(Component.translatable("changed_additions.ability.claws.desc"));
 		return list;
 	}
 

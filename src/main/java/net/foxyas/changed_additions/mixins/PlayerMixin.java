@@ -45,24 +45,24 @@ public class PlayerMixin {
                     // ⚔ AOE
                     double radius = 1;
                     AABB attackArea = entity.getBoundingBox().inflate(radius, 0.25, radius);
-                    List<LivingEntity> nearbyEntities = player.level.getEntitiesOfClass(LivingEntity.class, attackArea);
+                    List<LivingEntity> nearbyEntities = player.level().getEntitiesOfClass(LivingEntity.class, attackArea);
                     float f = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
                     float f3 = nearbyEntities.isEmpty() ? f : f / nearbyEntities.size();
                     // 🔥 Knock back
                     for (LivingEntity livingEntity : nearbyEntities) {
-                        if (livingEntity != entity && livingEntity != player && (!(livingEntity instanceof ArmorStand) || !((ArmorStand) livingEntity).isMarker()) && player.canHit(livingEntity, 0)) {
+                        if (livingEntity != entity && livingEntity != player && (!(livingEntity instanceof ArmorStand) || !((ArmorStand) livingEntity).isMarker()) && player.canAttack(livingEntity)) {
                             livingEntity.knockback(0.4, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
-                            livingEntity.hurt(DamageSource.playerAttack(player), f3);
+                            livingEntity.hurt(livingEntity.damageSources().playerAttack(player), f3);
                         }
                     }
                     // visual
                     double d0 = (double) (-Mth.sin(player.getYRot() * 0.017453292F)) * 1;
                     double d1 = (double) Mth.cos(player.getYRot() * 0.017453292F) * 1;
-                    if (player.level instanceof ServerLevel serverLevel) {
+                    if (player.level() instanceof ServerLevel serverLevel) {
                         serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);
                         serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.6), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);
                         serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.7), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);
-                        player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1f, 0.75f);
+                        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1f, 0.75f);
                     }
                 }
             }

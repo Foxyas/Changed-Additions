@@ -17,7 +17,7 @@ description="Adds extra content to the Changed Mod by LtxProgrammer but keeping 
 [[dependencies.changed_additions]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2]"
+    versionRange="[1.20.1]"
     ordering="NONE"
     side="BOTH"
 

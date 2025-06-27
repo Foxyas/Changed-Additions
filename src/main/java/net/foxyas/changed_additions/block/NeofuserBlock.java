@@ -6,7 +6,6 @@ import net.foxyas.changed_additions.world.inventory.NeofuserGuiMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -28,8 +27,9 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.network.NetworkHooks;
@@ -39,7 +39,7 @@ import java.util.List;
 
 public class NeofuserBlock extends Block implements EntityBlock {
     public NeofuserBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.METAL).strength(1f, 10f));
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.METAL).strength(1f, 10f));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class NeofuserBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> dropsOriginal = super.getDrops(state, builder);
         if (!dropsOriginal.isEmpty()) return dropsOriginal;
         return Collections.singletonList(new ItemStack(this, 1));
@@ -67,10 +67,10 @@ public class NeofuserBlock extends Block implements EntityBlock {
     public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
         super.use(blockstate, world, pos, entity, hand, hit);
         if (entity instanceof ServerPlayer player) {
-            NetworkHooks.openGui(player, new MenuProvider() {
+            NetworkHooks.openScreen(player, new MenuProvider() {
                 @Override
                 public Component getDisplayName() {
-                    return new TextComponent("Neofuser");
+                    return Component.literal("Neofuser");
                 }
 
                 @Override

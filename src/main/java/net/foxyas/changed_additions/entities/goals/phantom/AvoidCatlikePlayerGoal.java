@@ -40,7 +40,7 @@ public class AvoidCatlikePlayerGoal extends Goal {
 
         nextSearchTick = phantom.tickCount + 20;
 
-        List<LivingEntity> list = phantom.level.getEntitiesOfClass(
+        List<LivingEntity> list = phantom.level().getEntitiesOfClass(
                 LivingEntity.class,
                 phantom.getBoundingBox().inflate(16.0D),
                 e -> {
@@ -58,7 +58,7 @@ public class AvoidCatlikePlayerGoal extends Goal {
         if (!list.isEmpty()) {
             for (LivingEntity entity : list) {
                 if (entity instanceof Player player) {
-                    phantom.level.playSound(
+                    phantom.level().playSound(
                             null,
                             player.blockPosition(),
                             SoundEvents.CAT_HISS,

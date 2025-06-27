@@ -20,6 +20,6 @@ public class TransfurVariantTags {
 
     private static TagKey<TransfurVariant<?>> create(String name) {
         return TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                new ResourceLocation(ChangedAdditionsMod.MODID, name));
+                ResourceLocation.fromNamespaceAndPath(ChangedAdditionsMod.MODID, name));
     }
 }

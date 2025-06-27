@@ -2,7 +2,7 @@ package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,14 +14,14 @@ public class QTEDEBUG {
     @SubscribeEvent
     public static void DEBUG(ServerChatEvent event) {
         ServerPlayer player = event.getPlayer();
-        String message = event.getMessage().toLowerCase();
+        String message = event.getMessage().toString().toLowerCase();
 
         if (message.startsWith("_/qte")) {
             event.setCanceled(true); // impede que o comando apareça no chat normal
 
             String[] parts = message.split(" ");
             if (parts.length < 2) {
-                player.displayClientMessage(new TextComponent("Uso: /qte <arrows|wasd|space>").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(Component.literal("Uso: /qte <arrows|wasd|space>").withStyle(ChatFormatting.RED), false);
                 return;
             }
 
@@ -37,7 +37,7 @@ public class QTEDEBUG {
             };
 
             if (type == null) {
-                player.displayClientMessage(new TextComponent("Tipo inválido! Use arrows_[left or right], wasd, wdsa ou space.").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(Component.literal("Tipo inválido! Use arrows_[left or right], wasd, wdsa ou space.").withStyle(ChatFormatting.RED), false);
                 return;
             }
 
@@ -51,13 +51,13 @@ public class QTEDEBUG {
             };
 
             if (type2 == null) {
-                player.displayClientMessage(new TextComponent("Tipo inválido! Use ftkc, s ou g.").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(Component.literal("Tipo inválido! Use ftkc, s ou g.").withStyle(ChatFormatting.RED), false);
                 return;
             }
 
             QTEManager.addQTE(player, new QuickTimeEvent(player, type, type2, FoxyasUtils.StringToInt(parts[3]))); // 100 ticks = 5 segundos
 
-            player.displayClientMessage(new TextComponent("Quick Time Event iniciado: " + type.name()).withStyle(ChatFormatting.GREEN), false);
+            player.displayClientMessage(Component.literal("Quick Time Event iniciado: " + type.name()).withStyle(ChatFormatting.GREEN), false);
         }
     }
 }

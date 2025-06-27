@@ -1,15 +1,7 @@
 package net.foxyas.changed_additions.item.eventsHandle;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.client.models.accessories.IAccessoryItem;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = ChangedAdditionsMod.MODID, value = Dist.CLIENT)

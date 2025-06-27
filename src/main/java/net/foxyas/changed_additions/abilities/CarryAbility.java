@@ -12,7 +12,8 @@ import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.init.ChangedTransfurVariants;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -35,13 +36,12 @@ public class CarryAbility extends SimpleAbility {
 	}
 
 	@Override
-	public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {
-		return new TranslatableComponent("changed_additions.ability.carry");
+	public Component getAbilityName(IAbstractChangedEntity entity) {
+		return Component.translatable("changed_additions.ability.carry");
 	}
 
-	@Override
 	public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-		return new ResourceLocation("changed_additions:textures/abilities/carry_ability.png");
+		return ResourceLocation.parse("changed_additions:textures/abilities/carry_ability.png");
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public class CarryAbility extends SimpleAbility {
 			if (!isShifting) {
 				carriedEntity.setDeltaMovement(player.getLookAngle().scale(1.05));
 				carriedEntity.hasImpulse = true;
-				if (!player.level.isClientSide()) {
-					((ServerLevel) player.level).getChunkSource().broadcast(carriedEntity, new ClientboundSetEntityMotionPacket(carriedEntity));
+				if (!player.level().isClientSide()) {
+					((ServerLevel) player.level()).getChunkSource().broadcast(carriedEntity, new ClientboundSetEntityMotionPacket(carriedEntity));
 				}
 			}
 			return;
@@ -131,12 +131,12 @@ public class CarryAbility extends SimpleAbility {
 		if (carryTarget instanceof LivingEntity p && !(this.isPossibleToCarry(p))) return;
 
 		if (carryTarget instanceof WhiteLatexCentaur || (carryTarget instanceof Player p && ProcessTransfur.getPlayerTransfurVariant(p) != null && ProcessTransfur.getPlayerTransfurVariant(p).is(ChangedTransfurVariants.WHITE_LATEX_CENTAUR.get()))) {
-			player.displayClientMessage(new TranslatableComponent("changed_additions.warn.cant_carry", carryTarget.getDisplayName()), true);
+			player.displayClientMessage(Component.translatable("changed_additions.warn.cant_carry", carryTarget.getDisplayName()), true);
 			return;
 		}
 		if (carryTarget instanceof Player carryPlayer && carryPlayer.isCreative() && !player.isCreative())
 			return;
-		if (carryTarget.getType().is(ChangedTags.EntityTypes.HUMANOIDS) || carryTarget.getType().is(TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation("changed_additions:can_carry")))) {
+		if (carryTarget.getType().is(ChangedTags.EntityTypes.HUMANOIDS) || carryTarget.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("changed_additions:can_carry")))) {
 			if (carryTarget.startRiding(player, true)) {
 				syncMount(player);
 				if (carryTarget instanceof Player)
@@ -146,11 +146,11 @@ public class CarryAbility extends SimpleAbility {
 	}
 
 	public static void SoundPlay(Player player) {
-		player.level.playSound(null, player.blockPosition(), ChangedSounds.BOW2, SoundSource.PLAYERS, 2.5f, 1.0f);
+		player.level().playSound(null, player.blockPosition(), ChangedSounds.BOW2.get(), SoundSource.PLAYERS, 2.5f, 1.0f);
 	}
 
 	private static void syncMount(Player player) {
-		if (!player.level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+		if (!player.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.connection.send(new ClientboundSetPassengersPacket(player));
 			serverPlayer.setDeltaMovement(serverPlayer.getLookAngle().scale(1.05));
 			SoundPlay(serverPlayer);
@@ -158,7 +158,7 @@ public class CarryAbility extends SimpleAbility {
 	}
 
 	private static void syncMount(Player player, Player player2) {
-		if (!player.level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+		if (!player.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.connection.send(new ClientboundSetPassengersPacket(player));
 			serverPlayer.setDeltaMovement(player2.getLookAngle().scale(1.05));
 			SoundPlay(serverPlayer);
@@ -167,7 +167,7 @@ public class CarryAbility extends SimpleAbility {
 
 
 	private static void syncMountNoMotion(Player player) {
-		if (!player.level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+		if (!player.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.connection.send(new ClientboundSetPassengersPacket(player));
 			SoundPlay(serverPlayer);
 		}

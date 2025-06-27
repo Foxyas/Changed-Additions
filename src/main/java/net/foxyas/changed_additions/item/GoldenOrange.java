@@ -12,7 +12,6 @@ import net.minecraft.world.item.Rarity;
 public class GoldenOrange extends Item {
     public GoldenOrange() {
         super(new Item.Properties()
-                .tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)
                 .rarity(Rarity.RARE)
                 .food(new FoodProperties.Builder()
                         .nutrition(4).saturationMod(1.2F)

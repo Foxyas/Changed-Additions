@@ -10,7 +10,7 @@ public class ProcessUntransfur {
             variant.unhookAll(player);
             ProcessTransfur.removePlayerTransfurVariant(player);
             ProcessTransfur.setPlayerTransfurProgress(player, 0.0F);
-            player.playSound(ChangedAdditionsSounds.UNTRANSFUR, 1, 1);
+            player.playSound(ChangedAdditionsSounds.UNTRANSFUR.get(), 1, 1);
         });
     }
 }

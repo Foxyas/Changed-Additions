@@ -6,7 +6,7 @@ import net.foxyas.changed_additions.network.TurnOffTransfurMessage;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -58,10 +58,10 @@ public class ChangedAdditionsKeyMappings {
 	};*/
 
     @SubscribeEvent
-    public static void registerKeyBindings(FMLClientSetupEvent event) {
-        ClientRegistry.registerKeyBinding(TURN_OFF_TRANSFUR);
-        ClientRegistry.registerKeyBinding(PAT_KEY);
-        //ClientRegistry.registerKeyBinding(OPEN_STRUGGLE_MENU);
+    public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
+        event.register(TURN_OFF_TRANSFUR);
+        event.register(PAT_KEY);
+        //KeyBindingHelper.registerKeyBinding(OPEN_STRUGGLE_MENU);
     }
 
     @Mod.EventBusSubscriber({Dist.CLIENT})

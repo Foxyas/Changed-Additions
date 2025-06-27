@@ -12,7 +12,7 @@ public class ChangedAdditionsScreens {
     @SubscribeEvent
     public static void clientLoad(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.register(ChangedAdditionsMenus.NEOFUSER_GUI, NeofuserGuiScreen::new);
+            MenuScreens.register(ChangedAdditionsMenus.NEOFUSER_GUI.get(), NeofuserGuiScreen::new);
         });
     }
 }

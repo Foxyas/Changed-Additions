@@ -3,22 +3,23 @@ package net.foxyas.changed_additions.item.armor;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.foxyas.changed_additions.init.ChangedAdditionsItems;
-import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.item.ExtendedItemProperties;
 import net.ltxprogrammer.changed.item.Shorts;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.DyeableArmorItem;
+import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
@@ -62,7 +63,7 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
     }
 	
     public DyeableShorts() {
-        super(MATERIAL, EquipmentSlot.LEGS, (new Properties()).tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
+        super(MATERIAL, Type.LEGGINGS, (new Properties()));
     }
 
     public boolean isDamageable(ItemStack stack) {
@@ -75,7 +76,7 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
     }
 
     public SoundEvent getEquipSound() {
-        return ChangedSounds.EQUIP3;
+        return ChangedSounds.EQUIP3.get();
     }
 
     @Override
@@ -86,20 +87,8 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
     }
 
     public SoundEvent getBreakSound(ItemStack itemStack) {
-        return ChangedSounds.SLASH10;
+        return ChangedSounds.SLASH10.get();
     }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(tab)) {
-            for (DefaultColors color : DefaultColors.values()) {
-                ItemStack stack = new ItemStack(this);
-                this.setColor(stack, color.getColorToInt());
-                items.add(stack);
-            }
-        }
-    }
-
 
     @Override
     public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
@@ -113,8 +102,8 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientInitializer {
         @SubscribeEvent
-        public static void onItemColorsInit(ColorHandlerEvent.Item event) {
-            event.getItemColors().register(
+        public static void onItemColorsInit(RegisterColorHandlersEvent.Item event) {
+            event.register(
                     (stack, layer) -> ((DyeableLeatherItem)stack.getItem()).getColor(stack),
                     ChangedAdditionsItems.DYEABLE_SHORTS.get());
         }

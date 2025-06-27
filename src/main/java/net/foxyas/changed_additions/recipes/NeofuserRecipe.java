@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -11,7 +12,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
@@ -38,6 +38,11 @@ public class NeofuserRecipe implements Recipe<SimpleContainer> {
         //return recipeItems.get(0).test(pContainer.getItem(1));
     }
 
+    @Override
+    public ItemStack assemble(SimpleContainer simpleContainer, RegistryAccess registryAccess) {
+        return output;
+    }
+
     public float getProgressSpeed() {
         return ProgressSpeed;
     }
@@ -47,7 +52,6 @@ public class NeofuserRecipe implements Recipe<SimpleContainer> {
         return recipeItems;
     }
 
-    @Override
     public ItemStack assemble(SimpleContainer pContainer) {
         return output;
     }
@@ -58,6 +62,10 @@ public class NeofuserRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return output.copy();
+    }
+
     public ItemStack getResultItem() {
         return output.copy();
     }
@@ -84,9 +92,9 @@ public class NeofuserRecipe implements Recipe<SimpleContainer> {
         }
     }
 
-    public static class Serializer implements RecipeSerializer<NeofuserRecipe>, IForgeRegistryEntry<RecipeSerializer<?>> {
+    public static class Serializer implements RecipeSerializer<NeofuserRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation("changed_additions", "neofuser_recipe");
+        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("changed_additions", "neofuser_recipe");
 
         @Override
         public NeofuserRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
@@ -122,23 +130,8 @@ public class NeofuserRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-            buf.writeItemStack(recipe.getResultItem(), false);
+            buf.writeItemStack(recipe.output, false);
             buf.writeFloat(recipe.getProgressSpeed());
-        }
-
-        @Override
-        public ResourceLocation getRegistryName() {
-            return ID;
-        }
-
-        @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
-            return this;
-        }
-
-        @Override
-        public Class<RecipeSerializer<?>> getRegistryType() {
-            return (Class<RecipeSerializer<?>>) (Class<?>) RecipeSerializer.class;
         }
     }
 }

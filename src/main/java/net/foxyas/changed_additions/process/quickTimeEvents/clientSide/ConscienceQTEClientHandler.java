@@ -1,5 +1,6 @@
 package net.foxyas.changed_additions.process.quickTimeEvents.clientSide;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.foxyas.changed_additions.configuration.ChangedAdditionsClientConfigs;
@@ -9,20 +10,24 @@ import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QTEManage
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEvent;
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEventSequenceType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static net.foxyas.changed_additions.process.util.FoxyasUtils.drawCenteredString;
+import static net.ltxprogrammer.changed.client.gui.GrabOverlay.blit;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class ConscienceQTEClientHandler {
 
     @SubscribeEvent
-    public static void onRenderOverlay(RenderGameOverlayEvent.Pre event) {
+    public static void onRenderOverlay(RenderGuiOverlayEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null) return;
@@ -30,7 +35,7 @@ public class ConscienceQTEClientHandler {
         QuickTimeEvent qte = QTEManager.getAutoActiveQTE(player);
         if (qte == null || qte.isFinished()) return;
 
-        PoseStack stack = event.getMatrixStack();
+        GuiGraphics stack = event.getGuiGraphics();
         int sw = event.getWindow().getGuiScaledWidth();
         int sh = event.getWindow().getGuiScaledHeight();
 
@@ -49,7 +54,13 @@ public class ConscienceQTEClientHandler {
                 KeySizeX = qteType.getKeyTypeSize().getFirst();
                 KeySizeY = qteType.getKeyTypeSize().getSecond();
                 ResourceLocation texture = qteType.getKeyTexture();
-                RenderSystem.setShaderTexture(0, texture);
+                RenderSystem.disableDepthTest();
+                RenderSystem.depthMask(false);
+                RenderSystem.enableBlend();
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                RenderSystem.setShaderColor(1, 1, 1, 1);
+
 
                 //int size = 16;
                 int x = (sw / 2) + key.guiX;
@@ -74,9 +85,9 @@ public class ConscienceQTEClientHandler {
                 }
 
                 if (isPressed) {
-                    GuiComponent.blit(stack, x, y, u, v + KeySizeY, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
+                    blit(stack, texture, x, y, u, v + KeySizeY, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
                 } else {
-                    GuiComponent.blit(stack, x, y, u, v, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
+                    blit(stack, texture, x, y, u, v, KeySizeX, KeySizeY, ImageSizeX, ImageSizeY);
                 }
 
                 if (ChangedAdditionsClientConfigs.QTE_SHOW_INFO.get() && key == keys.get(0)) {
@@ -90,16 +101,20 @@ public class ConscienceQTEClientHandler {
 
                     if (ChangedAdditionsClientConfigs.QTE_SHOW_TICKS_LEFT.get()) {
                         String ticksText = "Ticks Left: " + ticksLeft;
-                        GuiComponent.drawCenteredString(stack, mc.font, ticksText, textX, baseY + (lineSpacing * line++), getTickColor(ticksLeft));
+                        drawCenteredString(stack, mc.font, ticksText, textX, baseY + (lineSpacing * line++), getTickColor(ticksLeft));
                     }
 
                     if (ChangedAdditionsClientConfigs.QTE_SHOW_PROGRESS.get()) {
                         String progressText = String.format("Progress: %.0f%%", progress * 100f);
-                        GuiComponent.drawCenteredString(stack, mc.font, progressText, textX, baseY + (lineSpacing * line), getProgressColor(progress));
+                        drawCenteredString(stack, mc.font, progressText, textX, baseY + (lineSpacing * line), getProgressColor(progress));
                     }
                     //mc.font.draw(stack, progressText, textX, textY, 0xFFFFFF);
                 }
-
+                RenderSystem.depthMask(true);
+                RenderSystem.defaultBlendFunc();
+                RenderSystem.enableDepthTest();
+                RenderSystem.disableBlend();
+                RenderSystem.setShaderColor(1, 1, 1, 1);
             }
         }
     }
@@ -126,9 +141,9 @@ public class ConscienceQTEClientHandler {
         int g2 = (toColor >> 8) & 0xFF;
         int b2 = toColor & 0xFF;
 
-        int r = (int)(r1 + (r2 - r1) * factor);
-        int g = (int)(g1 + (g2 - g1) * factor);
-        int b = (int)(b1 + (b2 - b1) * factor);
+        int r = (int) (r1 + (r2 - r1) * factor);
+        int g = (int) (g1 + (g2 - g1) * factor);
+        int b = (int) (b1 + (b2 - b1) * factor);
 
         return (r << 16) | (g << 8) | b;
     }

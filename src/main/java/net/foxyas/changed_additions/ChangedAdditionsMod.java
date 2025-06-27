@@ -32,12 +32,13 @@ public class ChangedAdditionsMod {
     public static final Logger LOGGER = LogManager.getLogger(ChangedAdditionsMod.class);
     public static final String MODID = "changed_additions";
     private static final String PROTOCOL_VERSION = "1";
-    public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+    public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(ResourceLocation.fromNamespaceAndPath(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
     private static int messageID = 0;
 
     public ChangedAdditionsMod() {
-        ChangedAdditionsTabs.load();
+        @SuppressWarnings("removal")
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        ChangedAdditionsTabs.REGISTRY.register(bus);
         ChangedAdditionsEnchantments.REGISTRY.register(bus);
         ChangedAdditionsMobEffects.REGISTRY.register(bus);
         ChangedAdditionsBlocks.REGISTRY.register(bus);
@@ -45,6 +46,9 @@ public class ChangedAdditionsMod {
         ChangedAdditionsEntities.REGISTRY.register(bus);
         ChangedAdditionsTransfurVariants.REGISTRY.register(bus);
         ChangedAdditionsAbilities.REGISTRY.register(bus);
+        ChangedAdditionsMenus.REGISTRY.register(bus);
+        ChangedAdditionsSounds.SOUNDS.register(bus);
+        ChangedAdditionsParticles.REGISTRY.register(bus);
 
         ChangedAdditionsBlockEntities.REGISTRY.register(bus);
 
@@ -56,7 +60,7 @@ public class ChangedAdditionsMod {
     }
 
     public static ResourceLocation modResource(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
     public static ModelLayerLocation modModelLayerLocation(String path, String type) {

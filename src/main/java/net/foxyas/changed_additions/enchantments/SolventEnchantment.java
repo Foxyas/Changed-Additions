@@ -45,7 +45,7 @@ public class SolventEnchantment extends Enchantment implements IForgeEnchantment
         }
 
 
-        return Ingredient.of(ItemTags.create(new ResourceLocation("changed_additions:latex_solvent_appliable"))).test(itemstack);
+        return Ingredient.of(ItemTags.create(ResourceLocation.parse("changed_additions:latex_solvent_appliable"))).test(itemstack);
     }
 
     @Override

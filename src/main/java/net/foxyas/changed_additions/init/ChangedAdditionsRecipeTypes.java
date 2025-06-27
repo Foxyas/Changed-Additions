@@ -28,6 +28,7 @@ public class ChangedAdditionsRecipeTypes {
 
     @SubscribeEvent
     public static void register(FMLConstructModEvent event) {
+        @SuppressWarnings("removal")
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         event.enqueueWork(() -> SERIALIZERS.register(bus));
     }

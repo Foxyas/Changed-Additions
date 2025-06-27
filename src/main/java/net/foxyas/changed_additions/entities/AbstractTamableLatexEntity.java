@@ -6,12 +6,10 @@ import net.ltxprogrammer.changed.entity.ai.LatexFollowOwnerGoal;
 import net.ltxprogrammer.changed.entity.ai.LatexOwnerHurtByTargetGoal;
 import net.ltxprogrammer.changed.entity.ai.LatexOwnerHurtTargetGoal;
 import net.ltxprogrammer.changed.init.ChangedCriteriaTriggers;
-import net.minecraft.Util;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -120,7 +118,7 @@ public abstract class AbstractTamableLatexEntity extends ChangedEntity implement
             double d0 = this.random.nextGaussian() * 0.02;
             double d1 = this.random.nextGaussian() * 0.02;
             double d2 = this.random.nextGaussian() * 0.02;
-            this.level.addParticle(particleoptions, this.getRandomX(1.0), this.getRandomY() + 0.5, this.getRandomZ(1.0), d0, d1, d2);
+            this.level().addParticle(particleoptions, this.getRandomX(1.0), this.getRandomY() + 0.5, this.getRandomZ(1.0), d0, d1, d2);
         }
 
     }
@@ -145,7 +143,7 @@ public abstract class AbstractTamableLatexEntity extends ChangedEntity implement
     public @Nullable LivingEntity getOwner() {
         try {
             UUID uuid = this.getOwnerUUID();
-            return uuid == null ? null : this.level.getPlayerByUUID(uuid);
+            return uuid == null ? null : this.level().getPlayerByUUID(uuid);
         } catch (IllegalArgumentException var2) {
             return null;
         }
@@ -167,22 +165,22 @@ public abstract class AbstractTamableLatexEntity extends ChangedEntity implement
     protected @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             boolean flag = this.isOwnedBy(player) || this.isTame();
             return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
         } else if (this.isTame()) {
             if (this.isTame() && this.isTameItem(itemstack) && this.getHealth() < this.getMaxHealth()) {
                 itemstack.shrink(1);
                 this.heal(2.0F);
-                this.gameEvent(GameEvent.MOB_INTERACT, this.eyeBlockPosition());
-                this.level.broadcastEntityEvent(this, (byte) 7);
+                this.gameEvent(GameEvent.ENTITY_INTERACT, this);
+                this.level().broadcastEntityEvent(this, (byte) 7);
                 return InteractionResult.SUCCESS;
             } else {
                 InteractionResult interactionresult = super.mobInteract(player, hand);
                 if ((!interactionresult.consumesAction() || this.isBaby()) && this.isOwnedBy(player)) {
                     boolean shouldFollow = !this.isFollowingOwner();
                     this.setFollowOwner(shouldFollow);
-                    player.displayClientMessage(new TranslatableComponent(shouldFollow ? "text.changed.tamed.follow" : "text.changed.tamed.wander", this.getDisplayName()), true);
+                    player.displayClientMessage(Component.translatable(shouldFollow ? "text.changed.tamed.follow" : "text.changed.tamed.wander", this.getDisplayName()), true);
                     this.jumping = false;
                     this.navigation.stop();
                     this.setTarget(null);
@@ -276,8 +274,10 @@ public abstract class AbstractTamableLatexEntity extends ChangedEntity implement
     public void die(@NotNull DamageSource source) {
         Component deathMessage = this.getCombatTracker().getDeathMessage();
         super.die(source);
-        if (this.dead && !this.level.isClientSide && this.level.getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getOwner() instanceof ServerPlayer) {
-            this.getOwner().sendMessage(deathMessage, Util.NIL_UUID);
+        if (this.dead && !this.level().isClientSide && this.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getOwner() instanceof ServerPlayer) {
+            if (this.getOwner() instanceof Player player) {
+                player.displayClientMessage(deathMessage, false);
+            }
         }
 
     }

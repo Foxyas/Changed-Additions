@@ -24,8 +24,7 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -80,12 +79,12 @@ public class ChangedAdditionsCommands {
                                                     int SAFE_LIMIT = 32768;
 
                                                     if (value > SAFE_LIMIT) {
-                                                        ctx.getSource().sendFailure(new TextComponent("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
+                                                        ctx.getSource().sendFailure(Component.literal("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
                                                         return 0;
                                                     }
 
                                                     BlockHandle.run(world, minPos, maxPos, LatexType.WHITE_LATEX);
-                                                    ctx.getSource().sendSuccess(new TextComponent("Set Infection of " + value + " blocks to white_latex"), true);
+                                                    ctx.getSource().sendSuccess(() -> Component.literal("Set Infection of " + value + " blocks to white_latex"), true);
                                                     return 1;
                                                 })
                                         ).then(Commands.literal("dark_latex")
@@ -98,12 +97,12 @@ public class ChangedAdditionsCommands {
                                                     int SAFE_LIMIT = 32768;
 
                                                     if (value > SAFE_LIMIT) {
-                                                        ctx.getSource().sendFailure(new TextComponent("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
+                                                        ctx.getSource().sendFailure(Component.literal("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
                                                         return 0;
                                                     }
 
                                                     BlockHandle.run(world, minPos, maxPos, LatexType.DARK_LATEX);
-                                                    ctx.getSource().sendSuccess(new TextComponent("Set Infection of " + value + " blocks to dark_latex"), true);
+                                                    ctx.getSource().sendSuccess(() -> Component.literal("Set Infection of " + value + " blocks to dark_latex"), true);
                                                     return 1;
 
                                                 })
@@ -117,12 +116,12 @@ public class ChangedAdditionsCommands {
                                                     int SAFE_LIMIT = 32768;
 
                                                     if (value > SAFE_LIMIT) {
-                                                        ctx.getSource().sendFailure(new TextComponent("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
+                                                        ctx.getSource().sendFailure(Component.literal("Too many blocks selected: " + value + " > " + SAFE_LIMIT));
                                                         return 0;
                                                     }
 
                                                     BlockHandle.run(world, minPos, maxPos, LatexType.NEUTRAL);
-                                                    ctx.getSource().sendSuccess(new TextComponent("Set Infection of " + value + " blocks to neutral"), true);
+                                                    ctx.getSource().sendSuccess(() -> Component.literal("Set Infection of " + value + " blocks to neutral"), true);
                                                     return 1;
 
                                                 })
@@ -159,15 +158,15 @@ public class ChangedAdditionsCommands {
                                     Player player = EntityArgument.getPlayer(ctx, "targetPlayer");
                                     QuickTimeEvent quickTimeEvent = QTEManager.getActiveQTE(player);
                                     if (quickTimeEvent != null) {
-                                        ctx.getSource().sendSuccess(
-                                                new TranslatableComponent(
+                                        ctx.getSource().sendSuccess(() ->
+                                                        Component.translatable(
                                                         "changed_additions.commands.getQuickTimeEventForPlayer.have",
                                                         player.getName().getString()
                                                 ),
                                                 false
                                         );
-                                        ctx.getSource().sendSuccess(
-                                                new TranslatableComponent(
+                                        ctx.getSource().sendSuccess(() ->
+                                                        Component.translatable(
                                                         "changed_additions.commands.getQuickTimeEventForPlayer.details",
                                                         quickTimeEvent.getType().name(),
                                                         quickTimeEvent.getSequenceType().name(),
@@ -177,8 +176,8 @@ public class ChangedAdditionsCommands {
                                                 false
                                         );
                                     } else {
-                                        ctx.getSource().sendSuccess(
-                                                new TranslatableComponent(
+                                        ctx.getSource().sendSuccess(() ->
+                                                        Component.translatable(
                                                         "changed_additions.commands.getQuickTimeEventForPlayer.none",
                                                         player.getName().getString()
                                                 ),
@@ -223,15 +222,15 @@ public class ChangedAdditionsCommands {
                                                                 sequenceType = QuickTimeEventSequenceType.valueOf(sequenceStr.toUpperCase());
                                                                 type = QuickTimeEventType.valueOf(typeStr.toUpperCase());
                                                             } catch (IllegalArgumentException ex) {
-                                                                ctx.getSource().sendFailure(new TranslatableComponent("changed_additions.commands.setQuickTimeEventForPlayer.fail"));
+                                                                ctx.getSource().sendFailure(Component.translatable("changed_additions.commands.setQuickTimeEventForPlayer.fail"));
                                                                 return 0;
                                                             }
 
                                                             int ticks = IntegerArgumentType.getInteger(ctx, "Ticks");
                                                             QuickTimeEvent quickTimeEvent = new QuickTimeEvent(player, sequenceType, type, ticks);
                                                             QTEManager.addQTE(player, quickTimeEvent);
-                                                            ctx.getSource().sendSuccess(
-                                                                    new TranslatableComponent(
+                                                            ctx.getSource().sendSuccess(() ->
+                                                                            Component.translatable(
                                                                             "changed_additions.commands.setQuickTimeEventForPlayer.success",
                                                                             type.name(), sequenceType.name(), player.getName().getString(), ticks
                                                                     ),
@@ -312,17 +311,17 @@ public class ChangedAdditionsCommands {
         public static float getSize(Player player, float size, boolean OverrideSize) {
             float SIZE_TOLERANCE = BasicPlayerInfo.getSizeTolerance();
             if (size < 1.0f - SIZE_TOLERANCE) {
-                player.displayClientMessage(new TextComponent("Size value is too low: " + size + ", The Size Value is going to be auto set to limit").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too Low Warn
+                player.displayClientMessage(Component.literal("Size value is too low: " + size + ", The Size Value is going to be auto set to limit").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too Low Warn
             } else if (size > 1.0f + SIZE_TOLERANCE) {
-                player.displayClientMessage(new TextComponent("Size value is too high: " + size + ", The Size Value is going to be auto set to max").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too High Warn
+                player.displayClientMessage(Component.literal("Size value is too high: " + size + ", The Size Value is going to be auto set to max").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too High Warn
             }
             return OverrideSize ? Mth.clamp(size, 1.0f - SIZE_TOLERANCE, 1.0f + SIZE_TOLERANCE) : size;
 
             /*
              * if(newSize < 1.0f - SIZE_TOLERANCE) {
-             *		player.displayClientMessage(new TextComponent ("Size value is too low: " + newSize + ", The Size Value is going to be auto set to 0.95"),true);
+             *		player.displayClientMessage(Component.literal ("Size value is too low: " + newSize + ", The Size Value is going to be auto set to 0.95"),true);
              *	} else if (newSize > 1.0f + SIZE_TOLERANCE) {
-             *		player.displayClientMessage(new TextComponent ("Size value is too high: " + newSize + ", The Size Value is going to be auto set to 1.05"),true);
+             *		player.displayClientMessage(Component.literal ("Size value is too high: " + newSize + ", The Size Value is going to be auto set to 1.05"),true);
              *	}
              */
         }
@@ -332,12 +331,12 @@ public class ChangedAdditionsCommands {
                 float newSize = getSize(player, amount, true);
                 Changed.config.client.basicPlayerInfo.setSize(newSize); // Change Size
                 ChangedAdditionsMod.LOGGER.info("Size changed to: " + newSize + " for player: " + player.getName().getString()); // Command Classic Log
-                //player.displayClientMessage(new TextComponent("Size changed to: " + newSize), false); // Chat log for the player
-                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.success", amount), false);
+                //player.displayClientMessage(Component.literal("Size changed to: " + newSize), false); // Chat log for the player
+                arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setBpiSize.success", amount), false);
                 return 1;
             } else {
                 ChangedAdditionsMod.LOGGER.atError().log("cannot change size."); // Command Classic Error
-                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setBpiSize.fail"), false);
+                arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setBpiSize.fail"), false);
                 return 0;
             }
         }
@@ -346,16 +345,16 @@ public class ChangedAdditionsCommands {
         public static int MaxSizeChange(CommandContext<CommandSourceStack> arguments, double amount) {
             try {
                 Changed.config.server.bpiSizeTolerance.set(amount); // Change Size
-                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success", amount), false);
+                arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setMaxBPISize.success", amount), false);
                 if (amount < 0) {
-                    arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success_but_to_low", amount), false);
+                    arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setMaxBPISize.success_but_to_low", amount), false);
                 }
                 if (amount > 100) {
-                    arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.setMaxBPISize.success_but_to_high", amount), false);
+                    arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setMaxBPISize.success_but_to_high", amount), false);
                 }
                 return 1;
             } catch (Exception exception) {
-                arguments.getSource().sendFailure(new TextComponent(exception.getMessage()));
+                arguments.getSource().sendFailure(Component.literal(exception.getMessage()));
                 return 0;
             }
         }
@@ -363,10 +362,10 @@ public class ChangedAdditionsCommands {
         public static int SendMaxSizeTolerance(CommandContext<CommandSourceStack> arguments) {
             try {
                 double value = Changed.config.server.bpiSizeTolerance.get();
-                arguments.getSource().sendSuccess(new TranslatableComponent("changed_additions.commands.getMaxSizeTolerance", value), false);
+                arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.getMaxSizeTolerance", value), false);
                 return 1;
             } catch (Exception e) {
-                arguments.getSource().sendFailure(new TranslatableComponent(e.getMessage()));
+                arguments.getSource().sendFailure(Component.translatable(e.getMessage()));
                 return 0;
             }
         }

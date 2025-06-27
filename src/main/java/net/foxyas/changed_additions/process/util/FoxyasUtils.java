@@ -2,10 +2,14 @@ package net.foxyas.changed_additions.process.util;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -27,10 +31,18 @@ public class FoxyasUtils {
 
     public static List<Holder<EntityType<?>>> getEntitiesInTag(TagKey<EntityType<?>> tagKey, Level level) {
         return level.registryAccess()
-                .registry(Registry.ENTITY_TYPE_REGISTRY)
+                .registry(Registries.ENTITY_TYPE)
                 .flatMap(reg -> reg.getTag(tagKey))
                 .map(tag -> tag.stream().toList())
                 .orElse(List.of());
+    }
+
+    public static void drawCenteredString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, int color) {
+        guiGraphics.drawString(font, text, x - font.width(text) / 2, y, color);
+    }
+
+    public static void drawCenteredString(GuiGraphics guiGraphics, Font font, String text, int x, int y, int color) {
+        guiGraphics.drawString(font, text, x - font.width(text) / 2, y, color);
     }
 
     public static int clamp(int value, int min, int max) {
@@ -71,7 +83,6 @@ public class FoxyasUtils {
     }
 
 
-
     public static BlockHitResult manualRaycastIgnoringBlocks(Level level, Entity entity, double maxDistance, Set<Block> ignoredBlocks) {
         Vec3 start = entity.getEyePosition(1.0F);
         Vec3 lookVec = entity.getViewVector(1.0F);
@@ -82,7 +93,7 @@ public class FoxyasUtils {
         int steps = (int) (maxDistance / stepSize);
 
         for (int i = 0; i < steps; i++) {
-            BlockPos blockPos = new BlockPos(currentPos);
+            BlockPos blockPos = new BlockPos((int) currentPos.x, (int) currentPos.y, (int) currentPos.z);
             BlockState state = level.getBlockState(blockPos);
 
             if (!ignoredBlocks.contains(state.getBlock()) && state.isSolidRender(level, blockPos)) {
@@ -97,7 +108,7 @@ public class FoxyasUtils {
 
         Direction missDirection = Direction.getNearest(lookVec.x, lookVec.y, lookVec.z);
         Vec3 missPos = applyOffset(end, missDirection, -0.05D);
-        return BlockHitResult.miss(missPos, missDirection, new BlockPos(end));
+        return BlockHitResult.miss(missPos, missDirection, new BlockPos((int) end.x, (int) end.y, (int) end.z));
     }
 
     // Utilitário para aplicar deslocamento da face atingida
@@ -111,7 +122,7 @@ public class FoxyasUtils {
 
     public static void grandPlayerAdvancement(Player player, String AdvancementId) {
         if (player instanceof ServerPlayer _player) {
-            Advancement _adv = _player.server.getAdvancements().getAdvancement(new ResourceLocation(AdvancementId));
+            Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse(AdvancementId));
             assert _adv != null;
             if (_player.getAdvancements().getOrStartProgress(_adv).isDone()) {
                 return;

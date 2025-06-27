@@ -61,7 +61,7 @@ public class FollowAndLookAtLaser extends Goal {
     }
 
     private boolean hasLineOfSight(Vec3 target) {
-        return mob.level.clip(new ClipContext(
+        return mob.level().clip(new ClipContext(
                 mob.getEyePosition(), target,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,

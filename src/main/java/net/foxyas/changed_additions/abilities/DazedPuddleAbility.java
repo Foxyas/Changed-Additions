@@ -2,7 +2,7 @@ package net.foxyas.changed_additions.abilities;
 
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
 import net.ltxprogrammer.changed.ability.SimpleAbility;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
@@ -14,14 +14,14 @@ public class DazedPuddleAbility extends SimpleAbility {
     public final AttributeModifier PuddleReachAttributeMod = new AttributeModifier(UUID.fromString("393f142c-fcec-4a4f-a233-6c86b64f6468"),"ReachPuddleMod", -0.5, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
     @Override
-    public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {
-        return new TranslatableComponent("ability.changed.puddle");
+    public Component getAbilityName(IAbstractChangedEntity entity) {
+        return Component.translatable("ability.changed.puddle");
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-        return new ResourceLocation("changed:textures/abilities/puddle.png");
+        return ResourceLocation.parse("changed:textures/abilities/puddle.png");
     }
+
     @Override
     public void startUsing(IAbstractChangedEntity entity) {
         /*if (entity.getChangedEntity() instanceof DazedEntity dazedEntity) {
@@ -49,7 +49,7 @@ public class DazedPuddleAbility extends SimpleAbility {
             return;
         }
         float TransfurDmgAmount = (float) TransfurDmgAttribute.getValue();
-        entity.getLevel().getEntitiesOfClass(LivingEntity.class, entity.getChangedEntity().getBoundingBox().inflate(0.25, 0, 0.25)).forEach(caught -> {
+        entity.level().getEntitiesOfClass(LivingEntity.class, entity.getChangedEntity().getBoundingBox().inflate(0.25, 0, 0.25)).forEach(caught -> {
             if (caught == entity.getEntity())
                 return;
             if (caught.getType().is(ChangedTags.EntityTypes.HUMANOIDS)) {

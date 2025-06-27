@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class PatEntityTrigger extends SimpleCriterionTrigger<PatEntityTrigger.TriggerInstance> {
 
     // Definindo o ID do trigger
-    private static final ResourceLocation ID = new ResourceLocation("changed_additions", "pat_entity_trigger");
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("changed_additions", "pat_entity_trigger");
 
     @Override
     public @NotNull ResourceLocation getId() {
@@ -19,7 +19,7 @@ public class PatEntityTrigger extends SimpleCriterionTrigger<PatEntityTrigger.Tr
     }
 
     @Override
-    protected @NotNull TriggerInstance createInstance(JsonObject p_66248_, EntityPredicate.Composite p_66249_, DeserializationContext p_66250_) {
+    protected @NotNull TriggerInstance createInstance(JsonObject p_66248_, @NotNull ContextAwarePredicate p_66249_, @NotNull DeserializationContext p_66250_) {
         // Verificação de presença de cada slot de armadura e desserialização dos predicados
         ItemPredicate headSlot = p_66248_.has("head") ? ItemPredicate.fromJson(p_66248_.get("head")) : ItemPredicate.ANY;
         ItemPredicate chestSlot = p_66248_.has("chest") ? ItemPredicate.fromJson(p_66248_.get("chest")) : ItemPredicate.ANY;
@@ -46,7 +46,7 @@ public class PatEntityTrigger extends SimpleCriterionTrigger<PatEntityTrigger.Tr
         private final ItemPredicate feetSlot;
         private final EntityTypePredicate entityType;
 
-        public TriggerInstance(EntityPredicate.Composite playerPredicate, ItemPredicate headSlot, ItemPredicate chestSlot, ItemPredicate legsSlot, ItemPredicate feetSlot, EntityTypePredicate entityType) {
+        public TriggerInstance(ContextAwarePredicate playerPredicate, ItemPredicate headSlot, ItemPredicate chestSlot, ItemPredicate legsSlot, ItemPredicate feetSlot, EntityTypePredicate entityType) {
             super(PatEntityTrigger.ID, playerPredicate);
             this.headSlot = headSlot;
             this.chestSlot = chestSlot;

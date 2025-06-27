@@ -18,7 +18,7 @@ import org.lwjgl.glfw.GLFW;
 public class QTEInputHandle {
 
     @SubscribeEvent
-    public static void onKeyInput(InputEvent.KeyInputEvent event) {
+    public static void onKeyInput(InputEvent.Key event) {
         if (event.getAction() == GLFW.GLFW_PRESS || event.getAction() == GLFW.GLFW_REPEAT) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player != null && mc.screen == null) {
@@ -27,7 +27,7 @@ public class QTEInputHandle {
 
                     InputKey.fromKeyCode(event.getKey()).ifPresent(inputKey -> {
                         if (QTEManager.Client.getActiveQTE(mc.player) != null) {
-                            mc.player.getLevel().playSound(mc.player, mc.player, ChangedAdditionsClientConfigs.USE_BLOW1_SOUND_INSTEAD_OF_CLICK.get() ? ChangedSounds.BLOW1 : SoundEvents.UI_BUTTON_CLICK, SoundSource.PLAYERS, 1f, QTEManager.Client.getActiveQTE(mc.player).getProgress());
+                            mc.player.level().playSound(mc.player, mc.player, ChangedAdditionsClientConfigs.USE_BLOW1_SOUND_INSTEAD_OF_CLICK.get() ? ChangedSounds.BLOW1.get() : SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.PLAYERS, 1f, QTEManager.Client.getActiveQTE(mc.player).getProgress());
                         }
                     });
 

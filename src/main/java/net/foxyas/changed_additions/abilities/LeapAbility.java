@@ -7,7 +7,7 @@ import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,13 +20,12 @@ public class LeapAbility extends SimpleAbility {
     }
 
     @Override
-    public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {
-        return new TranslatableComponent("changed_additions.ability.leap");
+    public Component getAbilityName(IAbstractChangedEntity entity) {
+        return Component.translatable("changed_additions.ability.leap");
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-        return new ResourceLocation("changed_additions:textures/abilities/leap_ability.png");
+        return ResourceLocation.parse("changed_additions:textures/abilities/leap_ability.png");
     }
 
     @Override
@@ -67,7 +66,7 @@ public class LeapAbility extends SimpleAbility {
             return;
         }
 
-        if (!player.isOnGround() || player.isInWater() || player.isSpectator()) {
+        if (!player.onGround() || player.isInWater() || player.isSpectator()) {
             return;
         }
 
@@ -98,15 +97,15 @@ public class LeapAbility extends SimpleAbility {
 
             // Grant Advancement
             if (motionY * multiplier >= 0.75) {
-            	//player.displayClientMessage(new TextComponent("Message" + motionY * multiplier), true);
+            	//player.displayClientMessage(Component.literal("Message" + motionY * multiplier), true);
                 grantAdvancement(player, "changed_additions:leaper");
             }
         }
     }
 
     private static void playSound(Player player) {
-        if (!player.level.isClientSide()) {
-            player.level.playSound(null, player.blockPosition(), ChangedSounds.BOW2,
+        if (!player.level().isClientSide()) {
+            player.level().playSound(null, player.blockPosition(), ChangedSounds.BOW2.get(),
                     player.getSoundSource(), 2.5F, 1.0F);
         }
     }
@@ -125,11 +124,11 @@ public class LeapAbility extends SimpleAbility {
 
     private static void grantAdvancement(Player player, String advancementId) {
         if (!(player instanceof ServerPlayer serverPlayer) ||
-                !(serverPlayer.level instanceof ServerLevel)) {
+                !(serverPlayer.level() instanceof ServerLevel)) {
             return;
         }
 
-        Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(new ResourceLocation(advancementId));
+        Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(ResourceLocation.parse(advancementId));
         if (advancement == null) return;
         
 

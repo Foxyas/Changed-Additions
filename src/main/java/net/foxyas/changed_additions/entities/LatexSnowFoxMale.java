@@ -29,7 +29,7 @@ public class LatexSnowFoxMale extends AbstractLatexSnowFox {
 
     @Override
     public TransfurMode getTransfurMode() {
-        if(level.random.nextInt(10) > 5){
+        if(level().random.nextInt(10) > 5){
             return TransfurMode.ABSORPTION;
         }
         return TransfurMode.REPLICATION;
@@ -38,7 +38,7 @@ public class LatexSnowFoxMale extends AbstractLatexSnowFox {
     @Override
     public HairStyle getDefaultHairStyle() {
         HairStyle Hair;
-        if(level.random.nextInt(10) > 5){ Hair = HairStyle.SHORT_MESSY.get();
+        if(level().random.nextInt(10) > 5){ Hair = HairStyle.SHORT_MESSY.get();
         } else {
             Hair = BALD.get();
         }
@@ -50,10 +50,9 @@ public class LatexSnowFoxMale extends AbstractLatexSnowFox {
         return HairStyle.Collection.MALE.getStyles();
     }
 
-    @Override
     public Color3 getDripColor() {
         Color3 color;
-        if(level.random.nextInt(10) > 5){ color = Color3.getColor("#ffffff");
+        if(level().random.nextInt(10) > 5){ color = Color3.getColor("#ffffff");
         } else {
             color = Color3.getColor("#e0e0e0");
         }

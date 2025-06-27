@@ -5,7 +5,6 @@ import net.foxyas.changed_additions.init.ChangedAdditionsMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,7 +15,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -39,9 +39,9 @@ public class NeofuserGuiMenu extends AbstractContainerMenu implements Supplier<M
     private BlockEntity boundBlockEntity = null;
 
     public NeofuserGuiMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        super(ChangedAdditionsMenus.NEOFUSER_GUI, id);
+        super(ChangedAdditionsMenus.NEOFUSER_GUI.get(), id);
         this.entity = inv.player;
-        this.world = inv.player.level;
+        this.world = inv.player.level();
         this.internal = new ItemStackHandler(4);
         BlockPos pos = null;
         if (extraData != null) {
@@ -56,7 +56,7 @@ public class NeofuserGuiMenu extends AbstractContainerMenu implements Supplier<M
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
-                itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
+                itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
                     this.internal = capability;
                     this.bound = true;
                 });
@@ -64,14 +64,14 @@ public class NeofuserGuiMenu extends AbstractContainerMenu implements Supplier<M
                 extraData.readByte(); // drop padding
                 boundEntity = world.getEntity(extraData.readVarInt());
                 if (boundEntity != null)
-                    boundEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
+                    boundEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
                         this.internal = capability;
                         this.bound = true;
                     });
             } else { // might be bound to block
                 boundBlockEntity = this.world.getBlockEntity(pos);
                 if (boundBlockEntity != null)
-                    boundBlockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
+                    boundBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
                         this.internal = capability;
                         this.bound = true;
                     });
@@ -115,7 +115,7 @@ public class NeofuserGuiMenu extends AbstractContainerMenu implements Supplier<M
     }
 
     public Component getDisplayName() {
-        return this.boundBlockEntity instanceof NeofuserBlockEntity neofuserBlockEntity ? neofuserBlockEntity.getDisplayName() : new TextComponent("");
+        return this.boundBlockEntity instanceof NeofuserBlockEntity neofuserBlockEntity ? neofuserBlockEntity.getDisplayName() : Component.literal("");
     }
 
     @Override

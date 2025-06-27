@@ -29,7 +29,7 @@ public class ServerPlayerMixin {
     private void onRead(CompoundTag tag, CallbackInfo ci) {
         if (tag.contains(QTE_TAG)) {
             ServerPlayer player = (ServerPlayer) (Object) this;
-            if (!player.getLevel().isClientSide()) {
+            if (!player.level().isClientSide()) {
                 QuickTimeEvent qte = QuickTimeEvent.loadFromTag(player, tag.getCompound(QTE_TAG));
                 QTEPendingManager.queueQTE(player, qte);
             }

@@ -25,7 +25,7 @@
   "effect.changed_additions.latex_solvent": "Latex Solvent",
   "effect.changed_additions.latex_solvent.description": "Inflicts damage on latex entities, with damage increasing as the effect strengthens.",
 
-  "itemGroup.changed_additions": "Changed Additions",
+  "itemGroup.changed_additions.misc": "Changed Additions",
 
   "changed_additions.gui.recipe_progress": "The Progress Speed is %1$s",
 

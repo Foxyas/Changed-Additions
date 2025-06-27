@@ -21,7 +21,7 @@ public class RandomVariantFunctionMixin {
         // Obtém a lista de variantes a serem removidas
         List<ResourceLocation> list = ChangedAdditionsTransfurVariants.getRemovedVariantsList()
                 .stream()
-                .map(TransfurVariant::getRegistryName)
+                .map(TransfurVariant::getFormId)
                 .toList();
 
         // Remove as variantes se elas existirem na lista

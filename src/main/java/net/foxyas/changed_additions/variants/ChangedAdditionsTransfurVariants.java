@@ -61,7 +61,7 @@ public class ChangedAdditionsTransfurVariants {
     }
 
     public static boolean isVariantOC(String transfurVariantString, @Nullable Level level) {
-        ResourceLocation transfurVariantID = new ResourceLocation(transfurVariantString);
+        ResourceLocation transfurVariantID = ResourceLocation.parse(transfurVariantString);
         TransfurVariant<?> variantFromID = ChangedRegistry.TRANSFUR_VARIANT.get().getValue(transfurVariantID);
         if (variantFromID != null) {
             return isVariantOC(variantFromID, level);

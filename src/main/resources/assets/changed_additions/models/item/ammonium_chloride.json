@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "changed_additions:items/new_ammonia"
+    "layer0": "changed_additions:item/new_ammonia"
   }
 }

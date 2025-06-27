@@ -5,10 +5,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.foxyas.changed_additions.block.entity.NeofuserBlockEntity;
 import net.foxyas.changed_additions.world.inventory.NeofuserGuiMenu;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,9 +18,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.HashMap;
 
+import static net.ltxprogrammer.changed.client.gui.GrabOverlay.blit;
+
 public class NeofuserGuiScreen extends AbstractContainerScreen<NeofuserGuiMenu> {
     private final static HashMap<String, Object> guistate = NeofuserGuiMenu.guistate;
-    private static final ResourceLocation texture = new ResourceLocation("changed_additions:textures/screens/neofuser_gui.png");
+    private static final ResourceLocation texture = ResourceLocation.parse("changed_additions:textures/screens/neofuser_gui.png");
     private final NeofuserGuiMenu container;
     private final Level world;
     private final int x, y, z;
@@ -47,30 +49,26 @@ public class NeofuserGuiScreen extends AbstractContainerScreen<NeofuserGuiMenu> 
     }
 
     @Override
-    public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics ms, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         this.renderTooltip(ms, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(PoseStack ms, float partialTicks, int gx, int gy) {
+    protected void renderBg(GuiGraphics ms, float partialTicks, int gx, int gy) {
         RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.setShaderTexture(0, texture);
-        blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        blit(ms, texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
         double math = 0;
         float progress = getValue(this.world, new BlockPos(x, y, z)) / 3.57f;
 
         int progressint = (int) progress;
 
-        RenderSystem.setShaderTexture(0, new ResourceLocation("changed_additions:textures/screens/empty_bar.png"));
-        blit(ms, this.leftPos + 84, this.topPos + 59, 0, 0, 32, 12, 32, 12);
-
-        RenderSystem.setShaderTexture(0, new ResourceLocation("changed_additions:textures/screens/bar_full.png"));
-        blit(ms, this.leftPos + 84 + 2, this.topPos + 59 + 2, 0, 0, progressint, 8, progressint, 8);
+        blit(ms, ResourceLocation.parse("changed_additions:textures/screens/empty_bar.png"), this.leftPos + 84, this.topPos + 59, 0, 0, 32, 12, 32, 12);
+        blit(ms, ResourceLocation.parse("changed_additions:textures/screens/bar_full.png"), this.leftPos + 84 + 2, this.topPos + 59 + 2, 0, 0, progressint, 8, progressint, 8);
 
 
         RenderSystem.disableBlend();
@@ -91,22 +89,23 @@ public class NeofuserGuiScreen extends AbstractContainerScreen<NeofuserGuiMenu> 
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         float progress = getValue(this.world, new BlockPos(x, y, z)) / NeofuserBlockEntity.MAX_RECIPE_PROGRESS;
 
-        this.font.draw(poseStack, this.container.getDisplayName(), 9, 10, -12829636);
-        this.font.draw(poseStack, new TextComponent((progress * 100) + "%"), 89, 47, -12829636);
+        // Para desenhar o nome do container (texto simples)
+        guiGraphics.drawString(this.font, this.container.getDisplayName(), 9, 10, -12829636, false);
+
+        // Para desenhar o progresso formatado como porcentagem
+        guiGraphics.drawString(this.font, Component.literal(String.format("%.1f%%", progress * 100)), 89, 47, -12829636, false);
     }
 
     @Override
     public void onClose() {
         super.onClose();
-        Minecraft.getInstance().keyboardHandler.setSendRepeatsToGui(false);
     }
 
     @Override
     public void init() {
         super.init();
-        this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
     }
 }

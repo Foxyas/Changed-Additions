@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "changed_additions:items/golden_orange"
+    "layer0": "changed_additions:item/golden_orange"
   }
 }

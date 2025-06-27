@@ -10,7 +10,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -20,8 +19,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -60,11 +59,6 @@ public class NeofuserBlockEntity extends RandomizableContainerBlockEntity implem
     }
 
     @Override
-    public CompoundTag getTileData() {
-        return super.getTileData();
-    }
-
-    @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
@@ -93,7 +87,7 @@ public class NeofuserBlockEntity extends RandomizableContainerBlockEntity implem
 
     @Override
     public Component getDefaultName() {
-        return new TextComponent("neofuser");
+        return Component.literal("neofuser");
     }
 
     @Override
@@ -108,7 +102,7 @@ public class NeofuserBlockEntity extends RandomizableContainerBlockEntity implem
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Neofuser");
+        return Component.literal("Neofuser");
     }
 
     @Override
@@ -147,7 +141,7 @@ public class NeofuserBlockEntity extends RandomizableContainerBlockEntity implem
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-        if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (!this.remove && facing != null && capability == ForgeCapabilities.ITEM_HANDLER)
             return handlers[facing.ordinal()].cast();
         return super.getCapability(capability, facing);
     }

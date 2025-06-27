@@ -18,7 +18,7 @@ public class InputKeyTracker {
     private static final Set<InputKey> pressedThisTick = EnumSet.noneOf(InputKey.class);
 
     @SubscribeEvent
-    public static void onKeyInput(InputEvent.KeyInputEvent event) {
+    public static void onKeyInput(InputEvent.Key event) {
         Optional<InputKey> optional = InputKey.fromKeyCode(event.getKey());
         if (optional.isEmpty()) return;
 

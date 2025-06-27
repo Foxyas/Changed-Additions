@@ -9,7 +9,7 @@ import net.ltxprogrammer.changed.init.ChangedAbilities;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,19 +25,18 @@ public class SoftenAbility extends AbstractAbility<SoftenAbilityInstance> {
     }
 
     @Override
-    public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {
-        return new TranslatableComponent("changed_additions.ability.soften");
+    public Component getAbilityName(IAbstractChangedEntity entity) {
+        return Component.translatable("changed_additions.ability.soften");
     }
 
     @Override
     public Collection<Component> getAbilityDescription(IAbstractChangedEntity entity) {
-        Collection<Component> Description = List.of(new TranslatableComponent("changed_additions.ability.soften.description"));
+        Collection<Component> Description = List.of(Component.translatable("changed_additions.ability.soften.description"));
         return Description;
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-        return new ResourceLocation("changed_additions:textures/abilities/gooey_paw.png");
+        return ResourceLocation.parse("changed_additions:textures/abilities/gooey_paw.png");
     }
 
     @Override

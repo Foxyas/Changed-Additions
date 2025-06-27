@@ -4,6 +4,7 @@ import net.ltxprogrammer.changed.entity.*;
 import net.ltxprogrammer.changed.init.ChangedAttributes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
@@ -53,7 +54,7 @@ public abstract class AbstractLatexSnowFox extends ChangedEntity implements Gend
 
     @Override
     public TransfurMode getTransfurMode() {
-        return this.level.random.nextBoolean() ? TransfurMode.ABSORPTION : TransfurMode.REPLICATION;
+        return this.level().random.nextBoolean() ? TransfurMode.ABSORPTION : TransfurMode.REPLICATION;
     }
 
     @Override
@@ -67,7 +68,7 @@ public abstract class AbstractLatexSnowFox extends ChangedEntity implements Gend
     }
 
     @Override
-    public @NotNull Packet<?> getAddEntityPacket() {
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

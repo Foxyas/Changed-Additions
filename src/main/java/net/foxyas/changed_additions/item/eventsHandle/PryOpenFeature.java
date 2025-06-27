@@ -19,15 +19,15 @@ public class PryOpenFeature {
 
     @SubscribeEvent
     public static void PryOpenDoor(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getWorld().isClientSide()) {
+        if (event.getLevel().isClientSide()) {
             return;
         }
 
-        Player player = event.getPlayer();
-        Level level = event.getWorld();
+        Player player = event.getEntity();
+        Level level = event.getLevel();
         BlockPos pos = event.getPos();
         ItemStack itemStack = event.getItemStack();
-        BlockState state = event.getWorld().getBlockState(pos);
+        BlockState state = event.getLevel().getBlockState(pos);
         if (itemStack.getItem() instanceof PickaxeItem) {
             if (state.getBlock() instanceof AbstractLabDoor labDoor) {
                 if (!labDoor.isOpen(state, level, pos) && !labDoor.wantPowered(state, level, pos)) {

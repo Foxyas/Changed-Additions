@@ -21,7 +21,7 @@ public class TransfurVisionSync {
 
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getPlayer() instanceof ServerPlayer serverPlayer) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             TransfurVisionSync.syncTo(serverPlayer);
         }
     }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "changed_additions:items/the_cloth_part_of_sneaky"
+    "layer0": "changed_additions:item/the_cloth_part_of_sneaky"
   }
 }

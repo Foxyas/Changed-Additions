@@ -27,7 +27,7 @@ import static net.foxyas.changed_additions.process.ProcessUntransfur.UntransfurP
 
 public class LaethinSyringeItem extends Item implements SpecializedAnimations {
     public LaethinSyringeItem() {
-        super(new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB).stacksTo(64).rarity(Rarity.COMMON));
+        super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class LaethinSyringeItem extends Item implements SpecializedAnimations {
 
         if (player instanceof ServerPlayer serverPlayer) {
             ProcessTransfur.ifPlayerTransfurred(serverPlayer, (transfurVariantInstance) -> {
-                PlayerUtil.ParticlesUtil.sendParticles(serverPlayer.getLevel(), ChangedParticles.drippingLatex(transfurVariantInstance.getTransfurColor()), serverPlayer.getEyePosition(), 0.25f, 0.25f, 0.25f, 10, 0);
+                PlayerUtil.ParticlesUtil.sendParticles(serverPlayer.level(), ChangedParticles.drippingLatex(transfurVariantInstance.getTransfurColor()), serverPlayer.getEyePosition(), 0.25f, 0.25f, 0.25f, 10, 0);
             });
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
         }

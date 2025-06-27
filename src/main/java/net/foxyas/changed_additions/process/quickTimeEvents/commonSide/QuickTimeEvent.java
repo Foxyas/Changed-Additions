@@ -5,15 +5,17 @@ import net.foxyas.changed_additions.init.ChangedAdditionsDamageSources;
 import net.foxyas.changed_additions.network.packets.QTESyncPacket;
 import net.foxyas.changed_additions.network.packets.utils.PacketsUtils;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
+import net.foxyas.changed_additions.process.util.GlobalEntityUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import org.lwjgl.glfw.GLFW;
 
@@ -148,11 +150,11 @@ public class QuickTimeEvent {
     private void handleSuccess() {
         if (player != null) {
             if (this.getType() == QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE) {
-                player.displayClientMessage(new TranslatableComponent("changed_additions.fight_conscience.success"), true);
+                player.displayClientMessage(Component.translatable("changed_additions.fight_conscience.success"), true);
             } else if (this.getType() == QuickTimeEventType.STRUGGLE) {
-                player.displayClientMessage(new TranslatableComponent("changed_additions.struggle.success"), true);
+                player.displayClientMessage(Component.translatable("changed_additions.struggle.success"), true);
             } else if (this.getType() == QuickTimeEventType.GENERIC) {
-                player.displayClientMessage(new TranslatableComponent("changed_additions.generic.success"), true);
+                player.displayClientMessage(Component.translatable("changed_additions.generic.success"), true);
             }
         }
     }
@@ -160,17 +162,17 @@ public class QuickTimeEvent {
     private void handleFail() {
         if (player != null) {
             if (this.getType() == QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE) {
-                player.displayClientMessage(new TranslatableComponent("changed_additions.fight_conscience.fail"), true);
+                player.displayClientMessage(Component.translatable("changed_additions.fight_conscience.fail"), true);
 
                 TransfurVariantInstance<?> variant = ProcessTransfur.getPlayerTransfurVariant(player);
                 if (variant != null) {
-                    player.hurt(ChangedAdditionsDamageSources.CONSCIENCE_LOST, 10000);
+                    player.hurt(ChangedAdditionsDamageSources.CONSCIENCE_LOST.source(player.level().registryAccess()), 1000);
                     PlayerUtil.UnTransfurPlayerAndKill(player);
                 }
             } else if (this.getType() == QuickTimeEventType.STRUGGLE) {
-                player.displayClientMessage(new TranslatableComponent("changed_additions.struggle.fail"), true);
+                player.displayClientMessage(Component.translatable("changed_additions.struggle.fail"), true);
             } else if (this.getType() == QuickTimeEventType.GENERIC) {
-                player.displayClientMessage(new TranslatableComponent("changed_additions.generic.fail"), true);
+                player.displayClientMessage(Component.translatable("changed_additions.generic.fail"), true);
             }
         }
     }

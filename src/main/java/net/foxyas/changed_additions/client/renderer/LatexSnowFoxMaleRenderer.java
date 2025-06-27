@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LatexSnowFoxMaleRenderer extends AdvancedHumanoidRenderer<LatexSnowFoxMale, LatexSnowFoxMaleModel, ArmorLatexMaleWolfModel<LatexSnowFoxMale>> {
 	public LatexSnowFoxMaleRenderer(EntityRendererProvider.Context context) {
-		super(context, new LatexSnowFoxMaleModel(context.bakeLayer(LatexSnowFoxMaleModel.LAYER_LOCATION)), ArmorLatexMaleWolfModel::new, ArmorLatexMaleWolfModel.INNER_ARMOR, ArmorLatexMaleWolfModel.OUTER_ARMOR, 0.5F);
+		super(context, new LatexSnowFoxMaleModel(context.bakeLayer(LatexSnowFoxMaleModel.LAYER_LOCATION)), ArmorLatexMaleWolfModel.MODEL_SET, 0.5F);
 		//this.addLayer(new LatexParticlesLayer<>(this, this.getModel()));
 		this.addLayer(TransfurCapeLayer.normalCape(this, context.getModelSet()));
 		this.addLayer(new CustomEyesLayer<>(this, context.getModelSet()));
@@ -22,6 +22,6 @@ public class LatexSnowFoxMaleRenderer extends AdvancedHumanoidRenderer<LatexSnow
 
 	@Override
 	public ResourceLocation getTextureLocation(LatexSnowFoxMale entity) {
-		return new ResourceLocation("changed_additions:textures/entities/latex_snow_foxes/latex_snow_fox_male.png");
+		return ResourceLocation.parse("changed_additions:textures/entities/latex_snow_foxes/latex_snow_fox_male.png");
 	}
 }

@@ -4,6 +4,7 @@ import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
 import net.ltxprogrammer.changed.init.ChangedRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -18,7 +19,7 @@ public class ChangedAdditionsTags {
         public static final TagKey<Block> LAB_BIG_DOORS = create("lab_big_doors");
 
         private static TagKey<Block> create(String name) {
-            return TagKey.create(Registry.BLOCK_REGISTRY, ChangedAdditionsMod.modResource(name));
+            return TagKey.create(Registries.BLOCK, ChangedAdditionsMod.modResource(name));
         }
     }
 
@@ -37,7 +38,7 @@ public class ChangedAdditionsTags {
         }
 
         private static TagKey<EntityType<?>> create(String name) {
-            return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, ChangedAdditionsMod.modResource(name));
+            return TagKey.create(Registries.ENTITY_TYPE, ChangedAdditionsMod.modResource(name));
         }
     }
 
@@ -49,7 +50,7 @@ public class ChangedAdditionsTags {
 
         private static TagKey<TransfurVariant<?>> create(String name) {
             return TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                    new ResourceLocation(ChangedAdditionsMod.MODID, name));
+                    ResourceLocation.fromNamespaceAndPath(ChangedAdditionsMod.MODID, name));
         }
     }
 }

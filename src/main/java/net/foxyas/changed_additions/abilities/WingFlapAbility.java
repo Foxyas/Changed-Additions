@@ -7,8 +7,7 @@ import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -21,26 +20,25 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
     public WingFlapAbility() {
         super(AbilityInstance::new);
     }
-
-    @Override
+    
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
         if (entity.getEntity() instanceof Player player){
             AbilityInstance Instance = ProcessTransfur.getPlayerTransfurVariant(player).getAbilityInstance(this);
             if (Instance.DashPower <= 0.1f){
-                return new ResourceLocation("changed_additions:textures/abilities/wing_flap_ability_start.png");
+                return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_start.png");
             } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F){
-                return new ResourceLocation("changed_additions:textures/abilities/wing_flap_ability_mid.png");
+                return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_mid.png");
             } else if (Instance.DashPower >= 0.95F) {
-                return new ResourceLocation("changed_additions:textures/abilities/wing_flap_ability_final.png");
+                return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_final.png");
             }
         }
 
-        return new ResourceLocation("changed_additions:textures/abilities/wing_flap_ability_start.png");
+        return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_start.png");
     }
 
     @Override
-    public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {
-        return new TranslatableComponent("changed_additions.ability.wing_flap");
+    public Component getAbilityName(IAbstractChangedEntity entity) {
+        return Component.translatable("changed_additions.ability.wing_flap");
     }
 
     @Override
@@ -50,7 +48,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
                 return UseType.CHARGE_TIME;
             } else if (player.isFallFlying()) {
                 return UseType.HOLD;
-            } else if (player.isOnGround()) {
+            } else if (player.onGround()) {
                 return UseType.HOLD;
             }
         }
@@ -65,7 +63,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
                 return 5;
             } else if (player.isFallFlying()) {
                 return 45;
-            } else if (player.isOnGround()) {
+            } else if (player.onGround()) {
                 return 10;
             }
         }
@@ -79,7 +77,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
                 return 10;
             } else if (player.isFallFlying()) {
                 return 25;
-            } else if (player.isOnGround()) {
+            } else if (player.onGround()) {
                 return 20;
             }
         }
@@ -150,8 +148,8 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 			}
 
 
-			if (player.level.isClientSide() && ChangedAdditionsClientConfigs.WING_FLAP_INFO.get()){
-				player.displayClientMessage(new TextComponent("Ticks = " + getController().getHoldTicks()), true);
+			if (player.level().isClientSide() && ChangedAdditionsClientConfigs.WING_FLAP_INFO.get()){
+				player.displayClientMessage(Component.literal("Ticks = " + getController().getHoldTicks()), true);
 			}
         }
 
@@ -171,7 +169,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
                 playFlapSound(player);
                 exhaustPlayer(player, 8F * DashPower);
                 this.DashPower = 0;
-            } else if (player.isOnGround() && player.getXRot() <= -45 && ReadytoDash) {
+            } else if (player.onGround() && player.getXRot() <= -45 && ReadytoDash) {
                 this.ReadytoDash = false;
                 double speed = 2 * DashPower;
                 player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(0,speed,0)));
@@ -184,22 +182,22 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
         }
 
         private static void playSound(Player player) {
-            if (!player.level.isClientSide()) {
-                player.level.playSound(null, player.blockPosition(), ChangedSounds.BOW2,
+            if (!player.level().isClientSide()) {
+                player.level().playSound(null, player.blockPosition(), ChangedSounds.BOW2.get(),
                         player.getSoundSource(), 2.5F, 1.0F);
             }
         }
 
         private static void playFlapSound(Player player) {
-            if (!player.level.isClientSide()) {
-                player.level.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_FLAP,
+            if (!player.level().isClientSide()) {
+                player.level().playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_FLAP,
                         player.getSoundSource(), 2.5F, 1.0F);
             }
         }
 
         private static void playFlapSound(Player player, float pitch) {
-            if (!player.level.isClientSide()) {
-                player.level.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_FLAP,
+            if (!player.level().isClientSide()) {
+                player.level().playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_FLAP,
                         player.getSoundSource(), 2.5F, pitch);
             }
         }

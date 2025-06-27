@@ -63,8 +63,8 @@ public abstract class GameRendererMixin {
     private boolean changed_Additions$ShouldWork(Player player) {
         TransfurVariantInstance<?> variantInstance = ProcessTransfur.getPlayerTransfurVariant(player);
         if (variantInstance != null) {
-            this.changed_Additions$transfurVariantVision = TransfurVariantVisions.getTransfurVariantVision(player.getLevel(), variantInstance.getFormId());
-            return TransfurVariantVisions.getTransfurVariantVision(player.getLevel(), variantInstance.getFormId()) != null;
+            this.changed_Additions$transfurVariantVision = TransfurVariantVisions.getTransfurVariantVision(player.level(), variantInstance.getFormId());
+            return TransfurVariantVisions.getTransfurVariantVision(player.level(), variantInstance.getFormId()) != null;
         }
 
 
@@ -106,7 +106,7 @@ public abstract class GameRendererMixin {
                     this.minecraft.getTextureManager(),
                     this.minecraft.getResourceManager(),
                     this.minecraft.getMainRenderTarget(),
-                    new ResourceLocation(changed_Additions$transfurVariantVision.getVisionEffect().toString())
+                    ResourceLocation.parse(changed_Additions$transfurVariantVision.getVisionEffect().toString())
             );
             this.changed_Additions$colorblindChain.resize(this.minecraft.getWindow().getWidth(), this.minecraft.getWindow().getHeight());
         } catch (IOException e) {

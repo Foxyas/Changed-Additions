@@ -1,7 +1,7 @@
 package net.foxyas.changed_additions.process.util;
 
-import com.mojang.math.Vector3f;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
+import net.foxyas.changed_additions.init.ChangedAdditionsDamageSources;
 import net.ltxprogrammer.changed.client.renderer.AdvancedHumanoidRenderer;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
 import net.ltxprogrammer.changed.effect.particle.ColoredParticleOption;
@@ -18,13 +18,18 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -35,6 +40,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.RegistryObject;
+import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
@@ -42,22 +49,37 @@ import java.util.stream.StreamSupport;
 
 public class PlayerUtil {
 
+    public static void hurtEntityViaDamageType(RegistryObject<DamageType> damageType, Entity entity, float amount) {
+        if (damageType == null || damageType.getId() == null) {
+            return;
+        }
+        ResourceKey<DamageType> key = ResourceKey.create(Registries.DAMAGE_TYPE, damageType.getId());
+
+        Holder<DamageType> holder = entity.level().registryAccess()
+                .registryOrThrow(Registries.DAMAGE_TYPE)
+                .getHolderOrThrow(key);
+
+        DamageSource source = new DamageSource(holder);
+        entity.hurt(source, amount);
+    }
+
+
     public static void TransfurPlayer(Entity entity, TransfurVariant<?> latexVariant) {
         LivingEntity livingEntity = (LivingEntity) entity;
-        ProcessTransfur.transfur(livingEntity, entity.getLevel(), latexVariant, true);
+        ProcessTransfur.transfur(livingEntity, entity.level(), latexVariant, true);
     }
 
     public static void TransfurPlayer(Entity entity, String id) {
         ResourceLocation form;
         try {
-            form = new ResourceLocation(id);
+            form = ResourceLocation.parse(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         LivingEntity livingEntity = (LivingEntity) entity;
-        if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getRegistryName).anyMatch(form::equals)) {
+        if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getFormId).anyMatch(form::equals)) {
             TransfurVariant<?> latexVariant = ChangedRegistry.TRANSFUR_VARIANT.get().getValue(form);
-            ProcessTransfur.transfur(livingEntity, entity.getLevel(), latexVariant, true);
+            ProcessTransfur.transfur(livingEntity, entity.level(), latexVariant, true);
         }
     }
 
@@ -82,7 +104,7 @@ public class PlayerUtil {
 
     @Nullable
     public static Entity getEntityPlayerLookingAt(Player player, double range) {
-        Level world = player.level;
+        Level world = player.level();
         Vec3 startVec = player.getEyePosition(1.0F); // Player's eye position
         Vec3 lookVec = player.getLookAngle(); // Player's look direction
         Vec3 endVec = startVec.add(lookVec.scale(range)); // End point of the line of sight
@@ -115,7 +137,7 @@ public class PlayerUtil {
 
     @Nullable
     public static Entity getEntityPlayerLookingAt(Entity player, double range) {
-        Level world = player.level;
+        Level world = player.level();
         Vec3 startVec = player.getEyePosition(1.0F); // Player's eye position
         Vec3 lookVec = player.getLookAngle(); // Player's look direction
         Vec3 endVec = startVec.add(lookVec.scale(range)); // End point of the line of sight
@@ -212,7 +234,7 @@ public class PlayerUtil {
 
 
     public static boolean isLineOfSightClear(Player player, Entity entity) {
-        var level = player.getLevel();
+        var level = player.level();
         var playerEyePos = player.getEyePosition(1.0F); // Posição dos olhos do jogador
         var entityEyePos = entity.getBoundingBox().getCenter(); // Centro da entidade
 
@@ -241,7 +263,7 @@ public class PlayerUtil {
 
             if (distance > blockReach * blockReach) {
                 Vec3 pos = hitResult.getLocation();
-                hitResult = BlockHitResult.miss(pos, Direction.getNearest(eyePos.x, eyePos.y, eyePos.z), new BlockPos(pos));
+                hitResult = BlockHitResult.miss(pos, Direction.getNearest(eyePos.x, eyePos.y, eyePos.z), new BlockPos(new Vec3i((int) pos.x(),(int) pos.y(),(int) pos.z())));
             }
         }
 
@@ -256,7 +278,7 @@ public class PlayerUtil {
             double distanceToTarget = eyePos.distanceToSqr(targetPos);
 
             if (distanceToTarget > distance || distanceToTarget > entityReach * entityReach) {
-                hitResult = BlockHitResult.miss(targetPos, Direction.getNearest(viewVec.x, viewVec.y, viewVec.z), new BlockPos(targetPos));
+                hitResult = BlockHitResult.miss(targetPos, Direction.getNearest(viewVec.x, viewVec.y, viewVec.z), new BlockPos(new Vec3i((int) targetPos.x(),(int) targetPos.y(),(int) targetPos.z())));
             } else if (distanceToTarget < distance) {
                 hitResult = entityHitResult;
             }
@@ -287,7 +309,7 @@ public class PlayerUtil {
         for (int i = 0; i <= maxRange; i++) {
             // Calcula a posição do bloco na trajetória do laser
             Vec3 targetVec = eyePosition.add(lookDirection.scale(i));
-            BlockPos targetPos = new BlockPos(targetVec);
+            BlockPos targetPos = new BlockPos(new Vec3i((int) targetVec.x(),(int) targetVec.y(),(int) targetVec.z()));
 
             // Verifica se o bloco é ar; se for, ignora essa fileira
             if (world.getBlockState(targetPos).isAir()) {
@@ -507,23 +529,6 @@ public class PlayerUtil {
             if (renderer instanceof AdvancedHumanoidRenderer<?, ?, ?> ChangedEntityModel) {
                 // Retorna o modelo da entidade
                 return ChangedEntityModel.getModel();
-            }
-            return null; // Retorna null se não for uma entidade viva com um modelo
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        public static AdvancedHumanoidModel<?> getChangedEntityArmorModel(ChangedEntity entity, boolean outerModel) {
-            // Obtém o EntityRendererManager (gerenciador de renderizadores)
-            EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(entity);
-
-            // Verifica se o renderizador é para uma entidade viva (LivingEntity)
-            if (renderer instanceof AdvancedHumanoidRenderer<?, ?, ?> ChangedEntityModel) {
-                if (outerModel) {
-                    // Retorna o modelo da entidade
-                    return ChangedEntityModel.getArmorLayer().getArmorModel(EquipmentSlot.CHEST);
-                }
-                // Retorna o modelo da entidade
-                return ChangedEntityModel.getArmorLayer().getArmorModel(EquipmentSlot.LEGS);
             }
             return null; // Retorna null se não for uma entidade viva com um modelo
         }

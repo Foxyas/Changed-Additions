@@ -1,24 +1,29 @@
 package net.foxyas.changed_additions.init;
 
+import net.ltxprogrammer.changed.Changed;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Function;
 
 public class ChangedAdditionsTabs {
-    public static CreativeModeTab CHANGED_ADDITIONS_TAB;
+    public static DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Changed.MODID);
 
-    public static void load() {
-        CHANGED_ADDITIONS_TAB = new CreativeModeTab("changed_additions") {
-            @Override
-            public ItemStack makeIcon() {
-                return new ItemStack(ChangedAdditionsBlocks.NEOFUSER.get());
-            }
+    public static RegistryObject<CreativeModeTab> CHANGED_ADDITIONS_TAB = register("misc", builder ->
+            builder.icon(() -> new ItemStack(ChangedAdditionsBlocks.NEOFUSER.get()))
+                    .displayItems((params, output) -> {
+                        ChangedAdditionsItems.REGISTRY.getEntries().forEach((itemRegistryObject -> {
+                            output.accept(itemRegistryObject.get());
+                        }));
+                    }).build());
 
-            @OnlyIn(Dist.CLIENT)
-            public boolean hasSearchBar() {
-                return false;
-            }
-        };
+    private static RegistryObject<CreativeModeTab> register(String id, Function<CreativeModeTab.Builder, CreativeModeTab> finalizer) {
+        return REGISTRY.register(id, () -> finalizer.apply(
+                CreativeModeTab.builder().title(Component.translatable("itemGroup.changed_additions." + id))
+        ));
     }
 }

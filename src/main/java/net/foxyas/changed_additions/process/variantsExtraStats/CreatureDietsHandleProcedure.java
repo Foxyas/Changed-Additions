@@ -40,7 +40,7 @@ public class CreatureDietsHandleProcedure {
     public static void onUseItemFinish(LivingEntityUseItemEvent.Finish event) {
         if (event == null) return;
 
-        LivingEntity livingEntity = event.getEntityLiving();
+        LivingEntity livingEntity = event.getEntity();
         ItemStack item = event.getItem();
 
         if (!(livingEntity instanceof Player player)) {
@@ -51,7 +51,7 @@ public class CreatureDietsHandleProcedure {
         if (latexInstance == null) return;
 
 
-        Level world = player.getLevel();
+        Level world = player.level();
 
         if (world.isClientSide) {
             return;
@@ -99,8 +99,8 @@ public class CreatureDietsHandleProcedure {
 
     private static void applyMobEffects(Player player) {
         player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 60, 3, false, true, true));
-        player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 160, 0, false, true, true,
-                new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, 2)));
+        player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 160, 0, false, true, true));
+        player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, 2));
     }
 
     private static void applyFoodEffects(Player player, ItemStack item, boolean isGoodFood) {
@@ -137,48 +137,48 @@ public class CreatureDietsHandleProcedure {
     }
 
     private static boolean isCatDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity.getType().getRegistryName().toString().contains("cat") || entity.getType().getRegistryName().toString().contains("tiger") ||
+        return entity.getType().toString().contains("cat") || entity.getType().toString().contains("tiger") ||
                 variant.is(TransfurVariantTags.CAT_LIKE) ||
                 variant.is(TransfurVariantTags.LEOPARD_LIKE) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed_additions:cat_diet")));
+                        ResourceLocation.parse("changed_additions:cat_diet")));
     }
 
     private static boolean isWolfDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity.getType().getRegistryName().toString().contains("dog") ||
-                entity.getType().getRegistryName().toString().contains("wolf") ||
+        return entity.getType().toString().contains("dog") ||
+                entity.getType().toString().contains("wolf") ||
                 entity instanceof AbstractLatexWolf ||
                 variant.is(TransfurVariantTags.WOLF_LIKE) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed_additions:wolf_diet")));
+                        ResourceLocation.parse("changed_additions:wolf_diet")));
     }
 
     private static boolean isSpecialDiet(TransfurVariant<?> variant) {
         return variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                new ResourceLocation("changed_additions:special_diet")));
+                ResourceLocation.parse("changed_additions:special_diet")));
     }
 
     private static boolean isFoxDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity.getType().getRegistryName().toString().contains("fox") || variant.is(TransfurVariantTags.FOX_LIKE)
+        return entity.getType().toString().contains("fox") || variant.is(TransfurVariantTags.FOX_LIKE)
                 || variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed_additions:fox_diet")));
+                        ResourceLocation.parse("changed_additions:fox_diet")));
     }
 
     private static boolean isAquaticDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity instanceof AquaticEntity || entity.getType().getRegistryName().toString().contains("shark") ||
+        return entity instanceof AquaticEntity || entity.getType().toString().contains("shark") ||
                 variant.is(TransfurVariantTags.SHARK_LIKE) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed_additions:aquatic_like"))) ||
+                        ResourceLocation.parse("changed_additions:aquatic_like"))) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed_additions:aquatic_diet")));
+                        ResourceLocation.parse("changed_additions:aquatic_diet")));
     }
 
     private static boolean isDragonDiet(ChangedEntity entity, TransfurVariant<?> variant) {
-        return entity.getType().getRegistryName().toString().contains("dragon") ||
+        return entity.getType().toString().contains("dragon") ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed:dragon_like"))) ||
+                        ResourceLocation.parse("changed:dragon_like"))) ||
                 variant.is(TagKey.create(ChangedRegistry.TRANSFUR_VARIANT.get().getRegistryKey(),
-                        new ResourceLocation("changed_additions:dragon_diet")));
+                        ResourceLocation.parse("changed_additions:dragon_diet")));
     }
 
     private enum DietType {
@@ -221,7 +221,7 @@ public class CreatureDietsHandleProcedure {
 
         public boolean isDietItem(ItemStack item) {
             return dietItems.contains(item.getItem()) ||
-                    item.is(ItemTags.create(new ResourceLocation(dietTag)));
+                    item.is(ItemTags.create(ResourceLocation.parse(dietTag)));
         }
 
         public static boolean isNotFoodItem(ItemStack item) {
@@ -232,7 +232,7 @@ public class CreatureDietsHandleProcedure {
             } else if (item.is(Items.POTION)) {
                 return true;
             } else if (NonFoodItemslist.contains(item.getItem())
-                    || item.is(ItemTags.create(new ResourceLocation("changed_additions:is_not_food")))) {
+                    || item.is(ItemTags.create(ResourceLocation.parse("changed_additions:is_not_food")))) {
                 return true;
             } else return item.is(Items.GOLDEN_APPLE);
         }

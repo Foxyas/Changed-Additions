@@ -20,25 +20,28 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static net.foxyas.changed_additions.init.ChangedAdditionsSounds.ARMOR_EQUIP;
 
 public class DarkLatexCoatItem extends ArmorItem {
-    public DarkLatexCoatItem(EquipmentSlot slot, Properties properties) {
+    public DarkLatexCoatItem(ArmorItem.Type slot, Properties properties) {
         super(new ArmorMaterial() {
+
             @Override
-            public int getDurabilityForSlot(@NotNull EquipmentSlot p_40410_) {
+            public int getDurabilityForType(@NotNull Type type) {
                 return 0;
             }
 
             @Override
-            public int getDefenseForSlot(@NotNull EquipmentSlot slot) {
+            public int getDefenseForType(@NotNull Type type) {
                 return 0;
             }
 
@@ -49,7 +52,7 @@ public class DarkLatexCoatItem extends ArmorItem {
 
             @Override
             public @NotNull SoundEvent getEquipSound() {
-                return ARMOR_EQUIP;
+                return ARMOR_EQUIP.get();
             }
 
             @Override
@@ -93,15 +96,16 @@ public class DarkLatexCoatItem extends ArmorItem {
     @Nullable
     @Override
     public SoundEvent getEquipSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("changed_additions:armor_equip"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("changed_additions:armor_equip"));
     }
 
     // Método para definir o modelo da armadura no lado do cliente
-    public void initializeClient(java.util.function.@NotNull Consumer<net.minecraftforge.client.IItemRenderProperties> consumer) {
-        consumer.accept(new net.minecraftforge.client.IItemRenderProperties() {
+    @Override
+    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             @Override
             @OnlyIn(Dist.CLIENT)
-            public HumanoidModel<?> getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
                 // Criar o modelo de armadura com base na classe DarkLatexCoat
                 HumanoidModel<?> armorModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of("head", new DarkLatexCoatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(DarkLatexCoatModel.LAYER_LOCATION)).getPuroCoatHead(),  // Para a parte da cabeça
                         "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()), "body", new DarkLatexCoatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(DarkLatexCoatModel.LAYER_LOCATION)).getPuroCoatBody(), "left_arm", new DarkLatexCoatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(DarkLatexCoatModel.LAYER_LOCATION)).getPuroCoatLeftArm(), "right_arm", new DarkLatexCoatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(DarkLatexCoatModel.LAYER_LOCATION)).getPuroCoatRightArm(), "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()), "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()))));
@@ -123,7 +127,7 @@ public class DarkLatexCoatItem extends ArmorItem {
     }
 
     public static class HeadPart extends DarkLatexCoatItem {
-        public HeadPart(EquipmentSlot slot, Properties properties) {
+        public HeadPart(ArmorItem.Type slot, Properties properties) {
             super(slot, properties);
 
         }
@@ -134,11 +138,12 @@ public class DarkLatexCoatItem extends ArmorItem {
         }
 
         // Método para definir o modelo da armadura no lado do cliente
-        public void initializeClient(java.util.function.@NotNull Consumer<net.minecraftforge.client.IItemRenderProperties> consumer) {
-            consumer.accept(new net.minecraftforge.client.IItemRenderProperties() {
+        @Override
+        public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
                 @Override
                 @OnlyIn(Dist.CLIENT)
-                public HumanoidModel<?> getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+                public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
                     // Criar o modelo de armadura com base na classe DarkLatexCoat
                     HumanoidModel<?> armorModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(),
                             Map.of("head", new DarkLatexCoatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(DarkLatexCoatModel.LAYER_LOCATION)).getPuroCoatHead(),  // Para a parte da cabeça

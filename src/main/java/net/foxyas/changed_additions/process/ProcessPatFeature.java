@@ -23,7 +23,7 @@ public class ProcessPatFeature {
 
     public static void ProcessPat(LevelAccessor world, double x, double y, double z, Entity entity) {
         if (entity instanceof Player player) {
-            //player.displayClientMessage(new TextComponent("TEST"), false);
+            //player.displayClientMessage(Component.literal("TEST"), false);
             PatFeatureHandle.execute(world, player);
         }
     }
@@ -67,11 +67,11 @@ public class ProcessPatFeature {
                 return;
             }
             if (shouldBeConfused(player, target)) {
-                player.getLevel().addParticle(ChangedParticles.emote(changedEntity, Emote.CONFUSED),
+                player.level().addParticle(ChangedParticles.emote(changedEntity, Emote.CONFUSED),
                         target.getX(), target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65, target.getZ(),
                         0.0f, 0.0f, 0.0f);
             } else {
-                player.getLevel().addParticle(ChangedParticles.emote(changedEntity, Emote.HEART),
+                player.level().addParticle(ChangedParticles.emote(changedEntity, Emote.HEART),
                         target.getX(), target.getY() + (double) target.getDimensions(target.getPose()).height + 0.65, target.getZ(),
                         0.0f, 0.0f, 0.0f);
             }

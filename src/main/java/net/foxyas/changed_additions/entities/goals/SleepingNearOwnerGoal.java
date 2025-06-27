@@ -76,7 +76,7 @@ public class SleepingNearOwnerGoal extends Goal {
     @Override
     public void start() {
         if (bedPos != null && pet instanceof PathfinderMob pathfinderPet) {
-            PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+            PlayerUtil.ParticlesUtil.sendParticles(owner.level(),
                     ChangedParticles.emote(pet, Emote.IDEA),
                     pet.getX(),
                     pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -115,7 +115,7 @@ public class SleepingNearOwnerGoal extends Goal {
                 //}
                 if (sleepTimer >= 10) {
                     if (!pet.isSleeping()) {
-                        PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+                        PlayerUtil.ParticlesUtil.sendParticles(owner.level(),
                                 ChangedParticles.emote(pet, Emote.HEART),
                                 pet.getX(),
                                 pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -246,7 +246,7 @@ public class SleepingNearOwnerGoal extends Goal {
         @Override
         public void start() {
             if (bedPos != null && pet instanceof PathfinderMob pathfinderPet) {
-                PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+                PlayerUtil.ParticlesUtil.sendParticles(owner.level(),
                         ChangedParticles.emote(pet, Emote.IDEA),
                         pet.getX(),
                         pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -283,7 +283,7 @@ public class SleepingNearOwnerGoal extends Goal {
             }
 
             if (bedPos != null) {
-                BlockState bedState = pet.level.getBlockState(bedPos);
+                BlockState bedState = pet.level().getBlockState(bedPos);
 
                 // Verifica se a cama ainda existe e não está ocupada antes de continuar indo até ela
                 if (!(bedState.getBlock() instanceof BedBlock) || bedState.getValue(BedBlock.OCCUPIED)) {
@@ -302,7 +302,7 @@ public class SleepingNearOwnerGoal extends Goal {
                         // Verifica novamente antes de dormir
                         if (!bedState.getValue(BedBlock.OCCUPIED)) {
                             pet.startSleeping(bedPos);
-                            PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+                            PlayerUtil.ParticlesUtil.sendParticles(owner.level(),
                                     ChangedParticles.emote(pet, Emote.HEART),
                                     pet.getX(),
                                     pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -312,7 +312,7 @@ public class SleepingNearOwnerGoal extends Goal {
                                     0.0f, 1, 0f
                             );
                             // Atualiza o estado da cama para ocupada
-                            pet.level.setBlockAndUpdate(bedPos, bedState.setValue(BedBlock.OCCUPIED, true));
+                            pet.level().setBlockAndUpdate(bedPos, bedState.setValue(BedBlock.OCCUPIED, true));
 
                             // Para a movimentação da entidade
                             if (pet instanceof PathfinderMob pathfinderPet) {
@@ -355,9 +355,9 @@ public class SleepingNearOwnerGoal extends Goal {
 
                 // Verifica se bedPos não é nulo antes de acessar o bloco
                 if (bedPos != null) {
-                    BlockState bedState = pet.level.getBlockState(bedPos);
+                    BlockState bedState = pet.level().getBlockState(bedPos);
                     if (bedState.getBlock() instanceof BedBlock) {
-                        pet.level.setBlockAndUpdate(bedPos, bedState.setValue(BedBlock.OCCUPIED, false));
+                        pet.level().setBlockAndUpdate(bedPos, bedState.setValue(BedBlock.OCCUPIED, false));
                     }
                 }
             }
@@ -372,7 +372,7 @@ public class SleepingNearOwnerGoal extends Goal {
         private List<BlockPos> findBedsNearOwner(Player player) {
             if (player == null) return Collections.emptyList(); // Retorna uma lista vazia se o jogador for nulo
 
-            Level world = pet.level;
+            Level world = pet.level();
             BlockPos ownerPos = player.blockPosition();
             BlockPos playerBed = player.getSleepingPos().orElse(null);
             List<BlockPos> nearbyBeds = new ArrayList<>();

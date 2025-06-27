@@ -1,10 +1,11 @@
 package net.foxyas.changed_additions.process;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 
 public class StructureHandle {
@@ -21,14 +22,13 @@ public class StructureHandle {
      *
      * @param level      o ServerLevel
      * @param pos        a posição a ser verificada
-     * @param structure  ResourceKey da estrutura
-     * @param chunkRange o raio de chunks a ser verificado
+     * @param structureKey  ResourceKey da estrutura
      * @return true se a estrutura pode gerar na área, false caso contrário.
      */
-    public static boolean isStructureNearby(ServerLevel level, BlockPos pos, ResourceKey<StructureSet> structure, int chunkRange) {
-        int[] chunkCoords = getChunkCoordinates(pos);
-        return level.getChunkSource().getGenerator().hasFeatureChunkInRange(structure, level.getSeed(), chunkCoords[0], chunkCoords[1], chunkRange);
+    public static boolean isStructureAt(ServerLevel level, BlockPos pos, ResourceKey<Structure> structureKey) {
+        return level.structureManager().getStructureAt(pos, level.registryAccess().registryOrThrow(Registries.STRUCTURE).getHolderOrThrow(structureKey).get()).isValid();
     }
+
 
     /**
      * Verifica se uma estrutura pode gerar dentro de um determinado raio de chunks.
@@ -40,7 +40,7 @@ public class StructureHandle {
      * @return true se a estrutura pode gerar na área, false caso contrário.
      */
     public static boolean isStructureNearby(ServerLevel level, BlockPos pos, String structureId, int chunkRange) {
-        ResourceKey<StructureSet> structureKey = ResourceKey.create(BuiltinRegistries.STRUCTURE_SETS.key(), new ResourceLocation(structureId));
-        return isStructureNearby(level, pos, structureKey, chunkRange);
+        ResourceKey<Structure> structureKey = ResourceKey.create(Registries.STRUCTURE, ResourceLocation.parse(structureId));
+        return isStructureAt(level, pos, structureKey);
     }
 }

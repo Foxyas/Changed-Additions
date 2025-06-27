@@ -6,6 +6,7 @@ import net.ltxprogrammer.changed.init.ChangedAttributes;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,10 +33,14 @@ public class FengQIWolf extends ChangedEntity implements GenderedEntity, PowderS
 
     public FengQIWolf(EntityType<FengQIWolf> type, Level world) {
         super(type, world);
-        maxUpStep = 0.6f;
         xpReward = 5;
         this.setAttributes(this.getAttributes());
         setNoAi(false);
+    }
+
+    @Override
+    public float maxUpStep() {
+        return 0.6f;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -86,7 +92,7 @@ public class FengQIWolf extends ChangedEntity implements GenderedEntity, PowderS
     @Override
     public HairStyle getDefaultHairStyle() {
         HairStyle Hair = BALD.get();
-        if (level.random.nextInt(10) > 5) {
+        if (level().random.nextInt(10) > 5) {
             Hair = HairStyle.SHORT_MESSY.get();
         } else {
             Hair = BALD.get();
@@ -99,10 +105,9 @@ public class FengQIWolf extends ChangedEntity implements GenderedEntity, PowderS
         return HairStyle.Collection.MALE.getStyles();
     }
 
-    @Override
     public Color3 getDripColor() {
         Color3 color = Color3.getColor("#ffffff");
-        if (level.random.nextInt(10) > 5) {
+        if (level().random.nextInt(10) > 5) {
             color = Color3.getColor("#749ae2");
         } else {
             color = Color3.getColor("#93c6fd");
@@ -120,7 +125,7 @@ public class FengQIWolf extends ChangedEntity implements GenderedEntity, PowderS
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

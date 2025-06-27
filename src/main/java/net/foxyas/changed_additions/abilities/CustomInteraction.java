@@ -3,7 +3,7 @@ package net.foxyas.changed_additions.abilities;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,13 +14,12 @@ public class CustomInteraction extends AbstractAbility<CustomInteractionInstance
     }
 
     @Override
-    public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {
-        return new TranslatableComponent("changed_additions.ability.custom_interaction");
+    public Component getAbilityName(IAbstractChangedEntity entity) {
+        return Component.translatable("changed_additions.ability.custom_interaction");
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-        return new ResourceLocation("changed_additions:textures/abilities/normal_paw.png");
+        return ResourceLocation.parse("changed_additions:textures/abilities/normal_paw.png");
     }
 
     @Nullable

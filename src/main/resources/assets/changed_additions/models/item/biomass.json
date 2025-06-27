@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "changed_additions:items/biomass"
+    "layer0": "changed_additions:item/biomass"
   }
 }

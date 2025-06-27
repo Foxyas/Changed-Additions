@@ -3,7 +3,8 @@ package net.foxyas.changed_additions.recipes.special;
 import com.google.gson.JsonObject;
 import net.foxyas.changed_additions.init.ChangedAdditionsRecipeTypes;
 import net.foxyas.changed_additions.item.armor.DyeableShorts;
-import net.ltxprogrammer.changed.item.BenignPants;
+import net.ltxprogrammer.changed.item.BenignShorts;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -19,7 +21,7 @@ import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DYEABLE_SH
 
 public class DyeableShortsColoringRecipe extends CustomRecipe {
     public DyeableShortsColoringRecipe(ResourceLocation id) {
-        super(id);
+        super(id, CraftingBookCategory.MISC);
     }
 
     @Override
@@ -31,7 +33,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
                 Item item = stack.getItem();
-                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignPants) {
+                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignShorts) {
                     if (hasShorts) return false;
                     hasShorts = true;
                 } else if (item instanceof DyeItem) {
@@ -46,7 +48,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container) {
+    public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess) {
         ItemStack pants = ItemStack.EMPTY;
 
         int totalR = 0;
@@ -58,7 +60,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
                 Item item = stack.getItem();
-                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignPants) {
+                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignShorts) {
                     pants = stack;
                 } else if (item instanceof DyeItem dyeItem) {
                     int color = dyeItem.getDyeColor().getTextColor(); // 0xRRGGBB
@@ -80,7 +82,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
             result.setCount(1);
             if (result.getItem() instanceof DyeableLeatherItem dyeableLeatherItem) {
                 dyeableLeatherItem.setColor(result, finalColor);
-            } else if (result.getItem() instanceof BenignPants) {
+            } else if (result.getItem() instanceof BenignShorts) {
                 ItemStack backUp = result;
                 result = new ItemStack(DYEABLE_SHORTS.get(), backUp.getCount());
                 result.setTag(backUp.getTag());
@@ -106,7 +108,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
 
     public static class Serializer implements RecipeSerializer<DyeableShortsColoringRecipe> {
 
-        public static final ResourceLocation ID = new ResourceLocation("changed_additions", "shorts_coloring");
+        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("changed_additions", "shorts_coloring");
 
         @Override
         public DyeableShortsColoringRecipe fromJson(ResourceLocation id, JsonObject json) {
@@ -123,21 +125,6 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
         @Override
         public void toNetwork(FriendlyByteBuf buffer, DyeableShortsColoringRecipe recipe) {
             // Nada para escrever
-        }
-
-        @Override
-        public ResourceLocation getRegistryName() {
-            return ID;
-        }
-
-        @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
-            return this;
-        }
-
-        @Override
-        public Class<RecipeSerializer<?>> getRegistryType() {
-            return (Class<RecipeSerializer<?>>) (Class<?>) RecipeSerializer.class;
         }
     }
 

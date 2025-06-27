@@ -12,7 +12,7 @@ import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,6 +30,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class PatFeatureHandle {
 
@@ -102,7 +103,7 @@ public class PatFeatureHandle {
     private static boolean isInSpectatorMode(Entity entity) {
         if (entity instanceof ServerPlayer serverPlayer) {
             return serverPlayer.gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
-        } else if (entity.level.isClientSide() && entity instanceof Player player) {
+        } else if (entity.level().isClientSide() && entity instanceof Player player) {
             return Objects.requireNonNull(Objects.requireNonNull(Minecraft.getInstance().getConnection()).getPlayerInfo(player.getGameProfile().getId())).getGameMode() == GameType.SPECTATOR;
         }
         return false;
@@ -115,12 +116,12 @@ public class PatFeatureHandle {
             if (player instanceof Player) {
                 ((Player) player).swing(getSwingHand(player), true);
             }
-            if (player instanceof Player p && !p.level.isClientSide()) {
-                p.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
+            if (player instanceof Player p && !p.level().isClientSide()) {
+                p.displayClientMessage(Component.translatable("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
                 if (target instanceof CustomPatReaction pat) {
                     pat.WhenPattedReaction(p);
                     pat.WhenPattedReaction();
-                    //p.displayClientMessage(new TextComponent("pat_message:" + target.getDisplayName().getString()), false);
+                    //p.displayClientMessage(Component.literal("pat_message:" + target.getDisplayName().getString()), false);
                 } else {
                 }
             }
@@ -155,12 +156,12 @@ public class PatFeatureHandle {
                 if (target instanceof CustomPatReaction e) {
                     e.WhenPattedReaction(p);
                     e.WhenPattedReaction();
-                    //p.displayClientMessage(new TextComponent("pat_message:" + target.getDisplayName().getString()), false);
+                    //p.displayClientMessage(Component.literal("pat_message:" + target.getDisplayName().getString()), false);
                 } else {
                 }
 
                 // Exibe mensagens
-                p.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
+                p.displayClientMessage(Component.translatable("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
             }
 
 
@@ -185,15 +186,15 @@ public class PatFeatureHandle {
             ProcessPatFeature.GlobalPatReaction globalPatReactionEvent = new ProcessPatFeature.GlobalPatReaction(world, player, target);
             if (isTargetTransfur && world instanceof ServerLevel serverLevel) {
                 ChangedAdditionsMod.postModEvent(globalPatReactionEvent);
-                if (serverLevel.random.nextFloat(100) <= 25.5f) {
+                if (new Random().nextFloat(100) <= 25.5f) {
                     target.heal(6f);
                     GivePatAdvancement(player);
                 }
             }
 
-            if (!player.level.isClientSide()) {
-                player.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
-                target.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_received", player.getDisplayName().getString()), true);
+            if (!player.level().isClientSide()) {
+                player.displayClientMessage(Component.translatable("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
+                target.displayClientMessage(Component.translatable("key.changed_additions.pat_received", player.getDisplayName().getString()), true);
             }
         }
     }
@@ -207,8 +208,8 @@ public class PatFeatureHandle {
             if (world instanceof ServerLevel serverLevel) {
                 //serverLevel.sendParticles(ParticleTypes.HEART, target.getX(), target.getY() + 1, target.getZ(), 7, 0.3, 0.3, 0.3, 1);
             }
-            if (player instanceof Player p && !p.level.isClientSide()) {
-                p.displayClientMessage(new TranslatableComponent("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
+            if (player instanceof Player p && !p.level().isClientSide()) {
+                p.displayClientMessage(Component.translatable("key.changed_additions.pat_message", target.getDisplayName().getString()), true);
             }
         }
     }
@@ -216,7 +217,7 @@ public class PatFeatureHandle {
     private static boolean isInCreativeMode(Entity entity) {
         if (entity instanceof ServerPlayer serverPlayer) {
             return serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
-        } else if (entity.level.isClientSide() && entity instanceof Player player) {
+        } else if (entity.level().isClientSide() && entity instanceof Player player) {
             return Objects.requireNonNull(Objects.requireNonNull(Minecraft.getInstance().getConnection()).getPlayerInfo(player.getGameProfile().getId())).getGameMode() == GameType.CREATIVE;
         }
         return false;
@@ -232,7 +233,7 @@ public class PatFeatureHandle {
 
     public static void GivePatAdvancement(Entity entity) {
         if (entity instanceof ServerPlayer _player) {
-            Advancement _adv = _player.server.getAdvancements().getAdvancement(new ResourceLocation("changed_additions:pat_advancement"));
+            Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse("changed_additions:pat_advancement"));
             assert _adv != null;
             if (_player.getAdvancements().getOrStartProgress(_adv).isDone()) {
                 return;

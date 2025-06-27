@@ -1,12 +1,12 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "changed_additions:blocks/neofuser_buttom",
-    "up": "changed_additions:blocks/neofuser_top_animated",
-    "north": "changed_additions:blocks/neofuser_side_b",
-    "east": "changed_additions:blocks/neofuser_side_a",
-    "south": "changed_additions:blocks/neofuser_back",
-    "west": "changed_additions:blocks/neofuser_side_a",
-    "particle": "changed_additions:blocks/neofuser_buttom"
+    "down": "changed_additions:block/neofuser_buttom",
+    "up": "changed_additions:block/neofuser_top_animated",
+    "north": "changed_additions:block/neofuser_side_b",
+    "east": "changed_additions:block/neofuser_side_a",
+    "south": "changed_additions:block/neofuser_back",
+    "west": "changed_additions:block/neofuser_side_a",
+    "particle": "changed_additions:block/neofuser_buttom"
   }
 }

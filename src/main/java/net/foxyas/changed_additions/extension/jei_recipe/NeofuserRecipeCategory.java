@@ -11,16 +11,15 @@ import net.foxyas.changed_additions.init.ChangedAdditionsBlocks;
 import net.foxyas.changed_additions.init.ChangedAdditionsJeiPlugin;
 import net.foxyas.changed_additions.recipes.NeofuserRecipe;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 @Deprecated
 public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
-    public final static ResourceLocation UID = new ResourceLocation("changed_additions", "neofuser_recipe");
-    public final static ResourceLocation TEXTURE = new ResourceLocation("changed_additions", "textures/screens/jei_neofuser_screen.png");
+    public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath("changed_additions", "neofuser_recipe");
+    public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("changed_additions", "textures/screens/jei_neofuser_screen.png");
     private final IDrawable background;
     private final IDrawable icon;
 
@@ -36,10 +35,11 @@ public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
 
     @Override
     public Component getTitle() {
-        return new TextComponent("Neofuser Recipe");
+        return Component.literal("Neofuser Recipe");
     }
 
     @Override
+    @SuppressWarnings("removal")
     public IDrawable getBackground() {
         return this.background;
     }
@@ -51,13 +51,11 @@ public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
 
     @Deprecated
     @SuppressWarnings("removal")
-    @Override
     public Class<? extends NeofuserRecipe> getRecipeClass() {
         return NeofuserRecipe.class;
     }
 
     @SuppressWarnings("removal")
-    @Override
     public ResourceLocation getUid() {
         return UID;
     }
@@ -72,9 +70,9 @@ public class NeofuserRecipeCategory implements IRecipeCategory<NeofuserRecipe> {
         // Exibir o campo progress como um texto ou barra de progresso
         float progressSpeed = recipe.getProgressSpeed();
         builder.addSlot(RecipeIngredientRole.CATALYST, 64, 36).addItemStack(new ItemStack(Items.KNOWLEDGE_BOOK)) // Substitua por um item adequado
-                .addTooltipCallback((recipeSlotView, tooltip) -> {
+                .addRichTooltipCallback((recipeSlotView, tooltip) -> {
                     // Adiciona uma nova linha ao tooltip com o progresso da receita
-                    tooltip.add(new TranslatableComponent("changed_additions.gui.recipe_progress", progressSpeed));
+                    tooltip.add(Component.translatable("changed_additions.gui.recipe_progress", progressSpeed));
                 });
     }
 }
