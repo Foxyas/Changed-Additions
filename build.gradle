@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '[6.0,6.2)', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
@@ -20,7 +20,7 @@ archivesBaseName = 'changed_additions'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: '1.20.1'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -63,15 +63,15 @@ repositories {
         url "https://cursemaven.com"
     }
 
-    maven {
+    /*maven {
         name = "Changed"
         url = "https://raw.githubusercontent.com/LtxProgrammer/Changed-Minecraft-Mod/master/mcmodsrepo/"
-    }
+    }*/
 
-    /*maven {
+    maven {
         name = "Changed_Local_file"
         url uri("${rootProject.projectDir}/libs")
-    }*/
+    }
 
 
     /* maven {
@@ -95,15 +95,19 @@ mixin {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.2.21'
+    minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.18.2-f40.2.0:v0.14c") //Changed
-    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5322305") //Fps Boost
-    runtimeOnly fg.deobf("curse.maven:oculus-581495:4578744") //Shaders :D
-    runtimeOnly fg.deobf("curse.maven:catalogue-459701:3803098") //Catalogue (Better Mod menu)
-    runtimeOnly fg.deobf("curse.maven:configured-457570:4462832") //Configured (Config options in game)
+    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.20.1-f47.4.0:v0.15.0") //Changed
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraftVersion}-common-api:${jeiVersion}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraftVersion}-forge-api:${jeiVersion}")
+    //runtimeOnly fg.deobf("mezz.jei:jei-${minecraftVersion}-forge:${jeiVersion}")
+    //runtimeOnly fg.deobf("curse.maven:embeddium-908741:5322305") //Fps Boost
+    //runtimeOnly fg.deobf("curse.maven:oculus-581495:4578744") //Shaders :D
+    //runtimeOnly fg.deobf("curse.maven:catalogue-459701:3803098") //Catalogue (Better Mod menu)
+    //runtimeOnly fg.deobf("curse.maven:configured-457570:4462832") //Configured (Config options in game)
 }
 
 tasks.withType(JavaCompile).configureEach {
