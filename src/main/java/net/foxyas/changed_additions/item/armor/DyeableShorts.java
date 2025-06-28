@@ -3,7 +3,11 @@ package net.foxyas.changed_additions.item.armor;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.foxyas.changed_additions.init.ChangedAdditionsItems;
+import net.ltxprogrammer.changed.data.AccessorySlotType;
+import net.ltxprogrammer.changed.data.AccessorySlots;
+import net.ltxprogrammer.changed.init.ChangedAccessorySlots;
 import net.ltxprogrammer.changed.init.ChangedSounds;
+import net.ltxprogrammer.changed.item.ClothingItem;
 import net.ltxprogrammer.changed.item.ExtendedItemProperties;
 import net.ltxprogrammer.changed.item.Shorts;
 import net.ltxprogrammer.changed.util.Color3;
@@ -11,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.DyeableArmorItem;
@@ -29,7 +34,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 
 
-public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedItemProperties {
+public class DyeableShorts extends ClothingItem implements DyeableLeatherItem {
 
 	public enum DefaultColors {
         RED(new Color(255, 0, 0)),
@@ -63,11 +68,16 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
     }
 	
     public DyeableShorts() {
-        super(MATERIAL, Type.LEGGINGS, (new Properties()));
+        super();
     }
 
     public boolean isDamageable(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public boolean allowedInSlot(ItemStack itemStack, LivingEntity wearer, AccessorySlotType slot) {
+        return slot == ChangedAccessorySlots.LEGS.get() || slot == ChangedAccessorySlots.LOWER_BODY.get();
     }
 
     @Override
@@ -96,17 +106,6 @@ public class DyeableShorts extends DyeableArmorItem implements Shorts, ExtendedI
             return "changed_additions:textures/models/armor/dyeable_shorts_layer_1_overlay.png"; // totalmente invisível
         }
         return "changed_additions:textures/models/armor/dyeable_shorts_layer_1.png";
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientInitializer {
-        @SubscribeEvent
-        public static void onItemColorsInit(RegisterColorHandlersEvent.Item event) {
-            event.register(
-                    (stack, layer) -> ((DyeableLeatherItem)stack.getItem()).getColor(stack),
-                    ChangedAdditionsItems.DYEABLE_SHORTS.get());
-        }
     }
 
     public static void DynamicColor(RegistryObject<Item> item){

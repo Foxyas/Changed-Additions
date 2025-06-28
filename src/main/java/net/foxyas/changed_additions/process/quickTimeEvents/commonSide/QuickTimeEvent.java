@@ -166,8 +166,7 @@ public class QuickTimeEvent {
 
                 TransfurVariantInstance<?> variant = ProcessTransfur.getPlayerTransfurVariant(player);
                 if (variant != null) {
-                    player.hurt(ChangedAdditionsDamageSources.CONSCIENCE_LOST.source(player.level().registryAccess()), 1000);
-                    PlayerUtil.UnTransfurPlayerAndKill(player);
+                    PlayerUtil.UnTransfurPlayerAndKill(player, ChangedAdditionsDamageSources.CONSCIENCE_LOST.source(player.level().registryAccess()));
                 }
             } else if (this.getType() == QuickTimeEventType.STRUGGLE) {
                 player.displayClientMessage(Component.translatable("changed_additions.struggle.fail"), true);

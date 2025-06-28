@@ -74,7 +74,7 @@ public class ChangedAdditionsMod {
     public void clientLoad(FMLClientSetupEvent event) {
         // Dynamic Color
         LaserItemDynamicRender.DynamicLaserColor(LASER_POINTER);
-        StyleItemPredicate.DynamicStyleRender(DYEABLE_SHIRT, "style_check");
+        //StyleItemPredicate.DynamicStyleRender(DYEABLE_SHIRT, "style_check");
     }
 
     public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {

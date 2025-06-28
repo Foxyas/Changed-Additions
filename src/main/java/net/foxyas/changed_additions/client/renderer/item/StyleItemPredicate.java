@@ -15,11 +15,11 @@ import java.util.function.Supplier;
 
 public class StyleItemPredicate {
 
-    public static void DynamicStyleRender(RegistryObject<Item> item, String name) {
+    /*public static void DynamicStyleRender(RegistryObject<Item> item, String name) {
         ItemProperties.register(item.get(), ChangedAdditionsMod.modResource(name),
                 (itemStackToRender, clientWorld, entity, itemEntityId) -> (float) TShirtClothing.getShirtType(itemStackToRender).ordinal());
 
-    }
+    }*/
 
 
 }

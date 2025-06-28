@@ -8,9 +8,15 @@ import net.foxyas.changed_additions.item.armor.TShirtClothing;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -43,5 +49,21 @@ public class ChangedAdditionsItems {
 
     private static RegistryObject<Item> block(RegistryObject<Block> block) {
         return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientInitializer {
+        @SubscribeEvent
+        public static void onItemColorsInit(RegisterColorHandlersEvent.Item event) {
+            event.register(
+                    (stack, layer) -> layer == 0 ? ((DyeableLeatherItem) stack.getItem()).getColor(stack) : -1,
+                    ChangedAdditionsItems.DYEABLE_SHIRT.get()
+            );
+
+            event.register(
+                    (stack, layer) -> ((DyeableLeatherItem)stack.getItem()).getColor(stack),
+                    ChangedAdditionsItems.DYEABLE_SHORTS.get());
+        }
     }
 }

@@ -21,7 +21,6 @@ import java.util.Objects;
 
 public abstract class AbstractLatexSnowFox extends ChangedEntity implements GenderedEntity, PowderSnowWalkable {
 
-
     public AbstractLatexSnowFox(EntityType<? extends ChangedEntity> type, Level level) {
         super(type, level);
     }

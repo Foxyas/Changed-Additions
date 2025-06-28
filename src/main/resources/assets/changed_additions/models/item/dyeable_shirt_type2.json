@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "changed_additions:item/shirt_type2"
+    "layer0": "changed_additions:item/shirt_type1"
   }
 }

@@ -98,7 +98,7 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
                             model.prepareMobModel(changedEntity, limbSwing, limbSwingAmount, partialTicks);
                             model.setupAnim(changedEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                             model.prepareVisibility(component.renderAs, stack);
-                            model.renderForSlot(changedEntity, advancedHumanoidRenderer, stack, component.renderAs, matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+                            model.renderForSlot(changedEntity, advancedHumanoidRenderer, stack, component.renderAs, matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
                             model.unprepareVisibility(component.renderAs, stack);
                         }
 
@@ -109,7 +109,7 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
                 EntityModel layer = renderLayerParent.getModel();
                 if (layer instanceof HumanoidModel<?> baseModel) {
                     baseModel.copyPropertiesTo(this.clothingModel);
-                    this.clothingModel.renderToBuffer(matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+                    this.clothingModel.renderToBuffer(matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
                 }
             }
         }

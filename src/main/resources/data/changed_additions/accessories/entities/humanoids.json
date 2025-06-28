@@ -1,0 +1,13 @@
+{
+  "entities": [
+    "changed_additions:feng_qi_wolf",
+    "changed_additions:latex_snow_fox_female",
+    "changed_additions:latex_snow_fox_male"
+  ],
+  "slots": [
+    "changed:body",
+    "changed:hands",
+    "changed:full_body",
+    "changed:legs"
+  ]
+}

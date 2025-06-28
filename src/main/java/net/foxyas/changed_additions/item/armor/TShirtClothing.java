@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
-public class TShirtClothing extends SimpleClothingItem {
+public class TShirtClothing extends DyeableClothingItem {
 
     public enum DefaultColors {
         RED(new Color(255, 0, 0)),
@@ -52,7 +52,7 @@ public class TShirtClothing extends SimpleClothingItem {
         }
     }
 
-    public enum ShirtType {
+    /*public enum ShirtType {
         TYPE1("type1"),
         TYPE2("type2");
 
@@ -72,10 +72,10 @@ public class TShirtClothing extends SimpleClothingItem {
             }
             return TYPE1; // default
         }
-    }
+    }*/
 
     public TShirtClothing() {
-        super(Type.CHESTPLATE, new Properties());
+        super();
     }
 
     @Override
@@ -94,31 +94,17 @@ public class TShirtClothing extends SimpleClothingItem {
         return stack;
     }
 
-
-    @OnlyIn(Dist.CLIENT)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientInitializer {
-        @SubscribeEvent
-        public static void onItemColorsInit(RegisterColorHandlersEvent.Item event) {
-            event.register(
-                    (stack, layer) -> ((DyeableLeatherItem) stack.getItem()).getColor(stack),
-                    ChangedAdditionsItems.DYEABLE_SHIRT.get()
-            );
-        }
-    }
-
-    @Override
-    public int getColor(ItemStack p_41122_) {
-        CompoundTag compoundtag = p_41122_.getTagElement("display");
-        return compoundtag != null && compoundtag.contains("color", 99) ? compoundtag.getInt("color") : Color3.WHITE.toInt();
-    }
-
     @Override
     public boolean isDamageable(ItemStack stack) {
         return false;
     }
 
-    public static ShirtType getShirtType(ItemStack stack) {
+    @Override
+    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        return super.getArmorTexture(stack, entity, slot, type);
+    }
+
+    /*public static ShirtType getShirtType(ItemStack stack) {
         String tag = stack.getOrCreateTag().getString("Style");
         return ShirtType.fromString(tag);
     }
@@ -143,5 +129,5 @@ public class TShirtClothing extends SimpleClothingItem {
             return "changed_additions:textures/models/armor/t_shirt_layer_1_overlay.png";
         }
         return "changed_additions:textures/models/armor/t_shirt_layer_1.png";
-    }
+    }*/
 }

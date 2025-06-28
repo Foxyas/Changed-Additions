@@ -92,7 +92,7 @@ public class PlayerUtil {
         });
     }
 
-    public static void UnTransfurPlayerAndKill(Entity entity) {
+    public static void UnTransfurPlayerAndKill(Entity entity, DamageSource damageSource) {
         Player player = (Player) entity;
         ProcessTransfur.ifPlayerTransfurred(player, (variant) -> {
             variant.getParent().replaceEntity(player);
@@ -100,6 +100,7 @@ public class PlayerUtil {
             ProcessTransfur.removePlayerTransfurVariant(player);
             ProcessTransfur.setPlayerTransfurProgress(player, 0.0f);
         });
+        player.hurt(damageSource, 1000);
     }
 
     @Nullable
