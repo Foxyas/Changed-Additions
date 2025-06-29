@@ -2,9 +2,11 @@ package net.foxyas.changed_additions.entities;
 
 import net.ltxprogrammer.changed.entity.*;
 import net.ltxprogrammer.changed.init.ChangedAttributes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +40,38 @@ public abstract class AbstractLatexSnowFox extends ChangedEntity implements Gend
     }
 
     public static void init() {
+    }
+
+    public static void setSpawnPlacement(final SpawnPlacementRegisterEvent event) {
+    }
+
+    public static boolean checkSpawnRules(EntityType<LatexSnowFoxFemale> latexSnowFoxFemaleEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource randomSource) {
+        // Permitir spawners, para não bloquear spawners custom ou eggs
+        if (mobSpawnType == MobSpawnType.SPAWNER || mobSpawnType == MobSpawnType.SPAWN_EGG)
+            return true;
+
+        // Só permitir natural em blocos sólidos e naturais
+        BlockPos below = pos.below();
+        boolean isValidGround = serverLevelAccessor.getBlockState(below).isSolidRender(serverLevelAccessor, below) && !serverLevelAccessor.getBlockState(below).isAir();
+
+        if (!isValidGround)
+            return false;
+
+        // Checar luz
+        int lightLevel = serverLevelAccessor.getLightEngine().getRawBrightness(pos, 0);
+        if (lightLevel > 7)
+            return false;
+
+        // Checar se o bioma é frio o suficiente (opcional)
+        float temperature = serverLevelAccessor.getBiome(pos).value().getBaseTemperature();
+        if (temperature > 0.5F)  // Evitar savana/deserto, mais frio = melhor
+            return false;
+
+        // Altura
+        if (pos.getY() < serverLevelAccessor.getMinBuildHeight() + 5)
+            return false;
+
+        return true;
     }
 
     protected void setAttributes(AttributeMap attributes) {

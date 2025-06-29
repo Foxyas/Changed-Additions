@@ -1,0 +1,14 @@
+{
+  "type": "changed_additions:simple_mob_spawn",
+  "biomes": [
+    "minecraft:snowy_plains",
+    "minecraft:snowy_taiga"
+  ],
+  "entity_type": [
+    "changed_additions:latex_snow_fox_male",
+    "changed_additions:latex_snow_fox_female"
+  ],
+  "weight": 20,
+  "min_count": 1,
+  "max_count": 4
+}

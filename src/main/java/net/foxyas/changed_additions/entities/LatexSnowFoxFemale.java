@@ -3,8 +3,15 @@ package net.foxyas.changed_additions.entities;
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
 import net.ltxprogrammer.changed.entity.*;
 import net.ltxprogrammer.changed.util.Color3;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
@@ -54,6 +61,16 @@ public class LatexSnowFoxFemale extends AbstractLatexSnowFox {
             color = Color3.getColor("#e0e0e0");
         }
         return color;
+    }
+
+    public static void setSpawnPlacement(final SpawnPlacementRegisterEvent event) {
+        event.register(
+                ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE.get(),
+                SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                LatexSnowFoxFemale::checkSpawnRules,
+                SpawnPlacementRegisterEvent.Operation.REPLACE
+        );
     }
 
     public Color3 getTransfurColor(TransfurCause cause) {

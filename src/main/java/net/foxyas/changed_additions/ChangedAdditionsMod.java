@@ -35,15 +35,15 @@ public class ChangedAdditionsMod {
     public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(ResourceLocation.fromNamespaceAndPath(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
     private static int messageID = 0;
 
-    public ChangedAdditionsMod() {
-        @SuppressWarnings("removal")
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    public ChangedAdditionsMod(FMLJavaModLoadingContext context) {
+        final IEventBus bus = context.getModEventBus();
         ChangedAdditionsTabs.REGISTRY.register(bus);
         ChangedAdditionsEnchantments.REGISTRY.register(bus);
         ChangedAdditionsMobEffects.REGISTRY.register(bus);
         ChangedAdditionsBlocks.REGISTRY.register(bus);
         ChangedAdditionsItems.REGISTRY.register(bus);
         ChangedAdditionsEntities.REGISTRY.register(bus);
+        ChangedAdditionsBiomeModifierSerializers.BIOME_MODIFIERS.register(bus);
         ChangedAdditionsTransfurVariants.REGISTRY.register(bus);
         ChangedAdditionsAbilities.REGISTRY.register(bus);
         ChangedAdditionsMenus.REGISTRY.register(bus);
