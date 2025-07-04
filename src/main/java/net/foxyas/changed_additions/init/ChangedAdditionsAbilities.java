@@ -64,7 +64,7 @@ public class ChangedAdditionsAbilities /*extends ChangedAbilities*/ {
                     return Optional.of(scheme.foreground().toInt());
                 }
             }
-            return layer == 0 ? Optional.of(scheme.foreground().toInt()) : Optional.empty();
+            return Optional.empty();
         }, WING_FLAP_ABILITY.get());
     }
 
