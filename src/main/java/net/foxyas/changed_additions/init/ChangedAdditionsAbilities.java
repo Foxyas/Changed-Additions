@@ -52,20 +52,7 @@ public class ChangedAdditionsAbilities /*extends ChangedAbilities*/ {
 
     @SubscribeEvent
     public static void clientLoad(FMLClientSetupEvent event) {
-        ChangedClient.abilityColors.getOrThrow().register((abilityInstance, layer) -> {
-            AbstractRadialScreen.ColorScheme scheme = AbilityColors.getAbilityColors(abilityInstance);
-            TransfurMode mode = abilityInstance.entity.getTransfurMode();
-            if (abilityInstance instanceof WingFlapAbility.AbilityInstance Instance) {
-                if (Instance.DashPower <= 0.1f && layer == 0){
-                    return Optional.of(scheme.foreground().toInt());
-                } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F && layer == 1){
-                    return Optional.of(scheme.foreground().toInt());
-                } else if (Instance.DashPower >= 0.95F && layer == 2) {
-                    return Optional.of(scheme.foreground().toInt());
-                }
-            }
-            return Optional.empty();
-        }, WING_FLAP_ABILITY.get());
+        ChangedClient.abilityColors.getOrThrow().register(WingFlapAbility::getColor, WING_FLAP_ABILITY.get());
     }
 
 }

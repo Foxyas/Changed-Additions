@@ -4,6 +4,9 @@ import net.foxyas.changed_additions.configuration.ChangedAdditionsClientConfigs;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
+import net.ltxprogrammer.changed.client.AbilityColors;
+import net.ltxprogrammer.changed.client.gui.AbstractRadialScreen;
+import net.ltxprogrammer.changed.entity.TransfurMode;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
@@ -12,21 +15,24 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.Optional;
+
 
 public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInstance> {
 
     public static final int MAX_TICK_HOLD = 30;
     public static final int TICK_HOLD_NEED = 10;
+
     public WingFlapAbility() {
         super(AbilityInstance::new);
     }
-    
+
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
-        if (entity.getEntity() instanceof Player player){
+        if (entity.getEntity() instanceof Player player) {
             AbilityInstance Instance = ProcessTransfur.getPlayerTransfurVariant(player).getAbilityInstance(this);
-            if (Instance.DashPower <= 0.1f){
+            if (Instance.DashPower <= 0.1f) {
                 return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_start.png");
-            } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F){
+            } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F) {
                 return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_mid.png");
             } else if (Instance.DashPower >= 0.95F) {
                 return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_final.png");
@@ -36,6 +42,20 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
         return ResourceLocation.parse("changed_additions:textures/abilities/wing_flap_ability_start.png");
     }
 
+    public static Optional<Integer> getColor(AbstractAbilityInstance abilityInstance, int layer) {
+        AbstractRadialScreen.ColorScheme scheme = AbilityColors.getAbilityColors(abilityInstance);
+        if (abilityInstance instanceof WingFlapAbility.AbilityInstance Instance) {
+            if (Instance.DashPower < 0.3f && layer == 0) {
+                return Optional.of(scheme.foreground().toInt());
+            } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F && layer == 1) {
+                return Optional.of(scheme.foreground().toInt());
+            } else if (Instance.DashPower >= 0.95F && layer == 2) {
+                return Optional.of(scheme.foreground().toInt());
+            }
+        }
+        return Optional.empty();
+    }
+
     @Override
     public Component getAbilityName(IAbstractChangedEntity entity) {
         return Component.translatable("changed_additions.ability.wing_flap");
@@ -43,8 +63,8 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
     @Override
     public UseType getUseType(IAbstractChangedEntity entity) {
-        if (entity.getEntity() instanceof Player player){
-            if (player.getAbilities().flying){
+        if (entity.getEntity() instanceof Player player) {
+            if (player.getAbilities().flying) {
                 return UseType.CHARGE_TIME;
             } else if (player.isFallFlying()) {
                 return UseType.HOLD;
@@ -58,8 +78,8 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
     @Override
     public int getChargeTime(IAbstractChangedEntity entity) {
-        if (entity.getEntity() instanceof Player player){
-            if (player.getAbilities().flying){
+        if (entity.getEntity() instanceof Player player) {
+            if (player.getAbilities().flying) {
                 return 5;
             } else if (player.isFallFlying()) {
                 return 45;
@@ -72,8 +92,8 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
     @Override
     public int getCoolDown(IAbstractChangedEntity entity) {
-        if (entity.getEntity() instanceof Player player){
-            if (player.getAbilities().flying){
+        if (entity.getEntity() instanceof Player player) {
+            if (player.getAbilities().flying) {
                 return 10;
             } else if (player.isFallFlying()) {
                 return 25;
@@ -86,9 +106,10 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
     public static class AbilityInstance extends AbstractAbilityInstance {
 
-    	public boolean ReadytoDash = false;
+        public boolean ReadytoDash = false;
         public int LastTick = 0;
         public float DashPower = 0;
+
         public AbilityInstance(AbstractAbility<?> ability, IAbstractChangedEntity entity) {
             super(ability, entity);
         }
@@ -125,7 +146,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
             if (player.getAbilities().flying && !player.isFallFlying()) {
                 double speed = 2;
-                player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(speed,speed,speed)));
+                player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(speed, speed, speed)));
                 playFlapSound(player);
                 exhaustPlayer(player, 0.8F);
             }
@@ -133,24 +154,24 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
         @Override
         public void tick() {
-         if (!(entity.getEntity() instanceof Player player) || player.getFoodData().getFoodLevel() <= 6) {
+            if (!(entity.getEntity() instanceof Player player) || player.getFoodData().getFoodLevel() <= 6) {
                 return;
             }
 
             this.DashPower = capLevel((float) getController().getHoldTicks() / MAX_TICK_HOLD, 0, 2.5f);
-            if (getController().getHoldTicks() >= TICK_HOLD_NEED){
-				this.ReadytoDash = true;
+            if (getController().getHoldTicks() >= TICK_HOLD_NEED) {
+                this.ReadytoDash = true;
             }
-            
-
-			if (this.DashPower >= 1 && getController().getHoldTicks() == MAX_TICK_HOLD){
-				player.playSound(SoundEvents.ENDER_DRAGON_FLAP, 1, 2F);
-			}
 
 
-			if (player.level().isClientSide() && ChangedAdditionsClientConfigs.WING_FLAP_INFO.get()){
-				player.displayClientMessage(Component.literal("Ticks = " + getController().getHoldTicks()), true);
-			}
+            if (this.DashPower >= 1 && getController().getHoldTicks() == MAX_TICK_HOLD) {
+                player.playSound(SoundEvents.ENDER_DRAGON_FLAP, 1, 2F);
+            }
+
+
+            if (player.level().isClientSide() && ChangedAdditionsClientConfigs.WING_FLAP_INFO.get()) {
+                player.displayClientMessage(Component.literal("Ticks = " + getController().getHoldTicks()), true);
+            }
         }
 
         @Override
@@ -162,17 +183,17 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
             if (player.isInWater() || player.isSpectator()) {
                 return;
             }
-            if (player.isFallFlying() && !player.getAbilities().flying && ReadytoDash){
-            	this.ReadytoDash = false;
+            if (player.isFallFlying() && !player.getAbilities().flying && ReadytoDash) {
+                this.ReadytoDash = false;
                 double speed = 2 * DashPower;
-                player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(speed,speed,speed)));
+                player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(speed, speed, speed)));
                 playFlapSound(player);
                 exhaustPlayer(player, 8F * DashPower);
                 this.DashPower = 0;
             } else if (player.onGround() && player.getXRot() <= -45 && ReadytoDash) {
                 this.ReadytoDash = false;
                 double speed = 2 * DashPower;
-                player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(0,speed,0)));
+                player.setDeltaMovement(player.getDeltaMovement().add(player.getViewVector(1).multiply(0, speed, 0)));
                 playFlapSound(player, 0.5F);
                 exhaustPlayer(player, 8F * DashPower);
                 this.DashPower = 0;
