@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.client.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.client.models.animation.CarryAbilityAnimation;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets.TailSet;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class LatexKitsuneMaleModel extends AdvancedHumanoidModel<LatexKitsuneMaleEntity> implements AdvancedHumanoidModelInterface<LatexKitsuneMaleEntity, LatexKitsuneMaleModel> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("changed_addon", "kitsune_male"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("kitsune_male", "main");
 
     private final ModelPart Hair;
     private final ModelPart Head;

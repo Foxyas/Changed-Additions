@@ -38,6 +38,7 @@ import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+@SuppressWarnings("ALL")
 public class SimpleColorfulClothingRenderer implements AccessoryRenderer, TransitionalAccessory {
     protected final HumanoidModel clothingModel;
     protected final Set<ModelComponent> components;
@@ -72,6 +73,7 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
         }
     }
 
+    @SuppressWarnings({"unchecked"})
     public <T extends LivingEntity, M extends EntityModel<T>> void render(AccessorySlotContext<T> slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         ItemStack stack = slotContext.stack();
         Item var14 = stack.getItem();
@@ -116,6 +118,7 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
 
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends LivingEntity, M extends EntityModel<T>> void renderFirstPersonOnArms(AccessorySlotContext<T> slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, HumanoidArm arm, PoseStack stackCorrector, float partialTicks) {
         ItemStack stack = slotContext.stack();
         Item var11 = stack.getItem();
