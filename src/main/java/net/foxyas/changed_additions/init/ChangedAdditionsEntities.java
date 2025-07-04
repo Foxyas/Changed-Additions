@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ChangedAdditionsEntities {
-	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITIES, ChangedAdditionsMod.MODID);
+	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ChangedAdditionsMod.MODID);
 	public static final RegistryObject<EntityType<FengQIWolf>> FENG_QI_WOLF = register("feng_qi_wolf",
 			EntityType.Builder.<FengQIWolf>of(FengQIWolf::new, ChangedMobCategories.CHANGED)
 					.setShouldReceiveVelocityUpdates(true)
