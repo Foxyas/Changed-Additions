@@ -2,10 +2,12 @@ package net.foxyas.changed_additions.client.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.client.models.animation.CarryAbilityAnimation;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets.TailSet;
 import net.foxyas.changed_additions.entities.LatexKitsuneFemaleEntity;
+import net.foxyas.changed_additions.entities.LatexKitsuneMaleEntity;
 import net.ltxprogrammer.changed.client.animations.Limb;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneFemaleEntity> implements AdvancedHumanoidModelInterface<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("changed_addon", "kitsune_female"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("kitsune_female", "main");
 
     private final ModelPart Hair;
     private final ModelPart Head;
@@ -447,7 +449,7 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
      }
   */
     @Override
-    public void setupHand() {
+    public void setupHand(LatexKitsuneFemaleEntity latexKitsuneFemaleEntity) {
         animator.setupHand();
     }
 
@@ -457,7 +459,7 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
         animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         CarryAbilityAnimation.playAnimation(entity, this);
-		this.applyAllTailRotations();
+        this.applyAllTailRotations();
     }
 
     public void applyTailRotations(ModelPart tail, float xRot, float yRot, float zRot) {
@@ -466,15 +468,15 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
         tail.zRot += zRot * Mth.DEG_TO_RAD;
     }
 
-	public void applyAllTailRotations() {
-		this.applyTailRotations(this.TailUpperRight, -10.8885f, 16.4137f, -6.1549f);
-		this.applyTailRotations(this.TailUpperLeft, -10.9827f, -17.9886f, 0.3862f);
-		this.applyTailRotations(this.TailLowerRight, 10, 17.5f, 0);
-		this.applyTailRotations(this.TailLowerLeft, 9.9727f, -17.0014f, -5.9783f);
-		//this.applyTailRotations(TailMiddleMiddle, 0, 0, 0);
-		this.applyTailRotations(this.TailMiddleLower, 20, 0, 0);
-		this.applyTailRotations(this.TailMiddleUpper, -20, 0, 0);
-	}
+    public void applyAllTailRotations() {
+        this.applyTailRotations(this.TailUpperRight, -10.8885f, 16.4137f, -6.1549f);
+        this.applyTailRotations(this.TailUpperLeft, -10.9827f, -17.9886f, 0.3862f);
+        this.applyTailRotations(this.TailLowerRight, 10, 17.5f, 0);
+        this.applyTailRotations(this.TailLowerLeft, 9.9727f, -17.0014f, -5.9783f);
+        //this.applyTailRotations(TailMiddleMiddle, 0, 0, 0);
+        this.applyTailRotations(this.TailMiddleLower, 20, 0, 0);
+        this.applyTailRotations(this.TailMiddleUpper, -20, 0, 0);
+    }
 
     public ModelPart getArm(HumanoidArm p_102852) {
         return p_102852 == HumanoidArm.LEFT ? this.LeftArm : this.RightArm;
@@ -511,7 +513,7 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
     }
 
     @Override
-    public HumanoidAnimator<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> getAnimator() {
+    public HumanoidAnimator<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> getAnimator(LatexKitsuneFemaleEntity latexKitsuneFemaleEntity) {
         return animator;
     }
 }

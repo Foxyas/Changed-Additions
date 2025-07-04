@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LatexKitsuneFemaleRenderer extends AdvancedHumanoidRenderer<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel, ArmorLatexFemaleWolfModel<LatexKitsuneFemaleEntity>> {
     public LatexKitsuneFemaleRenderer(EntityRendererProvider.Context context) {
-        super(context, new LatexKitsuneFemaleModel(context.bakeLayer(LatexKitsuneFemaleModel.LAYER_LOCATION)), ArmorLatexFemaleWolfModel::new, ArmorLatexFemaleWolfModel.INNER_ARMOR, ArmorLatexFemaleWolfModel.OUTER_ARMOR, 0.5f);
+        super(context, new LatexKitsuneFemaleModel(context.bakeLayer(LatexKitsuneFemaleModel.LAYER_LOCATION)), ArmorLatexFemaleWolfModel.MODEL_SET, 0.5f);
         this.addLayer(new LatexParticlesLayer<>(this, getModel()));
         this.addLayer(new CustomEyesLayer<>(this, context.getModelSet()));
         this.addLayer(TransfurCapeLayer.normalCape(this, context.getModelSet()));
