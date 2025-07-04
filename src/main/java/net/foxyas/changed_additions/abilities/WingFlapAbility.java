@@ -4,6 +4,7 @@ import net.foxyas.changed_additions.configuration.ChangedAdditionsClientConfigs;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
+import net.ltxprogrammer.changed.client.gui.AbstractRadialScreen;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,8 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
+
+import java.util.Optional;
 
 
 public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInstance> {
@@ -37,6 +40,21 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
         return new ResourceLocation("changed_additions:textures/abilities/wing_flap_ability_start.png");
     }
+
+    //For the next update
+    /*public static Optional<Integer> getColor(AbstractAbilityInstance abilityInstance, int layer) {
+        AbstractRadialScreen.ColorScheme scheme = AbilityColors.getAbilityColors(abilityInstance);
+        if (abilityInstance instanceof WingFlapAbility.AbilityInstance Instance) {
+            if (Instance.DashPower < 0.3f && layer == 0) {
+                return Optional.of(scheme.foreground().toInt());
+            } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F && layer == 1) {
+                return Optional.of(scheme.foreground().toInt());
+            } else if (Instance.DashPower >= 0.95F && layer == 2) {
+                return Optional.of(scheme.foreground().toInt());
+            }
+        }
+        return Optional.empty();
+    }*/
 
     @Override
     public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {

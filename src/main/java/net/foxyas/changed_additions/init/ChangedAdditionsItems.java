@@ -31,10 +31,10 @@ public class ChangedAdditionsItems {
     public static final RegistryObject<Item> LASER_POINTER = REGISTRY.register("laser_pointer", LaserPointer::new);
 
     public static final RegistryObject<Item> LATEX_SNOW_FOX_SPAWN_EGG = REGISTRY.register("latex_snow_fox_male_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_SNOW_FOX_MALE, 0xFFFFFFF, 0xfD6DDF7, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
-
     public static final RegistryObject<Item> LATEX_SNOW_FOX_FEMALE_SPAWN_EGG = REGISTRY.register("latex_snow_fox_female_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_SNOW_FOX_FEMALE, 0xFFFFFFF, 0xfD6DDF7, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
-
-    public static final RegistryObject<Item> feng_qi_wolf_SPAWN_EGG = REGISTRY.register("feng_qi_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.FENG_QI_WOLF, Color3.getColor("#93c6fd").toInt(), Color3.getColor("#FAC576").toInt(), new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+    public static final RegistryObject<Item> FENG_QI_WOLF_SPAWN_EGG = REGISTRY.register("feng_qi_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.FENG_QI_WOLF, Color3.getColor("#93c6fd").toInt(), Color3.getColor("#FAC576").toInt(), new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+    public static final RegistryObject<Item> LATEX_KITSUNE_MALE_SPAWN_EGG = REGISTRY.register("latex_kitsune_male_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_KITSUNE_MALE, 0xffffff, 0xffffff, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+    public static final RegistryObject<Item> LATEX_KITSUNE_FEMALE_SPAWN_EGG = REGISTRY.register("latex_kitsune_female_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_KITSUNE_FEMALE, 0xffffff, 0xffffff, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
 
     public static final RegistryObject<Item> DARK_LATEX_COAT = REGISTRY.register("dark_latex_coat",
             () -> new DarkLatexCoatItem(EquipmentSlot.CHEST, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));

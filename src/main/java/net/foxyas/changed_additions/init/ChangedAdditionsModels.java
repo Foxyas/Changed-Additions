@@ -1,8 +1,6 @@
 package net.foxyas.changed_additions.init;
 
-import net.foxyas.changed_additions.client.models.FengQIWolfModel;
-import net.foxyas.changed_additions.client.models.LatexSnowFoxFemaleModel;
-import net.foxyas.changed_additions.client.models.LatexSnowFoxMaleModel;
+import net.foxyas.changed_additions.client.models.*;
 import net.foxyas.changed_additions.client.models.accessories.models.*;
 import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
 import net.foxyas.changed_additions.client.models.armors.SkinLayerModel;
@@ -18,6 +16,8 @@ public class ChangedAdditionsModels {
         event.registerLayerDefinition(FengQIWolfModel.LAYER_LOCATION, FengQIWolfModel::createBodyLayer);
         event.registerLayerDefinition(LatexSnowFoxMaleModel.LAYER_LOCATION, LatexSnowFoxMaleModel::createBodyLayer);
         event.registerLayerDefinition(LatexSnowFoxFemaleModel.LAYER_LOCATION, LatexSnowFoxFemaleModel::createBodyLayer);
+        event.registerLayerDefinition(LatexKitsuneMaleModel.LAYER_LOCATION, LatexKitsuneMaleModel::createBodyLayer);
+        event.registerLayerDefinition(LatexKitsuneFemaleModel.LAYER_LOCATION, LatexKitsuneFemaleModel::createBodyLayer);
 
         //Accessories
         event.registerLayerDefinition(AccessoriesFemaleWolf.LAYER_LOCATION, AccessoriesFemaleWolf::createBodyLayer);
