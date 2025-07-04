@@ -4,15 +4,24 @@ package net.foxyas.changed_additions.init;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.abilities.*;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
+import net.ltxprogrammer.changed.client.AbilityColors;
+import net.ltxprogrammer.changed.client.ChangedClient;
+import net.ltxprogrammer.changed.client.gui.AbstractRadialScreen;
+import net.ltxprogrammer.changed.entity.TransfurMode;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
+import net.ltxprogrammer.changed.init.ChangedAbilities;
 import net.ltxprogrammer.changed.init.ChangedEntities;
 import net.ltxprogrammer.changed.init.ChangedTags;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
+import java.util.Optional;
 
 import static net.ltxprogrammer.changed.init.ChangedRegistry.ABILITY;
 
@@ -38,6 +47,25 @@ public class ChangedAdditionsAbilities /*extends ChangedAbilities*/ {
         event.addAbility(event.isOfTag(ChangedAdditionsTags.EntityTypes.HAVE_CLAWS).and(event.isNotOfTag(ChangedAdditionsTags.EntityTypes.NO_CLAWS)), CLAWS_ABILITY);
         event.addAbility(event.isOfTag(ChangedAdditionsTags.EntityTypes.FELINES_LIKE), LEAP);
         event.addAbility(entityType -> getCanGlideEntites().contains(entityType), WING_FLAP_ABILITY);
+    }
+
+
+    @SubscribeEvent
+    public static void clientLoad(FMLClientSetupEvent event) {
+        ChangedClient.abilityColors.getOrThrow().register((abilityInstance, layer) -> {
+            AbstractRadialScreen.ColorScheme scheme = AbilityColors.getAbilityColors(abilityInstance);
+            TransfurMode mode = abilityInstance.entity.getTransfurMode();
+            if (abilityInstance instanceof WingFlapAbility.AbilityInstance Instance) {
+                if (Instance.DashPower <= 0.1f && layer == 0){
+                    return Optional.of(scheme.foreground().toInt());
+                } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F && layer == 1){
+                    return Optional.of(scheme.foreground().toInt());
+                } else if (Instance.DashPower >= 0.95F && layer == 2) {
+                    return Optional.of(scheme.foreground().toInt());
+                }
+            }
+            return layer == 0 ? Optional.of(scheme.foreground().toInt()) : Optional.empty();
+        }, WING_FLAP_ABILITY.get());
     }
 
 }
