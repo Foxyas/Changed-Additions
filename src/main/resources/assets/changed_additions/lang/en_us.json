@@ -90,8 +90,8 @@
 
   "gamerule.changed_additions:fight_to_keep_consciousness": "Fight to Keep Consciousness QTE",
   "gamerule.changed_additions:fight_to_keep_consciousness.description": "Allow the fight to keep consciousness quick time event to happen",
-  "gamerule.changed_additions:CreatureDiets": "Creatures Diets?",
-  "gamerule.changed_additions:CreatureDiets.description": "Allow Transfurs Get More Food points and saturation when eat a Good food for them",
+  "gamerule.changed_additions:doCreatureDiets": "Creatures Diets?",
+  "gamerule.changed_additions:doCreatureDiets.description": "Allow Transfurs Get More Food points and saturation when eat a Good food for them",
 
 
   "advancements.pat_advancement.title": "That does something?!",
@@ -101,5 +101,6 @@
   "advancements.pants_dyer.title": "With a touch of dye",
   "advancements.pants_dyer.descr": "You gave those shorts a splash of color. Style and laser safe? That’s a win-win.",
   "advancements.organic_transfur_advancement.title": "Organic And Fluffy!!",
-  "advancements.organic_transfur_advancement.descr": "Transfur yourself into a organic form"
+  "advancements.organic_transfur_advancement.descr": "Transfur yourself into a organic form",
+  "changed_additions.ability.teleport": "Teleport Ability"
 }

@@ -1,13 +1,16 @@
 package net.foxyas.changed_additions.process;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
+import net.foxyas.changed_additions.entities.AbstractKitsuneEntity;
 import net.foxyas.changed_additions.process.variantsExtraStats.TransfurExtraStats;
 import net.foxyas.changed_additions.process.variantsExtraStats.TransfurExtraStatsRegistry;
 import net.foxyas.changed_additions.variants.ExtraVariantStats;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;

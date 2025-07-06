@@ -57,7 +57,7 @@ public class CreatureDietsHandleProcedure {
             return;
         }
 
-        boolean isForWork = world.getGameRules().getBoolean(ChangedAdditionsGameRules.CHANGED_ADDITIONS_CREATURE_DIETS);
+        boolean isForWork = world.getGameRules().getBoolean(ChangedAdditionsGameRules.CREATURE_DIETS);
         boolean Debuffs;
         Debuffs = ChangedAdditionsServerConfigs.DEBUFFS.get();
 

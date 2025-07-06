@@ -228,6 +228,13 @@ public class LaserPointParticle extends TextureSheetParticle {
         if (entityHitResult != null) {
             hitPos = entityHitResult.getLocation();
             face = entityHitResult.getEntity().getDirection();
+            // Aplica offset dinâmico baseado na direção
+            double offset = -0.025D;
+            hitPos = hitPos.subtract(
+                    face.getStepX() * offset,
+                    face.getStepY() * offset,
+                    face.getStepZ() * offset
+            );
         } else if (result instanceof BlockHitResult blockResult) {
             BlockHitResult finalResult = blockResult;
 
@@ -240,20 +247,12 @@ public class LaserPointParticle extends TextureSheetParticle {
 
             hitPos = finalResult.getLocation();
             face = finalResult.getDirection();
-            hitPos = FoxyasUtils.applyOffset(hitPos, face, !Subtract ? -0.01f : 0.05f);
+            hitPos = FoxyasUtils.applyOffset(hitPos, face, !Subtract ? -0.025f : 0.025f);
         } else {
             hitPos = result.getLocation(); // fallback (geralmente miss)
         }
 
-        if (face != null) {
-            // Aplica offset dinâmico baseado na direção
-            double offset = !Subtract ? -0.05D : 0.05D;
-            hitPos = hitPos.subtract(
-                    face.getStepX() * offset,
-                    face.getStepY() * offset,
-                    face.getStepZ() * offset
-            );
-        }
+        /**/
 
         if (ChangedAdditionsClientConfigs.SMOOTH_LASER_MOVIMENT.get()) {
             moveToward(hitPos);

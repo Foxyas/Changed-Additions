@@ -8,6 +8,7 @@
     "PlayerMixin",
     "RandomVariantFunctionMixin",
     "ServerPlayerMixin",
+    "blocks.AbstractLatexBlockMixin",
     "blocks.BlockMixin",
     "blocks.CrossCollisionBlockMixin",
     "blocks.DroppedSyringeMixin",

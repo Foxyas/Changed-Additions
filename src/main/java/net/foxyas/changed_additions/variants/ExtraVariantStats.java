@@ -1,5 +1,7 @@
 package net.foxyas.changed_additions.variants;
 
+import net.minecraft.world.damagesource.DamageSource;
+
 public interface ExtraVariantStats {
 
     // Variable Set By Entity

@@ -81,12 +81,11 @@ public class ChangedAdditionsTransfurVariants {
     public static final RegistryObject<TransfurVariant<FengQIWolf>> FENG_QI_WOLF = register("form_feng_qi_wolf", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_WOLF)
             .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).scares(List.of(Rabbit.class)).nightVision());
 
-    public static final RegistryObject<TransfurVariant<LatexKitsuneMaleEntity>> LATEX_KITSUNE_MALE = register("form_latex_kitsune/male", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_KITSUNE_MALE).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
+    public static final RegistryObject<TransfurVariant<LatexKitsuneMaleEntity>> LATEX_KITSUNE_MALE = register("form_latex_kitsune/male", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_KITSUNE_MALE).addAbility(ChangedAdditionsAbilities.TELEPORT).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
 
-    public static final RegistryObject<TransfurVariant<LatexKitsuneFemaleEntity>> LATEX_KITSUNE_FEMALE = register("form_latex_kitsune/female", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_KITSUNE_FEMALE).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
+    public static final RegistryObject<TransfurVariant<LatexKitsuneFemaleEntity>> LATEX_KITSUNE_FEMALE = register("form_latex_kitsune/female", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_KITSUNE_FEMALE).addAbility(ChangedAdditionsAbilities.TELEPORT).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
 
     public static final RegistryObject<TransfurVariant<LatexCalicoCatEntity>> LATEX_CALICO_CAT = register("form_latex_calico_cat", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_CALICO_CAT).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Creeper.class)).nightVision());
-
 
     public static class Gendered {
         public static final GenderedPair<LatexSnowFoxMale, LatexSnowFoxFemale> LATEX_SNOW_FOXES = new GenderedPair<>(LATEX_SNOW_FOX_MALE, LATEX_SNOW_FOX_FEMALE);
