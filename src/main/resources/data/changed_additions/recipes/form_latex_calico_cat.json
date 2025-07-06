@@ -2,9 +2,9 @@
   "type": "changed:infuser",
   "ingredients": [
     { "item": "changed:latex_base" },
-    { "item": "changed:white_latex_base" },
-    { "tag": "forge:dyes/orange_dye" },
-    { "tag": "forge:dyes/brown_dye" },
+    { "item": "changed:white_latex_goo" },
+    { "tag": "forge:dyes/orange" },
+    { "tag": "forge:dyes/brown" },
     { "item": "minecraft:string" },
     { "item": "minecraft:feather" },
     { "item": "minecraft:salmon" }
