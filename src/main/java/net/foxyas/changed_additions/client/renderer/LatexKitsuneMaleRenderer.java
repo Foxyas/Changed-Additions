@@ -5,10 +5,7 @@ import net.foxyas.changed_additions.client.models.LatexKitsuneMaleModel;
 import net.foxyas.changed_additions.entities.LatexKitsuneMaleEntity;
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
 import net.ltxprogrammer.changed.client.renderer.AdvancedHumanoidRenderer;
-import net.ltxprogrammer.changed.client.renderer.layers.CustomEyesLayer;
-import net.ltxprogrammer.changed.client.renderer.layers.GasMaskLayer;
-import net.ltxprogrammer.changed.client.renderer.layers.LatexParticlesLayer;
-import net.ltxprogrammer.changed.client.renderer.layers.TransfurCapeLayer;
+import net.ltxprogrammer.changed.client.renderer.layers.*;
 import net.ltxprogrammer.changed.client.renderer.model.armor.ArmorLatexMaleWolfModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +17,7 @@ public class LatexKitsuneMaleRenderer extends AdvancedHumanoidRenderer<LatexKits
         this.addLayer(new CustomEyesLayer<>(this, context.getModelSet()));
         this.addLayer(TransfurCapeLayer.normalCape(this, context.getModelSet()));
         this.addLayer(new GasMaskLayer<>(this, context.getModelSet()));
+        this.addLayer(new EmissiveBodyLayer<>(this, ChangedAdditionsMod.modResource("textures/entities/latex_kitsune_male/latex_kitsune_male_stripes.png")));
     }
 
     @Override

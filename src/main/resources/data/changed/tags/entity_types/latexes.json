@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "changed_additions:latex_snow_fox_male",
-    "changed_additions:latex_snow_fox_female"
+    "changed_additions:latex_snow_fox_female",
+    "changed_additions:latex_kitsune_male",
+    "changed_additions:latex_kitsune_female",
+    "changed_additions:latex_calico_cat"
   ]
 }

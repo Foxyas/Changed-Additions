@@ -35,6 +35,8 @@ public class ChangedAdditionsItems {
     public static final RegistryObject<Item> FENG_QI_WOLF_SPAWN_EGG = REGISTRY.register("feng_qi_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.FENG_QI_WOLF, Color3.getColor("#93c6fd").toInt(), Color3.getColor("#FAC576").toInt(), new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
     public static final RegistryObject<Item> LATEX_KITSUNE_MALE_SPAWN_EGG = REGISTRY.register("latex_kitsune_male_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_KITSUNE_MALE, 0xffffff, 0xffffff, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
     public static final RegistryObject<Item> LATEX_KITSUNE_FEMALE_SPAWN_EGG = REGISTRY.register("latex_kitsune_female_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_KITSUNE_FEMALE, 0xffffff, 0xffffff, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+    public static final RegistryObject<Item> LATEX_CALICO_CAT_MALE_SPAWN_EGG = REGISTRY.register("latex_calico_cat_spawn_egg", () -> new ForgeSpawnEggItem(ChangedAdditionsEntities.LATEX_CALICO_CAT, 0xffece4, 0xd56f53, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));
+
 
     public static final RegistryObject<Item> DARK_LATEX_COAT = REGISTRY.register("dark_latex_coat",
             () -> new DarkLatexCoatItem(EquipmentSlot.CHEST, new Item.Properties().tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB)));

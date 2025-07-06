@@ -10,8 +10,9 @@
   "item.changed_additions.latex_snow_fox_female_spawn_egg": "Female Latex Snow Fox Spawn Egg",
   "item.changed_additions.latex_snow_fox_male_spawn_egg": "Male Latex Snow Fox Spawn Egg",
   "item.changed_additions.feng_qi_wolf_spawn_egg": "Feng QI Fox",
-  "item.changed_additions.latex_kitsune_female_spawn_egg": "Latex Kitsune Female Spawn Egg",
-  "item.changed_additions.latex_kitsune_male_spawn_egg": "Latex Kitsune Male Spawn Egg",
+  "item.changed_additions.latex_kitsune_female_spawn_egg": "Female Latex Kitsune Spawn Egg",
+  "item.changed_additions.latex_kitsune_male_spawn_egg": "Male Latex Kitsune Spawn Egg",
+  "item.changed_additions.latex_calico_cat_spawn_egg": "Latex Calico Cat Spawn Egg",
 
   "item.changed_additions.dark_latex_coat": "Dark Latex Coat",
   "item.changed_additions.dark_latex_coat_cap": "Dark Latex Head Cap",
@@ -22,8 +23,9 @@
   "entity.changed_additions.latex_snow_fox_male": "Male Latex Snow Fox",
   "entity.changed_additions.latex_snow_fox_female": "Female Latex Snow Fox",
   "entity.changed_additions.feng_qi_wolf": "Feng QI Fox",
-  "entity.changed_additions.latex_kitsune_female": "Latex Kitsune Female",
-  "entity.changed_additions.latex_kitsune_male": "Latex Kitsune Male",
+  "entity.changed_additions.latex_kitsune_female": "Female Latex Kitsune",
+  "entity.changed_additions.latex_kitsune_male": "Male Latex Kitsune",
+  "entity.changed_additions.latex_calico_cat": "Latex Calico Cat",
 
   "enchantment.changed_additions.latex_solvent": "Latex Solvent",
   "enchantment.changed_additions.solvent.desc": "Deal more Damage to Latex Entities",

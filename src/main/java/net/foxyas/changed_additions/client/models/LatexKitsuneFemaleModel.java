@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.client.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.client.models.animation.CarryAbilityAnimation;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets.TailSet;
@@ -16,15 +17,15 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneFemaleEntity> implements AdvancedHumanoidModelInterface<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("changed_addon", "kitsune_female"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("latex_kitsune_female", "main");
 
     private final ModelPart Hair;
     private final ModelPart Head;
