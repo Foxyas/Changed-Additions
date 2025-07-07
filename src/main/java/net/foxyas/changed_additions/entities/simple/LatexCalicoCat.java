@@ -30,7 +30,6 @@ public class LatexCalicoCat extends AbstractBasicChangedEntity {
         return TransfurMode.REPLICATION;
     }
 
-    @Override
     public Color3 getDripColor() {
         return this.random.nextBoolean() ? Color3.parseHex("#d67053") : Color3.parseHex("#67423f");
     }

@@ -34,8 +34,8 @@ public class BoneMealExpansion {
 
         @SubscribeEvent
         public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-            Player player = event.getPlayer();
-            Level level = event.getWorld();
+            Player player = event.getEntity();
+            Level level = event.getLevel();
             BlockPos pos = event.getPos();
             ItemStack stack = event.getItemStack();
             BlockState state = level.getBlockState(pos);
