@@ -13,9 +13,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
-version = '1.0'
+version = 'v0.0.6'
 group = 'net.foxyas.changed_additions'
-archivesBaseName = 'ChangedAdditions-m1.20.1-v'
+archivesBaseName = 'ChangedAdditions-m1.20.1'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
