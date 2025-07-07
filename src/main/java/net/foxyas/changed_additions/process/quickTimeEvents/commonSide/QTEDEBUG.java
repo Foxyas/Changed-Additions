@@ -13,6 +13,8 @@ public class QTEDEBUG {
 
     @SubscribeEvent
     public static void DEBUG(ServerChatEvent event) {
+        if (true){return;} //disabled
+
         ServerPlayer player = event.getPlayer();
         String message = event.getMessage().toLowerCase();
 
