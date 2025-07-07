@@ -1,3 +1,4 @@
+/*
 package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
@@ -63,4 +64,4 @@ public class QTEDEBUG {
         }
     }
 }
-
+*/
