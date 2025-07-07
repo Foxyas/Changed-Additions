@@ -12,6 +12,7 @@ import net.ltxprogrammer.changed.client.renderer.layers.TransfurCapeLayer;
 import net.ltxprogrammer.changed.client.renderer.model.armor.ArmorLatexMaleWolfModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 public class LatexKitsuneMaleRenderer extends AdvancedHumanoidRenderer<LatexKitsuneMaleEntity, LatexKitsuneMaleModel, ArmorLatexMaleWolfModel<LatexKitsuneMaleEntity>> {
     public LatexKitsuneMaleRenderer(EntityRendererProvider.Context context) {
@@ -23,7 +24,7 @@ public class LatexKitsuneMaleRenderer extends AdvancedHumanoidRenderer<LatexKits
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LatexKitsuneMaleEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull LatexKitsuneMaleEntity entity) {
         return ChangedAdditionsMod.modResource("textures/entities/latex_kitsune_male/latex_kitsune_male.png");
     }
 }

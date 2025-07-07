@@ -6,6 +6,7 @@ import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.client.models.animation.CarryAbilityAnimation;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets.TailSet;
+import net.foxyas.changed_additions.entities.LatexKitsuneFemaleEntity;
 import net.foxyas.changed_additions.entities.LatexKitsuneMaleEntity;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
@@ -447,7 +448,7 @@ public class LatexKitsuneMaleModel extends AdvancedHumanoidModel<LatexKitsuneMal
      }
   */
 	@Override
-	public void setupHand() {
+	public void setupHand(LatexKitsuneMaleEntity latexKitsuneMaleEntity) {
 		animator.setupHand();
 	}
 
@@ -504,7 +505,7 @@ public class LatexKitsuneMaleModel extends AdvancedHumanoidModel<LatexKitsuneMal
 	}
 
 	@Override
-	public HumanoidAnimator<LatexKitsuneMaleEntity, LatexKitsuneMaleModel> getAnimator() {
+	public HumanoidAnimator<LatexKitsuneMaleEntity, LatexKitsuneMaleModel> getAnimator(LatexKitsuneMaleEntity latexKitsuneMaleEntity) {
 		return animator;
 	}
 

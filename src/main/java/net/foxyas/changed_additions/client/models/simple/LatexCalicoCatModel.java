@@ -3,7 +3,7 @@ package net.foxyas.changed_additions.client.models.simple;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.entities.simple.LatexCalicoCatEntity;
+import net.foxyas.changed_additions.entities.simple.LatexCalicoCat;
 import net.ltxprogrammer.changed.client.renderer.animate.AnimatorPresets;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
@@ -12,13 +12,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCatEntity> implements AdvancedHumanoidModelInterface<LatexCalicoCatEntity, LatexCalicoCatModel> {
+public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCat> implements AdvancedHumanoidModelInterface<LatexCalicoCat, LatexCalicoCatModel> {
     public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("latex_calico_cat", "main");
     private final ModelPart RightLeg;
     private final ModelPart LeftLeg;
@@ -27,7 +26,7 @@ public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCatEnt
     private final ModelPart Head;
     private final ModelPart Torso;
     private final ModelPart Tail;
-    private final HumanoidAnimator<LatexCalicoCatEntity, LatexCalicoCatModel> animator;
+    private final HumanoidAnimator<LatexCalicoCat, LatexCalicoCatModel> animator;
 
     public LatexCalicoCatModel(ModelPart root) {
         super(root);
@@ -87,15 +86,15 @@ public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCatEnt
         return LayerDefinition.create(meshdefinition, 96, 96);
     }
 
-    public void prepareMobModel(LatexCalicoCatEntity p_102861_, float p_102862_, float p_102863_, float p_102864_) {
+    public void prepareMobModel(LatexCalicoCat p_102861_, float p_102862_, float p_102863_, float p_102864_) {
         this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
-    public void setupHand() {
+    public void setupHand(LatexCalicoCat calicoCatEntity) {
         this.animator.setupHand();
     }
 
-    public void setupAnim(@NotNull LatexCalicoCatEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@NotNull LatexCalicoCat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     }
@@ -125,7 +124,7 @@ public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCatEnt
         this.LeftArm.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
-    public HumanoidAnimator<LatexCalicoCatEntity, LatexCalicoCatModel> getAnimator() {
+    public HumanoidAnimator<LatexCalicoCat, LatexCalicoCatModel> getAnimator(LatexCalicoCat calicoCatEntity) {
         return this.animator;
     }
 }

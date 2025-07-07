@@ -11,12 +11,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PlayMessages;
 
-public class LatexCalicoCatEntity extends AbstractBasicChangedEntity {
-    public LatexCalicoCatEntity(EntityType<? extends ChangedEntity> type, Level level) {
+public class LatexCalicoCat extends AbstractBasicChangedEntity {
+    public LatexCalicoCat(EntityType<? extends ChangedEntity> type, Level level) {
         super(type, level);
     }
 
-    public LatexCalicoCatEntity(PlayMessages.SpawnEntity ignoredPacket, Level world) {
+    public LatexCalicoCat(PlayMessages.SpawnEntity ignoredPacket, Level world) {
         this(ChangedAdditionsEntities.LATEX_CALICO_CAT.get(), world);
     }
 
