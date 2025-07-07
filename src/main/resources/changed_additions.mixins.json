@@ -13,9 +13,11 @@
     "blocks.CrossCollisionBlockMixin",
     "blocks.DroppedSyringeMixin",
     "entities.ChangedEntityMixin",
+    "entities.IronGolemMixin",
     "goals.AvoidEntityGoalMixin",
     "goals.PhantomAIMixin",
     "mods.ChangedMixin",
+    "player.ServerTransfurVariantInstanceMixin",
     "render.WingFallFlyAnimationMixin",
     "render.WingFlyAnimationMixin"
   ],
