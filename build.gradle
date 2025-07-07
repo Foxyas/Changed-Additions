@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 
 version = '1.0'
 group = 'net.foxyas.changed_additions'
-archivesBaseName = 'changed_additions'
+archivesBaseName = 'ChangedAdditions-m1.20.1-v'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
