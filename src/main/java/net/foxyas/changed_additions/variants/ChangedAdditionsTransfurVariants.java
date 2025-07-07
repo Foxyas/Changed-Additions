@@ -1,9 +1,8 @@
 package net.foxyas.changed_additions.variants;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
-import net.foxyas.changed_additions.entities.FengQIWolf;
-import net.foxyas.changed_additions.entities.LatexSnowFoxFemale;
-import net.foxyas.changed_additions.entities.LatexSnowFoxMale;
+import net.foxyas.changed_additions.entities.*;
+import net.foxyas.changed_additions.entities.simple.*;
 import net.foxyas.changed_additions.init.ChangedAdditionsAbilities;
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
 import net.foxyas.changed_additions.init.ChangedAdditionsTags;
@@ -15,6 +14,7 @@ import net.ltxprogrammer.changed.init.ChangedRegistry;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Rabbit;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -81,8 +81,15 @@ public class ChangedAdditionsTransfurVariants {
     public static final RegistryObject<TransfurVariant<FengQIWolf>> FENG_QI_WOLF = register("form_feng_qi_wolf", TransfurVariant.Builder.of(ChangedAdditionsEntities.FENG_QI_WOLF)
             .stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).scares(List.of(Rabbit.class)).nightVision());
 
+    public static final RegistryObject<TransfurVariant<LatexKitsuneMaleEntity>> LATEX_KITSUNE_MALE = register("form_latex_kitsune/male", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_KITSUNE_MALE).addAbility(ChangedAdditionsAbilities.TELEPORT).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
+
+    public static final RegistryObject<TransfurVariant<LatexKitsuneFemaleEntity>> LATEX_KITSUNE_FEMALE = register("form_latex_kitsune/female", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_KITSUNE_FEMALE).addAbility(ChangedAdditionsAbilities.TELEPORT).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Rabbit.class)).nightVision());
+
+    public static final RegistryObject<TransfurVariant<LatexCalicoCatEntity>> LATEX_CALICO_CAT = register("form_latex_calico_cat", () -> TransfurVariant.Builder.of(ChangedAdditionsEntities.LATEX_CALICO_CAT).stepSize(0.7F).breatheMode(TransfurVariant.BreatheMode.NORMAL).addAbility(ChangedAdditionsAbilities.CLAWS_ABILITY).scares(List.of(Creeper.class)).nightVision());
+
     public static class Gendered {
         public static final GenderedPair<LatexSnowFoxMale, LatexSnowFoxFemale> LATEX_SNOW_FOXES = new GenderedPair<>(LATEX_SNOW_FOX_MALE, LATEX_SNOW_FOX_FEMALE);
+        public static final GenderedPair<LatexKitsuneMaleEntity, LatexKitsuneFemaleEntity> KITSUNES = new GenderedPair<>(LATEX_KITSUNE_MALE, LATEX_KITSUNE_FEMALE);
     }
 
     private static <T extends ChangedEntity> RegistryObject<TransfurVariant<T>> register(String name, TransfurVariant.Builder<T> builder) {

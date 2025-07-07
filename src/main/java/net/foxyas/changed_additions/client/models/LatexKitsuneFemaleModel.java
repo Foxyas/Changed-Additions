@@ -7,7 +7,6 @@ import net.foxyas.changed_additions.client.models.animation.CarryAbilityAnimatio
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets;
 import net.foxyas.changed_additions.client.models.animations.ChangedAddonAnimationsPresets.TailSet;
 import net.foxyas.changed_additions.entities.LatexKitsuneFemaleEntity;
-import net.foxyas.changed_additions.entities.LatexKitsuneMaleEntity;
 import net.ltxprogrammer.changed.client.animations.Limb;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
@@ -18,15 +17,15 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneFemaleEntity> implements AdvancedHumanoidModelInterface<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> {
-    public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("kitsune_female", "main");
+    public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("latex_kitsune_female", "main");
 
     private final ModelPart Hair;
     private final ModelPart Head;
@@ -449,7 +448,7 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
      }
   */
     @Override
-    public void setupHand(LatexKitsuneFemaleEntity latexKitsuneFemaleEntity) {
+    public void setupHand() {
         animator.setupHand();
     }
 
@@ -459,7 +458,7 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
         animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         CarryAbilityAnimation.playAnimation(entity, this);
-        this.applyAllTailRotations();
+		this.applyAllTailRotations();
     }
 
     public void applyTailRotations(ModelPart tail, float xRot, float yRot, float zRot) {
@@ -468,15 +467,15 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
         tail.zRot += zRot * Mth.DEG_TO_RAD;
     }
 
-    public void applyAllTailRotations() {
-        this.applyTailRotations(this.TailUpperRight, -10.8885f, 16.4137f, -6.1549f);
-        this.applyTailRotations(this.TailUpperLeft, -10.9827f, -17.9886f, 0.3862f);
-        this.applyTailRotations(this.TailLowerRight, 10, 17.5f, 0);
-        this.applyTailRotations(this.TailLowerLeft, 9.9727f, -17.0014f, -5.9783f);
-        //this.applyTailRotations(TailMiddleMiddle, 0, 0, 0);
-        this.applyTailRotations(this.TailMiddleLower, 20, 0, 0);
-        this.applyTailRotations(this.TailMiddleUpper, -20, 0, 0);
-    }
+	public void applyAllTailRotations() {
+		this.applyTailRotations(this.TailUpperRight, -10.8885f, 16.4137f, -6.1549f);
+		this.applyTailRotations(this.TailUpperLeft, -10.9827f, -17.9886f, 0.3862f);
+		this.applyTailRotations(this.TailLowerRight, 10, 17.5f, 0);
+		this.applyTailRotations(this.TailLowerLeft, 9.9727f, -17.0014f, -5.9783f);
+		//this.applyTailRotations(TailMiddleMiddle, 0, 0, 0);
+		this.applyTailRotations(this.TailMiddleLower, 20, 0, 0);
+		this.applyTailRotations(this.TailMiddleUpper, -20, 0, 0);
+	}
 
     public ModelPart getArm(HumanoidArm p_102852) {
         return p_102852 == HumanoidArm.LEFT ? this.LeftArm : this.RightArm;
@@ -513,7 +512,7 @@ public class LatexKitsuneFemaleModel extends AdvancedHumanoidModel<LatexKitsuneF
     }
 
     @Override
-    public HumanoidAnimator<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> getAnimator(LatexKitsuneFemaleEntity latexKitsuneFemaleEntity) {
+    public HumanoidAnimator<LatexKitsuneFemaleEntity, LatexKitsuneFemaleModel> getAnimator() {
         return animator;
     }
 }

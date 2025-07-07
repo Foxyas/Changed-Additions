@@ -1,16 +1,16 @@
 package net.foxyas.changed_additions.process.util;
 
+import com.ibm.icu.impl.Pair;
+import net.ltxprogrammer.changed.block.AbstractLatexBlock;
+import net.ltxprogrammer.changed.entity.LatexType;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -24,25 +24,16 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FoxyasUtils {
 
     public static List<Holder<EntityType<?>>> getEntitiesInTag(TagKey<EntityType<?>> tagKey, Level level) {
         return level.registryAccess()
-                .registry(Registries.ENTITY_TYPE)
+                .registry(Registry.ENTITY_TYPE_REGISTRY)
                 .flatMap(reg -> reg.getTag(tagKey))
                 .map(tag -> tag.stream().toList())
                 .orElse(List.of());
-    }
-
-    public static void drawCenteredString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, int color) {
-        guiGraphics.drawString(font, text, x - font.width(text) / 2, y, color);
-    }
-
-    public static void drawCenteredString(GuiGraphics guiGraphics, Font font, String text, int x, int y, int color) {
-        guiGraphics.drawString(font, text, x - font.width(text) / 2, y, color);
     }
 
     public static int clamp(int value, int min, int max) {
@@ -82,6 +73,101 @@ public class FoxyasUtils {
         return 0;
     }
 
+    /// CAREFUL USING THIS
+    public static boolean isConnectedToSourceNoLimit(ServerLevel level, BlockPos start, LatexType latexType, Block targetBlock) {
+        Set<BlockPos> visited = new HashSet<>();
+        Queue<BlockPos> toVisit = new ArrayDeque<>();
+        toVisit.add(start);
+
+        while (!toVisit.isEmpty()) {
+            BlockPos current = toVisit.poll();
+            if (!visited.add(current)) continue;
+
+            BlockState state = level.getBlockState(current);
+            if (state.is(targetBlock)) {
+                return true;
+            }
+
+            if (AbstractLatexBlock.isLatexed(state) && AbstractLatexBlock.getLatexed(state) == latexType) {
+                for (Direction dir : Direction.values()) {
+                    BlockPos neighbor = current.relative(dir);
+                    if (!visited.contains(neighbor)) {
+                        toVisit.add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isConnectedToSource(ServerLevel level, BlockPos start, LatexType latexType, Block targetBlock, int maxDepth) {
+        Set<BlockPos> visited = new HashSet<>();
+        Queue<Pair<BlockPos, Integer>> toVisit = new ArrayDeque<>();
+        toVisit.add(Pair.of(start, 0));
+
+        while (!toVisit.isEmpty()) {
+            Pair<BlockPos, Integer> entry = toVisit.poll();
+            BlockPos current = entry.first;
+            int depth = entry.second;
+
+            if (depth > maxDepth) {
+                continue;
+            }
+
+            if (!visited.add(current)) {
+                continue;
+            }
+
+            BlockState state = level.getBlockState(current);
+            if (state.is(targetBlock)) {
+                return true;
+            }
+
+            if (AbstractLatexBlock.isLatexed(state) && AbstractLatexBlock.getLatexed(state) == latexType) {
+                for (Direction dir : Direction.values()) {
+                    BlockPos neighbor = current.relative(dir);
+                    toVisit.add(Pair.of(neighbor, depth + 1));
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static void spreadFromSource(ServerLevel level, BlockPos source, int maxDepth) {
+        Set<BlockPos> visited = new HashSet<>();
+        Queue<Pair<BlockPos, Integer>> queue = new ArrayDeque<>();
+
+        queue.add(Pair.of(source, 0));
+        visited.add(source);
+
+        while (!queue.isEmpty()) {
+            var current = queue.poll();
+            BlockPos pos = current.first;
+            int depth = current.second;
+
+            if (depth > maxDepth) continue;
+
+            BlockState state = level.getBlockState(pos);
+            if (!AbstractLatexBlock.isLatexed(state)) continue;
+
+            // Simula "crescimento"
+            state.randomTick(level, pos, level.getRandom());
+            level.levelEvent(1505, pos, 1); // Partículas
+
+            // Adiciona vizinhos se ainda dentro do limite
+            if (depth < maxDepth) {
+                for (Direction dir : Direction.values()) {
+                    BlockPos neighbor = pos.relative(dir);
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        queue.add(Pair.of(neighbor, depth + 1));
+                    }
+                }
+            }
+        }
+    }
 
     public static BlockHitResult manualRaycastIgnoringBlocks(Level level, Entity entity, double maxDistance, Set<Block> ignoredBlocks) {
         Vec3 start = entity.getEyePosition(1.0F);
@@ -93,7 +179,7 @@ public class FoxyasUtils {
         int steps = (int) (maxDistance / stepSize);
 
         for (int i = 0; i < steps; i++) {
-            BlockPos blockPos = new BlockPos((int) currentPos.x, (int) currentPos.y, (int) currentPos.z);
+            BlockPos blockPos = new BlockPos(currentPos);
             BlockState state = level.getBlockState(blockPos);
 
             if (!ignoredBlocks.contains(state.getBlock()) && state.isSolidRender(level, blockPos)) {
@@ -108,7 +194,7 @@ public class FoxyasUtils {
 
         Direction missDirection = Direction.getNearest(lookVec.x, lookVec.y, lookVec.z);
         Vec3 missPos = applyOffset(end, missDirection, -0.05D);
-        return BlockHitResult.miss(missPos, missDirection, new BlockPos((int) end.x, (int) end.y, (int) end.z));
+        return BlockHitResult.miss(missPos, missDirection, new BlockPos(end));
     }
 
     // Utilitário para aplicar deslocamento da face atingida
@@ -122,7 +208,7 @@ public class FoxyasUtils {
 
     public static void grandPlayerAdvancement(Player player, String AdvancementId) {
         if (player instanceof ServerPlayer _player) {
-            Advancement _adv = _player.server.getAdvancements().getAdvancement(ResourceLocation.parse(AdvancementId));
+            Advancement _adv = _player.server.getAdvancements().getAdvancement(new ResourceLocation(AdvancementId));
             assert _adv != null;
             if (_player.getAdvancements().getOrStartProgress(_adv).isDone()) {
                 return;

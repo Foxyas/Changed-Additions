@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.init;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.*;
+import net.foxyas.changed_additions.entities.simple.LatexCalicoCatEntity;
 import net.ltxprogrammer.changed.init.ChangedMobCategories;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -56,6 +57,15 @@ public class ChangedAdditionsEntities {
 
 					.sized(0.7f, 1.93f));
 
+	public static final RegistryObject<EntityType<LatexCalicoCatEntity>> LATEX_CALICO_CAT = register("latex_calico_cat",
+			EntityType.Builder.<LatexCalicoCatEntity>of(LatexCalicoCatEntity::new, ChangedMobCategories.CHANGED)
+					.setShouldReceiveVelocityUpdates(true)
+					.setTrackingRange(64).setUpdateInterval(3)
+					.setCustomClientFactory(LatexCalicoCatEntity::new)
+					.clientTrackingRange(10)
+
+					.sized(0.7f, 1.93f));
+
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
 	}
@@ -68,6 +78,7 @@ public class ChangedAdditionsEntities {
 			LatexSnowFoxFemale.init();
 			LatexKitsuneMaleEntity.init();
 			LatexKitsuneFemaleEntity.init();
+			LatexCalicoCatEntity.init();
 		});
 	}
 
@@ -78,5 +89,6 @@ public class ChangedAdditionsEntities {
 		event.put(LATEX_SNOW_FOX_FEMALE.get(), LatexSnowFoxFemale.createAttributes().build());
 		event.put(LATEX_KITSUNE_MALE.get(), LatexKitsuneMaleEntity.createAttributes().build());
 		event.put(LATEX_KITSUNE_FEMALE.get(), LatexKitsuneFemaleEntity.createAttributes().build());
+		event.put(LATEX_CALICO_CAT.get(), LatexCalicoCatEntity.createAttributes().build());
 	}
 }

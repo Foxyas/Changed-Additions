@@ -44,6 +44,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -440,6 +441,19 @@ public class PlayerUtil {
                 serverLevel.sendParticles(particleOptions,
                         x, y + 1, z, count, XV, YV, ZV, speed);
             }
+        }
+
+        public static void sendColorTransitionParticles(Level level, Player player,
+                                                        float redStart, float greenStart, float blueStart,
+                                                        float redEnd, float greenEnd, float blueEnd,
+                                                        float size, float XV, float YV, float ZV, int count, float speed) {
+            sendColorTransitionParticles(level, player.getX(), player.getY(), player.getZ(), redStart, greenStart, blueStart, redEnd, greenEnd, blueEnd, size, XV, YV, ZV, count, speed);
+        }
+
+        public static void sendColorTransitionParticles(Level level, Player player,
+                                                        Color startColor, Color endColor,
+                                                        float size, float XV, float YV, float ZV, int count, float speed) {
+            sendColorTransitionParticles(level, player.getX(), player.getY(), player.getZ(), startColor.getRed() / 255f, startColor.getGreen() / 255f, startColor.getBlue() / 255f, endColor.getRed() / 255f, endColor.getGreen() / 255f, endColor.getBlue() / 255f, size, XV, YV, ZV, count, speed);
         }
 
         public static void sendDripParticles(Level level, Entity entity, float middle,
