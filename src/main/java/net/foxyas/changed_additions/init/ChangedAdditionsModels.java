@@ -1,7 +1,6 @@
 package net.foxyas.changed_additions.init;
 
 import net.foxyas.changed_additions.client.models.*;
-import net.foxyas.changed_additions.client.models.accessories.models.*;
 import net.foxyas.changed_additions.client.models.armors.DarkLatexCoatModel;
 import net.foxyas.changed_additions.client.models.armors.SkinLayerModel;
 import net.foxyas.changed_additions.client.models.simple.LatexCalicoCatModel;
@@ -20,14 +19,6 @@ public class ChangedAdditionsModels {
         event.registerLayerDefinition(LatexKitsuneMaleModel.LAYER_LOCATION, LatexKitsuneMaleModel::createBodyLayer);
         event.registerLayerDefinition(LatexKitsuneFemaleModel.LAYER_LOCATION, LatexKitsuneFemaleModel::createBodyLayer);
         event.registerLayerDefinition(LatexCalicoCatModel.LAYER_LOCATION, LatexCalicoCatModel::createBodyLayer);
-
-        //Accessories
-        event.registerLayerDefinition(AccessoriesFemaleWolf.LAYER_LOCATION, AccessoriesFemaleWolf::createBodyLayer);
-        event.registerLayerDefinition(AccessoriesMaleWolf.LAYER_LOCATION, AccessoriesMaleWolf::createBodyLayer);
-        event.registerLayerDefinition(AccessoriesStiger.LAYER_LOCATION, AccessoriesStiger::createBodyLayer);
-        event.registerLayerDefinition(AccessoriesMaleFox.LAYER_LOCATION, AccessoriesMaleFox::createBodyLayer);
-        event.registerLayerDefinition(AccessoriesFemaleWolf.LAYER_LOCATION, AccessoriesFemaleFox::createBodyLayer);
-
 
         //Armors Models
         event.registerLayerDefinition(DarkLatexCoatModel.LAYER_LOCATION, DarkLatexCoatModel::createBodyLayer);
