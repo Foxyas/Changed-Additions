@@ -1,17 +1,14 @@
 package net.foxyas.changed_additions.item;
 
 import net.foxyas.changed_additions.entities.goals.FollowAndLookAtLaser;
-import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.item.SpecializedAnimations;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -41,11 +38,12 @@ import static net.foxyas.changed_additions.process.util.PlayerUtil.ParticlesUtil
 import static net.foxyas.changed_additions.process.util.PlayerUtil.getEntityHitLookingAt;
 
 
+@SuppressWarnings("resource")
 public class LaserPointer extends Item implements SpecializedAnimations {
 
     public static final float MAX_LASER_REACH = 32;
 
-    public static enum DefaultColors {
+    public enum DefaultColors {
         RED(new Color(255, 0, 0)),
         GREEN(new Color(0, 255, 0)),
         BLUE(new Color(0, 0, 255)),
@@ -83,7 +81,7 @@ public class LaserPointer extends Item implements SpecializedAnimations {
     }
 
     public LaserPointer() {
-        super(new Properties().stacksTo(1).tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
+        super(new Properties().stacksTo(1));
     }
 
     @Override
@@ -137,28 +135,17 @@ public class LaserPointer extends Item implements SpecializedAnimations {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(@NotNull ItemStack stack) {
         return 720000;
     }
 
     @Override
-    public @NotNull UseAnim getUseAnimation(ItemStack stack) {
+    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
         return UseAnim.NONE;
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(tab)) {
-            for (DefaultColors color : DefaultColors.values()) {
-                ItemStack stack = new ItemStack(this);
-                stack.getOrCreateTag().putInt("Color", color.getColorToInt());
-                items.add(stack);
-            }
-        }
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
         if (flag.isAdvanced()) {
             // Suponha que você tenha salvo os valores RGB no NBT
@@ -166,7 +153,7 @@ public class LaserPointer extends Item implements SpecializedAnimations {
             if (tag.contains("Color")) {
                 Color color = new Color(tag.getInt("Color"));
                 String hex = getHex(color);
-                tooltip.add(new TextComponent("Color: " + hex).withStyle((e) -> e.withColor(TextColor.parseColor(hex))));
+                tooltip.add(Component.literal("Color: " + hex).withStyle((e) -> e.withColor(TextColor.parseColor(hex))));
             }
         }
 
@@ -178,14 +165,14 @@ public class LaserPointer extends Item implements SpecializedAnimations {
 
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (!level.isClientSide) {
             HitResult result = player.pick(MAX_LASER_REACH, 0.0F, false);
             EntityHitResult entityHitResult = getEntityHitLookingAt(player, LaserPointer.MAX_LASER_REACH);
             Vec3 hitPos = result.getLocation();
-            Direction face = Direction.UP; // fallback para quando mirar no ar
+//            Direction face = Direction.UP; // fallback para quando mirar no ar
 
 //            if (entityHitResult != null) {
 //
@@ -238,14 +225,14 @@ public class LaserPointer extends Item implements SpecializedAnimations {
 
 
     @Override
-    public void releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
+    public void releaseUsing(@NotNull ItemStack itemstack, @NotNull Level world, @NotNull LivingEntity entity, int time) {
         super.releaseUsing(itemstack, world, entity, time);
     }
 
     @Override
-    public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
-        super.onUsingTick(stack, player, count);
-        if (!player.getLevel().isClientSide) {
+    public void onUseTick(@NotNull Level level, @NotNull LivingEntity player, @NotNull ItemStack stack, int count) {
+        super.onUseTick(level, player, stack, count);
+        if (!player.level().isClientSide) {
             HitResult result = player.pick(MAX_LASER_REACH, 0.0F, false);
             EntityHitResult entityHitResult = getEntityHitLookingAt(player, LaserPointer.MAX_LASER_REACH);
             Vec3 hitPos = result.getLocation();
@@ -254,17 +241,17 @@ public class LaserPointer extends Item implements SpecializedAnimations {
                 hitPos = entityHitResult.getLocation();
             } else if (result instanceof BlockHitResult blockResult &&
                     // Se for translúcido, refazer raycast ignorando blocos
-                    player.getLevel().getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
+                    player.level().getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
 
                 Set<Block> blockSet = Objects.requireNonNull(ForgeRegistries.BLOCKS.tags())
                         .getTag(ChangedTags.Blocks.LASER_TRANSLUCENT).stream().collect(Collectors.toSet());
-                BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(player.getLevel(), player, 64, blockSet);
+                BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(player.level(), player, 64, blockSet);
                 hitPos = applyOffset(result.getLocation(), blockHitResult.getDirection(), 0);
 
             }
 
             double radius = 16.0; // Raio de busca
-            List<LivingEntity> nearbyMobs = player.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(hitPos, hitPos).inflate(radius), (e) -> {
+            List<LivingEntity> nearbyMobs = player.level().getEntitiesOfClass(LivingEntity.class, new AABB(hitPos, hitPos).inflate(radius), (e) -> {
                 if (e instanceof Mob mob) {
                     return mob.goalSelector.getAvailableGoals().stream().anyMatch(g -> g.getGoal() instanceof FollowAndLookAtLaser);
                 }

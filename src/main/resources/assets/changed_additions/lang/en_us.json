@@ -104,11 +104,12 @@
   "advancements.organic_transfur_advancement.title": "Organic And Fluffy!!",
   "advancements.organic_transfur_advancement.descr": "Transfur yourself into a organic form",
 
-  "text.changed_additions.additionalHealth": "Additional Health \u003d %s",
+  "text.changed_additions.additionalHealth": "Additional Health: \u003d %s",
   "text.changed_additions.additionalHealth.Hearts": " Hearts",
-  "text.changed_additions.canGlide/Fly": "Glide/Fly \u003d %s",
-  "text.changed_additions.jumpStrength": "Jump Strength \u003d %s",
-  "text.changed_additions.land_speed": "Land Speed \u003d %s",
-  "text.changed_additions.legs": "Amount of Legs \u003d %s",
-  "text.changed_additions.swim_speed": "Swim Speed \u003d %s"
+  "text.changed_additions.canGlide/Fly": "Glide/Fly: \u003d %s",
+  "text.changed_additions.jumpStrength": "Jump Strength: \u003d %s",
+  "text.changed_additions.land_speed": "Land Speed: \u003d %s",
+  "text.changed_additions.legs": "Amount of Legs: \u003d %s",
+  "text.changed_additions.swim_speed": "Swim Speed: \u003d %s",
+  "text.changed_additions.miningStrength": "Mining Strength: %s"
 }

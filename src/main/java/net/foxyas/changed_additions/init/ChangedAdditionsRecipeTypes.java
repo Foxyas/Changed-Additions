@@ -18,7 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ChangedAdditionsRecipeTypes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, "changed_additions");
 
-    public static final RegistryObject<RecipeSerializer<?>> LAZER_POINTER_COLORING =
+    public static final RegistryObject<RecipeSerializer<?>> LASER_POINTER_COLORING =
             SERIALIZERS.register("laser_pointer_coloring", LaserPointerColoringRecipe.Serializer::new);
     public static final RegistryObject<RecipeSerializer<?>> SHORTS_COLORING =
             SERIALIZERS.register("shorts_coloring", DyeableShortsColoringRecipe.Serializer::new);

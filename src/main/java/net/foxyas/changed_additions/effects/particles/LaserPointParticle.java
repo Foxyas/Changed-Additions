@@ -131,7 +131,7 @@ public class LaserPointParticle extends TextureSheetParticle {
 
         @Override
         public @NotNull ParticleType<?> getType() {
-            return ChangedAdditionsParticles.LAZER_POINT.get(); // Substitua pelo seu ParticleType real
+            return ChangedAdditionsParticles.LASER_POINT.get(); // Substitua pelo seu ParticleType real
         }
 
         @Override

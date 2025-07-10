@@ -3,12 +3,9 @@ package net.foxyas.changed_additions.init;
 import com.mojang.serialization.Codec;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.effects.particles.*;
-import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.util.Color3;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,11 +13,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 
@@ -28,7 +22,7 @@ import java.util.function.Function;
 public class ChangedAdditionsParticles {
     public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, ChangedAdditionsMod.MODID);
     public static final RegistryObject<ParticleType<ThunderSparkOption>> THUNDER_SPARK = register("thunder_spark", ThunderSparkOption.DESERIALIZER, ThunderSparkOption::codec);
-    public static final RegistryObject<ParticleType<LaserPointParticle.Option>> LAZER_POINT = register("laser_point", LaserPointParticle.Option.DESERIALIZER, LaserPointParticle.Option::codec);
+    public static final RegistryObject<ParticleType<LaserPointParticle.Option>> LASER_POINT = register("laser_point", LaserPointParticle.Option.DESERIALIZER, LaserPointParticle.Option::codec);
     public static final RegistryObject<ParticleType<SolventDripsOption>> SOLVENT_PARTICLE = register("solvent_drips", SolventDripsOption.DESERIALIZER, SolventDripsOption::codec);
 
     public static ThunderSparkOption thunderSpark(int lifeSpam) {
@@ -64,7 +58,7 @@ public class ChangedAdditionsParticles {
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(THUNDER_SPARK.get(), ThunderSparkParticle.Provider::new);
-        event.registerSpriteSet(LAZER_POINT.get(), LaserPointParticle.Provider::new);
+        event.registerSpriteSet(LASER_POINT.get(), LaserPointParticle.Provider::new);
         event.registerSpriteSet(SOLVENT_PARTICLE.get(), SolventDrips.Provider::new);
     }
 
