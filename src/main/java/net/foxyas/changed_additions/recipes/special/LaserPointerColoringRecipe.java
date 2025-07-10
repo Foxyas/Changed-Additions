@@ -89,7 +89,7 @@ public class LaserPointerColoringRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ChangedAdditionsRecipeTypes.LAZER_POINTER_COLORING.get();
+        return ChangedAdditionsRecipeTypes.LASER_POINTER_COLORING.get();
     }
 
     public static class Serializer implements RecipeSerializer<LaserPointerColoringRecipe> {
