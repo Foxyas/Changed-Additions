@@ -57,6 +57,7 @@
   "changed_additions.ability.soften": "Soften",
   "changed_additions.ability.soften.description": "Allow the player to pass through blocks with holes",
   "changed_additions.ability.wing_flap": "Wing Flap",
+  "changed_additions.ability.teleport": "Teleport Ability",
 
   "changed_additions.warn.cant_carry": "You try to lift %1$s, but it\u0027s far too heavy.",
 
@@ -102,5 +103,12 @@
   "advancements.pants_dyer.descr": "You gave those shorts a splash of color. Style and laser safe? That’s a win-win.",
   "advancements.organic_transfur_advancement.title": "Organic And Fluffy!!",
   "advancements.organic_transfur_advancement.descr": "Transfur yourself into a organic form",
-  "changed_additions.ability.teleport": "Teleport Ability"
+
+  "text.changed_additions.additionalHealth": "Additional Health \u003d %s",
+  "text.changed_additions.additionalHealth.Hearts": " Hearts",
+  "text.changed_additions.canGlide/Fly": "Glide/Fly \u003d %s",
+  "text.changed_additions.jumpStrength": "Jump Strength \u003d %s",
+  "text.changed_additions.land_speed": "Land Speed \u003d %s",
+  "text.changed_additions.legs": "Amount of Legs \u003d %s",
+  "text.changed_additions.swim_speed": "Swim Speed \u003d %s"
 }

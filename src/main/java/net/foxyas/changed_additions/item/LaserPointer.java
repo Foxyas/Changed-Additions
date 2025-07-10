@@ -11,6 +11,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -82,7 +83,7 @@ public class LaserPointer extends Item implements SpecializedAnimations {
     }
 
     public LaserPointer() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).tab(ChangedAdditionsTabs.CHANGED_ADDITIONS_TAB));
     }
 
     @Override
@@ -146,6 +147,17 @@ public class LaserPointer extends Item implements SpecializedAnimations {
     }
 
     @Override
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(tab)) {
+            for (DefaultColors color : DefaultColors.values()) {
+                ItemStack stack = new ItemStack(this);
+                stack.getOrCreateTag().putInt("Color", color.getColorToInt());
+                items.add(stack);
+            }
+        }
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
         if (flag.isAdvanced()) {
@@ -154,7 +166,7 @@ public class LaserPointer extends Item implements SpecializedAnimations {
             if (tag.contains("Color")) {
                 Color color = new Color(tag.getInt("Color"));
                 String hex = getHex(color);
-                tooltip.add(Component.literal("Color: " + hex).withStyle((e) -> e.withColor(TextColor.parseColor(hex))));
+                tooltip.add(new TextComponent("Color: " + hex).withStyle((e) -> e.withColor(TextColor.parseColor(hex))));
             }
         }
 
@@ -175,22 +187,28 @@ public class LaserPointer extends Item implements SpecializedAnimations {
             Vec3 hitPos = result.getLocation();
             Direction face = Direction.UP; // fallback para quando mirar no ar
 
+//            if (entityHitResult != null) {
+//
+//            } else if (result.getType() == HitResult.Type.MISS) {
+//                // Mira no ar: define uma posição "alvo" no ar baseada na direção do olhar
+//                spawnLaserParticle(level, player, stack, player.position());
+//            } else if (result instanceof BlockHitResult blockResult &&
+//                    // Se for translúcido, refazer raycast ignorando blocos
+//                    level.getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
+//                Set<Block> blockSet = Objects.requireNonNull(ForgeRegistries.BLOCKS.tags())
+//                        .getTag(ChangedTags.Blocks.LASER_TRANSLUCENT).stream().collect(Collectors.toSet());
+//                BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(level, player, 64, blockSet);
+//                hitPos = applyOffset(result.getLocation(), blockHitResult.getDirection(), 0f);
+//                //spawnLaserParticle(level, player, stack, hitPos);
+//
+//            } else if (result instanceof BlockHitResult blockResult && !level.getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
+//                hitPos = applyOffset(result.getLocation(), blockResult.getDirection(), -0.05D);
+//                //spawnLaserParticle(level, player, stack, hitPos);
+//            }
             if (entityHitResult != null) {
-            } else if (result.getType() == HitResult.Type.MISS) {
-                // Mira no ar: define uma posição "alvo" no ar baseada na direção do olhar
-                spawnLaserParticle(level, player, stack, player.position());
-            } else if (result instanceof BlockHitResult blockResult &&
-                    // Se for translúcido, refazer raycast ignorando blocos
-                    level.getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
-                Set<Block> blockSet = Objects.requireNonNull(ForgeRegistries.BLOCKS.tags())
-                        .getTag(ChangedTags.Blocks.LASER_TRANSLUCENT).stream().collect(Collectors.toSet());
-                BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(level, player, 64, blockSet);
-                hitPos = applyOffset(result.getLocation(), blockHitResult.getDirection(), 0f);
-                //spawnLaserParticle(level, player, stack, hitPos);
-
-            } else if (result instanceof BlockHitResult blockResult && !level.getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
-                hitPos = applyOffset(result.getLocation(), blockResult.getDirection(), -0.05D);
-                //spawnLaserParticle(level, player, stack, hitPos);
+                spawnLaserParticle(level, player, stack, entityHitResult.getLocation());
+            } else {
+                spawnLaserParticle(level, player, stack, hitPos);
             }
 
             double radius = 16.0; // Raio de busca
@@ -225,34 +243,28 @@ public class LaserPointer extends Item implements SpecializedAnimations {
     }
 
     @Override
-    public void onUseTick(Level level, LivingEntity player, ItemStack stack, int count) {
-        super.onUseTick(level, player, stack, count);
-        if (!player.level().isClientSide) {
+    public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
+        super.onUsingTick(stack, player, count);
+        if (!player.getLevel().isClientSide) {
             HitResult result = player.pick(MAX_LASER_REACH, 0.0F, false);
             EntityHitResult entityHitResult = getEntityHitLookingAt(player, LaserPointer.MAX_LASER_REACH);
             Vec3 hitPos = result.getLocation();
-            Direction face = Direction.UP; // fallback para quando mirar no ar
 
             if (entityHitResult != null) {
-                face = Direction.getNearest(entityHitResult.getLocation().x, entityHitResult.getLocation().y, entityHitResult.getLocation().z);
-                hitPos = applyOffset(entityHitResult.getLocation(), face, -0.05D);
-            } else if (result instanceof BlockHitResult blockResult && player.level().getBlockState(blockResult.getBlockPos()).isAir()) {
-                // Mira no ar: define uma posição "alvo" no ar baseada na direção do olhar
+                hitPos = entityHitResult.getLocation();
             } else if (result instanceof BlockHitResult blockResult &&
                     // Se for translúcido, refazer raycast ignorando blocos
-                    player.level().getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
+                    player.getLevel().getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
 
                 Set<Block> blockSet = Objects.requireNonNull(ForgeRegistries.BLOCKS.tags())
                         .getTag(ChangedTags.Blocks.LASER_TRANSLUCENT).stream().collect(Collectors.toSet());
-                BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(player.level(), player, 64, blockSet);
-                hitPos = applyOffset(result.getLocation(), blockHitResult.getDirection(), -0.05D);
+                BlockHitResult blockHitResult = manualRaycastIgnoringBlocks(player.getLevel(), player, 64, blockSet);
+                hitPos = applyOffset(result.getLocation(), blockHitResult.getDirection(), 0);
 
-            } else if (result instanceof BlockHitResult blockResult && !player.level().getBlockState(blockResult.getBlockPos()).is(ChangedTags.Blocks.LASER_TRANSLUCENT)) {
-                hitPos = applyOffset(result.getLocation(), blockResult.getDirection(), -0.05D);
             }
 
             double radius = 16.0; // Raio de busca
-            List<LivingEntity> nearbyMobs = player.level().getEntitiesOfClass(LivingEntity.class, new AABB(hitPos, hitPos).inflate(radius), (e) -> {
+            List<LivingEntity> nearbyMobs = player.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(hitPos, hitPos).inflate(radius), (e) -> {
                 if (e instanceof Mob mob) {
                     return mob.goalSelector.getAvailableGoals().stream().anyMatch(g -> g.getGoal() instanceof FollowAndLookAtLaser);
                 }
