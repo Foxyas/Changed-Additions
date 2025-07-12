@@ -280,8 +280,8 @@ public class LaserPointParticle extends TextureSheetParticle {
             this.y += this.yd;
             this.z += this.zd;
 
-            this.age = 0; // Reset idade para manter a partícula viva
         }
+        this.age = 0; // Reset idade para manter a partícula viva
     }
 
     private void SetToward(Vec3 target) {
@@ -294,7 +294,7 @@ public class LaserPointParticle extends TextureSheetParticle {
 
 
     @Override
-    public ParticleRenderType getRenderType() {
+    public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_LIT;
     }
 }
