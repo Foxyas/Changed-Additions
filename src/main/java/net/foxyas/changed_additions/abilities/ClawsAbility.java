@@ -63,7 +63,7 @@ public class ClawsAbility extends SimpleAbility {
 		if (entity.getTransfurVariantInstance() == null) {
 			return false;
 		}
-		return entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.CAT_LIKE) || entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.LEOPARD_LIKE);
+		return entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.HAS_CLAWS) || entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.CAT_LIKE) || entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.LEOPARD_LIKE);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class ClawsAbility extends SimpleAbility {
 		if (entity.getTransfurVariantInstance() == null) {
 			return false;
 		}
-		return entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.CAT_LIKE) || entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.LEOPARD_LIKE);
+		return entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.HAS_CLAWS) || entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.CAT_LIKE) || entity.getTransfurVariantInstance().getParent().is(TransfurVariantTags.LEOPARD_LIKE);
 	}
 
 	@Override
