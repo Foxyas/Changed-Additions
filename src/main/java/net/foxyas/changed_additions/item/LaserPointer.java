@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 import static net.foxyas.changed_additions.init.ChangedAdditionsParticles.laserPoint;
 import static net.foxyas.changed_additions.process.util.FoxyasUtils.manualRaycastIgnoringBlocks;
-import static net.foxyas.changed_additions.process.util.PlayerUtil.ParticlesUtil;
+import net.foxyas.changed_additions.process.util.ParticlesUtil;
 import static net.foxyas.changed_additions.process.util.PlayerUtil.getEntityHitLookingAt;
 
 

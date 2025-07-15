@@ -1,5 +1,6 @@
 package net.foxyas.changed_additions.entities.goals;
 
+import net.foxyas.changed_additions.process.util.ParticlesUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.Emote;
 import net.ltxprogrammer.changed.entity.TamableLatexEntity;
@@ -76,7 +77,7 @@ public class SleepingNearOwnerGoal extends Goal {
     @Override
     public void start() {
         if (bedPos != null && pet instanceof PathfinderMob pathfinderPet) {
-            PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+            ParticlesUtil.sendParticles(owner.getLevel(),
                     ChangedParticles.emote(pet, Emote.IDEA),
                     pet.getX(),
                     pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -115,7 +116,7 @@ public class SleepingNearOwnerGoal extends Goal {
                 //}
                 if (sleepTimer >= 10) {
                     if (!pet.isSleeping()) {
-                        PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+                        ParticlesUtil.sendParticles(owner.getLevel(),
                                 ChangedParticles.emote(pet, Emote.HEART),
                                 pet.getX(),
                                 pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -246,7 +247,7 @@ public class SleepingNearOwnerGoal extends Goal {
         @Override
         public void start() {
             if (bedPos != null && pet instanceof PathfinderMob pathfinderPet) {
-                PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+                ParticlesUtil.sendParticles(owner.getLevel(),
                         ChangedParticles.emote(pet, Emote.IDEA),
                         pet.getX(),
                         pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
@@ -302,7 +303,7 @@ public class SleepingNearOwnerGoal extends Goal {
                         // Verifica novamente antes de dormir
                         if (!bedState.getValue(BedBlock.OCCUPIED)) {
                             pet.startSleeping(bedPos);
-                            PlayerUtil.ParticlesUtil.sendParticles(owner.getLevel(),
+                            ParticlesUtil.sendParticles(owner.getLevel(),
                                     ChangedParticles.emote(pet, Emote.HEART),
                                     pet.getX(),
                                     pet.getY() + (double) pet.getDimensions(pet.getPose()).height + 0.65,
