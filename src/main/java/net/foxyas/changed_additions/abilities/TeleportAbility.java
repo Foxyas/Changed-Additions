@@ -1,6 +1,7 @@
 package net.foxyas.changed_additions.abilities;
 
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
+import net.foxyas.changed_additions.process.util.ParticlesUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
 import net.ltxprogrammer.changed.ability.SimpleAbility;
@@ -64,9 +65,9 @@ public class TeleportAbility extends SimpleAbility {
             Vec3 location = blockHitResult.getLocation();
             Color startColor = new Color(0xffeeee);
             Color endColor = new Color(0xFFCECE);
-            PlayerUtil.ParticlesUtil.sendColorTransitionParticles(player.level(), player, startColor, endColor, 1, 0.25f, 0.25f, 0.25f, 10, 0.05f);
+            ParticlesUtil.sendColorTransitionParticles(player.level(), player, startColor, endColor, 1, 0.25f, 0.25f, 0.25f, 10, 0.05f);
             player.teleportToWithTicket(location.x, location.y, location.z);
-            PlayerUtil.ParticlesUtil.sendColorTransitionParticles(player.level(), player, startColor, endColor, 1, 0.25f, 0.25f, 0.25f, 10, 0.05f);
+            ParticlesUtil.sendColorTransitionParticles(player.level(), player, startColor, endColor, 1, 0.25f, 0.25f, 0.25f, 10, 0.05f);
             RandomSource random = entity.getLevel().getRandom();
             float pitch = random.nextFloat() + 1;
 			float volume = 0.5f;

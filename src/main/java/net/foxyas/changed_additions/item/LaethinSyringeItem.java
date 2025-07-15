@@ -1,6 +1,7 @@
 package net.foxyas.changed_additions.item;
 
 import net.foxyas.changed_additions.init.ChangedAdditionsTabs;
+import net.foxyas.changed_additions.process.util.ParticlesUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.init.ChangedItems;
 import net.ltxprogrammer.changed.init.ChangedParticles;
@@ -53,7 +54,7 @@ public class LaethinSyringeItem extends Item implements SpecializedAnimations {
 
         if (player instanceof ServerPlayer serverPlayer) {
             ProcessTransfur.ifPlayerTransfurred(serverPlayer, (transfurVariantInstance) -> {
-                PlayerUtil.ParticlesUtil.sendParticles(serverPlayer.level(), ChangedParticles.drippingLatex(transfurVariantInstance.getTransfurColor()), serverPlayer.getEyePosition(), 0.25f, 0.25f, 0.25f, 10, 0);
+                ParticlesUtil.sendParticles(serverPlayer.level(), ChangedParticles.drippingLatex(transfurVariantInstance.getTransfurColor()), serverPlayer.getEyePosition(), 0.25f, 0.25f, 0.25f, 10, 0);
             });
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
         }

@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.init;
 
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
+import net.foxyas.changed_additions.process.util.ParticlesUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.init.ChangedParticles;
@@ -72,7 +73,7 @@ public class ChangedAdditionsDamageSources {
             int amount = (int) event.getAmount() / 4;
 
             // Partícula solvente base
-            PlayerUtil.ParticlesUtil.sendParticles(
+            ParticlesUtil.sendParticles(
                     entity.level(),
                     ChangedAdditionsParticles.solventDrips(10, FoxyasUtils.clamp(new Random().nextFloat(0.45f), 0.15f, 0.45f)),
                     entity.position().add(0, entity.getBbHeight() / 2f, 0),
@@ -104,7 +105,7 @@ public class ChangedAdditionsDamageSources {
                 var colors = changed.getSelfVariant().getColors();
                 var color = changed.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
-                PlayerUtil.ParticlesUtil.sendParticles(
+                ParticlesUtil.sendParticles(
                         level,
                         ChangedParticles.drippingLatex(color),
                         position,
@@ -117,7 +118,7 @@ public class ChangedAdditionsDamageSources {
                     var colors = variant.getParent().getColors();
                     var color = player.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
-                    PlayerUtil.ParticlesUtil.sendParticles(
+                    ParticlesUtil.sendParticles(
                             level,
                             ChangedParticles.drippingLatex(color),
                             position,
@@ -137,7 +138,7 @@ public class ChangedAdditionsDamageSources {
                 var colors = changed.getSelfVariant().getColors();
                 var color = changed.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
-                PlayerUtil.ParticlesUtil.sendParticles(
+                ParticlesUtil.sendParticles(
                         level,
                         ChangedParticles.drippingLatex(color),
                         position,
@@ -150,7 +151,7 @@ public class ChangedAdditionsDamageSources {
                     var colors = variant.getParent().getColors();
                     var color = player.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
-                    PlayerUtil.ParticlesUtil.sendParticles(
+                    ParticlesUtil.sendParticles(
                             level,
                             ChangedParticles.drippingLatex(color),
                             position,
