@@ -3,7 +3,6 @@ package net.foxyas.changed_additions.world.blocksHandle;
 import com.ibm.icu.impl.Pair;
 import net.foxyas.changed_additions.init.ChangedAdditionsItems;
 import net.ltxprogrammer.changed.block.AbstractLatexBlock;
-import net.ltxprogrammer.changed.entity.LatexType;
 import net.ltxprogrammer.changed.init.ChangedItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,7 +26,7 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-public class BoneMealExpansion {
+public class BoneMealExpansion {/*
 
     @Mod.EventBusSubscriber
     public static class AttemptToApply {
@@ -128,7 +127,7 @@ public class BoneMealExpansion {
 
                             }
                         }
-                        */
+                        *\/
 
                         //serverLevel.levelEvent(1505, targetPos, 1); // Bone meal particles
                         success = true;
@@ -240,4 +239,5 @@ public class BoneMealExpansion {
         }
     }
 
+    */
 }

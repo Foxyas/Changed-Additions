@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class ShowExtraTransfurInfoProcedure {
+public class ShowExtraTransfurInfoToolTip {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
@@ -36,7 +36,7 @@ public class ShowExtraTransfurInfoProcedure {
 
         String form = itemstack.getOrCreateTag().getString("form");
         boolean isCreative = entity.isCreative();
-        
+
         if (isCreative) {
             if (!Screen.hasShiftDown()) {
                 String variantName = Component.translatable(Syringe.getVariantDescriptionId(itemstack)).getString();
@@ -54,9 +54,7 @@ public class ShowExtraTransfurInfoProcedure {
                 int index = Math.min(tooltip.size(), 3);
 
                 double extraHp = (hp) / 2.0;
-                tooltip.add(index, Component.translatable("text.changed_additions.additionalHealth")
-                        .append("")
-                        .append(extraHp == 0
+                tooltip.add(index, Component.translatable("text.changed_additions.additionalHealth", extraHp == 0
                                 ? Component.literal("§7None§r")
                                 : Component.literal((extraHp > 0 ? "§a+" : "§c") + extraHp + "§r"))
                         .append(Component.translatable("text.changed_additions.additionalHealth.Hearts")));
@@ -66,34 +64,26 @@ public class ShowExtraTransfurInfoProcedure {
 
                 index++;
                 double landSpeedPct = (landSpeed - 1) * 100;
-                tooltip.add(index, Component.translatable("text.changed_additions.land_speed")
-                        .append("")
-                        .append(landSpeedPct == 0
-                                ? Component.literal("§7None§r")
-                                : Component.literal((landSpeedPct > 0 ? "§a+" : "§c") + (int) landSpeedPct + "%")));
+                tooltip.add(index, Component.translatable("text.changed_additions.land_speed", landSpeedPct == 0
+                        ? Component.literal("§7None§r")
+                        : Component.literal((landSpeedPct > 0 ? "§a+" : "§c") + (int) landSpeedPct + "%")));
 
                 index++;
                 double swimSpeedPct = (swimSpeed - 1) * 100;
-                tooltip.add(index, Component.translatable("text.changed_additions.swim_speed")
-                        .append("")
-                        .append(swimSpeedPct == 0
-                                ? Component.literal("§7None§r")
-                                : Component.literal((swimSpeedPct > 0 ? "§a+" : "§c") + (int) swimSpeedPct + "%")));
+                tooltip.add(index, Component.translatable("text.changed_additions.swim_speed", swimSpeedPct == 0
+                        ? Component.literal("§7None§r")
+                        : Component.literal((swimSpeedPct > 0 ? "§a+" : "§c") + (int) swimSpeedPct + "%")));
 
                 index++;
                 double jumpStrengthPct = (jumpStrength - 1) * 100;
-                tooltip.add(index, Component.translatable("text.changed_additions.jumpStrength")
-                        .append("")
-                        .append(jumpStrengthPct == 0
-                                ? Component.literal("§7None§r")
-                                : Component.literal((jumpStrengthPct > 0 ? "§a+" : "§c") + (int) jumpStrengthPct + "%")));
+                tooltip.add(index, Component.translatable("text.changed_additions.jumpStrength", jumpStrengthPct == 0
+                        ? Component.literal("§7None§r")
+                        : Component.literal((jumpStrengthPct > 0 ? "§a+" : "§c") + (int) jumpStrengthPct + "%")));
 
                 index++;
-                tooltip.add(index, Component.translatable("text.changed_additions.canGlide/Fly")
-                        .append("")
-                        .append(canFlyOrGlide
-                                ? Component.literal("§aTrue§r")
-                                : Component.literal("§cFalse§r")));
+                tooltip.add(index, Component.translatable("text.changed_additions.canGlide/Fly", canFlyOrGlide
+                        ? Component.literal("§aTrue§r")
+                        : Component.literal("§cFalse§r")));
             }
 
             if (ChangedAdditionsTransfurVariants.isVariantOC(form, entity.level())) {

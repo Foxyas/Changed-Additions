@@ -2,7 +2,9 @@ package net.foxyas.changed_additions.entities;
 
 import net.foxyas.changed_additions.init.ChangedAdditionsEntities;
 import net.ltxprogrammer.changed.entity.*;
+import net.ltxprogrammer.changed.entity.latex.LatexType;
 import net.ltxprogrammer.changed.init.ChangedAttributes;
+import net.ltxprogrammer.changed.init.ChangedLatexTypes;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -81,7 +83,7 @@ public class FengQIWolf extends ChangedEntity implements GenderedEntity, PowderS
 
     @Override
     public LatexType getLatexType() {
-        return LatexType.NEUTRAL;
+        return ChangedLatexTypes.NONE.get();
     }
 
     @Override

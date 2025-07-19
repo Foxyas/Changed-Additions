@@ -15,7 +15,6 @@ import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTime
 import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.block.AbstractLatexBlock;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
-import net.ltxprogrammer.changed.entity.LatexType;
 import net.ltxprogrammer.changed.entity.beast.AbstractDarkLatexEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -65,7 +64,7 @@ public class ChangedAdditionsCommands {
         );
         var getMaxSizeToleranceCommandNode = event.getDispatcher().register(getMaxBPISize);
 
-        LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("BlocksHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
+        /*LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("BlocksHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.literal("setBlocksInfectionType")
                         .then(Commands.argument("minPos", BlockPosArgument.blockPos())
                                 .then(Commands.argument("maxPos", BlockPosArgument.blockPos())
@@ -132,7 +131,7 @@ public class ChangedAdditionsCommands {
         );
 
 
-        var BlockInfectionHandleCommandNode = event.getDispatcher().register(BlocksHandle);
+        var BlockInfectionHandleCommandNode = event.getDispatcher().register(BlocksHandle);*/
 
         LiteralArgumentBuilder<CommandSourceStack> tameEntity = literalBuilder.then(Commands.literal("tameChangedEntity").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.argument("tameTarget", EntityArgument.entities())
@@ -251,7 +250,7 @@ public class ChangedAdditionsCommands {
         event.getDispatcher().register(Commands.literal("ca").redirect(ChangedAdditionsCommandNode));
         event.getDispatcher().register(Commands.literal("ca-MaxBPI").requires(source -> source.hasPermission(2)).redirect(setMaxBPICommandNode.getChild("setMaxBPISize")));
         event.getDispatcher().register(Commands.literal("ca-QTE").requires(source -> source.hasPermission(2)).redirect(QuickTimeEventsHandleCommandNode.getChild("QuickTimeEventsHandle")));
-        event.getDispatcher().register(Commands.literal("ca-setBlocksInfection").requires(source -> source.hasPermission(2)).redirect(BlockInfectionHandleCommandNode.getChild("BlocksHandle").getChild("setBlocksInfectionType")));
+        //event.getDispatcher().register(Commands.literal("ca-setBlocksInfection").requires(source -> source.hasPermission(2)).redirect(BlockInfectionHandleCommandNode.getChild("BlocksHandle").getChild("setBlocksInfectionType")));
     }
 
     @SubscribeEvent
@@ -274,7 +273,7 @@ public class ChangedAdditionsCommands {
         event.getDispatcher().register(setBPISizeCommand);
     }
 
-    public static class BlockHandle {
+    /*public static class BlockHandle {
         public static void run(LevelAccessor world, BlockPos minPos, BlockPos maxPos, LatexType enumValue) {
             for (BlockPos pos : BlockPos.betweenClosed(minPos, maxPos)) {
                 BlockState state = world.getBlockState(pos);
@@ -284,7 +283,7 @@ public class ChangedAdditionsCommands {
                 }
             }
         }
-    }
+    }*/
 
     public static class TameHandle {
         public static void run(Collection<?> tameTargets, Player tamer, boolean overwriteOwner) {

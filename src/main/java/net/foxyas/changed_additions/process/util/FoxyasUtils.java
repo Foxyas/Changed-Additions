@@ -2,7 +2,7 @@ package net.foxyas.changed_additions.process.util;
 
 import com.ibm.icu.impl.Pair;
 import net.ltxprogrammer.changed.block.AbstractLatexBlock;
-import net.ltxprogrammer.changed.entity.LatexType;
+import net.ltxprogrammer.changed.entity.latex.LatexType;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.gui.Font;
@@ -82,102 +82,6 @@ public class FoxyasUtils {
         } catch (Exception e) {
         }
         return 0;
-    }
-
-    /// CAREFUL USING THIS
-    public static boolean isConnectedToSourceNoLimit(ServerLevel level, BlockPos start, LatexType latexType, Block targetBlock) {
-        Set<BlockPos> visited = new HashSet<>();
-        Queue<BlockPos> toVisit = new ArrayDeque<>();
-        toVisit.add(start);
-
-        while (!toVisit.isEmpty()) {
-            BlockPos current = toVisit.poll();
-            if (!visited.add(current)) continue;
-
-            BlockState state = level.getBlockState(current);
-            if (state.is(targetBlock)) {
-                return true;
-            }
-
-            if (AbstractLatexBlock.isLatexed(state) && AbstractLatexBlock.getLatexed(state) == latexType) {
-                for (Direction dir : Direction.values()) {
-                    BlockPos neighbor = current.relative(dir);
-                    if (!visited.contains(neighbor)) {
-                        toVisit.add(neighbor);
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public static boolean isConnectedToSource(ServerLevel level, BlockPos start, LatexType latexType, Block targetBlock, int maxDepth) {
-        Set<BlockPos> visited = new HashSet<>();
-        Queue<Pair<BlockPos, Integer>> toVisit = new ArrayDeque<>();
-        toVisit.add(Pair.of(start, 0));
-
-        while (!toVisit.isEmpty()) {
-            Pair<BlockPos, Integer> entry = toVisit.poll();
-            BlockPos current = entry.first;
-            int depth = entry.second;
-
-            if (depth > maxDepth) {
-                continue;
-            }
-
-            if (!visited.add(current)) {
-                continue;
-            }
-
-            BlockState state = level.getBlockState(current);
-            if (state.is(targetBlock)) {
-                return true;
-            }
-
-            if (AbstractLatexBlock.isLatexed(state) && AbstractLatexBlock.getLatexed(state) == latexType) {
-                for (Direction dir : Direction.values()) {
-                    BlockPos neighbor = current.relative(dir);
-                    toVisit.add(Pair.of(neighbor, depth + 1));
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public static void spreadFromSource(ServerLevel level, BlockPos source, int maxDepth) {
-        Set<BlockPos> visited = new HashSet<>();
-        Queue<Pair<BlockPos, Integer>> queue = new ArrayDeque<>();
-
-        queue.add(Pair.of(source, 0));
-        visited.add(source);
-
-        while (!queue.isEmpty()) {
-            var current = queue.poll();
-            BlockPos pos = current.first;
-            int depth = current.second;
-
-            if (depth > maxDepth) continue;
-
-            BlockState state = level.getBlockState(pos);
-            if (!AbstractLatexBlock.isLatexed(state)) continue;
-
-            // Simula "crescimento"
-            state.randomTick(level, pos, level.getRandom());
-            level.levelEvent(1505, pos, 1); // Partículas
-
-            // Adiciona vizinhos se ainda dentro do limite
-            if (depth < maxDepth) {
-                for (Direction dir : Direction.values()) {
-                    BlockPos neighbor = pos.relative(dir);
-                    if (!visited.contains(neighbor)) {
-                        visited.add(neighbor);
-                        queue.add(Pair.of(neighbor, depth + 1));
-                    }
-                }
-            }
-        }
     }
 
 

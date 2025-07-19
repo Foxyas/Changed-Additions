@@ -9,7 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class DispenserExpansion {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(BoneMealExpansion.BoneMealDispenserHandler::registerDispenserBehavior);
-        event.enqueueWork(BoneMealExpansion.GooApplyDispenserHandler::registerDispenserBehavior);
+        //event.enqueueWork(BoneMealExpansion.BoneMealDispenserHandler::registerDispenserBehavior);
+        //event.enqueueWork(BoneMealExpansion.GooApplyDispenserHandler::registerDispenserBehavior);
     }
 }

@@ -1,7 +1,9 @@
 package net.foxyas.changed_additions.entities;
 
 import net.ltxprogrammer.changed.entity.*;
+import net.ltxprogrammer.changed.entity.latex.LatexType;
 import net.ltxprogrammer.changed.init.ChangedAttributes;
+import net.ltxprogrammer.changed.init.ChangedLatexTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -98,7 +100,7 @@ public abstract class AbstractLatexSnowFox extends ChangedEntity implements Gend
 
     @Override
     public LatexType getLatexType() {
-        return LatexType.NEUTRAL;
+        return ChangedLatexTypes.NONE.get();
     }
 
     @Override

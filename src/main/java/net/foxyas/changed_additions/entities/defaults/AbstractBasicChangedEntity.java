@@ -2,8 +2,9 @@ package net.foxyas.changed_additions.entities.defaults;
 
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.HairStyle;
-import net.ltxprogrammer.changed.entity.LatexType;
+import net.ltxprogrammer.changed.entity.latex.LatexType;
 import net.ltxprogrammer.changed.init.ChangedAttributes;
+import net.ltxprogrammer.changed.init.ChangedLatexTypes;
 import net.ltxprogrammer.changed.util.Color3;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -52,7 +53,7 @@ public abstract class AbstractBasicChangedEntity extends ChangedEntity {
 
     @Override
     public LatexType getLatexType() {
-        return LatexType.NEUTRAL;
+        return ChangedLatexTypes.NONE.get();
     }
 
     @Override
