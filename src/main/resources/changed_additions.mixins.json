@@ -27,7 +27,6 @@
   "client": [
     "GameRendererMixin",
     "PostChainMixin",
-    "render.AdvancedHumanoidRendererMixin",
-    "render.LatexHumanoidArmorLayerMixin"
+    "render.AdvancedHumanoidRendererMixin"
   ]
 }
