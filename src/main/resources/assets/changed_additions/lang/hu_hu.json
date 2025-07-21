@@ -31,7 +31,7 @@
   "enchantment.changed_additions.solvent.desc": "Több sebzést okoz latex entitásoknak",
 
   "effect.changed_additions.latex_solvent": "Latexoldás",
-  "effect.changed_additions.latex_solvent.description": "Inflicts damage on latex entities, with damage increasing as the effect strengthens.",
+  "effect.changed_additions.latex_solvent.description": "Sebzést okoz a latex entitásokon, a hatás erősödésével a sebzés növekszik.",
 
   "itemGroup.changed_additions": "Changed Additions",
 
@@ -42,11 +42,11 @@
   "changed_additions.commands.setBpiSize.success": "Méret sikeresen megváltoztatva erre: %s",
   "changed_additions.commands.setMaxBPISize.success": "Maximális mérettűrés %s értékre meg lett változtatva",
   "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s érték magasabb, mint 100, és emiatt késést és összeomlási problémákat okozhat",
-  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Assigned a Quick Time Event (%s / %s) to '%s' for %s ticks.",
+  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Hozzárendelt egy quick time eventet (%s / %s) a '%s' játékoshoz %s tikkig.",
   "changed_additions.commands.setQuickTimeEventForPlayer.fail": "Helytelen quick time event paraméterek.",
-  "changed_additions.commands.getQuickTimeEventForPlayer.have": "Player '%s' currently has an active Quick Time Event.",
-  "changed_additions.commands.getQuickTimeEventForPlayer.details": "Type: %s, Sequence: %s, Ticks remaining: %s , Progress: %s",
-  "changed_additions.commands.getQuickTimeEventForPlayer.none": "Player '%s' does not have any active Quick Time Event.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.have": "'%s' játékosnak jelenleg aktív quick time eventje van.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.details": "Típus: %s, Sorozat: %s, Hátralévő tikkek: %s , Haladás: %s",
+  "changed_additions.commands.getQuickTimeEventForPlayer.none": "'%s' játékosnak nincs aktív quick time eventje.",
 
 
   "changed_additions.ability.carry": "Hordozás",
@@ -72,27 +72,27 @@
   "changed_additions.jei_descriptions.laser_pointer": "§oFesthető§r",
 
   "subtitles.untransfur": "Visszatranszfur",
-  "subtitles.armor.equip": "Soft Armor Equip",
+  "subtitles.armor.equip": "Páncél felvétele lágy állapotban",
 
   "key.changed_additions.pat_message": "You pat %s",
   "key.changed_additions.pat_received": "%s pat you",
-  "key.changed_additions.turn_off_transfur": "Turn Off Transfur",
-  "key.categories.changed_additions": "Changed Additions Keybinds",
+  "key.changed_additions.turn_off_transfur": "Transzfur kikapcsolása",
+  "key.categories.changed_additions": "Changed Additions key bindek",
   "key.changed_additions.pat_key": "Pat",
 
   "changed_additions.info.is_patable": "Press %1$s to pat %2$s",
 
-  "changed_additions.fight_conscience.success": "You §2Maintained§r your conscience! Well done!",
-  "changed_additions.struggle.success": "You §2Freed§r yourself! Well done!",
-  "changed_additions.generic.success": "You §2Won§r! Well done!",
-  "changed_additions.fight_conscience.fail": "You §4Lost§r your conscience. Good luck next time!",
-  "changed_additions.struggle.fail": "You §4Lost§r — your struggle wasn't enough. Good luck next time!",
-  "changed_additions.generic.fail": "You §4Lost§r. Good luck next time!",
+  "changed_additions.fight_conscience.success": "§2Megtartotta§r eszméletét! Szép munka!",
+  "changed_additions.struggle.success": "§2Felszabadította§r magát! Szép munka!",
+  "changed_additions.generic.success": "§2Győztél§r! Szép munka!",
+  "changed_additions.fight_conscience.fail": "§4Elvesztette§r eszméletét. Sok szerencsét legközelebb!",
+  "changed_additions.struggle.fail": "§4Vesztettél§r — a küzdelme nem volt elég. Sok szerencsét legközelebb!",
+  "changed_additions.generic.fail": "§4Vesztettél§r. Sok szerencsét legközelebb!",
 
-  "gamerule.changed_additions:fight_to_keep_consciousness": "Fight to Keep Consciousness QTE",
-  "gamerule.changed_additions:fight_to_keep_consciousness.description": "Allow the fight to keep consciousness quick time event to happen",
-  "gamerule.changed_additions:doCreatureDiets": "Creatures Diets?",
-  "gamerule.changed_additions:doCreatureDiets.description": "Allow Transfurs Get More Food points and saturation when eat a Good food for them",
+  "gamerule.changed_additions:fight_to_keep_consciousness": "Harc az eszmélet megtartásáért QTE",
+  "gamerule.changed_additions:fight_to_keep_consciousness.description": "Hagyja, hogy a harc az eszmélet megtartásáért quick time event megtörténjen",
+  "gamerule.changed_additions:doCreatureDiets": "Lények étrendje?",
+  "gamerule.changed_additions:doCreatureDiets.description": "Lehetővé teszi a transzfuráltak számára, hogy több éhség helyreállítást és telítettséget kapjanak, ha jó ételt esznek számukra",
 
 
   "advancements.pat_advancement.title": "That does something?!",
@@ -100,15 +100,15 @@
   "advancements.stealth_pats.title": "Rejtett §cszeretet§r",
   "advancements.stealth_pats.descr": "Pet a Goo Creature while wearing a cloak to conceal and confuse them.",
   "advancements.pants_dyer.title": "Egy kis festékkel",
-  "advancements.pants_dyer.descr": "Színt adtál a rövidnadrágnak. Stílusos és lézerbiztos? Ezzel mindenki nyer.",
-  "advancements.organic_transfur_advancement.title": "Organic And Fluffy!!",
-  "advancements.organic_transfur_advancement.descr": "Transfur yourself into a organic form",
+  "advancements.pants_dyer.descr": "Színt adtad a rövidnadrágnak. Stílusos és lézerbiztos? Ezzel mindenki nyer.",
+  "advancements.organic_transfur_advancement.title": "Organikus és bolyhos!!",
+  "advancements.organic_transfur_advancement.descr": "Transzfurálja magát organikus formává",
 
-  "text.changed_additions.additionalHealth": "Additional Health \u003d %s",
-  "text.changed_additions.additionalHealth.Hearts": " Hearts",
-  "text.changed_additions.canGlide/Fly": "Glide/Fly \u003d %s",
-  "text.changed_additions.jumpStrength": "Jump Strength \u003d %s",
-  "text.changed_additions.land_speed": "Land Speed \u003d %s",
-  "text.changed_additions.legs": "Amount of Legs \u003d %s",
-  "text.changed_additions.swim_speed": "Swim Speed \u003d %s"
+  "text.changed_additions.additionalHealth": "További életerősség \u003d %s",
+  "text.changed_additions.additionalHealth.Hearts": " szív",
+  "text.changed_additions.canGlide/Fly": "Siklórepülés/repülés \u003d %s",
+  "text.changed_additions.jumpStrength": "Ugrás erőssége \u003d %s",
+  "text.changed_additions.land_speed": "Szárazföldi sebesség \u003d %s",
+  "text.changed_additions.legs": "Lábak száma \u003d %s",
+  "text.changed_additions.swim_speed": "Úszási sebesség \u003d %s"
 }
