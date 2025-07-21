@@ -42,11 +42,11 @@
   "changed_additions.commands.setBpiSize.success": "Méret sikeresen megváltoztatva erre: %s",
   "changed_additions.commands.setMaxBPISize.success": "Maximális mérettűrés %s értékre meg lett változtatva",
   "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s érték magasabb, mint 100, és emiatt késést és összeomlási problémákat okozhat",
-  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Hozzárendelt egy quick time eventet (%s / %s) a '%s' játékoshoz %s tikkig.",
+  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Hozzárendelt egy quick time eventet (%s / %s) a(z) %s játékoshoz %s tikkig.",
   "changed_additions.commands.setQuickTimeEventForPlayer.fail": "Helytelen quick time event paraméterek.",
-  "changed_additions.commands.getQuickTimeEventForPlayer.have": "'%s' játékosnak jelenleg aktív quick time eventje van.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.have": "%s játékosnak jelenleg aktív quick time eventje van.",
   "changed_additions.commands.getQuickTimeEventForPlayer.details": "Típus: %s, Sorozat: %s, Hátralévő tikkek: %s , Haladás: %s",
-  "changed_additions.commands.getQuickTimeEventForPlayer.none": "'%s' játékosnak nincs aktív quick time eventje.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.none": "%s játékosnak nincs aktív quick time eventje.",
 
 
   "changed_additions.ability.carry": "Hordozás",
