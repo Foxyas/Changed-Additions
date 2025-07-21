@@ -9,13 +9,13 @@
 
   "item.changed_additions.latex_snow_fox_female_spawn_egg": "Nőstény latex sarki rókát idéző tojás",
   "item.changed_additions.latex_snow_fox_male_spawn_egg": "Hím latex sarki rókát idéző tojás",
-  "item.changed_additions.feng_qi_wolf_spawn_egg": "Feng QI róka",
+  "item.changed_additions.feng_qi_wolf_spawn_egg": "Feng QI rókát idéző tojás",
   "item.changed_additions.latex_kitsune_female_spawn_egg": "Nőstény latex kicunét idéző tojás",
   "item.changed_additions.latex_kitsune_male_spawn_egg": "Hím latex kicunét idéző tojás",
   "item.changed_additions.latex_calico_cat_spawn_egg": "Latex tarka macskát idéző tojás",
 
-  "item.changed_additions.dark_latex_coat": "Dark Latex Coat",
-  "item.changed_additions.dark_latex_coat_cap": "Dark Latex Head Cap",
+  "item.changed_additions.dark_latex_coat": "Sötét latex álca",
+  "item.changed_additions.dark_latex_coat_cap": "Sötét latex álcasapka",
   "item.changed_additions.golden_orange": "Aranynarancs",
 
   "block.changed_additions.neofuser": "Neofuser",
@@ -74,13 +74,13 @@
   "subtitles.untransfur": "Visszatranszfur",
   "subtitles.armor.equip": "Páncél felvétele lágy állapotban",
 
-  "key.changed_additions.pat_message": "You pat %s",
-  "key.changed_additions.pat_received": "%s pat you",
+  "key.changed_additions.pat_message": "Simogatja %s entitást",
+  "key.changed_additions.pat_received": "%s magát simogatja",
   "key.changed_additions.turn_off_transfur": "Transzfur kikapcsolása",
   "key.categories.changed_additions": "Changed Additions key bindek",
-  "key.changed_additions.pat_key": "Pat",
+  "key.changed_additions.pat_key": "Simogatás",
 
-  "changed_additions.info.is_patable": "Press %1$s to pat %2$s",
+  "changed_additions.info.is_patable": "Nyomja meg a(z) %1$s gombot a(z) %2$s entitás simogatásához",
 
   "changed_additions.fight_conscience.success": "§2Megtartotta§r eszméletét! Szép munka!",
   "changed_additions.struggle.success": "§2Felszabadította§r magát! Szép munka!",
@@ -95,10 +95,10 @@
   "gamerule.changed_additions:doCreatureDiets.description": "Lehetővé teszi a transzfuráltak számára, hogy több éhség helyreállítást és telítettséget kapjanak, ha jó ételt esznek számukra",
 
 
-  "advancements.pat_advancement.title": "That does something?!",
-  "advancements.pat_advancement.descr": "Your pat was so good that it helped someone get better",
+  "advancements.pat_advancement.title": "Ez csinál valamit?!",
+  "advancements.pat_advancement.descr": "Annyira jól esett a simogatása, hogy segített valakinek jobban lenni",
   "advancements.stealth_pats.title": "Rejtett §cszeretet§r",
-  "advancements.stealth_pats.descr": "Pet a Goo Creature while wearing a cloak to conceal and confuse them.",
+  "advancements.stealth_pats.descr": "Simogass meg egy latex lényt álcában, hogy magát elrejtse és őt összezavarja.",
   "advancements.pants_dyer.title": "Egy kis festékkel",
   "advancements.pants_dyer.descr": "Színt adtad a rövidnadrágnak. Stílusos és lézerbiztos? Ezzel mindenki nyer.",
   "advancements.organic_transfur_advancement.title": "Organikus és bolyhos!!",
