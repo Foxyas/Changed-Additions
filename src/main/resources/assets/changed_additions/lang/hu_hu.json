@@ -9,7 +9,7 @@
 
   "item.changed_additions.latex_snow_fox_female_spawn_egg": "Nőstény latex sarki rókát idéző tojás",
   "item.changed_additions.latex_snow_fox_male_spawn_egg": "Hím latex sarki rókát idéző tojás",
-  "item.changed_additions.feng_qi_fox_spawn_egg": "Feng QI róka",
+  "item.changed_additions.feng_qi_wolf_spawn_egg": "Feng QI róka",
   "item.changed_additions.latex_kitsune_female_spawn_egg": "Nőstény latex kicunét idéző tojás",
   "item.changed_additions.latex_kitsune_male_spawn_egg": "Hím latex kicunét idéző tojás",
   "item.changed_additions.latex_calico_cat_spawn_egg": "Latex tarka macskát idéző tojás",
@@ -22,7 +22,7 @@
 
   "entity.changed_additions.latex_snow_fox_male": "Hím latex sarki róka",
   "entity.changed_additions.latex_snow_fox_female": "Nőstény latex sarki róka",
-  "entity.changed_additions.feng_qi_fox": "Feng QI róka",
+  "entity.changed_additions.feng_qi_wolf": "Feng QI róka",
   "entity.changed_additions.latex_kitsune_female": "Nőstény latex kicune",
   "entity.changed_additions.latex_kitsune_male": "Hím latex kicune",
   "entity.changed_additions.latex_calico_cat": "Latex tarka macska",
