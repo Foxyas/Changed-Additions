@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 
+import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -86,20 +87,35 @@ public class TransfurVariantUtils {
         }
     }
 
-    public static int GetLegs(String stringvariant) {
+    public static String getMiningStrength(String stringVariant) {
         try {
-            ResourceLocation form = new ResourceLocation(stringvariant);
-            if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getRegistryName).anyMatch(form::equals)) {
+            ResourceLocation form = new ResourceLocation(stringVariant);
+            if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getFormId).anyMatch(form::equals)) {
                 TransfurVariant<?> variant = ChangedRegistry.TRANSFUR_VARIANT.get().getValue(form);
-                return variant == null ? 0 : variant.legCount;
+                return variant == null ? "unknow" : variant.miningStrength.name().toLowerCase(Locale.ROOT);
             } else {
-                return 0;
+                return "unknow";
             }
         } catch (Exception e) {
             //System.err.println("Erro when processing GetLegs: " + e.getMessage());
-            return 0;
+            return "unknow";
         }
     }
+
+//    public static int GetLegs(String stringvariant) {
+//        try {
+//            ResourceLocation form = new ResourceLocation(stringvariant);
+//            if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getRegistryName).anyMatch(form::equals)) {
+//                TransfurVariant<?> variant = ChangedRegistry.TRANSFUR_VARIANT.get().getValue(form);
+//                return variant == null ? 0 : variant.legCount;
+//            } else {
+//                return 0;
+//            }
+//        } catch (Exception e) {
+//            //System.err.println("Erro when processing GetLegs: " + e.getMessage());
+//            return 0;
+//        }
+//    }
 
     public static boolean CanGlideandFly(String stringvariant) {
         try {
