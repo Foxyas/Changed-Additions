@@ -13,7 +13,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -32,13 +31,26 @@ public abstract class AbstractBasicChangedEntity extends ChangedEntity {
         super(type, level);
     }
 
+    public static void init() {
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        AttributeSupplier.Builder builder = ChangedEntity.createLatexAttributes();
+        builder = builder.add(ChangedAttributes.TRANSFUR_DAMAGE.get(), 3f);
+        builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
+        builder = builder.add(Attributes.MAX_HEALTH, 24);
+        builder = builder.add(Attributes.ARMOR, 2);
+        builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
+        builder = builder.add(Attributes.FOLLOW_RANGE, 16);
+        return builder;
+    }
 
     protected void setAttributes(AttributeMap attributes) {
         Objects.requireNonNull(attributes.getInstance(ChangedAttributes.TRANSFUR_DAMAGE.get())).setBaseValue((3));
         attributes.getInstance(Attributes.MAX_HEALTH).setBaseValue((24));
         attributes.getInstance(Attributes.FOLLOW_RANGE).setBaseValue(40.0f);
         attributes.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(1.1f);
-        attributes.getInstance((Attribute) ForgeMod.SWIM_SPEED.get()).setBaseValue(0.95f);
+        attributes.getInstance(ForgeMod.SWIM_SPEED.get()).setBaseValue(0.95f);
         attributes.getInstance(Attributes.ATTACK_DAMAGE).setBaseValue(3.0f);
         attributes.getInstance(Attributes.ARMOR).setBaseValue(0);
         attributes.getInstance(Attributes.ARMOR_TOUGHNESS).setBaseValue(0);
@@ -49,7 +61,6 @@ public abstract class AbstractBasicChangedEntity extends ChangedEntity {
     public Color3 getHairColor(int i) {
         return Color3.getColor("#E5E5E5");
     }
-
 
     @Override
     public LatexType getLatexType() {
@@ -96,19 +107,5 @@ public abstract class AbstractBasicChangedEntity extends ChangedEntity {
     @Override
     public @NotNull SoundEvent getDeathSound() {
         return  SoundEvents.GENERIC_DEATH;
-    }
-
-    public static void init() {
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        AttributeSupplier.Builder builder = ChangedEntity.createLatexAttributes();
-        builder = builder.add(ChangedAttributes.TRANSFUR_DAMAGE.get(), 3f);
-        builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-        builder = builder.add(Attributes.MAX_HEALTH, 24);
-        builder = builder.add(Attributes.ARMOR, 2);
-        builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
-        builder = builder.add(Attributes.FOLLOW_RANGE, 16);
-        return builder;
     }
 }

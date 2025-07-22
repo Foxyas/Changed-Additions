@@ -1,7 +1,6 @@
 package net.foxyas.changed_additions.entities.goals;
 
 import net.foxyas.changed_additions.process.util.ParticlesUtil;
-import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.Emote;
 import net.ltxprogrammer.changed.entity.TamableLatexEntity;
 import net.ltxprogrammer.changed.init.ChangedParticles;
@@ -164,6 +163,7 @@ public class SleepingNearOwnerGoal extends Goal {
         private Player owner;
         private BlockPos bedPos;
         private int sleepTimer = 0;
+
         public BipedSleepGoal(LivingEntity pet) {
             this.pet = pet;
             this.isDogOrCat = false;

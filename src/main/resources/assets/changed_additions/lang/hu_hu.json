@@ -1,0 +1,114 @@
+{
+  "item.changed_additions.ammonium_chloride": "Ammónium-klorid",
+  "item.changed_additions.anti_latex_base": "Anti-latex alap",
+  "item.changed_additions.biomass": "Biomassza",
+  "item.changed_additions.dyeable_shorts": "Festhető rövidnadrág",
+  "item.changed_additions.dyeable_shirt": "Festhető poló",
+  "item.changed_additions.laethin_syringe": "Laethin fecskendő",
+  "item.changed_additions.laser_pointer": "Lézermutató",
+
+  "item.changed_additions.latex_snow_fox_female_spawn_egg": "Nőstény latex sarki rókát idéző tojás",
+  "item.changed_additions.latex_snow_fox_male_spawn_egg": "Hím latex sarki rókát idéző tojás",
+  "item.changed_additions.feng_qi_wolf_spawn_egg": "Feng QI rókát idéző tojás",
+  "item.changed_additions.latex_kitsune_female_spawn_egg": "Nőstény latex kicunét idéző tojás",
+  "item.changed_additions.latex_kitsune_male_spawn_egg": "Hím latex kicunét idéző tojás",
+  "item.changed_additions.latex_calico_cat_spawn_egg": "Latex tarka macskát idéző tojás",
+
+  "item.changed_additions.dark_latex_coat": "Sötét latex álca",
+  "item.changed_additions.dark_latex_coat_cap": "Sötét latex álcasapka",
+  "item.changed_additions.golden_orange": "Aranynarancs",
+
+  "block.changed_additions.neofuser": "Neofuser",
+
+  "entity.changed_additions.latex_snow_fox_male": "Hím latex sarki róka",
+  "entity.changed_additions.latex_snow_fox_female": "Nőstény latex sarki róka",
+  "entity.changed_additions.feng_qi_wolf": "Feng QI róka",
+  "entity.changed_additions.latex_kitsune_female": "Nőstény latex kicune",
+  "entity.changed_additions.latex_kitsune_male": "Hím latex kicune",
+  "entity.changed_additions.latex_calico_cat": "Latex tarka macska",
+
+  "enchantment.changed_additions.latex_solvent": "Latexoldó",
+  "enchantment.changed_additions.solvent.desc": "Több sebzést okoz latex entitásoknak",
+
+  "effect.changed_additions.latex_solvent": "Latexoldás",
+  "effect.changed_additions.latex_solvent.description": "Sebzést okoz a latex entitásokon, a hatás erősödésével a sebzés növekszik.",
+
+  "itemGroup.changed_additions": "Changed Additions",
+
+  "changed_additions.gui.recipe_progress": "A haladás sebessége %1$s",
+
+  "changed_additions.commands.getMaxSizeTolerance": "Maximális mérettűrés %s",
+  "changed_additions.commands.setBpiSize.fail": "Hiba történt a játékos méretének megváltoztatásakor",
+  "changed_additions.commands.setBpiSize.success": "Méret sikeresen megváltoztatva erre: %s",
+  "changed_additions.commands.setMaxBPISize.success": "Maximális mérettűrés %s értékre meg lett változtatva",
+  "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s érték magasabb, mint 100, és emiatt késést és összeomlási problémákat okozhat",
+  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Hozzárendelt egy quick time eventet (%s / %s) a(z) %s játékoshoz %s tikkig.",
+  "changed_additions.commands.setQuickTimeEventForPlayer.fail": "Helytelen quick time event paraméterek.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.have": "%s játékosnak jelenleg aktív quick time eventje van.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.details": "Típus: %s, Sorozat: %s, Hátralévő tikkek: %s , Haladás: %s",
+  "changed_additions.commands.getQuickTimeEventForPlayer.none": "%s játékosnak nincs aktív quick time eventje.",
+
+
+  "changed_additions.ability.carry": "Hordozás",
+  "changed_additions.ability.claws": "Karmolás",
+  "changed_additions.ability.claws.desc": "Aktiválja macskakarmait, és szabadítsa fel §mkezeivel§r mancsaival elsöprő támadásokat.",
+  "changed_additions.ability.custom_interaction": "Alak interakciói",
+  "changed_additions.ability.leap": "Szökkenés",
+  "changed_additions.ability.soften": "Lágyulás",
+  "changed_additions.ability.soften.description": "Hagyja, hogy a játékos áthaladjon lyukas blokkokon",
+  "changed_additions.ability.wing_flap": "Szárnycsapkodás",
+  "changed_additions.ability.teleport": "Teleportálás",
+
+  "changed_additions.warn.cant_carry": "Megpróbálja felemelni %1$s-t, de túl nehéz.",
+
+  "death.attack.latex_solvent": "%1$s feloldódott",
+  "death.attack.latex_solvent.player": "%2$s feloldotta %1$s játékost",
+  "death.attack.conscience_lost": "%1$s elvesztette eszméletét",
+  "death.attack.conscience_lost.player": "%2$s által %1$s elvesztette eszméletét",
+
+
+  "changed_additions.jei_descriptions.dyeable_shorts": "Normál rövidnadrág festéséből készült\n§oFesthető§r",
+  "changed_additions.jei_descriptions.dyeable_shirt": "§oFesthető§r",
+  "changed_additions.jei_descriptions.laser_pointer": "§oFesthető§r",
+
+  "subtitles.untransfur": "Visszatranszfur",
+  "subtitles.armor.equip": "Páncél felvétele",
+
+  "key.changed_additions.pat_message": "Simogatja %s entitást",
+  "key.changed_additions.pat_received": "%s magát simogatja",
+  "key.changed_additions.turn_off_transfur": "Transzfur kikapcsolása",
+  "key.categories.changed_additions": "Changed Additions key bindek",
+  "key.changed_additions.pat_key": "Simogatás",
+
+  "changed_additions.info.is_patable": "Nyomja meg a(z) %1$s gombot a(z) %2$s entitás simogatásához",
+
+  "changed_additions.fight_conscience.success": "§2Megtartotta§r eszméletét! Szép munka!",
+  "changed_additions.struggle.success": "§2Felszabadította§r magát! Szép munka!",
+  "changed_additions.generic.success": "§2Győztél§r! Szép munka!",
+  "changed_additions.fight_conscience.fail": "§4Elvesztette§r eszméletét. Sok szerencsét legközelebb!",
+  "changed_additions.struggle.fail": "§4Vesztettél§r — a küzdelme nem volt elég. Sok szerencsét legközelebb!",
+  "changed_additions.generic.fail": "§4Vesztettél§r. Sok szerencsét legközelebb!",
+
+  "gamerule.changed_additions:fight_to_keep_consciousness": "Harc az eszmélet megtartásáért QTE",
+  "gamerule.changed_additions:fight_to_keep_consciousness.description": "Hagyja, hogy a harc az eszmélet megtartásáért quick time event megtörténjen",
+  "gamerule.changed_additions:doCreatureDiets": "Lények étrendje?",
+  "gamerule.changed_additions:doCreatureDiets.description": "Lehetővé teszi a transzfuráltak számára, hogy több éhség helyreállítást és telítettséget kapjanak, ha jó ételt esznek számukra",
+
+
+  "advancements.pat_advancement.title": "Ez csinál valamit?!",
+  "advancements.pat_advancement.descr": "Annyira jól esett a simogatása, hogy segített valakinek jobban lenni",
+  "advancements.stealth_pats.title": "Rejtett §cszeretet§r",
+  "advancements.stealth_pats.descr": "Simogass meg egy latex lényt álcában, hogy magát elrejtse és őt összezavarja.",
+  "advancements.pants_dyer.title": "Egy kis festékkel",
+  "advancements.pants_dyer.descr": "Színt adtad a rövidnadrágnak. Stílusos és lézerbiztos? Ezzel mindenki nyer.",
+  "advancements.organic_transfur_advancement.title": "Organikus és bolyhos!!",
+  "advancements.organic_transfur_advancement.descr": "Transzfurálja magát organikus formává",
+
+  "text.changed_additions.additionalHealth": "További életerősség \u003d %s",
+  "text.changed_additions.additionalHealth.Hearts": " szív",
+  "text.changed_additions.canGlide/Fly": "Siklórepülés/repülés \u003d %s",
+  "text.changed_additions.jumpStrength": "Ugrás erőssége \u003d %s",
+  "text.changed_additions.land_speed": "Szárazföldi sebesség \u003d %s",
+  "text.changed_additions.legs": "Lábak száma \u003d %s",
+  "text.changed_additions.swim_speed": "Úszási sebesség \u003d %s"
+}
