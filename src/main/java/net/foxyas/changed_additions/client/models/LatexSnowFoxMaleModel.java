@@ -193,7 +193,8 @@ public class LatexSnowFoxMaleModel extends AdvancedHumanoidModel<LatexSnowFoxMal
         this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
-    public void setupHand() {
+    @Override
+    public void setupHand(LatexSnowFoxMale latexSnowFoxMale) {
         this.animator.setupHand();
     }
 
@@ -228,7 +229,7 @@ public class LatexSnowFoxMaleModel extends AdvancedHumanoidModel<LatexSnowFoxMal
     }
 
 	@Override
-	public HumanoidAnimator<LatexSnowFoxMale, LatexSnowFoxMaleModel> getAnimator() {
+	public HumanoidAnimator<LatexSnowFoxMale, LatexSnowFoxMaleModel> getAnimator(LatexSnowFoxMale latexSnowFoxMale) {
 		return animator;
 	}
 }

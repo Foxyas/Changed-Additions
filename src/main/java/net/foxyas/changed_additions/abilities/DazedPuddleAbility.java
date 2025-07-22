@@ -18,7 +18,6 @@ public class DazedPuddleAbility extends SimpleAbility {
         return new TranslatableComponent("ability.changed.puddle");
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
         return new ResourceLocation("changed:textures/abilities/puddle.png");
     }

@@ -39,7 +39,6 @@ public class CarryAbility extends SimpleAbility {
 		return new TranslatableComponent("changed_additions.ability.carry");
 	}
 
-	@Override
 	public ResourceLocation getTexture(IAbstractChangedEntity entity) {
 		return new ResourceLocation("changed_additions:textures/abilities/carry_ability.png");
 	}
