@@ -32,7 +32,6 @@ public class ClawsAbility extends SimpleAbility {
 		}
 	}
 
-	@Override
 	public ResourceLocation getTexture(IAbstractChangedEntity entity) {
 		return new ResourceLocation("changed_additions:textures/abilities/claw.png");
 	}

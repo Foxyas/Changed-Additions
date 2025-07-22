@@ -98,8 +98,7 @@ public class FengQIWolf extends ChangedEntity implements GenderedEntity, PowderS
     public @Nullable List<HairStyle> getValidHairStyles() {
         return HairStyle.Collection.MALE.getStyles();
     }
-
-    @Override
+    
     public Color3 getDripColor() {
         Color3 color = Color3.getColor("#ffffff");
         if (level.random.nextInt(10) > 5) {

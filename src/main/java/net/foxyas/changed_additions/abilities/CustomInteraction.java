@@ -18,7 +18,6 @@ public class CustomInteraction extends AbstractAbility<CustomInteractionInstance
         return new TranslatableComponent("changed_additions.ability.custom_interaction");
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
         return new ResourceLocation("changed_additions:textures/abilities/normal_paw.png");
     }

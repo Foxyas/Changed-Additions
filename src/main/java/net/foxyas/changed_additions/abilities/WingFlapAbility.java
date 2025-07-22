@@ -4,6 +4,7 @@ import net.foxyas.changed_additions.configuration.ChangedAdditionsClientConfigs;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
+import net.ltxprogrammer.changed.client.AbilityColors;
 import net.ltxprogrammer.changed.client.gui.AbstractRadialScreen;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
@@ -25,7 +26,6 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
         super(AbilityInstance::new);
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
         if (entity.getEntity() instanceof Player player){
             AbilityInstance Instance = ProcessTransfur.getPlayerTransfurVariant(player).getAbilityInstance(this);
@@ -42,7 +42,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
     }
 
     //For the next update
-    /*public static Optional<Integer> getColor(AbstractAbilityInstance abilityInstance, int layer) {
+    public static Optional<Integer> getColor(AbstractAbilityInstance abilityInstance, int layer) {
         AbstractRadialScreen.ColorScheme scheme = AbilityColors.getAbilityColors(abilityInstance);
         if (abilityInstance instanceof WingFlapAbility.AbilityInstance Instance) {
             if (Instance.DashPower < 0.3f && layer == 0) {
@@ -54,7 +54,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
             }
         }
         return Optional.empty();
-    }*/
+    }
 
     @Override
     public TranslatableComponent getAbilityName(IAbstractChangedEntity entity) {

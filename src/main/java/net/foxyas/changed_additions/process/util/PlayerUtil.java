@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.process.util;
 
 import net.ltxprogrammer.changed.client.renderer.AdvancedHumanoidRenderer;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
+import net.ltxprogrammer.changed.client.renderer.model.armor.LatexHumanoidArmorModel;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
 import net.ltxprogrammer.changed.init.ChangedRegistry;
@@ -352,23 +353,6 @@ public class PlayerUtil {
             if (renderer instanceof AdvancedHumanoidRenderer<?, ?, ?> ChangedEntityModel) {
                 // Retorna o modelo da entidade
                 return ChangedEntityModel.getModel();
-            }
-            return null; // Retorna null se não for uma entidade viva com um modelo
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        public static AdvancedHumanoidModel<?> getChangedEntityArmorModel(ChangedEntity entity, boolean outerModel) {
-            // Obtém o EntityRendererManager (gerenciador de renderizadores)
-            EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(entity);
-
-            // Verifica se o renderizador é para uma entidade viva (LivingEntity)
-            if (renderer instanceof AdvancedHumanoidRenderer<?, ?, ?> ChangedEntityModel) {
-                if (outerModel) {
-                    // Retorna o modelo da entidade
-                    return ChangedEntityModel.getArmorLayer().getArmorModel(EquipmentSlot.CHEST);
-                }
-                // Retorna o modelo da entidade
-                return ChangedEntityModel.getArmorLayer().getArmorModel(EquipmentSlot.LEGS);
             }
             return null; // Retorna null se não for uma entidade viva com um modelo
         }

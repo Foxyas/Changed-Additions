@@ -24,7 +24,6 @@ public class LeapAbility extends SimpleAbility {
         return new TranslatableComponent("changed_additions.ability.leap");
     }
 
-    @Override
     public ResourceLocation getTexture(IAbstractChangedEntity entity) {
         return new ResourceLocation("changed_additions:textures/abilities/leap_ability.png");
     }

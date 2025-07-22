@@ -196,7 +196,8 @@ public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> implement
         this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
-    public void setupHand() {
+    @Override
+    public void setupHand(FengQIWolf entity) {
         this.animator.setupHand();
     }
 
@@ -230,7 +231,7 @@ public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> implement
         this.LeftArm.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
-    public HumanoidAnimator<FengQIWolf, FengQIWolfModel> getAnimator() {
+    public HumanoidAnimator<FengQIWolf, FengQIWolfModel> getAnimator(FengQIWolf entity) {
         return this.animator;
     }
 }
