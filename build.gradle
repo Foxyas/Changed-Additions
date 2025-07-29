@@ -99,7 +99,14 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.18.2-f40.2.0:v0.14.1") //Changed
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
+        jarJar.ranged(it, "[0.4.1,)")
+    }
+
+    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.18.2-f40.2.0:v0.14.1"){
+        changing = true
+    } //Changed
     runtimeOnly fg.deobf("curse.maven:embeddium-908741:5322305") //Fps Boost
     runtimeOnly fg.deobf("curse.maven:oculus-581495:4578744") //Shaders :D
     runtimeOnly fg.deobf("curse.maven:catalogue-459701:3803098") //Catalogue (Better Mod menu)
