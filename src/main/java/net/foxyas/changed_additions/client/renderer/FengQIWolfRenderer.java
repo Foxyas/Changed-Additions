@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class FengQIWolfRenderer extends AdvancedHumanoidRenderer<FengQIWolf, FengQIWolfModel, ArmorLatexMaleWolfModel<FengQIWolf>> {
 	public FengQIWolfRenderer(EntityRendererProvider.Context context) {
-		super(context, new FengQIWolfModel(context.bakeLayer(FengQIWolfModel.LAYER_LOCATION)), ArmorLatexMaleWolfModel.MODEL_SET, 0.5F);
+		super(context, new FengQIWolfModel(context.bakeLayer(FengQIWolfModel.LAYER_LOCATION)), ArmorLatexMaleWolfModel::new, ArmorLatexMaleWolfModel.INNER_ARMOR, ArmorLatexMaleWolfModel.OUTER_ARMOR, 0.5F);
 		//this.addLayer(new LatexParticlesLayer<>(this, this.getModel()));
 		this.addLayer(TransfurCapeLayer.normalCape(this, context.getModelSet()));
 		this.addLayer(new CustomEyesLayer<>(this, context.getModelSet()));

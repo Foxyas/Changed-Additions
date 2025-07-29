@@ -110,6 +110,5 @@
   "text.changed_additions.jumpStrength": "Jump Strength \u003d %s",
   "text.changed_additions.land_speed": "Land Speed \u003d %s",
   "text.changed_additions.legs": "Amount of Legs \u003d %s",
-  "text.changed_additions.swim_speed": "Swim Speed \u003d %s",
-  "text.changed_additions.miningStrength": "Mining Strength: %s"
+  "text.changed_additions.swim_speed": "Swim Speed \u003d %s"
 }

@@ -4,7 +4,6 @@ import net.foxyas.changed_additions.configuration.ChangedAdditionsClientConfigs;
 import net.ltxprogrammer.changed.ability.AbstractAbility;
 import net.ltxprogrammer.changed.ability.AbstractAbilityInstance;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
-import net.ltxprogrammer.changed.client.AbilityColors;
 import net.ltxprogrammer.changed.client.gui.AbstractRadialScreen;
 import net.ltxprogrammer.changed.init.ChangedSounds;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
@@ -39,21 +38,6 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
         }
 
         return new ResourceLocation("changed_additions:textures/abilities/wing_flap_ability_start.png");
-    }
-
-    //For the next update
-    public static Optional<Integer> getColor(AbstractAbilityInstance abilityInstance, int layer) {
-        AbstractRadialScreen.ColorScheme scheme = AbilityColors.getAbilityColors(abilityInstance);
-        if (abilityInstance instanceof WingFlapAbility.AbilityInstance Instance) {
-            if (Instance.DashPower < 0.3f && layer == 0) {
-                return Optional.of(scheme.foreground().toInt());
-            } else if (Instance.DashPower >= 0.3f && Instance.DashPower < 0.95F && layer == 1) {
-                return Optional.of(scheme.foreground().toInt());
-            } else if (Instance.DashPower >= 0.95F && layer == 2) {
-                return Optional.of(scheme.foreground().toInt());
-            }
-        }
-        return Optional.empty();
     }
 
     @Override

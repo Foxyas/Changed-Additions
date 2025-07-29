@@ -60,7 +60,6 @@ public class ShowExtraTransfurInfoToolTip {
                 double landSpeed = TransfurVariantUtils.GetLandSpeed(form, entity);
                 double jumpStrength = TransfurVariantUtils.GetJumpStrength(form);
                 boolean canFlyOrGlide = TransfurVariantUtils.CanGlideandFly(form);
-                String miningStrength = TransfurVariantUtils.getMiningStrength(form);
                 int index = Math.min(tooltip.size(), 3);
 
                 double extraHp = (hp) / 2.0;
@@ -70,9 +69,6 @@ public class ShowExtraTransfurInfoToolTip {
                                 ? new TextComponent("§7None§r")
                                 : new TextComponent((extraHp > 0 ? "§a+" : "§c") + extraHp + "§r"))
                         .append(new TranslatableComponent("text.changed_additions.additionalHealth.Hearts")));
-
-                index++;
-                tooltip.add(index, new TranslatableComponent("text.changed_additions.miningStrength", miningStrength));
 
                 index++;
                 double landSpeedPct = (landSpeed - 1) * 100;

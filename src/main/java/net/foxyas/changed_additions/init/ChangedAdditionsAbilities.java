@@ -45,9 +45,4 @@ public class ChangedAdditionsAbilities /*extends ChangedAbilities*/ {
         event.addAbility(entityType -> getCanGlideEntites().contains(entityType), WING_FLAP_ABILITY);
     }
 
-    @SubscribeEvent
-    public static void clientLoad(FMLClientSetupEvent event) {
-        ChangedClient.abilityColors.getOrThrow().register(WingFlapAbility::getColor, WING_FLAP_ABILITY.get());
-    }
-
 }

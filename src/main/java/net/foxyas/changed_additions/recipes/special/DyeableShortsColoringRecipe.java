@@ -3,7 +3,7 @@ package net.foxyas.changed_additions.recipes.special;
 import com.google.gson.JsonObject;
 import net.foxyas.changed_additions.init.ChangedAdditionsRecipeTypes;
 import net.foxyas.changed_additions.item.armor.DyeableShorts;
-import net.ltxprogrammer.changed.item.BenignShorts;
+import net.ltxprogrammer.changed.item.BenignPants;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -31,7 +31,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
                 Item item = stack.getItem();
-                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignShorts) {
+                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignPants) {
                     if (hasShorts) return false;
                     hasShorts = true;
                 } else if (item instanceof DyeItem) {
@@ -58,7 +58,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
                 Item item = stack.getItem();
-                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignShorts) {
+                if (item == DYEABLE_SHORTS.get() || item instanceof DyeableShorts || item instanceof BenignPants) {
                     pants = stack;
                 } else if (item instanceof DyeItem dyeItem) {
                     int color = dyeItem.getDyeColor().getTextColor(); // 0xRRGGBB
@@ -80,7 +80,7 @@ public class DyeableShortsColoringRecipe extends CustomRecipe {
             result.setCount(1);
             if (result.getItem() instanceof DyeableLeatherItem dyeableLeatherItem) {
                 dyeableLeatherItem.setColor(result, finalColor);
-            } else if (result.getItem() instanceof BenignShorts) {
+            } else if (result.getItem() instanceof BenignPants) {
                 ItemStack backUp = result;
                 result = new ItemStack(DYEABLE_SHORTS.get(), backUp.getCount());
                 result.setTag(backUp.getTag());

@@ -87,21 +87,6 @@ public class TransfurVariantUtils {
         }
     }
 
-    public static String getMiningStrength(String stringVariant) {
-        try {
-            ResourceLocation form = new ResourceLocation(stringVariant);
-            if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getFormId).anyMatch(form::equals)) {
-                TransfurVariant<?> variant = ChangedRegistry.TRANSFUR_VARIANT.get().getValue(form);
-                return variant == null ? "unknow" : variant.miningStrength.name().toLowerCase(Locale.ROOT);
-            } else {
-                return "unknow";
-            }
-        } catch (Exception e) {
-            //System.err.println("Erro when processing GetLegs: " + e.getMessage());
-            return "unknow";
-        }
-    }
-
 //    public static int GetLegs(String stringvariant) {
 //        try {
 //            ResourceLocation form = new ResourceLocation(stringvariant);

@@ -205,10 +205,6 @@ public class LatexSnowFoxFemaleModel extends AdvancedHumanoidModel<LatexSnowFoxF
 		this.animator.setupHand();
 	}
 
-	public void setupHand(LatexSnowFoxFemale entity) {
-		this.animator.setupHand();
-	}
-
 	public void setupAnim(@NotNull LatexSnowFoxFemale entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.animator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
@@ -240,7 +236,7 @@ public class LatexSnowFoxFemaleModel extends AdvancedHumanoidModel<LatexSnowFoxF
 	}
 
 	@Override
-	public HumanoidAnimator<LatexSnowFoxFemale, LatexSnowFoxFemaleModel> getAnimator(LatexSnowFoxFemale entity) {
+	public HumanoidAnimator<LatexSnowFoxFemale, LatexSnowFoxFemaleModel> getAnimator() {
 		return animator;
 	}
 }

@@ -92,7 +92,7 @@ public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCatEnt
     }
 
     @Override
-    public void setupHand(LatexCalicoCatEntity entity) {
+    public void setupHand() {
         this.animator.setupHand();
     }
 
@@ -127,7 +127,7 @@ public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCatEnt
     }
 
     @Override
-    public HumanoidAnimator<LatexCalicoCatEntity, LatexCalicoCatModel> getAnimator(LatexCalicoCatEntity entity) {
+    public HumanoidAnimator<LatexCalicoCatEntity, LatexCalicoCatModel> getAnimator() {
         return this.animator;
     }
 }

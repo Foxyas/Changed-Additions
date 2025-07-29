@@ -40,7 +40,7 @@ public abstract class AdvancedHumanoidRendererMixin {
 
         if (this.armorLayer != null) {
             try {
-                var armorTorso = this.armorLayer.getArmorModel(entity, EquipmentSlot.CHEST).getTorso();
+                var armorTorso = this.armorLayer.getArmorModel(EquipmentSlot.CHEST).getTorso();
                 ModelPart armorPlantoidsPart = armorTorso.getChild("Plantoids"); // Aqui estava o problema
                 armorPlantoidsPart.visible = !ChangedAdditionsClientConfigs.PLANTOIDS_VARIABLE.get();
             } catch (NoSuchElementException e) {
