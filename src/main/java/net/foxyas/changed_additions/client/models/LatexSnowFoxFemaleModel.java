@@ -200,7 +200,11 @@ public class LatexSnowFoxFemaleModel extends AdvancedHumanoidModel<LatexSnowFoxF
 		this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
 	}
 
-	@Override
+
+	public void setupHand() {
+		this.animator.setupHand();
+	}
+
 	public void setupHand(LatexSnowFoxFemale entity) {
 		this.animator.setupHand();
 	}

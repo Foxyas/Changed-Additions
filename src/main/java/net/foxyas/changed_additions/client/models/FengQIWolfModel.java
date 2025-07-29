@@ -196,8 +196,11 @@ public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> implement
         this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
-    @Override
     public void setupHand(FengQIWolf entity) {
+        this.animator.setupHand();
+    }
+
+    public void setupHand() {
         this.animator.setupHand();
     }
 
