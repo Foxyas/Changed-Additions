@@ -110,6 +110,5 @@
   "text.changed_additions.jumpStrength": "Ugrás erőssége \u003d %s",
   "text.changed_additions.land_speed": "Szárazföldi sebesség \u003d %s",
   "text.changed_additions.legs": "Lábak száma \u003d %s",
-  "text.changed_additions.swim_speed": "Úszási sebesség \u003d %s",
-  "text.changed_additions.miningStrength": "Bányászati erősség: %s"
+  "text.changed_additions.swim_speed": "Úszási sebesség \u003d %s"
 }
