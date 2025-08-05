@@ -44,7 +44,7 @@ public class PatKeyMessage {
 		if (!world.hasChunkAt(entity.blockPosition()))
 			return;
 		if (type == 0) {
-			ProcessPatFeature.ProcessPat(world,x,y,z,entity);
+			ProcessPatFeature.ProcessPat(world, entity);
 		}
 	}
 }

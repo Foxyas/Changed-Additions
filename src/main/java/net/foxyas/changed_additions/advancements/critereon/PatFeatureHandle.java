@@ -141,7 +141,7 @@ public class PatFeatureHandle {
             Player player_ = (Player) player;
             if (target instanceof LivingEntity targetLiving) {
                 ProcessPatFeature.GlobalPatReaction globalPatReactionEvent = new ProcessPatFeature.GlobalPatReaction(world, player_, targetLiving);
-                ChangedAdditionsMod.postModEvent(globalPatReactionEvent);
+                ChangedAdditionsMod.postEvent(globalPatReactionEvent);
             }
 
 
@@ -185,7 +185,9 @@ public class PatFeatureHandle {
 
             ProcessPatFeature.GlobalPatReaction globalPatReactionEvent = new ProcessPatFeature.GlobalPatReaction(world, player, target);
             if (isTargetTransfur && world instanceof ServerLevel serverLevel) {
-                ChangedAdditionsMod.postModEvent(globalPatReactionEvent);
+                if (ChangedAdditionsMod.postEvent(globalPatReactionEvent)){
+                    return;
+                }
                 if (new Random().nextFloat(100) <= 25.5f) {
                     target.heal(6f);
                     GivePatAdvancement(player);

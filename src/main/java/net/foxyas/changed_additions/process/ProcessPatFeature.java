@@ -21,7 +21,7 @@ import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DARK_LATEX
 
 public class ProcessPatFeature {
 
-    public static void ProcessPat(LevelAccessor world, double x, double y, double z, Entity entity) {
+    public static void ProcessPat(LevelAccessor world, Entity entity) {
         if (entity instanceof Player player) {
             //player.displayClientMessage(Component.literal("TEST"), false);
             PatFeatureHandle.execute(world, player);

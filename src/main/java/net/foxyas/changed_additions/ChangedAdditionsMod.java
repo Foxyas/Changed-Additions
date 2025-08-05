@@ -1,9 +1,7 @@
 package net.foxyas.changed_additions;
 
 import net.foxyas.changed_additions.client.renderer.item.LaserItemDynamicRender;
-import net.foxyas.changed_additions.client.renderer.item.StyleItemPredicate;
 import net.foxyas.changed_additions.init.*;
-import net.foxyas.changed_additions.item.armor.TShirtClothing;
 import net.foxyas.changed_additions.variants.ChangedAdditionsTransfurVariants;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,7 +22,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static net.foxyas.changed_additions.init.ChangedAdditionsItems.DYEABLE_SHIRT;
 import static net.foxyas.changed_additions.init.ChangedAdditionsItems.LASER_POINTER;
 
 @Mod("changed_additions")
@@ -55,7 +52,7 @@ public class ChangedAdditionsMod {
         bus.addListener(this::clientLoad); // Client Stuff goes Here
     }
 
-    public static <T extends Event> boolean postModEvent(T event) {
+    public static <T extends Event> boolean postEvent(T event) {
         return MinecraftForge.EVENT_BUS.post(event);
     }
 
