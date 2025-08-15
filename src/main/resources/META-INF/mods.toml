@@ -25,7 +25,7 @@ description="Adds extra content to the Changed Mod by LtxProgrammer but keeping 
 [[dependencies.changed_additions]]
     modId="changed"
     mandatory=true
-    versionRange="[0.14c,)"
+    versionRange="[0.14.1,)"
     ordering="AFTER"
     side="BOTH"
 
