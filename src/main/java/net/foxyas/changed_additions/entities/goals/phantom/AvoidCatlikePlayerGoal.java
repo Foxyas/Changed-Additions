@@ -1,5 +1,6 @@
 package net.foxyas.changed_additions.entities.goals.phantom;
 
+import net.foxyas.changed_additions.mixins.entities.PhantomAccessor;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
@@ -32,6 +33,15 @@ public class AvoidCatlikePlayerGoal extends Goal {
     @Override
     public boolean canContinueToUse() {
         return !isScared;
+    }
+
+    @Override
+    public void start() {
+        super.start();
+        phantom.setTarget(null);
+        if (phantom instanceof PhantomAccessor phantomAccessor) {
+            phantomAccessor.setAttackPhase(Phantom.AttackPhase.CIRCLE);
+        }
     }
 
     private boolean checkNearbyCatlikeEntities() {
