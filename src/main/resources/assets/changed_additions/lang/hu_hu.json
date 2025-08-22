@@ -74,8 +74,8 @@
   "subtitles.untransfur": "Visszatranszfur",
   "subtitles.armor.equip": "Páncél felvétele",
 
-  "key.changed_additions.pat_message": "Simogatja %s entitást",
-  "key.changed_additions.pat_received": "%s magát simogatja",
+  "key.changed_additions.pat_message": "Simogatod %s entitást",
+  "key.changed_additions.pat_received": "%s téged simogat",
   "key.changed_additions.turn_off_transfur": "Transzfur kikapcsolása",
   "key.categories.changed_additions": "Changed Additions key bindek",
   "key.changed_additions.pat_key": "Simogatás",
