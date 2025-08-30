@@ -104,7 +104,7 @@ dependencies {
         jarJar.ranged(it, "[0.4.1,)")
     }
 
-    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.18.2-f40.2.0:v0.14.1b"){
+    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.18.2-f40.2.0:v0.14.1c"){
         changing = true
     } //Changed
     runtimeOnly fg.deobf("curse.maven:embeddium-908741:5322305") //Fps Boost

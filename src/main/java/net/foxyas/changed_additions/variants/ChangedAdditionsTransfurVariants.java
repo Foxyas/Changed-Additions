@@ -94,37 +94,10 @@ public class ChangedAdditionsTransfurVariants {
 
     private static <T extends ChangedEntity> RegistryObject<TransfurVariant<T>> register(String name, TransfurVariant.Builder<T> builder) {
         Objects.requireNonNull(builder);
-        /*
-        builder.addAbility(entityType -> {
-            if (entityType.is(ChangedTags.EntityTypes.LATEX)
-                    && !entityType.is(ChangedTags.EntityTypes.PARTIAL_LATEX)) {
-                return ChangedAdditionsAbilities.SOFTEN_ABILITY.get();
-            }
-            return null;
-        });
-        builder.addAbility(entityType -> {
-            if (entityType.is(ChangedAdditionsTags.EntityTypes.DRAGONS_ENTITIES)) {
-                return ChangedAdditionsAbilities.WING_FLAP_ABILITY.get();
-            }
-            return null;
-        });*/
-
         return REGISTRY.register(name, builder::build);
     }
 
     private static <T extends ChangedEntity> RegistryObject<TransfurVariant<T>> register(String name, Supplier<TransfurVariant.Builder<T>> builder) {
-        return REGISTRY.register(name, () -> builder.get()/*.addAbility(entityType -> {
-                    if (entityType.is(ChangedTags.EntityTypes.LATEX)
-                            && !entityType.is(ChangedTags.EntityTypes.PARTIAL_LATEX)) {
-                        return ChangedAdditionsAbilities.SOFTEN_ABILITY.get();
-                    }
-                    return null;
-                }).addAbility(entityType -> {
-                    if (entityType.is(ChangedAdditionsTags.EntityTypes.DRAGONS_ENTITIES)) {
-                        return ChangedAdditionsAbilities.SOFTEN_ABILITY.get();
-                    }
-                    return null;
-                })*/
-                .build());
+        return REGISTRY.register(name, () -> builder.get().build());
     }
 }
