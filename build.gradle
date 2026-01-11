@@ -78,7 +78,7 @@ repositories {
 
     maven {
         name = "Changed"
-        url = "https://raw.githubusercontent.com/LtxProgrammer/Changed-Minecraft-Mod/master/mcmodsrepo/"
+        url = "https://raw.githubusercontent.com/LtxProgrammer/Changed-Minecraft-Mod//0.15-features/mcmodsrepo/"
     }
 
     /*
