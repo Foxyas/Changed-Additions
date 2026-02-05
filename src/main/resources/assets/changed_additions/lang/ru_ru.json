@@ -1,0 +1,115 @@
+{
+  "item.changed_additions.ammonium_chloride": "Хлорид аммония",
+  "item.changed_additions.anti_latex_base": "Антилатексная основа",
+  "item.changed_additions.biomass": "Биомасса",
+  "item.changed_additions.dyeable_shorts": "Окрашиваемые шорты",
+  "item.changed_additions.dyeable_shirt": "Окрашиваемая футболка",
+  "item.changed_additions.laethin_syringe": "Шприц с лаэтином",
+  "item.changed_additions.laser_pointer": "Лазерная указка",
+
+  "item.changed_additions.latex_snow_fox_female_spawn_egg": "Яйцо призыва Латексная полярная лисица",
+  "item.changed_additions.latex_snow_fox_male_spawn_egg": "Яйцо призыва Латексный полярный лис",
+  "item.changed_additions.feng_qi_wolf_spawn_egg": "Лис Фэн Ци",
+  "item.changed_additions.latex_kitsune_female_spawn_egg": "Яйцо призыва Латексный кицунэ - самка",
+  "item.changed_additions.latex_kitsune_male_spawn_egg": "Яйцо призыва Латексный кицунэ - самец",
+  "item.changed_additions.latex_calico_cat_spawn_egg": "Яйцо призыва Латексный калико-кот",
+
+  "item.changed_additions.dark_latex_coat": "Плащ из тёмного латекса",
+  "item.changed_additions.dark_latex_coat_cap": "Шапка из тёмного латекса",
+  "item.changed_additions.golden_orange": "Золотой апельсин",
+
+  "block.changed_additions.neofuser": "Нео-смешиватель",
+
+  "entity.changed_additions.latex_snow_fox_male": "Латексный полярный лис",
+  "entity.changed_additions.latex_snow_fox_female": "Латексная полярная лисица",
+  "entity.changed_additions.feng_qi_wolf": "Лис Фэн Ци",
+  "entity.changed_additions.latex_kitsune_female": "Латексный кицунэ - самка",
+  "entity.changed_additions.latex_kitsune_male": "Латексный кицунэ - самец",
+  "entity.changed_additions.latex_calico_cat": "Латексный калико-кот",
+
+  "enchantment.changed_additions.latex_solvent": "Растворитель латекса",
+  "enchantment.changed_additions.solvent.desc": "Наносит больше урона латексным существам",
+
+  "effect.changed_additions.latex_solvent": "Растворитель латекса",
+  "effect.changed_additions.latex_solvent.description": "Наносит урон латексным существам, причём урон увеличивается с усилением эффекта.",
+
+  "itemGroup.changed_additions": "Changed Additions",
+
+  "changed_additions.gui.recipe_progress": "Скорость прогресса: %1$s",
+
+  "changed_additions.commands.getMaxSizeTolerance": "Предел изменения размера: %s",
+  "changed_additions.commands.setBpiSize.fail": "При попытке изменить размер игрока произошла ошибка",
+  "changed_additions.commands.setBpiSize.success": "Размер успешно изменён. Текущий размер: %s",
+  "changed_additions.commands.setMaxBPISize.success": "Изменён предел изменения размера. Теперь он составляет %s",
+  "changed_additions.commands.setMaxBPISize.success_but_to_high": "%s превышает значение в 100, и вследствие этого могут возникнуть непредвиденные лаги и вылеты, а также прочие ошибки",
+  "changed_additions.commands.setQuickTimeEventForPlayer.success": "Активировано QTE (%s / %s) игроку %s на %s тиков.",
+  "changed_additions.commands.setQuickTimeEventForPlayer.fail": "Некорректные параметры QTE.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.have": "Игрок %s сейчас имеет активный QTE.",
+  "changed_additions.commands.getQuickTimeEventForPlayer.details": "Тип: %s, Мини-игра: %s, Осталось тиков: %s , Прогресс: %s",
+  "changed_additions.commands.getQuickTimeEventForPlayer.none": "Игрок %s не имеет никаких активных QTE.",
+
+
+  "changed_additions.ability.carry": "Переноска",
+  "changed_additions.ability.claws": "Способность когтей",
+  "changed_additions.ability.claws.desc": "Активируйте свои кошачьи когти и наносите размашистые удары своими §mруками§r лапами.",
+  "changed_additions.ability.custom_interaction": "Вариант особого взаимодействия",
+  "changed_additions.ability.leap": "Прыжок",
+  "changed_additions.ability.soften": "Смягчение",
+  "changed_additions.ability.soften.description": "Позволяет игроку проходить через блоки с отверстиями",
+  "changed_additions.ability.wing_flap": "Взмах крыльями",
+  "changed_additions.ability.teleport": "Телепортация",
+
+  "changed_additions.warn.cant_carry": "Вы пытаетесь поднять %1$s, но это слишком тяжело.",
+
+  "death.attack.latex_solvent": "%1$s был растворён",
+  "death.attack.latex_solvent.player": "%1$s был растворён %2$s",
+  "death.attack.conscience_lost": "%1$s потерял сознание",
+  "death.attack.conscience_lost.player": "%1$s потерял сознание из-за %2$s",
+
+
+  "changed_additions.jei_descriptions.dyeable_shorts": "Сделано из какого-то тряпья\n§oПредмет можно покрасить§r",
+  "changed_additions.jei_descriptions.dyeable_shirt": "§oПредмет можно покрасить§r",
+  "changed_additions.jei_descriptions.laser_pointer": "§oМожно изменить цвет§r",
+
+  "subtitles.untransfur": "Отмена трансфурмации",
+  "subtitles.armor.equip": "Мягкая броня экипирована",
+
+  "key.changed_additions.pat_message": "Вы погладили %s",
+  "key.changed_additions.pat_received": "%s погладил вас",
+  "key.changed_additions.turn_off_transfur": "Отключить трансфурмацию",
+  "key.categories.changed_additions": "Клавиши Changed Additions",
+  "key.changed_additions.pat_key": "Погладить",
+
+  "changed_additions.info.is_patable": "Нажмите %1$s, чтобы погладить %2$s",
+
+  "changed_additions.fight_conscience.success": "Вы §2сохранили§r ваше сознание! Отличная работа!",
+  "changed_additions.struggle.success": "Вы §2освободили§r себя! Хорошая работа!",
+  "changed_additions.generic.success": "Вы §2победили§r! Хорошая работа!",
+  "changed_additions.fight_conscience.fail": "Вы §4потеряли§r ваше сознание. Удачи в следующий раз!",
+  "changed_additions.struggle.fail": "Вы §4проиграли§r — ваших стараний было недостаточно. Удачи в следующий раз!",
+  "changed_additions.generic.fail": "Вы §4проиграли§r. Удачи в следующий раз!",
+
+  "gamerule.changed_additions:fight_to_keep_consciousness": "Борьба за сохранение сознания QTE",
+  "gamerule.changed_additions:fight_to_keep_consciousness.description": "Включает возможность сохранить сознание при условии, что вы сможете победить в QTE",
+  "gamerule.changed_additions:doCreatureDiets": "Рацион существ?",
+  "gamerule.changed_additions:doCreatureDiets.description": "Позволяет трансфурмированным существам получать больше очков сытости при поедании подходящей еды",
+
+
+  "advancements.pat_advancement.title": "Это работает?!",
+  "advancements.pat_advancement.descr": "Вы настолько хорошо гладите существ, что это помогло кое-кому стать чуточку лучше",
+  "advancements.stealth_pats.title": "Скрытая §cпривязанность§r",
+  "advancements.stealth_pats.descr": "Погладьте латексное существо, будучи одетым в плащ из чёрного латекса, чтобы скрыться и запутать его.",
+  "advancements.pants_dyer.title": "С каплей краски",
+  "advancements.pants_dyer.descr": "Вы добавили цвета этим шортам. Стильно и безопасно для лазеров? Двойная победа.",
+  "advancements.organic_transfur_advancement.title": "Органично и пушисто!!",
+  "advancements.organic_transfur_advancement.descr": "Трансфурируйте себя в органическую форму",
+
+  "text.changed_additions.additionalHealth": "Дополнительное здоровье \u003d %s",
+  "text.changed_additions.additionalHealth.Hearts": " Сердец",
+  "text.changed_additions.canGlide/Fly": "Планирование/Полёт \u003d %s",
+  "text.changed_additions.jumpStrength": "Сила прыжка \u003d %s",
+  "text.changed_additions.land_speed": "Скорость на суше \u003d %s",
+  "text.changed_additions.legs": "Количество ног \u003d %s",
+  "text.changed_additions.swim_speed": "Скорость плавания \u003d %s",
+  "text.changed_additions.miningStrength": "Сила копания: %s"
+}
