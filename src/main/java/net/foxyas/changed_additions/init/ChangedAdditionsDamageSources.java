@@ -4,6 +4,7 @@ import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.foxyas.changed_additions.process.util.ParticlesUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.ChangedEntity;
+import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
 import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.ltxprogrammer.changed.init.ChangedTags;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
@@ -104,10 +105,11 @@ public class ChangedAdditionsDamageSources {
             float speed = 0.05f;
 
             if (entity instanceof ChangedEntity changed) {
-                if (changed.getSelfVariant() == null) {
+                TransfurVariant<?> selfVariant = changed.getSelfVariant();
+                if (selfVariant == null) {
                     return;
                 }
-                var colors = changed.getSelfVariant().getColors();
+                var colors = selfVariant.getColors();
                 var color = changed.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
                 ParticlesUtil.sendParticles(
@@ -140,7 +142,11 @@ public class ChangedAdditionsDamageSources {
             float speed = 0.05f;
 
             if (entity instanceof ChangedEntity changed) {
-                var colors = changed.getSelfVariant().getColors();
+                TransfurVariant<?> selfVariant = changed.getSelfVariant();
+                if (selfVariant == null) {
+                    return;
+                }
+                var colors = selfVariant.getColors();
                 var color = changed.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
                 ParticlesUtil.sendParticles(
