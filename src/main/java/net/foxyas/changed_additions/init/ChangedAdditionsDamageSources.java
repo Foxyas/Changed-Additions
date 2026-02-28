@@ -102,7 +102,11 @@ public class ChangedAdditionsDamageSources {
             float speed = 0.05f;
 
             if (entity instanceof ChangedEntity changed) {
-                var colors = changed.getSelfVariant().getColors();
+                TransfurVariant<?> selfVariant = changed.getSelfVariant();
+                if (selfVariant == null) {
+                    return;
+                }
+                var colors = selfVariant.getColors();
                 var color = changed.getRandom().nextBoolean() ? colors.getFirst() : colors.getSecond();
 
                 ParticlesUtil.sendParticles(
