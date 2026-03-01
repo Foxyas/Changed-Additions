@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = ServerTransfurVariantInstance.class, remap = false)
 public class ServerTransfurVariantInstanceMixin {
     
-    @Inject(method = "tick",
+    @Inject(method = "tickScare",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/ai/navigation/PathNavigation;moveTo(Lnet/minecraft/world/level/pathfinder/Path;D)Z",
@@ -23,7 +23,7 @@ public class ServerTransfurVariantInstanceMixin {
         }
     }
 
-    @Inject(method = "tick",
+    @Inject(method = "tickScare",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/ai/navigation/PathNavigation;setSpeedModifier(D)V",
