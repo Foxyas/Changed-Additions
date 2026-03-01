@@ -11,7 +11,7 @@ import net.ltxprogrammer.changed.client.renderer.model.armor.ArmorLatexMaleWolfM
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class LatexSnowFoxMaleRenderer extends AdvancedHumanoidRenderer<LatexSnowFoxMale, LatexSnowFoxMaleModel, ArmorLatexMaleWolfModel<LatexSnowFoxMale>> {
+public class LatexSnowFoxMaleRenderer extends AdvancedHumanoidRenderer<LatexSnowFoxMale, LatexSnowFoxMaleModel> {
 	public LatexSnowFoxMaleRenderer(EntityRendererProvider.Context context) {
 		super(context, new LatexSnowFoxMaleModel(context.bakeLayer(LatexSnowFoxMaleModel.LAYER_LOCATION)), ArmorLatexMaleWolfModel.MODEL_SET, 0.5F);
 		//this.addLayer(new LatexParticlesLayer<>(this, this.getModel()));

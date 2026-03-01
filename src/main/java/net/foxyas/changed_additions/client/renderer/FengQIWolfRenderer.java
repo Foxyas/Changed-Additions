@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class FengQIWolfRenderer extends AdvancedHumanoidRenderer<FengQIWolf, FengQIWolfModel, ArmorLatexMaleWolfModel<FengQIWolf>> {
+public class FengQIWolfRenderer extends AdvancedHumanoidRenderer<FengQIWolf, FengQIWolfModel> {
     public FengQIWolfRenderer(EntityRendererProvider.Context context) {
         super(context, new FengQIWolfModel(context.bakeLayer(FengQIWolfModel.LAYER_LOCATION)), ArmorLatexMaleWolfModel.MODEL_SET, 0.5F);
         //this.addLayer(new LatexParticlesLayer<>(this, this.getModel()));

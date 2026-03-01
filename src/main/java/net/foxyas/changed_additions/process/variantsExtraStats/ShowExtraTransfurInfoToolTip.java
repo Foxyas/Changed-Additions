@@ -48,7 +48,7 @@ public class ShowExtraTransfurInfoToolTip {
                 double hp = TransfurVariantUtils.GetExtraHp(form, entity);
                 double swimSpeed = TransfurVariantUtils.GetSwimSpeed(form, entity);
                 double landSpeed = TransfurVariantUtils.GetLandSpeed(form, entity);
-                double jumpStrength = TransfurVariantUtils.GetJumpStrength(form);
+                double jumpStrength = TransfurVariantUtils.GetJumpStrength(form, entity);
                 boolean canFlyOrGlide = TransfurVariantUtils.CanGlideAndFly(form);
                 String miningStrength = TransfurVariantUtils.getMiningStrength(form);
                 int index = Math.min(tooltip.size(), 3);

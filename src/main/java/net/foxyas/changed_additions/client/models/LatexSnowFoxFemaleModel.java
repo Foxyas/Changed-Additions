@@ -10,7 +10,6 @@ import net.foxyas.changed_additions.entities.LatexSnowFoxFemale;
 import net.ltxprogrammer.changed.client.renderer.animate.AnimatorPresets;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
-import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModelInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -20,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class LatexSnowFoxFemaleModel extends AdvancedHumanoidModel<LatexSnowFoxFemale> implements AdvancedHumanoidModelInterface<LatexSnowFoxFemale, LatexSnowFoxFemaleModel> {
+public class LatexSnowFoxFemaleModel extends AdvancedHumanoidModel<LatexSnowFoxFemale> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ChangedAdditionsMod.modResource("latex_snow_fox_female"), "main");
 	private final ModelPart RightLeg;
@@ -197,7 +196,7 @@ public class LatexSnowFoxFemaleModel extends AdvancedHumanoidModel<LatexSnowFoxF
 	}
 
 	public void prepareMobModel(LatexSnowFoxFemale p_102861_, float p_102862_, float p_102863_, float p_102864_) {
-		this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
+		super.prepareMobModel(p_102861_, p_102862_, p_102863_, p_102864_);
 	}
 
 	public void setupHand(LatexSnowFoxFemale latexSnowFoxFemale) {

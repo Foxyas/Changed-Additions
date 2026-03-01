@@ -204,7 +204,7 @@ public class WingFlapAbility extends AbstractAbility<WingFlapAbility.AbilityInst
 
         private static void playSound(Player player) {
             if (!player.level().isClientSide()) {
-                player.level().playSound(null, player.blockPosition(), ChangedSounds.BOW2.get(),
+                player.level().playSound(null, player.blockPosition(), ChangedSounds.CARDBOARD_BOX_OPEN.get(),
                         player.getSoundSource(), 2.5F, 1.0F);
             }
         }

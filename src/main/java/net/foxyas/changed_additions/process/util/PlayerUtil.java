@@ -383,7 +383,7 @@ public class PlayerUtil {
             EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(entity);
 
             // Verifica se o renderizador é para uma entidade viva (LivingEntity)
-            if (renderer instanceof AdvancedHumanoidRenderer<?, ?, ?> ChangedEntityModel) {
+            if (renderer instanceof AdvancedHumanoidRenderer<?, ?> ChangedEntityModel) {
                 // Retorna o modelo da entidade
                 return ChangedEntityModel.getModel();
             }
@@ -391,9 +391,9 @@ public class PlayerUtil {
         }
 
         @OnlyIn(Dist.CLIENT)
-        public static AdvancedHumanoidRenderer<?, ?, ?> getChangedEntityRender(ChangedEntity entity) {
+        public static AdvancedHumanoidRenderer<?, ?> getChangedEntityRender(ChangedEntity entity) {
             EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(entity);
-            if (renderer instanceof AdvancedHumanoidRenderer<?, ?, ?> ChangedEntityModel) {
+            if (renderer instanceof AdvancedHumanoidRenderer<?, ?> ChangedEntityModel) {
                 return ChangedEntityModel;
             }
             return null;

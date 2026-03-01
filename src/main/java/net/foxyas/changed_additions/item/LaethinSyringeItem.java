@@ -60,7 +60,7 @@ public class LaethinSyringeItem extends Item implements SpecializedAnimations {
         }
 
         UntransfurPlayer(player);
-        ChangedSounds.broadcastSound(entity, ChangedSounds.SWORD1, 1.0F, 1.0F);
+        ChangedSounds.broadcastSound(entity, ChangedSounds.SYRINGE_PRICK, 1.0F, 1.0F);
         assert player != null;
         if (!player.isCreative()) {
             stack.shrink(1);

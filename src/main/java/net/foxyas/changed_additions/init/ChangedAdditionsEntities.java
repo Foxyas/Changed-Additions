@@ -3,9 +3,9 @@ package net.foxyas.changed_additions.init;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.entities.*;
 import net.foxyas.changed_additions.entities.simple.LatexCalicoCat;
-import net.ltxprogrammer.changed.init.ChangedMobCategories;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,21 +18,21 @@ import net.minecraftforge.registries.RegistryObject;
 public class ChangedAdditionsEntities {
 	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ChangedAdditionsMod.MODID);
 	public static final RegistryObject<EntityType<FengQIWolf>> FENG_QI_WOLF = register("feng_qi_wolf",
-			EntityType.Builder.<FengQIWolf>of(FengQIWolf::new, ChangedMobCategories.CHANGED)
+			EntityType.Builder.<FengQIWolf>of(FengQIWolf::new, MobCategory.MONSTER)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(FengQIWolf::new)
 					.sized(0.7f, 1.93f));
 
 	public static final RegistryObject<EntityType<LatexSnowFoxMale>> LATEX_SNOW_FOX_MALE  = register("latex_snow_fox_male",
-			EntityType.Builder.<LatexSnowFoxMale>of(LatexSnowFoxMale::new, ChangedMobCategories.CHANGED)
+			EntityType.Builder.<LatexSnowFoxMale>of(LatexSnowFoxMale::new, MobCategory.MONSTER)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(LatexSnowFoxMale::new)
 					.sized(0.7f, 1.93f));
 
 	public static final RegistryObject<EntityType<LatexSnowFoxFemale>> LATEX_SNOW_FOX_FEMALE  = register("latex_snow_fox_female",
-			EntityType.Builder.<LatexSnowFoxFemale>of(LatexSnowFoxFemale::new, ChangedMobCategories.CHANGED)
+			EntityType.Builder.<LatexSnowFoxFemale>of(LatexSnowFoxFemale::new, MobCategory.MONSTER)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(LatexSnowFoxFemale::new)
@@ -40,7 +40,7 @@ public class ChangedAdditionsEntities {
 
 
 	public static final RegistryObject<EntityType<LatexKitsuneMaleEntity>> LATEX_KITSUNE_MALE = register("latex_kitsune_male",
-			EntityType.Builder.<LatexKitsuneMaleEntity>of(LatexKitsuneMaleEntity::new, ChangedMobCategories.CHANGED)
+			EntityType.Builder.<LatexKitsuneMaleEntity>of(LatexKitsuneMaleEntity::new, MobCategory.MONSTER)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(LatexKitsuneMaleEntity::new)
@@ -49,7 +49,7 @@ public class ChangedAdditionsEntities {
 					.sized(0.7f, 1.93f));
 
 	public static final RegistryObject<EntityType<LatexKitsuneFemaleEntity>> LATEX_KITSUNE_FEMALE = register("latex_kitsune_female",
-			EntityType.Builder.<LatexKitsuneFemaleEntity>of(LatexKitsuneFemaleEntity::new, ChangedMobCategories.CHANGED)
+			EntityType.Builder.<LatexKitsuneFemaleEntity>of(LatexKitsuneFemaleEntity::new, MobCategory.MONSTER)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(LatexKitsuneFemaleEntity::new)
@@ -58,7 +58,7 @@ public class ChangedAdditionsEntities {
 					.sized(0.7f, 1.93f));
 
 	public static final RegistryObject<EntityType<LatexCalicoCat>> LATEX_CALICO_CAT = register("latex_calico_cat",
-			EntityType.Builder.<LatexCalicoCat>of(LatexCalicoCat::new, ChangedMobCategories.CHANGED)
+			EntityType.Builder.<LatexCalicoCat>of(LatexCalicoCat::new, MobCategory.MONSTER)
 					.setShouldReceiveVelocityUpdates(true)
 					.setTrackingRange(64).setUpdateInterval(3)
 					.setCustomClientFactory(LatexCalicoCat::new)

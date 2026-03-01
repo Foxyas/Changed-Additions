@@ -86,7 +86,7 @@ public class DyeableShorts extends ClothingItem implements DyeableLeatherItem {
     }
 
     public SoundEvent getEquipSound() {
-        return ChangedSounds.EQUIP3.get();
+        return ChangedSounds.SHORTS_EQUIP.get();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class DyeableShorts extends ClothingItem implements DyeableLeatherItem {
     }
 
     public SoundEvent getBreakSound(ItemStack itemStack) {
-        return ChangedSounds.SLASH10.get();
+        return ChangedSounds.SHORTS_BREAK.get();
     }
 
     @Override

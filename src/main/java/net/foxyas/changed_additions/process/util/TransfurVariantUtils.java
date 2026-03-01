@@ -2,6 +2,7 @@ package net.foxyas.changed_additions.process.util;
 
 import net.ltxprogrammer.changed.entity.ChangedEntity;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariant;
+import net.ltxprogrammer.changed.init.ChangedAttributes;
 import net.ltxprogrammer.changed.init.ChangedRegistry;
 import net.ltxprogrammer.changed.init.ChangedTransfurVariants;
 import net.ltxprogrammer.changed.util.Cacheable;
@@ -132,17 +133,24 @@ public class TransfurVariantUtils {
 		}
 	}
 
-	public static float GetJumpStrength(String stringVariant) {
+	public static float GetJumpStrength(String stringVariant, Player player) {
 		try {
 			ResourceLocation form = ResourceLocation.parse(stringVariant);
 			if (TransfurVariant.getPublicTransfurVariants().map(TransfurVariant::getFormId).anyMatch(form::equals)) {
 				TransfurVariant<?> variant = ChangedRegistry.TRANSFUR_VARIANT.get().getValue(form);
-				return variant == null ? 0f : variant.jumpStrength;
+				ChangedEntity InstanceEntity = null;
+				if (variant != null) {
+					InstanceEntity = variant.getEntityType().create(player.level());
+				}
+				assert InstanceEntity != null;
+				InstanceEntity.setUnderlyingPlayer(player);
+				var Instance = UniversalDist.createVariantFor(variant,player);
+				return (float) (InstanceEntity.getAttributeValue(ChangedAttributes.JUMP_STRENGTH.get()));
 			} else {
 				return 0f;
 			}
 		} catch (Exception e) {
-			//System.err.println("Erro when processing GetJumpStrength: " + e.getMessage());
+			//System.err.println("Erro when processing GetSwimSpeed: " + e.getMessage());
 			return 0f;
 		}
 	}

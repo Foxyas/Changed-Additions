@@ -7,7 +7,6 @@ import net.foxyas.changed_additions.entities.FengQIWolf;
 import net.ltxprogrammer.changed.client.renderer.animate.AnimatorPresets;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
-import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModelInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> implements AdvancedHumanoidModelInterface<FengQIWolf, FengQIWolfModel> {
+public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ChangedAdditionsMod.modResource("foxta_fox"), "main");
     private final ModelPart RightLeg;
     private final ModelPart LeftLeg;
@@ -192,8 +191,8 @@ public class FengQIWolfModel extends AdvancedHumanoidModel<FengQIWolf> implement
         return LayerDefinition.create(meshdefinition, 96, 96);
     }
 
-    public void prepareMobModel(FengQIWolf p_102861_, float p_102862_, float p_102863_, float p_102864_) {
-        this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
+    public void prepareMobModel(@NotNull FengQIWolf p_102861_, float p_102862_, float p_102863_, float p_102864_) {
+        super.prepareMobModel(p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
     public void setupHand(FengQIWolf fengQIWolf) {

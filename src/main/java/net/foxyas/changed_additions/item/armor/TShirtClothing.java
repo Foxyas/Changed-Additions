@@ -84,7 +84,7 @@ public class TShirtClothing extends DyeableClothingItem {
     }
 
     public SoundEvent getEquipSound() {
-        return ChangedSounds.EQUIP3.get();
+        return ChangedSounds.SHIRT_EQUIP.get();
     }
 
     @Override

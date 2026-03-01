@@ -1,6 +1,5 @@
 package net.foxyas.changed_additions.commands;
 
-import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -13,28 +12,21 @@ import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTime
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEventSequenceType;
 import net.foxyas.changed_additions.process.quickTimeEvents.commonSide.QuickTimeEventType;
 import net.ltxprogrammer.changed.Changed;
-import net.ltxprogrammer.changed.block.AbstractLatexBlock;
 import net.ltxprogrammer.changed.entity.BasicPlayerInfo;
 import net.ltxprogrammer.changed.entity.beast.AbstractDarkLatexEntity;
-import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.server.command.EnumArgument;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,23 +38,6 @@ public class ChangedAdditionsCommands {
         final LiteralArgumentBuilder<CommandSourceStack> literalBuilder = Commands.literal("changed-additions");
         var ChangedAdditionsCommandNode = event.getDispatcher().register(literalBuilder);
 
-        LiteralArgumentBuilder<CommandSourceStack> setMaxBPISize = literalBuilder.then(Commands.literal("setMaxBPISize").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
-                .then(Commands.argument("MaxSize", DoubleArgumentType.doubleArg())
-                        .executes(arguments -> {
-                                    ServerLevel world = arguments.getSource().getLevel();
-                                    double amount = DoubleArgumentType.getDouble(arguments, "MaxSize");
-                                    return SizeManipulator.MaxSizeChange(arguments, amount);
-                                }
-                        )
-                )
-        );
-        var setMaxBPICommandNode = event.getDispatcher().register(setMaxBPISize);
-
-        LiteralArgumentBuilder<CommandSourceStack> getMaxBPISize = literalBuilder.then(Commands.literal("getMaxSizeTolerance").requires(source -> !source.getLevel().isClientSide)
-                .executes(SizeManipulator::SendMaxSizeTolerance
-                )
-        );
-        var getMaxSizeToleranceCommandNode = event.getDispatcher().register(getMaxBPISize);
 
         /*LiteralArgumentBuilder<CommandSourceStack> BlocksHandle = literalBuilder.requires(source -> !source.getLevel().isClientSide && source.hasPermission(2)).then(Commands.literal("BlocksHandle").requires(source -> !source.getLevel().isClientSide && source.hasPermission(2))
                 .then(Commands.literal("setBlocksInfectionType")
@@ -248,7 +223,6 @@ public class ChangedAdditionsCommands {
 
         //Short Commands
         event.getDispatcher().register(Commands.literal("ca").redirect(ChangedAdditionsCommandNode));
-        event.getDispatcher().register(Commands.literal("ca-MaxBPI").requires(source -> source.hasPermission(2)).redirect(setMaxBPICommandNode.getChild("setMaxBPISize")));
         event.getDispatcher().register(Commands.literal("ca-QTE").requires(source -> source.hasPermission(2)).redirect(QuickTimeEventsHandleCommandNode.getChild("QuickTimeEventsHandle")));
         //event.getDispatcher().register(Commands.literal("ca-setBlocksInfection").requires(source -> source.hasPermission(2)).redirect(BlockInfectionHandleCommandNode.getChild("BlocksHandle").getChild("setBlocksInfectionType")));
     }
@@ -307,22 +281,15 @@ public class ChangedAdditionsCommands {
 
     public static class SizeManipulator {
 
-        public static float getSize(Player player, float size, boolean OverrideSize) {
-            float SIZE_TOLERANCE = BasicPlayerInfo.getSizeTolerance();
-            if (size < 1.0f - SIZE_TOLERANCE) {
-                player.displayClientMessage(Component.literal("Size value is too low: " + size + ", The Size Value is going to be auto set to limit").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too Low Warn
-            } else if (size > 1.0f + SIZE_TOLERANCE) {
-                player.displayClientMessage(Component.literal("Size value is too high: " + size + ", The Size Value is going to be auto set to max").withStyle((style -> style.withColor(ChatFormatting.YELLOW).withBold(true))), false); // Too High Warn
+        private static float getSize(Player player, float size, boolean overrideSize) {
+            float MINIMUM_SIZE_TOLERANCE = BasicPlayerInfo.getSizeMinimum(player);
+            float MAX_SIZE_TOLERANCE = BasicPlayerInfo.getSizeMaximum(player);
+            if (size < MINIMUM_SIZE_TOLERANCE) {
+                ChangedAdditionsMod.LOGGER.atWarn().log("Size value is too low: {}, The Size Value will probably to be auto set to 0.95", size); // Too Low Warn
+            } else if (size > MAX_SIZE_TOLERANCE) {
+                ChangedAdditionsMod.LOGGER.atWarn().log("Size value is too high: {}, The Size Value will probably to be auto set to 1.05", size); // Too High Warn
             }
-            return OverrideSize ? Mth.clamp(size, 1.0f - SIZE_TOLERANCE, 1.0f + SIZE_TOLERANCE) : size;
-
-            /*
-             * if(newSize < 1.0f - SIZE_TOLERANCE) {
-             *		player.displayClientMessage(Component.literal ("Size value is too low: " + newSize + ", The Size Value is going to be auto set to 0.95"),true);
-             *	} else if (newSize > 1.0f + SIZE_TOLERANCE) {
-             *		player.displayClientMessage(Component.literal ("Size value is too high: " + newSize + ", The Size Value is going to be auto set to 1.05"),true);
-             *	}
-             */
+            return overrideSize ? Mth.clamp(size, MINIMUM_SIZE_TOLERANCE, MAX_SIZE_TOLERANCE) : size;
         }
 
         public static int SizeChange(CommandContext<CommandSourceStack> arguments, Entity entity, float amount) {
@@ -340,34 +307,6 @@ public class ChangedAdditionsCommands {
             }
         }
 
-
-        public static int MaxSizeChange(CommandContext<CommandSourceStack> arguments, double amount) {
-            try {
-                Changed.config.server.bpiSizeTolerance.set(amount); // Change Size
-                arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setMaxBPISize.success", amount), false);
-                if (amount < 0) {
-                    arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setMaxBPISize.success_but_to_low", amount), false);
-                }
-                if (amount > 100) {
-                    arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.setMaxBPISize.success_but_to_high", amount), false);
-                }
-                return 1;
-            } catch (Exception exception) {
-                arguments.getSource().sendFailure(Component.literal(exception.getMessage()));
-                return 0;
-            }
-        }
-
-        public static int SendMaxSizeTolerance(CommandContext<CommandSourceStack> arguments) {
-            try {
-                double value = Changed.config.server.bpiSizeTolerance.get();
-                arguments.getSource().sendSuccess(() -> Component.translatable("changed_additions.commands.getMaxSizeTolerance", value), false);
-                return 1;
-            } catch (Exception e) {
-                arguments.getSource().sendFailure(Component.translatable(e.getMessage()));
-                return 0;
-            }
-        }
     }
 
 

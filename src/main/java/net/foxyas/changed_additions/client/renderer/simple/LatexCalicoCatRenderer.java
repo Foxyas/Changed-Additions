@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class LatexCalicoCatRenderer extends AdvancedHumanoidRenderer<LatexCalicoCat, LatexCalicoCatModel, ArmorLatexMaleCatModel<LatexCalicoCat>> {
+public class LatexCalicoCatRenderer extends AdvancedHumanoidRenderer<LatexCalicoCat, LatexCalicoCatModel> {
     public LatexCalicoCatRenderer(EntityRendererProvider.Context context) {
         super(context, new LatexCalicoCatModel(context.bakeLayer(LatexCalicoCatModel.LAYER_LOCATION)), ArmorLatexMaleCatModel.MODEL_SET, 0.5F);
         this.addLayer(new LatexParticlesLayer<>(this, this.getModel()));

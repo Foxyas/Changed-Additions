@@ -1,7 +1,5 @@
 package net.foxyas.changed_additions.init;
 
-import net.foxyas.changed_additions.client.models.LatexKitsuneFemaleModel;
-import net.foxyas.changed_additions.client.models.LatexKitsuneMaleModel;
 import net.foxyas.changed_additions.client.renderer.*;
 import net.foxyas.changed_additions.client.renderer.simple.LatexCalicoCatRenderer;
 import net.minecraftforge.api.distmarker.Dist;

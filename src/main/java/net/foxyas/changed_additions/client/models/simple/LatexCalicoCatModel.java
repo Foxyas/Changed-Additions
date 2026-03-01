@@ -7,7 +7,6 @@ import net.foxyas.changed_additions.entities.simple.LatexCalicoCat;
 import net.ltxprogrammer.changed.client.renderer.animate.AnimatorPresets;
 import net.ltxprogrammer.changed.client.renderer.animate.HumanoidAnimator;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
-import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModelInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCat> implements AdvancedHumanoidModelInterface<LatexCalicoCat, LatexCalicoCatModel> {
+public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCat> {
     public static final ModelLayerLocation LAYER_LOCATION = ChangedAdditionsMod.modModelLayerLocation("latex_calico_cat", "main");
     private final ModelPart RightLeg;
     private final ModelPart LeftLeg;
@@ -87,7 +86,7 @@ public class LatexCalicoCatModel extends AdvancedHumanoidModel<LatexCalicoCat> i
     }
 
     public void prepareMobModel(LatexCalicoCat p_102861_, float p_102862_, float p_102863_, float p_102864_) {
-        this.prepareMobModel(this.animator, p_102861_, p_102862_, p_102863_, p_102864_);
+        super.prepareMobModel(p_102861_, p_102862_, p_102863_, p_102864_);
     }
 
     public void setupHand(LatexCalicoCat calicoCatEntity) {

@@ -27,7 +27,7 @@ public class QTEInputHandle {
 
                     InputKey.fromKeyCode(event.getKey()).ifPresent(inputKey -> {
                         if (QTEManager.Client.getActiveQTE(mc.player) != null) {
-                            mc.player.level().playSound(mc.player, mc.player, ChangedAdditionsClientConfigs.USE_BLOW1_SOUND_INSTEAD_OF_CLICK.get() ? ChangedSounds.BLOW1.get() : SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.PLAYERS, 1f, QTEManager.Client.getActiveQTE(mc.player).getProgress());
+                            mc.player.level().playSound(mc.player, mc.player, ChangedAdditionsClientConfigs.USE_BLOW1_SOUND_INSTEAD_OF_CLICK.get() ? ChangedSounds.TRANSFUR_HURT.get() : SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.PLAYERS, 1f, QTEManager.Client.getActiveQTE(mc.player).getProgress());
                         }
                     });
 

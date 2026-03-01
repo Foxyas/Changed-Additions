@@ -11,7 +11,7 @@ import net.ltxprogrammer.changed.client.renderer.model.armor.ArmorLatexFemaleWol
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class LatexSnowFoxFemaleRenderer extends AdvancedHumanoidRenderer<LatexSnowFoxFemale, LatexSnowFoxFemaleModel, ArmorLatexFemaleWolfModel<LatexSnowFoxFemale>> {
+public class LatexSnowFoxFemaleRenderer extends AdvancedHumanoidRenderer<LatexSnowFoxFemale, LatexSnowFoxFemaleModel> {
 	public LatexSnowFoxFemaleRenderer(EntityRendererProvider.Context context) {
 		super(context, new LatexSnowFoxFemaleModel(context.bakeLayer(LatexSnowFoxFemaleModel.LAYER_LOCATION)), ArmorLatexFemaleWolfModel.MODEL_SET, 0.5F);
 		//this.addLayer(new LatexParticlesLayer<>(this, this.getModel()));

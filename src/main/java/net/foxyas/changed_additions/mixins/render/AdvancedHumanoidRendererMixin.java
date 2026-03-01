@@ -25,7 +25,7 @@ public abstract class AdvancedHumanoidRendererMixin {
     public abstract AdvancedHumanoidModel<ChangedEntity> getModel(ChangedEntity entity);
 
     @Shadow
-    private LatexHumanoidArmorLayer<ChangedEntity, AdvancedHumanoidModel<ChangedEntity>, LatexHumanoidArmorModel<ChangedEntity, ?>> armorLayer;
+    private LatexHumanoidArmorLayer<ChangedEntity, AdvancedHumanoidModel<ChangedEntity>> armorLayer;
 
     @Inject(method = "render(Lnet/ltxprogrammer/changed/entity/ChangedEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
             at = @At("TAIL"), cancellable = true)

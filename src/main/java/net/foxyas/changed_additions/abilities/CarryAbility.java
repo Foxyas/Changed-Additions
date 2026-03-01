@@ -146,7 +146,7 @@ public class CarryAbility extends SimpleAbility {
 	}
 
 	public static void SoundPlay(Player player) {
-		player.level().playSound(null, player.blockPosition(), ChangedSounds.BOW2.get(), SoundSource.PLAYERS, 2.5f, 1.0f);
+		player.level().playSound(null, player.blockPosition(), ChangedSounds.CARDBOARD_BOX_OPEN.get(), SoundSource.PLAYERS, 2.5f, 1.0f);
 	}
 
 	private static void syncMount(Player player) {

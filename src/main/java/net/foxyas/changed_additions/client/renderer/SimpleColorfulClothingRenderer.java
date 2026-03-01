@@ -1,20 +1,12 @@
 package net.foxyas.changed_additions.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-
-import java.awt.*;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
 import net.ltxprogrammer.changed.client.FormRenderHandler;
 import net.ltxprogrammer.changed.client.renderer.AdvancedHumanoidRenderer;
 import net.ltxprogrammer.changed.client.renderer.accessory.AccessoryRenderer;
 import net.ltxprogrammer.changed.client.renderer.accessory.TransitionalAccessory;
 import net.ltxprogrammer.changed.client.renderer.layers.LatexHumanoidArmorLayer;
 import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModel;
-import net.ltxprogrammer.changed.client.renderer.model.AdvancedHumanoidModelInterface;
 import net.ltxprogrammer.changed.client.renderer.model.armor.ArmorHumanModel;
 import net.ltxprogrammer.changed.client.renderer.model.armor.ArmorModel;
 import net.ltxprogrammer.changed.client.renderer.model.armor.LatexHumanoidArmorModel;
@@ -25,6 +17,8 @@ import net.ltxprogrammer.changed.util.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -38,6 +32,12 @@ import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.awt.*;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
 @SuppressWarnings("ALL")
 public class SimpleColorfulClothingRenderer implements AccessoryRenderer, TransitionalAccessory {
     protected final HumanoidModel clothingModel;
@@ -46,6 +46,14 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
     public SimpleColorfulClothingRenderer(ArmorModel humanoid, Set<ModelComponent> components) {
         this.components = components;
         this.clothingModel = new HumanoidModel(Minecraft.getInstance().getEntityModels().bakeLayer(ArmorHumanModel.MODEL_SET.getModelName(humanoid)));
+    }
+
+    public static Supplier<AccessoryRenderer> of(ArmorModel armorModel, EquipmentSlot renderAs) {
+        return () -> new SimpleColorfulClothingRenderer(armorModel, Set.of(new ModelComponent(armorModel, renderAs)));
+    }
+
+    public static Supplier<AccessoryRenderer> of(ArmorModel humanoidModel, Set<ModelComponent> components) {
+        return () -> new SimpleColorfulClothingRenderer(humanoidModel, components);
     }
 
     public Optional<HumanoidModel<?>> getBeforeModel(AccessorySlotContext<?> slotContext, RenderLayerParent<?, ?> renderLayerParent) {
@@ -78,51 +86,57 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
         ItemStack stack = slotContext.stack();
         Item var14 = stack.getItem();
         if (var14 instanceof Clothing clothing) {
+            Color color = Color.WHITE;
             if (clothing instanceof DyeableLeatherItem dyeableLeatherItem) {
-                Color color = new Color(dyeableLeatherItem.getColor(stack));
-                T entity = slotContext.wearer();
-                ResourceLocation texture = clothing.getTexture(stack, entity);
-                if (texture == null) {
+                color = new Color(dyeableLeatherItem.getColor(stack));
+            }
+
+            T entity = slotContext.wearer();
+            ResourceLocation texture = clothing.getTexture(stack, entity);
+            if (texture == null) {
+                return;
+            }
+
+            if (entity instanceof ChangedEntity changedEntity) {
+                if (renderLayerParent instanceof AdvancedHumanoidRenderer advancedHumanoidRenderer) {
+                    LatexHumanoidArmorLayer layer = advancedHumanoidRenderer.getArmorLayer();
+
+                    for (ModelComponent component : this.components) {
+                        LatexHumanoidArmorModel model = (LatexHumanoidArmorModel) layer.modelPicker.getModelSetForSlot(changedEntity, component.renderAs).get(component.armorModel);
+                        AdvancedHumanoidModel other = advancedHumanoidRenderer.getModel(changedEntity);
+                        model.getAnimator(changedEntity).copyProperties(other.getAnimator(changedEntity));
+
+                        model.prepareMobModel(changedEntity, limbSwing, limbSwingAmount, partialTicks);
+                        model.setupAnim(changedEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+                        model.prepareVisibility(component.renderAs, stack);
+                        model.renderForSlot(changedEntity, advancedHumanoidRenderer, stack, component.renderAs, matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
+                    }
+
                     return;
                 }
-
-                if (entity instanceof ChangedEntity changedEntity) {
-                    if (renderLayerParent instanceof AdvancedHumanoidRenderer advancedHumanoidRenderer) {
-                        LatexHumanoidArmorLayer layer = advancedHumanoidRenderer.getArmorLayer();
-
-                        for (ModelComponent component : this.components) {
-                            LatexHumanoidArmorModel model = (LatexHumanoidArmorModel) layer.modelPicker.getModelSetForSlot(changedEntity, component.renderAs).get(component.armorModel);
-                            AdvancedHumanoidModel var24 = advancedHumanoidRenderer.getModel(changedEntity);
-                            if (var24 instanceof AdvancedHumanoidModelInterface advancedModel) {
-                                model.getAnimator(changedEntity).copyProperties(advancedModel.getAnimator(changedEntity));
-                            }
-
-                            model.prepareMobModel(changedEntity, limbSwing, limbSwingAmount, partialTicks);
-                            model.setupAnim(changedEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-                            model.prepareVisibility(component.renderAs, stack);
-                            model.renderForSlot(changedEntity, advancedHumanoidRenderer, stack, component.renderAs, matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
-                            model.unprepareVisibility(component.renderAs, stack);
-                        }
-
-                        return;
-                    }
-                }
-
-                EntityModel layer = renderLayerParent.getModel();
-                if (layer instanceof HumanoidModel<?> baseModel) {
-                    baseModel.copyPropertiesTo(this.clothingModel);
-                    this.clothingModel.renderToBuffer(matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
-                }
             }
+
+            EntityModel layer = renderLayerParent.getModel();
+            if (layer instanceof HumanoidModel<?> baseModel) {
+                baseModel.copyPropertiesTo(this.clothingModel);
+                this.clothingModel.renderToBuffer(matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
+            }
+
         }
 
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends LivingEntity, M extends EntityModel<T>> void renderFirstPersonOnArms(AccessorySlotContext<T> slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, HumanoidArm arm, PoseStack stackCorrector, float partialTicks) {
+    @Override
+    public <T extends LivingEntity, M extends EntityModel<T>> void renderFirstPersonOnArms(AccessorySlotContext<T> slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, HumanoidArm arm, PartPose armPose, float partialTicks) {
         ItemStack stack = slotContext.stack();
         Item var11 = stack.getItem();
         if (var11 instanceof Clothing clothing) {
+            Color color = Color.WHITE;
+            if (clothing instanceof DyeableLeatherItem dyeableLeatherItem) {
+                color = new Color(dyeableLeatherItem.getColor(stack));
+            }
+
             T entity = slotContext.wearer();
             ResourceLocation texture = clothing.getTexture(stack, entity);
             if (texture == null) {
@@ -137,11 +151,10 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
                         if (component.renderAs == EquipmentSlot.CHEST) {
                             LatexHumanoidArmorModel model = (LatexHumanoidArmorModel) layer.modelPicker.getModelSetForSlot(changedEntity, component.renderAs).get(component.armorModel);
                             model.prepareMobModel(changedEntity, 0.0F, 0.0F, partialTicks);
-                            model.setupAnim(changedEntity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
-                            model.setupHand(changedEntity);
                             model.prepareVisibility(component.renderAs, stack);
-                            FormRenderHandler.renderModelPartWithTexture(model.getArm(arm), stackCorrector, matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, 1.0F);
-                            model.unprepareVisibility(component.renderAs, stack);
+                            ModelPart armPart = model.getArm(arm);
+                            armPart.loadPose(armPose);
+                            FormRenderHandler.renderModelPartWithTexture(model.getArm(arm), poseStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
                         }
                     }
 
@@ -152,18 +165,13 @@ public class SimpleColorfulClothingRenderer implements AccessoryRenderer, Transi
             EntityModel layer = renderLayerParent.getModel();
             if (layer instanceof HumanoidModel<?> baseModel) {
                 baseModel.copyPropertiesTo(this.clothingModel);
-                FormRenderHandler.renderVanillaModelPartWithTexture(arm == HumanoidArm.RIGHT ? this.clothingModel.rightArm : this.clothingModel.leftArm, stackCorrector, matrixStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, 1.0F);
+                ModelPart armPart = arm == HumanoidArm.RIGHT ? this.clothingModel.rightArm : this.clothingModel.leftArm;
+                armPart.loadPose(armPose);
+                FormRenderHandler.renderVanillaModelPartWithTexture(armPart, poseStack, ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil()), light, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1);
             }
+
         }
 
-    }
-
-    public static Supplier<AccessoryRenderer> of(ArmorModel armorModel, EquipmentSlot renderAs) {
-        return () -> new SimpleColorfulClothingRenderer(armorModel, Set.of(new ModelComponent(armorModel, renderAs)));
-    }
-
-    public static Supplier<AccessoryRenderer> of(ArmorModel humanoidModel, Set<ModelComponent> components) {
-        return () -> new SimpleColorfulClothingRenderer(humanoidModel, components);
     }
 
     public static record ModelComponent(ArmorModel armorModel, EquipmentSlot renderAs) {
