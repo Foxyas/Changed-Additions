@@ -78,7 +78,7 @@ repositories {
 
     maven {
         name = "Changed"
-        url = "https://raw.githubusercontent.com/LtxProgrammer/Changed-Minecraft-Mod//0.15-features/mcmodsrepo/"
+        url = "https://ltxprogrammer.github.io/maven/"
     }
 
     /*
@@ -113,7 +113,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.20.1-f47.4.0:v0.15.0") //Changed
+    implementation fg.deobf("net.ltxprogrammer.changed:Changed-m1.20.1-f47.4.0:v0.15.4") //Changed
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
         jarJar.ranged(it, "[0.4.1,)")
