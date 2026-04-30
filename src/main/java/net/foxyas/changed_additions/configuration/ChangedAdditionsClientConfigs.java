@@ -6,7 +6,7 @@ public class ChangedAdditionsClientConfigs {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.ConfigValue<Boolean> SMOOTH_LASER_MOVIMENT;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> SMOOTH_LASER_MOVEMENT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> PLANTOIDS_VARIABLE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> PAT_OVERLAY;
     public static final ForgeConfigSpec.ConfigValue<Integer> PAT_OVERLAY_X;
@@ -22,7 +22,7 @@ public class ChangedAdditionsClientConfigs {
 
     static {
         BUILDER.push("Animations / Movement");
-        SMOOTH_LASER_MOVIMENT = BUILDER.comment("Make the Laser Moviment be smooth, it may cause the particule to be slower").define("Laser Smooth Moviment", false);
+        SMOOTH_LASER_MOVEMENT = BUILDER.comment("Make the Laser Movement be smooth, it may cause the particle to be slower").define("Laser Smooth Movement", false);
         BUILDER.pop();
 
         BUILDER.push("ModelsHandle");
