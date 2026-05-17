@@ -17,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.util.RandomSource;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
@@ -49,11 +50,11 @@ public class QuickTimeEvent {
         this.MaxTicks = durationTicks;
     }
 
-    public QuickTimeEvent(@Nullable Player player, Random random, QuickTimeEventType type, int durationTicks) {
+    public QuickTimeEvent(@Nullable Player player, RandomSource random, QuickTimeEventType type, int durationTicks) {
         this(player, QuickTimeEventSequenceType.getRandom(random), type, durationTicks);
     }
 
-    public QuickTimeEvent(@Nullable Player player, Random random, Random randomType, int durationTicks) {
+    public QuickTimeEvent(@Nullable Player player, RandomSource random, RandomSource randomType, int durationTicks) {
         this(player, QuickTimeEventSequenceType.getRandom(random), QuickTimeEventType.getRandom(randomType), durationTicks);
     }
 
