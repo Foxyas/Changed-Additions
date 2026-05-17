@@ -18,7 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
 
-version = 'v0.0.6'
+version = 'v1.0.0'
 group = 'net.foxyas.changed_additions'
 archivesBaseName = 'ChangedAdditions-m1.20.1'
 
