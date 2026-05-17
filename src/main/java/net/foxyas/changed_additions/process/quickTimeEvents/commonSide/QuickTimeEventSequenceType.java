@@ -5,6 +5,7 @@ import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.RandomSource;
 
 import java.util.List;
 import java.util.Random;
@@ -36,7 +37,7 @@ public enum QuickTimeEventSequenceType {
         return null;
     }
 
-    public static QuickTimeEventSequenceType getRandom(Random random) {
+    public static QuickTimeEventSequenceType getRandom(RandomSource random) {
         QuickTimeEventSequenceType[] values = values();
         return values[random.nextInt(values.length)];
     }
