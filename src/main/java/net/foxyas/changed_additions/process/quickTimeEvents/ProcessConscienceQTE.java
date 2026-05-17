@@ -22,7 +22,7 @@ public class ProcessConscienceQTE {
         boolean keepConscious = event.keepConscious;
         if (!keepConscious && !world.isClientSide() && world.getGameRules().getBoolean(ChangedAdditionsGameRules.FIGHT_TO_KEEP_CONSCIENCE)) {
             event.shouldKeepConscious = true;
-            QTEManager.addQTE(player, new QuickTimeEvent(player, (Random) player.getRandom(), QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE, player.getRandom().nextInt(100, 120)));
+            QTEManager.addQTE(player, new QuickTimeEvent(player, player.getRandom(), QuickTimeEventType.FIGHT_TO_KEEP_CONSCIENCE, player.getRandom().nextInt(100, 120)));
         }
     }
 }
