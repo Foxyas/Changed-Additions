@@ -56,6 +56,7 @@ public class ChangedAdditionsParticles {
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(THUNDER_SPARK.get(), ThunderSparkParticle.Provider::new);
         event.registerSpriteSet(LASER_POINT.get(), LaserPointParticle.Provider::new);
