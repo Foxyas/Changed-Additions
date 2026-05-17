@@ -45,7 +45,7 @@ public class ChangedAdditionsMod {
         ChangedAdditionsAbilities.REGISTRY.register(bus);
         ChangedAdditionsMenus.REGISTRY.register(bus);
         ChangedAdditionsSounds.SOUNDS.register(bus);
-        ChangedAdditionsParticles.REGISTRY.register(bus);
+        ChangedAdditionsParticleTypes.REGISTRY.register(bus);
 
         ChangedAdditionsBlockEntities.REGISTRY.register(bus);
 

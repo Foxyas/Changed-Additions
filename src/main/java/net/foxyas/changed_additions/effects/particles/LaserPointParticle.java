@@ -5,7 +5,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.foxyas.changed_additions.configuration.ChangedAdditionsClientConfigs;
-import net.foxyas.changed_additions.init.ChangedAdditionsParticles;
+import net.foxyas.changed_additions.init.ChangedAdditionsParticleTypes;
 import net.foxyas.changed_additions.item.LaserPointer;
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.foxyas.changed_additions.variants.TransfurVariantTags;
@@ -131,7 +131,7 @@ public class LaserPointParticle extends TextureSheetParticle {
 
         @Override
         public @NotNull ParticleType<?> getType() {
-            return ChangedAdditionsParticles.LASER_POINT.get(); // Substitua pelo seu ParticleType real
+            return ChangedAdditionsParticleTypes.LASER_POINT.get(); // Substitua pelo seu ParticleType real
         }
 
         @Override

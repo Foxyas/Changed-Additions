@@ -1,6 +1,5 @@
 package net.foxyas.changed_additions.process.quickTimeEvents.commonSide;
 
-import java.util.Random;
 import net.minecraft.util.RandomSource;
 
 public enum QuickTimeEventType {

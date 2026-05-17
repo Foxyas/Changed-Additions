@@ -2,7 +2,6 @@ package net.foxyas.changed_additions.abilities;
 
 import net.foxyas.changed_additions.process.util.FoxyasUtils;
 import net.foxyas.changed_additions.process.util.ParticlesUtil;
-import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.ability.IAbstractChangedEntity;
 import net.ltxprogrammer.changed.ability.SimpleAbility;
 import net.minecraft.network.chat.Component;
@@ -18,7 +17,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
-import java.util.Random;
 
 public class TeleportAbility extends SimpleAbility {
     public TeleportAbility() {

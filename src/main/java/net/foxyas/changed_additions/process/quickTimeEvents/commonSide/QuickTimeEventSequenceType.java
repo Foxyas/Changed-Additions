@@ -4,11 +4,10 @@ import com.mojang.datafixers.util.Pair;
 import net.foxyas.changed_additions.ChangedAdditionsMod;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 public enum QuickTimeEventSequenceType {
     SPACE(List.of(InputKey.SPACE), new Pair<>(64, 64), new Pair<>(64, 32)),

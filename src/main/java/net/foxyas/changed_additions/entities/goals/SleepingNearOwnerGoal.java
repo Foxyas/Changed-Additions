@@ -6,6 +6,7 @@ import net.ltxprogrammer.changed.entity.TamableLatexEntity;
 import net.ltxprogrammer.changed.init.ChangedParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -182,20 +183,20 @@ public class SleepingNearOwnerGoal extends Goal {
             this.bedSearchType = bedSearchType;
         }
 
-        public BipedSleepGoal(LivingEntity pet, boolean isDogOrCat, Random PersonalityBased) {
+        public BipedSleepGoal(LivingEntity pet, boolean isDogOrCat, RandomSource PersonalityBased) {
             this.pet = pet;
             this.isDogOrCat = isDogOrCat;
             this.bedSearchType = selectRandom(PersonalityBased);
         }
 
-        private static BedSearchType selectRandom(Random random) {
+        private static BedSearchType selectRandom(RandomSource random) {
             var value = random.nextInt(3);
             if (value == 0) {
                 return BedSearchType.NEAREST;
             } else if (value == 1) {
                 return BedSearchType.FURTHER;
             } else {
-                return new BedSearchType(random.nextDouble(11), 10);
+                return new BedSearchType(random.nextDouble() * 11, 10);
             }
         }
 

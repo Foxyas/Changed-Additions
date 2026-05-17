@@ -188,7 +188,7 @@ public class PatFeatureHandle {
                 if (ChangedAdditionsMod.postEvent(globalPatReactionEvent)){
                     return;
                 }
-                if (new Random().nextFloat(100) <= 25.5f) {
+                if (player.getRandom().nextFloat() <= 0.255f) {
                     target.heal(6f);
                     GivePatAdvancement(player);
                 }

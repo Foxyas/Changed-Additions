@@ -5,25 +5,19 @@ import net.foxyas.changed_additions.init.ChangedAdditionsDamageSources;
 import net.foxyas.changed_additions.network.packets.QTESyncPacket;
 import net.foxyas.changed_additions.network.packets.utils.PacketsUtils;
 import net.foxyas.changed_additions.process.quickTimeEvents.InputKey;
-import net.foxyas.changed_additions.process.util.GlobalEntityUtil;
 import net.foxyas.changed_additions.process.util.PlayerUtil;
 import net.ltxprogrammer.changed.entity.variant.TransfurVariantInstance;
 import net.ltxprogrammer.changed.process.ProcessTransfur;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class QuickTimeEvent {
 
